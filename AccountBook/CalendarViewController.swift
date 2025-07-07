@@ -148,3 +148,15 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
 }
+
+extension CalendarViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return CustomSizePresentationController(presentedViewController: presented, presenting: presentingViewController)
+    }
+}
+class CustomSizePresentationController: UIPresentationController {
+    override var frameOfPresentedViewInContainerView: CGRect {
+        guard let bounds = containerView?.bounds else { return .zero }
+        return CGRect(x: 0, y: bounds.height - 260 - containerView!.safeAreaInsets.bottom, width: bounds.width, height: 260)
+    }
+}

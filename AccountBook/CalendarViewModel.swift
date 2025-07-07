@@ -54,10 +54,8 @@ class CalendarViewModel {
             (fromVC as! CalendarViewController).applySnapshot()
         }
         
-        pickerVC.modalPresentationStyle = .pageSheet
-        if let sheet = pickerVC.sheetPresentationController {
-            sheet.detents = [.medium()]
-        }
+        pickerVC.modalPresentationStyle = .custom
+        pickerVC.transitioningDelegate = fromVC as! CalendarViewController
         fromVC.present(pickerVC, animated: true, completion: nil)
     }
     
