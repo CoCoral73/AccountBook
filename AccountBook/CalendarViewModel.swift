@@ -39,6 +39,28 @@ class CalendarViewModel {
         return calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
     }
     
+    func handleMonthButton(storyBoard: UIStoryboard?, fromVC: UIViewController) {
+        guard let pickerVC = storyBoard?
+            .instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
+                DatePickerViewController(coder: coder, viewModel: DatePickerViewModel(startDate: self.currentMonth)) })
+        else {
+            fatalError("DatePickerViewController 생성 에러")
+        }
+        
+        pickerVC.viewModel.onDidSelect = { [weak self] date in
+            guard let self = self else { return }
+            
+            self.currentMonth = date
+            (fromVC as! CalendarViewController).applySnapshot()
+        }
+        
+        pickerVC.modalPresentationStyle = .pageSheet
+        if let sheet = pickerVC.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        fromVC.present(pickerVC, animated: true, completion: nil)
+    }
+    
     func generateDayItems() -> [DayItem] {
         let rawDays = days(for: currentMonth)      // [Int?]
         // 이번 달 1일 Date 계산
@@ -60,7 +82,7 @@ class CalendarViewModel {
                     return result + (!ta.isIncome ? ta.amount : 0)
                 }) ?? 0
                 
-                items.append(DayItem(date: date, income: income, expense: expense))
+                items.append(DayItem(index: i, date: date, income: income, expense: expense))
             } else {
                 let date: Date, diff: Int
                 if i < firstIndex {
@@ -73,7 +95,7 @@ class CalendarViewModel {
                     date = calendar.date(byAdding: .day, value: diff, to: firstOfNextMonth)!
                 }
                 
-                items.append(DayItem(date: date, income: 0, expense: 0))
+                items.append(DayItem(index: i, date: date, income: 0, expense: 0))
             }
             
         }

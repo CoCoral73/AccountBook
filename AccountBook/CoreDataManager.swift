@@ -23,7 +23,6 @@ final class CoreDataManager {
 
     // MARK: - 초기화
     private init() {
-        // .xcdatamodeld 파일 이름(모델명)에 맞게 변경하세요
         persistentContainer = NSPersistentContainer(name: "AccountBookModel")
         persistentContainer.loadPersistentStores { storeDescription, error in
             if let error = error {

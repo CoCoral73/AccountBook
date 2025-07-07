@@ -8,11 +8,21 @@
 import UIKit
 
 struct DayItem: Hashable {
+    let index: Int
     let date: Date
     let income, expense: Int64
+    
+    /* index로만 식별
+    func hash(into hasher: inout Hasher) {
+        hasher.combine(index)
+    }
+    static func == (lhs: DayItem, rhs: DayItem) -> Bool {
+        lhs.index == rhs.index
+    }
+     */
 }
 
-class CalendarCollectionViewCell: UICollectionViewCell {
+class DayCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var dayLabel: UILabel!
     

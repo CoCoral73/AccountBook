@@ -32,6 +32,32 @@ class CalendarViewController: UIViewController {
         
         configureCollectionView()
         configureTableView()
+        addGesture()
+    }
+    
+    func addGesture() {
+        let swipeLeft = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeLeft.direction = .left
+        calendarCollectionView.addGestureRecognizer(swipeLeft)
+
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(handleSwipe(_:)))
+        swipeRight.direction = .right
+        calendarCollectionView.addGestureRecognizer(swipeRight)
+    }
+    
+    @objc private func handleSwipe(_ gesture: UISwipeGestureRecognizer) {
+        switch gesture.direction {
+        case .left:
+            // 다음 달로 이동
+            viewModel.changeMonth(by: +1)
+            applySnapshot()
+        case .right:
+            // 이전 달로 이동
+            viewModel.changeMonth(by: -1)
+            applySnapshot()
+        default:
+            break
+        }
     }
 
     override func viewDidLayoutSubviews() {
@@ -49,8 +75,9 @@ class CalendarViewController: UIViewController {
     }
     
     @IBAction func monthButtonTapped(_ sender: UIButton) {
+        viewModel.handleMonthButton(storyBoard: storyboard, fromVC: self)
     }
-    
+
 }
 
 //달력 구성 코드
@@ -81,7 +108,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     
     private func configureCollectionViewDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Int, DayItem>(collectionView: calendarCollectionView, cellProvider: { [weak self] collectionView, indexPath, dayItem in
-            guard let self = self, let cell = self.calendarCollectionView.dequeueReusableCell(withReuseIdentifier: Cell.dayCell, for: indexPath) as? CalendarCollectionViewCell else {
+            guard let self = self, let cell = self.calendarCollectionView.dequeueReusableCell(withReuseIdentifier: Cell.dayCell, for: indexPath) as? DayCollectionViewCell else {
                 return UICollectionViewCell()
             }
             
@@ -90,7 +117,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         })
     }
     
-    private func applySnapshot() {
+    func applySnapshot() {
         var snap = NSDiffableDataSourceSnapshot<Int, DayItem>()
         snap.appendSections([0])
         snap.appendItems(viewModel.generateDayItems(), toSection: 0)
@@ -102,9 +129,11 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
+    
     private func configureTableView() {
         detailTableView.delegate = self
         detailTableView.dataSource = self
+        
         detailTableView.rowHeight = 50
     }
     
