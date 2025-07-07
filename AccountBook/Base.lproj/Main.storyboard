@@ -387,6 +387,9 @@
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wO5-bR-CVf">
                                 <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="lEP-lf-qR6"/>
+                                </constraints>
                                 <items>
                                     <barButtonItem title="취소" id="dyl-s6-IdD">
                                         <connections>
@@ -410,6 +413,9 @@
                             </toolbar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2t-Wn-bQD">
                                 <rect key="frame" x="0.0" y="103" width="393" height="216"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="216" id="gnF-La-qgT"/>
+                                </constraints>
                             </pickerView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="wkr-TT-OXO"/>
