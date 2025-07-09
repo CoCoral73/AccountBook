@@ -81,7 +81,7 @@ final class CoreDataManager {
         var totals: [String: Int64] = [:]
 
         for tx in transactions {
-            let categoryName = tx.category?.name ?? "Unknown"
+            let categoryName = tx.category.name 
             let current = totals[categoryName] ?? 0
             totals[categoryName] = current + tx.amount
         }

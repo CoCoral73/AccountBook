@@ -23,6 +23,8 @@ class CalendarViewController: UIViewController {
     
     @IBOutlet weak var detailTableView: UITableView!
     
+    @IBOutlet weak var addButton: UIButton!
+    
     var viewModel: CalendarViewModel = CalendarViewModel()
     
     private var dataSource: UICollectionViewDiffableDataSource<Int, DayItem>!
@@ -30,6 +32,9 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        viewModel.onDidSetCurrentMonth = { [weak self] in
+            self?.applySnapshot()
+        }
         configureCollectionView()
         configureTableView()
         addGesture()
@@ -50,11 +55,11 @@ class CalendarViewController: UIViewController {
         case .left:
             // 다음 달로 이동
             viewModel.changeMonth(by: +1)
-            applySnapshot()
+            //applySnapshot()
         case .right:
             // 이전 달로 이동
             viewModel.changeMonth(by: -1)
-            applySnapshot()
+            //applySnapshot()
         default:
             break
         }
@@ -65,6 +70,8 @@ class CalendarViewController: UIViewController {
         
         //핑크 박스
         boxView.layer.cornerRadius = 10
+        
+        addButton.layer.cornerRadius = addButton.frame.width / 2
         
         let height = calendarCollectionView.collectionViewLayout.collectionViewContentSize.height
 
@@ -78,6 +85,8 @@ class CalendarViewController: UIViewController {
         viewModel.handleMonthButton(storyBoard: storyboard, fromVC: self)
     }
 
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+    }
 }
 
 //달력 구성 코드
@@ -87,6 +96,8 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         calendarCollectionView.delegate = self
         configureCollectionViewDataSource()
         applySnapshot()
+        
+        calendarCollectionView.allowsMultipleSelection = false
     }
     
     // 위 아래 간격
@@ -120,12 +131,25 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     func applySnapshot() {
         var snap = NSDiffableDataSourceSnapshot<Int, DayItem>()
         snap.appendSections([0])
-        snap.appendItems(viewModel.generateDayItems(), toSection: 0)
+        snap.appendItems(viewModel.dayItemsForCurrentMonth, toSection: 0)
         dataSource.apply(snap, animatingDifferences: false)
         
         monthButton.setTitle(viewModel.monthButtonString, for: .normal)
     }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let item = viewModel.setSelectedDay(with: indexPath.row)
+        let indexPath = dataSource.indexPath(for: item)!
+        
+        let cell = collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
+        cell.viewModel.isSelected = true
+        
+        detailTableView.reloadData()
+    }
+    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
+        let cell = collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
+        cell.viewModel.isSelected = false
+    }
 }
 
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
@@ -138,11 +162,13 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
+        return viewModel.numberOfRowsInSection
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = detailTableView.dequeueReusableCell(withIdentifier: Cell.detailCell, for: indexPath)
+        let cell = detailTableView.dequeueReusableCell(withIdentifier: Cell.detailCell, for: indexPath) as! DetailTableViewCell
+        
+        cell.viewModel = DetailViewModel(transaction: viewModel.cellForRowAt[indexPath.row])
         
         return cell
     }

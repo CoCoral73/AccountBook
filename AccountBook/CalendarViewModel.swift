@@ -9,25 +9,44 @@ import UIKit
 
 class CalendarViewModel {
     
-    private var currentMonth: Date {
+    private(set) var currentMonth: Date {
         didSet {
             loadMonthlyTransactions()
+            generateDayItems()
+            onDidSetCurrentMonth?()
         }
     }
     
+    var onDidSetCurrentMonth: (() -> Void)?
     
+    private(set) var dayItemsForCurrentMonth: [DayItem] = []
     private(set) var transactions: [Int: [Transaction]] = [:]
     private var dayCache: [Date: [Int?]] = [:]  // 월별 날짜 배열 캐싱
     private let calendar = Calendar.current
+    private(set) var selectedDay: Int
     
     init(currentMonth: Date = Date()) {
         self.currentMonth = currentMonth
+        selectedDay = calendar.component(.day, from: currentMonth)
+        
+        loadMonthlyTransactions()
+        generateDayItems()
     }
     
     var monthButtonString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy년 M월"
         return dateFormatter.string(from: currentMonth)
+    }
+    
+    var numberOfRowsInSection: Int {
+        guard let count = transactions[selectedDay]?.count else { return 0 }
+        return count
+    }
+    
+    var cellForRowAt: [Transaction] {
+        guard let datas = transactions[selectedDay] else { return [] }
+        return datas
     }
     
     func changeMonth(by offset: Int) {
@@ -37,6 +56,15 @@ class CalendarViewModel {
     
     func isCurrentMonth(with date: Date) -> Bool {
         return calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
+    }
+    
+    func setSelectedDay(with index: Int) -> DayItem {
+        let selectedDate = dayItemsForCurrentMonth[index].date
+        
+        currentMonth = selectedDate
+        return dayItemsForCurrentMonth.first { item in
+            calendar.isDate(item.date, inSameDayAs: selectedDate)
+        }!
     }
     
     func handleMonthButton(storyBoard: UIStoryboard?, fromVC: UIViewController) {
@@ -59,7 +87,7 @@ class CalendarViewModel {
         fromVC.present(pickerVC, animated: true, completion: nil)
     }
     
-    func generateDayItems() -> [DayItem] {
+    private func generateDayItems() {
         let rawDays = days(for: currentMonth)      // [Int?]
         // 이번 달 1일 Date 계산
         let comps = calendar.dateComponents([.year, .month], from: currentMonth)
@@ -98,7 +126,7 @@ class CalendarViewModel {
             
         }
         
-        return items
+        dayItemsForCurrentMonth = items
     }
     private func loadMonthlyTransactions() {
         let allTx = CoreDataManager.shared

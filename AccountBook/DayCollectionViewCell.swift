@@ -35,6 +35,13 @@ class DayCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+
+        viewModel.onSelectionChanged = nil
+        contentView.backgroundColor = .clear
+    }
+    
     func configure() {
         let dayStringAndColor = viewModel.dayStringAndColor
         dayLabel.text = dayStringAndColor.text
@@ -44,5 +51,11 @@ class DayCollectionViewCell: UICollectionViewCell {
         incomeLabel.textColor = viewModel.incomeTextColor
         expenseLabel.text = viewModel.expenseString
         expenseLabel.textColor = viewModel.expenseTextColor
+        
+        contentView.backgroundColor = .clear
+        
+        viewModel.onSelectionChanged = { [weak self] isSelected in
+            self?.contentView.backgroundColor = isSelected ? #colorLiteral(red: 1, green: 0.5680983663, blue: 0.6200271249, alpha: 0.2426014073) : .clear
+        }
     }
 }

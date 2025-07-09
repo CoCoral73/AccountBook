@@ -21,7 +21,7 @@ extension Transaction {
     @NSManaged public var isIncome: Bool
     @NSManaged public var memo: String?
     @NSManaged public var id: UUID?
-    @NSManaged public var category: TransactionCategory?
+    @NSManaged public var category: TransactionCategory
 
 }
 

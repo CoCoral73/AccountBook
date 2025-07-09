@@ -233,6 +233,7 @@
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
+                                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="bottom" secondItem="Kyb-jy-BIH" secondAttribute="bottom" constant="10" id="AaG-wh-TQV"/>
                                                 <constraint firstItem="Kyb-jy-BIH" firstAttribute="centerX" secondItem="NJZ-y4-3YZ" secondAttribute="centerX" id="Acq-18-UDX"/>
@@ -331,9 +332,32 @@
                                                 <constraint firstItem="4UF-UZ-o1K" firstAttribute="centerY" secondItem="9N2-lN-LbM" secondAttribute="centerY" id="tFV-ei-yyh"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="categoryLabel" destination="ccA-zw-Hz0" id="kgl-lh-iY1"/>
+                                            <outlet property="imgView" destination="2Wd-3h-5dA" id="mQj-8K-ee0"/>
+                                            <outlet property="nameLabel" destination="Xuu-EL-LcJ" id="eby-LE-Qun"/>
+                                            <outlet property="paymentLabel" destination="BcD-3W-Rec" id="uNO-qM-rdN"/>
+                                            <outlet property="priceLabel" destination="y3y-w3-yfk" id="Ayy-S0-UsY"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-SM-19z">
+                                <rect key="frame" x="328" y="704" width="50" height="50"/>
+                                <color key="backgroundColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="agX-X2-PKO"/>
+                                    <constraint firstAttribute="width" constant="50" id="pE6-Vz-jnI"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal">
+                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                                </state>
+                                <connections>
+                                    <action selector="addButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="aFr-vF-ow6"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -347,6 +371,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="k3h-HX-058" secondAttribute="trailing" id="Lnn-kV-4QM"/>
                             <constraint firstItem="k3h-HX-058" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="NkF-Si-pIA"/>
                             <constraint firstItem="dU9-6d-kDc" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Nop-QW-POV"/>
+                            <constraint firstAttribute="trailing" secondItem="XVN-SM-19z" secondAttribute="trailing" constant="15" id="OEs-7c-K6h"/>
                             <constraint firstItem="DEs-YH-E4L" firstAttribute="top" secondItem="K3Q-sI-xUx" secondAttribute="bottom" constant="10" id="VdI-65-MVZ"/>
                             <constraint firstItem="DEs-YH-E4L" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XlA-Jr-w5w"/>
                             <constraint firstItem="26h-FC-cIP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZBz-HP-emA"/>
@@ -358,6 +383,7 @@
                             <constraint firstItem="kq9-iQ-Zmf" firstAttribute="top" secondItem="dU9-6d-kDc" secondAttribute="bottom" id="j0s-uJ-owh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="26h-FC-cIP" secondAttribute="bottom" id="nnO-Gh-suv"/>
                             <constraint firstItem="K3Q-sI-xUx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tdJ-nz-hep"/>
+                            <constraint firstItem="26h-FC-cIP" firstAttribute="bottom" secondItem="XVN-SM-19z" secondAttribute="bottom" constant="15" id="uMm-B8-Lxw"/>
                             <constraint firstItem="SPv-hE-Kgg" firstAttribute="top" secondItem="DEs-YH-E4L" secondAttribute="bottom" constant="10" id="vt8-EC-Ii9"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="26h-FC-cIP" secondAttribute="trailing" id="zsM-Dw-p9U"/>
                         </constraints>
@@ -366,6 +392,7 @@
                         <imageReference key="image" image="calendar" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <connections>
+                        <outlet property="addButton" destination="XVN-SM-19z" id="6aX-Hl-39M"/>
                         <outlet property="boxView" destination="DEs-YH-E4L" id="LcX-32-ARQ"/>
                         <outlet property="calendarCollectionView" destination="kq9-iQ-Zmf" id="OcW-tJ-zvr"/>
                         <outlet property="collectionViewHeightConstraint" destination="Sar-NF-y8N" id="geB-Ak-V5X"/>
@@ -426,7 +453,7 @@
                                 </constraints>
                             </view>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r2t-Wn-bQD">
-                                <rect key="frame" x="0.0" y="103" width="393" height="216"/>
+                                <rect key="frame" x="0.0" y="103.33333333333331" width="393" height="216"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="216" id="gnF-La-qgT"/>
                                 </constraints>
@@ -455,7 +482,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="n81-2n-LS9" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1907.6335877862596" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="956" y="-714"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="guq-Kq-nWg">
@@ -465,7 +492,7 @@
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="Xnc-r2-XKB">
                         <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                         <autoresizingMask key="autoresizingMask"/>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="0.24260140729999999" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
                         <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="8Xv-6K-Ngp"/>
@@ -486,16 +513,16 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

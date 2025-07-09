@@ -12,6 +12,14 @@ class DayViewModel {
     private var dayItem: DayItem
     private var isCurrentMonth: Bool
     
+    var isSelected: Bool = false {
+        didSet {
+            onSelectionChanged?(isSelected)
+        }
+    }
+    
+    var onSelectionChanged: ((Bool) -> Void)?
+    
     init(dayItem: DayItem, isCurrentMonth: Bool) {
         self.dayItem = dayItem
         self.isCurrentMonth = isCurrentMonth
@@ -52,7 +60,4 @@ class DayViewModel {
         return .systemOrange
     }
     
-    func handleDayTapped() {
-        
-    }
 }
