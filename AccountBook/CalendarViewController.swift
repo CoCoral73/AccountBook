@@ -55,11 +55,9 @@ class CalendarViewController: UIViewController {
         case .left:
             // 다음 달로 이동
             viewModel.changeMonth(by: +1)
-            //applySnapshot()
         case .right:
             // 이전 달로 이동
             viewModel.changeMonth(by: -1)
-            //applySnapshot()
         default:
             break
         }
@@ -70,7 +68,7 @@ class CalendarViewController: UIViewController {
         
         //핑크 박스
         boxView.layer.cornerRadius = 10
-        
+        //추가 버튼
         addButton.layer.cornerRadius = addButton.frame.width / 2
         
         let height = calendarCollectionView.collectionViewLayout.collectionViewContentSize.height
@@ -138,17 +136,39 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = viewModel.setSelectedDay(with: indexPath.row)
-        let indexPath = dataSource.indexPath(for: item)!
         
-        let cell = collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
-        cell.viewModel.isSelected = true
+        if let existingSelections = calendarCollectionView.indexPathsForSelectedItems {
+            for oldIndexPath in existingSelections {
+                calendarCollectionView.deselectItem(at: oldIndexPath, animated: false)
+                if let oldCell = calendarCollectionView.cellForItem(at: oldIndexPath) as? DayCollectionViewCell {
+                    oldCell.viewModel.isSelected = false
+                }
+            }
+        }
+
+        let selectedItem = viewModel.setSelectedDay(with: indexPath.item)
+
+        if let newIndexPath = dataSource.indexPath(for: selectedItem) {
+ 
+            calendarCollectionView.selectItem(
+                at: newIndexPath,
+                animated: false,
+                scrollPosition: []
+            )
+
+            if let cell = calendarCollectionView.cellForItem(
+                at: newIndexPath
+            ) as? DayCollectionViewCell {
+                cell.viewModel.isSelected = true
+            }
+        }
         
         detailTableView.reloadData()
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! DayCollectionViewCell
-        cell.viewModel.isSelected = false
+        if let cell = collectionView.cellForItem(at: indexPath) as? DayCollectionViewCell {
+            cell.viewModel.isSelected = false
+        }
     }
 }
 
