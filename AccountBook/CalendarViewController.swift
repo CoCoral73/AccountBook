@@ -33,7 +33,8 @@ class CalendarViewController: UIViewController {
         super.viewDidLoad()
         
         viewModel.onDidSetCurrentMonth = { [weak self] in
-            self?.applySnapshot()
+            guard let self = self else { return }
+            self.applySnapshot()
         }
         configureCollectionView()
         configureTableView()
@@ -71,6 +72,7 @@ class CalendarViewController: UIViewController {
         //추가 버튼
         addButton.layer.cornerRadius = addButton.frame.width / 2
         
+        //컬렉션뷰의 컨텐츠 크기 만큼 높이 자동 조정
         let height = calendarCollectionView.collectionViewLayout.collectionViewContentSize.height
 
         if collectionViewHeightConstraint.constant != height {
@@ -87,15 +89,35 @@ class CalendarViewController: UIViewController {
     }
 }
 
-//달력 구성 코드
+//MARK: Collection View
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     
     private func configureCollectionView() {
         calendarCollectionView.delegate = self
+        calendarCollectionView.allowsMultipleSelection = false
+        
         configureCollectionViewDataSource()
         applySnapshot()
+    }
+    
+    private func selectDateIfNeeded() {
+        if let selectedIndexPaths = calendarCollectionView.indexPathsForSelectedItems {
+            for ip in selectedIndexPaths {
+                calendarCollectionView.deselectItem(at: ip, animated: false)
+            }
+        }
         
-        calendarCollectionView.allowsMultipleSelection = false
+        let date = viewModel.selectedDate
+        if viewModel.isCurrentMonth(with: date) {
+            if let item = viewModel.dayItemsForCurrentMonth.first(
+                where: { Calendar.current.isDate($0.date, inSameDayAs: date) }
+            ), let indexPath = dataSource.indexPath(for: item) {
+                calendarCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                if let cell = calendarCollectionView.cellForItem(at: indexPath) as? DayCollectionViewCell {
+                    cell.viewModel.isSelected = true
+                }
+            }
+        }
     }
     
     // 위 아래 간격
@@ -130,7 +152,10 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         var snap = NSDiffableDataSourceSnapshot<Int, DayItem>()
         snap.appendSections([0])
         snap.appendItems(viewModel.dayItemsForCurrentMonth, toSection: 0)
-        dataSource.apply(snap, animatingDifferences: false)
+        dataSource.apply(snap, animatingDifferences: false) { [weak self] in
+            self?.calendarCollectionView.layoutIfNeeded()
+            self?.selectDateIfNeeded()
+        }
         
         monthButton.setTitle(viewModel.monthButtonString, for: .normal)
     }
@@ -172,6 +197,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+//MARK: Table View
 extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     
     private func configureTableView() {
@@ -195,6 +221,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     
 }
 
+//MARK: Month Picker View, Custom Height
 extension CalendarViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return CustomSizePresentationController(presentedViewController: presented, presenting: presentingViewController)

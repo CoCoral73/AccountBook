@@ -9,7 +9,7 @@ import UIKit
 
 class CalendarViewModel {
     
-    private(set) var currentMonth: Date {
+    private var currentMonth: Date {
         didSet {
             loadMonthlyTransactions()
             generateDayItems()
@@ -23,10 +23,13 @@ class CalendarViewModel {
     private(set) var transactions: [Int: [Transaction]] = [:]
     private var dayCache: [Date: [Int?]] = [:]  // 월별 날짜 배열 캐싱
     private let calendar = Calendar.current
+    
+    private(set) var selectedDate: Date
     private(set) var selectedDay: Int
     
     init(currentMonth: Date = Date()) {
         self.currentMonth = currentMonth
+        selectedDate = currentMonth
         selectedDay = calendar.component(.day, from: currentMonth)
         
         loadMonthlyTransactions()
@@ -59,11 +62,11 @@ class CalendarViewModel {
     }
     
     func setSelectedDay(with index: Int) -> DayItem {
-        let selectedDate = dayItemsForCurrentMonth[index].date
-        
+        let date = dayItemsForCurrentMonth[index].date
+        selectedDate = date
         currentMonth = selectedDate
         return dayItemsForCurrentMonth.first { item in
-            calendar.isDate(item.date, inSameDayAs: selectedDate)
+            calendar.isDate(item.date, inSameDayAs: date)
         }!
     }
     
