@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DatePickerViewController: UIViewController {
+class MonthPickerViewController: UIViewController {
 
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var todayButton: UIBarButtonItem!
@@ -15,9 +15,9 @@ class DatePickerViewController: UIViewController {
     
     @IBOutlet weak var pickerView: UIPickerView!
 
-    var viewModel: DatePickerViewModel
+    var viewModel: MonthPickerViewModel
     
-    required init?(coder: NSCoder, viewModel: DatePickerViewModel) {
+    required init?(coder: NSCoder, viewModel: MonthPickerViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -48,7 +48,7 @@ class DatePickerViewController: UIViewController {
 
 }
 
-extension DatePickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+extension MonthPickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func initPickerView() {
         pickerView.delegate = self

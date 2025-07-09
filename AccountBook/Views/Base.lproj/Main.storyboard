@@ -2,7 +2,6 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XMS-xc-i1N">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -423,10 +422,10 @@
             </objects>
             <point key="canvasLocation" x="1796" y="-27"/>
         </scene>
-        <!--Date Picker View Controller-->
+        <!--Month Picker View Controller-->
         <scene sceneID="xl8-jQ-hNU">
             <objects>
-                <viewController storyboardIdentifier="DatePickerViewController" id="bux-WE-lBz" customClass="DatePickerViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DatePickerViewController" id="bux-WE-lBz" customClass="MonthPickerViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Rty-eI-6FS">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

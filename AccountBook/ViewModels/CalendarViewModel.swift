@@ -73,7 +73,7 @@ class CalendarViewModel {
     func handleMonthButton(storyBoard: UIStoryboard?, fromVC: UIViewController) {
         guard let pickerVC = storyBoard?
             .instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
-                DatePickerViewController(coder: coder, viewModel: DatePickerViewModel(startDate: self.currentMonth)) })
+                MonthPickerViewController(coder: coder, viewModel: MonthPickerViewModel(startDate: self.currentMonth)) })
         else {
             fatalError("DatePickerViewController 생성 에러")
         }

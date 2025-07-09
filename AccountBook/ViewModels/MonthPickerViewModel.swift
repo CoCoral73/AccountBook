@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DatePickerViewModel {
+class MonthPickerViewModel {
     let years: [Int] = Array(2020...2100)
     let months: [Int] = Array(1...12)
     
