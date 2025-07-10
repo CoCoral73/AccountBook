@@ -347,6 +347,14 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLY-fU-Yyz">
+                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <gestureRecognizers/>
+                                <connections>
+                                    <outletCollection property="gestureRecognizers" destination="egu-8W-rvE" appends="YES" id="djP-ag-Vck"/>
+                                </connections>
+                            </view>
                             <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-SM-19z">
                                 <rect key="frame" x="328" y="704" width="50" height="50"/>
                                 <color key="backgroundColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -357,20 +365,17 @@
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                 <state key="normal">
-                                    <imageReference key="image" image="plus" catalog="system" symbolScale="large"/>
+                                    <imageReference key="image" image="xmark" catalog="system" symbolScale="large"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="25"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="addButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="hEg-9d-PZl"/>
                                 </connections>
                             </button>
-                            <view hidden="YES" alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLY-fU-Yyz">
-                                <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="egu-8W-rvE" appends="YES" id="djP-ag-Vck"/>
-                                </connections>
-                            </view>
                             <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="peO-yp-c2P">
                                 <rect key="frame" x="121.66666666666669" y="331" width="150" height="190"/>
                                 <subviews>
@@ -615,6 +620,7 @@
         <image name="equal" catalog="system" width="128" height="73"/>
         <image name="minus" catalog="system" width="128" height="26"/>
         <image name="plus" catalog="system" width="128" height="113"/>
+        <image name="xmark" catalog="system" width="128" height="113"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

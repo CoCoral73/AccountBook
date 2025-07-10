@@ -43,7 +43,7 @@ class CalendarViewController: UIViewController {
         configureCollectionView()
         configureTableView()
         addGesture()
-        connectMenuToAddButton()
+        configureAddButtonInitialState()
     }
     
     func addGesture() {
@@ -68,24 +68,42 @@ class CalendarViewController: UIViewController {
             break
         }
     }
+
+    private var isExpanded = false
     
-    func connectMenuToAddButton() {
+    private func configureAddButtonInitialState() {
+        addButton.transform = addButton.transform.rotated(by: .pi / 4)
+    }
+    
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        if !isExpanded {
+            toggleAddButton(true)
+            overlayView.isHidden = false
+            addContainerView.isHidden = false
+            
+            overlayView.alpha = 0
+            addContainerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5) {
+                self.overlayView.alpha = 0.3
+                self.addContainerView.transform = .identity
+            }
+        } else {
+            overlayTapped(UITapGestureRecognizer())
+        }
         
     }
-
-    @IBAction func addButtonTapped(_ sender: UIButton) {
-        overlayView.isHidden = false
-        addContainerView.isHidden = false
-        
-        overlayView.alpha = 0
-        addContainerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5) {
-            self.overlayView.alpha = 0.3
-            self.addContainerView.transform = .identity
+    
+    private func toggleAddButton(_ state: Bool) {
+        UIView.animate(withDuration: 0.1) {
+            let rotation: CGFloat = self.isExpanded ? .pi/4 : -(.pi/4)
+            self.addButton.transform = self.addButton.transform.rotated(by: rotation)
         }
+        
+        isExpanded = state
     }
     
     @IBAction private func overlayTapped(_ sender: UITapGestureRecognizer) {
+        toggleAddButton(false)
         UIView.animate(withDuration: 0.2, animations: {
             self.overlayView.alpha = 0
             self.addContainerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
@@ -108,10 +126,7 @@ class CalendarViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        //추가 버튼
-        addButton.layer.cornerRadius = addButton.frame.width / 2
-        
+ 
         //컬렉션뷰의 컨텐츠 크기 만큼 높이 자동 조정
         let height = calendarCollectionView.collectionViewLayout.collectionViewContentSize.height
 
