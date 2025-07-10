@@ -70,12 +70,12 @@ class CalendarViewModel {
         }!
     }
     
-    func handleMonthButton(storyBoard: UIStoryboard?, fromVC: UIViewController) {
-        guard let pickerVC = storyBoard?
-            .instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
+    func handleMonthButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+        guard let pickerVC = storyboard?
+            .instantiateViewController(identifier: "MonthPickerViewController", creator: { coder in
                 MonthPickerViewController(coder: coder, viewModel: MonthPickerViewModel(startDate: self.currentMonth)) })
         else {
-            fatalError("DatePickerViewController 생성 에러")
+            fatalError("MonthPickerViewController 생성 에러")
         }
         
         pickerVC.viewModel.onDidSelect = { [weak self] date in
@@ -88,6 +88,15 @@ class CalendarViewModel {
         pickerVC.modalPresentationStyle = .custom
         pickerVC.transitioningDelegate = fromVC as! CalendarViewController
         fromVC.present(pickerVC, animated: true, completion: nil)
+    }
+    
+    func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: UIViewController) {
+        guard let addVC = storyboard?.instantiateViewController(withIdentifier: "AddViewController") as? AddViewController
+        else {
+            fatalError("AddViewController 생성 에러")
+        }
+        
+        fromVC.present(addVC, animated: true)
     }
     
     private func generateDayItems() {

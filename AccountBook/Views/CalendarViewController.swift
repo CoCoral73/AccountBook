@@ -24,6 +24,10 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var detailTableView: UITableView!
     
     @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var addContainerView: UIView!
+    @IBOutlet weak var incomeButton: UIButton!
+    @IBOutlet weak var expenseButton: UIButton!
     
     var viewModel: CalendarViewModel = CalendarViewModel()
     
@@ -39,6 +43,7 @@ class CalendarViewController: UIViewController {
         configureCollectionView()
         configureTableView()
         addGesture()
+        connectMenuToAddButton()
     }
     
     func addGesture() {
@@ -63,12 +68,47 @@ class CalendarViewController: UIViewController {
             break
         }
     }
+    
+    func connectMenuToAddButton() {
+        
+    }
 
+    @IBAction func addButtonTapped(_ sender: UIButton) {
+        overlayView.isHidden = false
+        addContainerView.isHidden = false
+        
+        overlayView.alpha = 0
+        addContainerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5) {
+            self.overlayView.alpha = 0.3
+            self.addContainerView.transform = .identity
+        }
+    }
+    
+    @IBAction private func overlayTapped(_ sender: UITapGestureRecognizer) {
+        UIView.animate(withDuration: 0.2, animations: {
+            self.overlayView.alpha = 0
+            self.addContainerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+        }) { _ in
+            self.overlayView.isHidden = true
+            self.addContainerView.isHidden = true
+            self.addContainerView.transform = .identity
+        }
+    }
+    
+    @IBAction func addTransactionButtonTapped(_ sender: UIButton) {
+        viewModel.handleAddTransactionButton(type: sender.title(for: .normal)!, storyboard: storyboard, fromVC: self)
+        overlayTapped(UITapGestureRecognizer())
+    }
+    
+    
+    @IBAction func monthButtonTapped(_ sender: UIButton) {
+        viewModel.handleMonthButton(storyboard: storyboard, fromVC: self)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        //핑크 박스
-        boxView.layer.cornerRadius = 10
         //추가 버튼
         addButton.layer.cornerRadius = addButton.frame.width / 2
         
@@ -79,13 +119,6 @@ class CalendarViewController: UIViewController {
             collectionViewHeightConstraint.constant = height
             view.layoutIfNeeded()
         }
-    }
-    
-    @IBAction func monthButtonTapped(_ sender: UIButton) {
-        viewModel.handleMonthButton(storyBoard: storyboard, fromVC: self)
-    }
-
-    @IBAction func addButtonTapped(_ sender: UIButton) {
     }
 }
 
@@ -230,6 +263,7 @@ extension CalendarViewController: UIViewControllerTransitioningDelegate {
 class CustomSizePresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let bounds = containerView?.bounds else { return .zero }
-        return CGRect(x: 0, y: bounds.height - 260 - containerView!.safeAreaInsets.bottom, width: bounds.width, height: 260)
+        let height = 260 + containerView!.safeAreaInsets.bottom
+        return CGRect(x: 0, y: bounds.height - height, width: bounds.width, height: height)
     }
 }
