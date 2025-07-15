@@ -83,7 +83,7 @@ class CalendarViewController: UIViewController {
             
             overlayView.alpha = 0
             addContainerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.7, initialSpringVelocity: 0.5) {
+            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1) {
                 self.overlayView.alpha = 0.3
                 self.addContainerView.transform = .identity
             }
@@ -104,7 +104,7 @@ class CalendarViewController: UIViewController {
     
     @IBAction private func overlayTapped(_ sender: UITapGestureRecognizer) {
         toggleAddButton(false)
-        UIView.animate(withDuration: 0.2, animations: {
+        UIView.animate(withDuration: 0.05, animations: {
             self.overlayView.alpha = 0
             self.addContainerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
         }) { _ in
