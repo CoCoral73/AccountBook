@@ -91,11 +91,13 @@ class CalendarViewModel {
     }
     
     func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: UIViewController) {
-        guard let addVC = storyboard?.instantiateViewController(withIdentifier: "AddViewController") as? AddViewController
+        guard let addVC = storyboard?.instantiateViewController(identifier: "AddViewController", creator: { coder in
+            AddViewController(coder: coder, viewModel: AddViewModel(currentDate: self.selectedDate)) })
         else {
             fatalError("AddViewController 생성 에러")
         }
         
+        addVC.modalPresentationStyle = .fullScreen
         fromVC.present(addVC, animated: true)
     }
     

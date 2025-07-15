@@ -272,10 +272,10 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 //MARK: Month Picker View, Custom Height
 extension CalendarViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return CustomSizePresentationController(presentedViewController: presented, presenting: presentingViewController)
+        return MonthPickerPresentationController(presentedViewController: presented, presenting: presentingViewController)
     }
 }
-class CustomSizePresentationController: UIPresentationController {
+class MonthPickerPresentationController: UIPresentationController {
     override var frameOfPresentedViewInContainerView: CGRect {
         guard let bounds = containerView?.bounds else { return .zero }
         let height = 260 + containerView!.safeAreaInsets.bottom
