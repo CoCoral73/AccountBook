@@ -39,6 +39,7 @@ class InputTableViewController: UITableViewController {
     
     private func configureTextField() {
         amountTextField.delegate = self
+        memoTextField.delegate = self
 
         amountTextField.becomeFirstResponder()
         configureKeyboardAccessory()
@@ -46,6 +47,9 @@ class InputTableViewController: UITableViewController {
     
     private func configureKeyboardAccessory() {
         let toolbar = UIToolbar()
+        toolbar.isTranslucent = false
+        toolbar.barTintColor = #colorLiteral(red: 0.8217506409, green: 0.8317010403, blue: 0.853022635, alpha: 1)
+        toolbar.tintColor = .black
         toolbar.sizeToFit()                      // 키보드 폭에 맞춰 높이 자동 조정
         
         // 2) 탭바 느낌의 아이템 생성
@@ -62,14 +66,12 @@ class InputTableViewController: UITableViewController {
         
         let equal = UIBarButtonItem(image: UIImage(systemName: "equal"), style: .plain, target: self, action: #selector(handleEquals))
         
-        let flexible = UIBarButtonItem(
-            barButtonSystemItem: .flexibleSpace,
-            target: nil, action: nil
-        )
+        let flexible = UIBarButtonItem(systemItem: .flexibleSpace)
+        let fixed = UIBarButtonItem(systemItem: .fixedSpace)
+        fixed.width = 20
         
-        toolbar.items = [flexible, plus, flexible, minus, flexible, multiply, flexible, divide, flexible, equal, flexible]
+        toolbar.items = [fixed, plus, flexible, minus, flexible, multiply, flexible, divide, flexible, equal, fixed]
         
-        // 3) 텍스트필드의 inputAccessoryView에 붙여주기
         amountTextField.inputAccessoryView = toolbar
     }
     
@@ -128,6 +130,10 @@ class InputTableViewController: UITableViewController {
 }
 
 extension InputTableViewController: UITextFieldDelegate {
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
+    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if currentInput == "" {

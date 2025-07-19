@@ -545,6 +545,55 @@
                                     <segue destination="P3s-zn-cLj" kind="embed" id="8qY-i6-Bos"/>
                                 </connections>
                             </containerView>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sKV-bk-hjV">
+                                <rect key="frame" x="0.0" y="239" width="393" height="579"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Oza-Eo-Bg1">
+                                    <size key="itemSize" width="128" height="128"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="CategoryCell" id="EHA-u6-lFn" customClass="CategoryCollectionViewCell" customModule="AccountBook" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="q7Q-iq-kiE">
+                                            <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="clock_icon" translatesAutoresizingMaskIntoConstraints="NO" id="hcs-dC-ojB">
+                                                    <rect key="frame" x="12" y="7" width="56" height="56"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="hcs-dC-ojB" secondAttribute="height" multiplier="1:1" id="cAX-zQ-MjE"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="윤태강윤태강" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="GW2-Dd-obK">
+                                                    <rect key="frame" x="14" y="66" width="52" height="12"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="12" id="kDK-qI-U95"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="hcs-dC-ojB" firstAttribute="top" secondItem="q7Q-iq-kiE" secondAttribute="top" constant="7" id="56k-Ml-8bU"/>
+                                                <constraint firstAttribute="bottom" secondItem="GW2-Dd-obK" secondAttribute="bottom" constant="2" id="FIf-t4-13c"/>
+                                                <constraint firstItem="hcs-dC-ojB" firstAttribute="centerX" secondItem="q7Q-iq-kiE" secondAttribute="centerX" id="OeF-qk-lV3"/>
+                                                <constraint firstItem="GW2-Dd-obK" firstAttribute="centerX" secondItem="q7Q-iq-kiE" secondAttribute="centerX" id="ZAD-Aw-EpD"/>
+                                                <constraint firstItem="GW2-Dd-obK" firstAttribute="top" secondItem="hcs-dC-ojB" secondAttribute="bottom" constant="3" id="hwz-Y0-EuT"/>
+                                            </constraints>
+                                        </collectionViewCellContentView>
+                                        <size key="customSize" width="80" height="80"/>
+                                        <connections>
+                                            <outlet property="imgView" destination="hcs-dC-ojB" id="OqG-PF-rYU"/>
+                                            <outlet property="nameLabel" destination="GW2-Dd-obK" id="C49-Wy-jmp"/>
+                                        </connections>
+                                    </collectionViewCell>
+                                </cells>
+                            </collectionView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="mQf-xT-2ki"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -553,11 +602,16 @@
                             <constraint firstItem="15W-lf-v3t" firstAttribute="trailing" secondItem="mQf-xT-2ki" secondAttribute="trailing" id="NSM-pu-P0x"/>
                             <constraint firstItem="15W-lf-v3t" firstAttribute="top" secondItem="mQf-xT-2ki" secondAttribute="top" id="UB7-YD-Yle"/>
                             <constraint firstItem="3lk-4K-Rmk" firstAttribute="leading" secondItem="mQf-xT-2ki" secondAttribute="leading" id="Whl-gX-iXi"/>
+                            <constraint firstItem="mQf-xT-2ki" firstAttribute="bottom" secondItem="sKV-bk-hjV" secondAttribute="bottom" id="aQg-MD-q1v"/>
+                            <constraint firstItem="sKV-bk-hjV" firstAttribute="top" secondItem="3lk-4K-Rmk" secondAttribute="bottom" constant="-24" id="puV-3B-U6S"/>
                             <constraint firstItem="15W-lf-v3t" firstAttribute="leading" secondItem="mQf-xT-2ki" secondAttribute="leading" id="ra4-ZR-IES"/>
                             <constraint firstItem="mQf-xT-2ki" firstAttribute="trailing" secondItem="3lk-4K-Rmk" secondAttribute="trailing" id="rwn-ZJ-Vfk"/>
+                            <constraint firstItem="mQf-xT-2ki" firstAttribute="trailing" secondItem="sKV-bk-hjV" secondAttribute="trailing" id="uXU-2t-gaV"/>
+                            <constraint firstItem="sKV-bk-hjV" firstAttribute="leading" secondItem="mQf-xT-2ki" secondAttribute="leading" id="yll-20-8T6"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="categoryCollectionView" destination="sKV-bk-hjV" id="avb-Ue-Waj"/>
                         <outlet property="dateButton" destination="tPB-xX-o31" id="JuZ-WQ-O4F"/>
                     </connections>
                 </viewController>
@@ -651,7 +705,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ8-0O-VTW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2606" y="-41"/>
+            <point key="canvasLocation" x="1854" y="496"/>
         </scene>
         <!--Month Picker View Controller-->
         <scene sceneID="xl8-jQ-hNU">
@@ -790,6 +844,7 @@
     <resources>
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
+        <image name="clock_icon" width="1024" height="1024"/>
         <image name="equal" catalog="system" width="128" height="73"/>
         <image name="minus" catalog="system" width="128" height="26"/>
         <image name="pencil.and.list.clipboard" catalog="system" width="114" height="128"/>
