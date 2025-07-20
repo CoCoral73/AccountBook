@@ -51,7 +51,17 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     private func configureCollectionView() {
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
+        categoryCollectionView.allowsSelection = true
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.item == 99 { //카테고리 추가
+            
+        } else {
+            
+        }
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100
     }
@@ -83,7 +93,7 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     }
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        view.endEditing(true)  // 또는 amountTextField.resignFirstResponder()
+        view.endEditing(true)
     }
     
 }

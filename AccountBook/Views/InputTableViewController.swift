@@ -10,6 +10,7 @@ import UIKit
 class InputTableViewController: UITableViewController {
     
     @IBOutlet weak var amountTextField: AmountTextField!
+    @IBOutlet weak var paymentSelectionButton: UIButton!
     @IBOutlet weak var memoTextField: UITextField!
     
     private enum Operator: Int {
@@ -120,6 +121,21 @@ class InputTableViewController: UITableViewController {
             currentInput = ""
         }
     }
+    
+    @IBAction func paymentSelectionButtonTapped(_ sender: UIButton) {
+        guard let paymentSelectionVC = storyboard?.instantiateViewController(withIdentifier: "PaymentSelectionViewController") as? PaymentSelectionViewController
+        else {
+            fatalError("PaymentSelectionViewController 생성 에러")
+        }
+        
+        paymentSelectionVC.onPaymentSelected = { [weak self] in
+            self?.memoTextField.becomeFirstResponder()
+        }
+        if let sheet = paymentSelectionVC.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        present(paymentSelectionVC, animated: true, completion: nil)
+    }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return .leastNonzeroMagnitude
@@ -136,6 +152,8 @@ extension InputTableViewController: UITextFieldDelegate {
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if textField == memoTextField { return true }
+        
         if currentInput == "" {
             textField.text = ""
             currentInput = string

@@ -537,16 +537,16 @@
                                 <color key="barTintColor" systemColor="systemBackgroundColor"/>
                             </toolbar>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3lk-4K-Rmk">
-                                <rect key="frame" x="0.0" y="113" width="393" height="150"/>
+                                <rect key="frame" x="0.0" y="113" width="393" height="180"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="Dls-iu-HYX"/>
+                                    <constraint firstAttribute="height" constant="180" id="Dls-iu-HYX"/>
                                 </constraints>
                                 <connections>
                                     <segue destination="P3s-zn-cLj" kind="embed" id="8qY-i6-Bos"/>
                                 </connections>
                             </containerView>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="sKV-bk-hjV">
-                                <rect key="frame" x="0.0" y="239" width="393" height="579"/>
+                                <rect key="frame" x="0.0" y="285" width="393" height="533"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Oza-Eo-Bg1">
                                     <size key="itemSize" width="128" height="128"/>
@@ -603,13 +603,14 @@
                             <constraint firstItem="15W-lf-v3t" firstAttribute="top" secondItem="mQf-xT-2ki" secondAttribute="top" id="UB7-YD-Yle"/>
                             <constraint firstItem="3lk-4K-Rmk" firstAttribute="leading" secondItem="mQf-xT-2ki" secondAttribute="leading" id="Whl-gX-iXi"/>
                             <constraint firstItem="mQf-xT-2ki" firstAttribute="bottom" secondItem="sKV-bk-hjV" secondAttribute="bottom" id="aQg-MD-q1v"/>
-                            <constraint firstItem="sKV-bk-hjV" firstAttribute="top" secondItem="3lk-4K-Rmk" secondAttribute="bottom" constant="-24" id="puV-3B-U6S"/>
+                            <constraint firstItem="sKV-bk-hjV" firstAttribute="top" secondItem="3lk-4K-Rmk" secondAttribute="bottom" constant="-8" id="puV-3B-U6S"/>
                             <constraint firstItem="15W-lf-v3t" firstAttribute="leading" secondItem="mQf-xT-2ki" secondAttribute="leading" id="ra4-ZR-IES"/>
                             <constraint firstItem="mQf-xT-2ki" firstAttribute="trailing" secondItem="3lk-4K-Rmk" secondAttribute="trailing" id="rwn-ZJ-Vfk"/>
                             <constraint firstItem="mQf-xT-2ki" firstAttribute="trailing" secondItem="sKV-bk-hjV" secondAttribute="trailing" id="uXU-2t-gaV"/>
                             <constraint firstItem="sKV-bk-hjV" firstAttribute="leading" secondItem="mQf-xT-2ki" secondAttribute="leading" id="yll-20-8T6"/>
                         </constraints>
                     </view>
+                    <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="categoryCollectionView" destination="sKV-bk-hjV" id="avb-Ue-Waj"/>
                         <outlet property="dateButton" destination="tPB-xX-o31" id="JuZ-WQ-O4F"/>
@@ -617,35 +618,178 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Es4-EV-4rV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1855.7251908396945" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="1856" y="-27"/>
+        </scene>
+        <!--Payment Selection View Controller-->
+        <scene sceneID="T3L-cB-FhF">
+            <objects>
+                <viewController storyboardIdentifier="PaymentSelectionViewController" id="zZj-xw-xdj" customClass="PaymentSelectionViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LQr-KX-SCL">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oql-2Z-37e">
+                                <rect key="frame" x="0.0" y="59" width="196.33333333333334" height="793"/>
+                                <subviews>
+                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBT-Hg-1Bw">
+                                        <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="198"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="현금">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="PaymentTypeButtonTapped:" destination="zZj-xw-xdj" eventType="touchUpInside" id="YDu-80-mTl"/>
+                                        </connections>
+                                    </button>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oA7-r2-QsC">
+                                        <rect key="frame" x="0.0" y="198" width="196.33333333333334" height="0.33333333333334281"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="0.5" id="E7C-vP-7Bj"/>
+                                        </constraints>
+                                    </view>
+                                    <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApX-MT-fIt">
+                                        <rect key="frame" x="0.0" y="198.33333333333331" width="196.33333333333334" height="198"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="계좌">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="PaymentTypeButtonTapped:" destination="zZj-xw-xdj" eventType="touchUpInside" id="MdP-5a-d89"/>
+                                        </connections>
+                                    </button>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xwA-qE-KZT">
+                                        <rect key="frame" x="0.0" y="396.33333333333331" width="196.33333333333334" height="0.33333333333331439"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                    </view>
+                                    <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O4-EQ-5xF">
+                                        <rect key="frame" x="0.0" y="396.66666666666669" width="196.33333333333334" height="198.00000000000006"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="체크카드">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="PaymentTypeButtonTapped:" destination="zZj-xw-xdj" eventType="touchUpInside" id="qO3-E0-rkY"/>
+                                        </connections>
+                                    </button>
+                                    <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ezZ-sa-Bxe">
+                                        <rect key="frame" x="0.0" y="594.66666666666663" width="196.33333333333334" height="0.33333333333337123"/>
+                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                    </view>
+                                    <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHV-r6-WFS">
+                                        <rect key="frame" x="0.0" y="595" width="196.33333333333334" height="198"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="신용카드">
+                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="PaymentTypeButtonTapped:" destination="zZj-xw-xdj" eventType="touchUpInside" id="2ow-dj-Bj6"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="ezZ-sa-Bxe" firstAttribute="height" secondItem="oA7-r2-QsC" secondAttribute="height" id="7Us-rI-s54"/>
+                                    <constraint firstItem="aHV-r6-WFS" firstAttribute="height" secondItem="VBT-Hg-1Bw" secondAttribute="height" id="8LV-Ba-cbP"/>
+                                    <constraint firstItem="1O4-EQ-5xF" firstAttribute="height" secondItem="VBT-Hg-1Bw" secondAttribute="height" id="LjF-0V-89n"/>
+                                    <constraint firstItem="ApX-MT-fIt" firstAttribute="height" secondItem="VBT-Hg-1Bw" secondAttribute="height" id="QHy-rq-bEZ"/>
+                                    <constraint firstItem="xwA-qE-KZT" firstAttribute="height" secondItem="oA7-r2-QsC" secondAttribute="height" id="oxs-EG-QZf"/>
+                                </constraints>
+                            </stackView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5n-zy-2ws" userLabel="세로경계선">
+                                <rect key="frame" x="196.33333333333334" y="59" width="0.33333333333334281" height="793"/>
+                                <color key="backgroundColor" systemColor="systemGray4Color"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="0.5" id="vGO-9U-Zwz"/>
+                                </constraints>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sbB-49-779">
+                                <rect key="frame" x="196.66666666666663" y="59" width="196.33333333333337" height="793"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PaymentCell" rowHeight="136" id="JvP-HC-8Cn">
+                                        <rect key="frame" x="0.0" y="50" width="196.33333333333337" height="136"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JvP-HC-8Cn" id="wNf-5u-bxV">
+                                            <rect key="frame" x="0.0" y="0.0" width="196.33333333333337" height="136"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="삼성카드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1WC-Aa-GzD">
+                                                    <rect key="frame" x="63.666666666666664" y="56" width="69.333333333333343" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="1WC-Aa-GzD" firstAttribute="centerY" secondItem="wNf-5u-bxV" secondAttribute="centerY" id="g3C-3b-Sxi"/>
+                                                <constraint firstItem="1WC-Aa-GzD" firstAttribute="centerX" secondItem="wNf-5u-bxV" secondAttribute="centerX" id="o3m-zM-NgC"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Sgw-ht-xoc"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="oql-2Z-37e" firstAttribute="leading" secondItem="Sgw-ht-xoc" secondAttribute="leading" id="0Bv-kB-qcA"/>
+                            <constraint firstItem="v5n-zy-2ws" firstAttribute="centerX" secondItem="LQr-KX-SCL" secondAttribute="centerX" id="42t-6p-fev"/>
+                            <constraint firstItem="oql-2Z-37e" firstAttribute="top" secondItem="Sgw-ht-xoc" secondAttribute="top" id="EkH-UL-nG1"/>
+                            <constraint firstItem="sbB-49-779" firstAttribute="leading" secondItem="v5n-zy-2ws" secondAttribute="trailing" id="F33-BQ-ZMW"/>
+                            <constraint firstAttribute="bottom" secondItem="v5n-zy-2ws" secondAttribute="bottom" id="NGj-eQ-hlE"/>
+                            <constraint firstItem="v5n-zy-2ws" firstAttribute="top" secondItem="Sgw-ht-xoc" secondAttribute="top" id="Ta9-en-Jic"/>
+                            <constraint firstItem="v5n-zy-2ws" firstAttribute="leading" secondItem="oql-2Z-37e" secondAttribute="trailing" id="bCM-Bn-SoJ"/>
+                            <constraint firstAttribute="bottom" secondItem="oql-2Z-37e" secondAttribute="bottom" id="jq4-UA-FJs"/>
+                            <constraint firstItem="sbB-49-779" firstAttribute="top" secondItem="Sgw-ht-xoc" secondAttribute="top" id="mH0-3Q-xIp"/>
+                            <constraint firstAttribute="bottom" secondItem="sbB-49-779" secondAttribute="bottom" id="sVh-fe-6cQ"/>
+                            <constraint firstAttribute="trailing" secondItem="sbB-49-779" secondAttribute="trailing" id="xRA-rX-0CT"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="accountButton" destination="ApX-MT-fIt" id="LRS-D8-6JC"/>
+                        <outlet property="cashButton" destination="VBT-Hg-1Bw" id="D6b-ci-5J0"/>
+                        <outlet property="checkcardButton" destination="1O4-EQ-5xF" id="krR-zL-Zen"/>
+                        <outlet property="creditcardButton" destination="aHV-r6-WFS" id="hFG-eY-hCi"/>
+                        <outlet property="tableView" destination="sbB-49-779" id="ZL2-WR-JNY"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kx5-X4-AHk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2751.9083969465646" y="-27.464788732394368"/>
         </scene>
         <!--Input Table View Controller-->
         <scene sceneID="bIt-QH-zM3">
             <objects>
                 <tableViewController automaticallyAdjustsScrollViewInsets="NO" hidesBottomBarWhenPushed="YES" id="P3s-zn-cLj" customClass="InputTableViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="chl-Aa-pm0">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="150"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="180"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                         <sections>
                             <tableViewSection id="U11-2K-0ZC">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="4GY-Qn-wJc">
-                                        <rect key="frame" x="0.0" y="50" width="393" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="55" id="4GY-Qn-wJc">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4GY-Qn-wJc" id="BjW-QF-0Vf">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wallet.bifold" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="1g3-1d-jXk">
-                                                    <rect key="frame" x="16" y="10.666666666666664" width="40" height="39"/>
+                                                    <rect key="frame" x="16" y="10.666666666666664" width="35" height="34"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="1g3-1d-jXk" secondAttribute="height" multiplier="1:1" id="OLn-yb-8lo"/>
                                                     </constraints>
                                                 </imageView>
                                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="금액 입력" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vNs-8b-LUT" customClass="AmountTextField" customModule="AccountBook" customModuleProvider="target">
-                                                    <rect key="frame" x="66" y="10.666666666666668" width="307" height="38.666666666666657"/>
+                                                    <rect key="frame" x="61" y="8.6666666666666679" width="312" height="37.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                                 </textField>
@@ -661,32 +805,67 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="60" id="Rqs-xI-sTY">
-                                        <rect key="frame" x="0.0" y="110" width="393" height="60"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="55" id="Rqs-xI-sTY">
+                                        <rect key="frame" x="0.0" y="105" width="393" height="55"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Rqs-xI-sTY" id="D9N-eN-ADy">
-                                            <rect key="frame" x="0.0" y="0.0" width="393" height="60"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="55"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil.and.list.clipboard" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HqJ-h4-7gB">
-                                                    <rect key="frame" x="16" y="8.6666666666666679" width="41.666666666666671" height="42"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="creditcard" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="HqJ-h4-7gB">
+                                                    <rect key="frame" x="16" y="11.999999999999998" width="35" height="31"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="HqJ-h4-7gB" secondAttribute="height" multiplier="1:1" id="WdE-OO-J97"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="상세내역 입력" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="h8R-vc-FSD">
-                                                    <rect key="frame" x="66" y="11.333333333333332" width="307" height="37.666666666666671"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="trailing" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="28i-xZ-1aF">
+                                                    <rect key="frame" x="61" y="3.6666666666666679" width="312" height="48"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
+                                                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                    <state key="normal" title="결제수단 선택">
+                                                        <color key="titleColor" systemColor="placeholderTextColor"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="paymentSelectionButtonTapped:" destination="P3s-zn-cLj" eventType="touchUpInside" id="ZOJ-yg-wwm"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstAttribute="bottom" secondItem="HqJ-h4-7gB" secondAttribute="bottom" constant="10" id="5iW-70-Igi"/>
+                                                <constraint firstItem="HqJ-h4-7gB" firstAttribute="leading" secondItem="D9N-eN-ADy" secondAttribute="leading" constant="16" id="6zI-P1-3Q3"/>
+                                                <constraint firstItem="28i-xZ-1aF" firstAttribute="centerY" secondItem="D9N-eN-ADy" secondAttribute="centerY" id="mVl-5m-Zl3"/>
+                                                <constraint firstItem="28i-xZ-1aF" firstAttribute="leading" secondItem="HqJ-h4-7gB" secondAttribute="trailing" constant="10" id="ooc-zX-zut"/>
+                                                <constraint firstItem="HqJ-h4-7gB" firstAttribute="top" secondItem="D9N-eN-ADy" secondAttribute="top" constant="10" id="uGP-nb-u2K"/>
+                                                <constraint firstAttribute="trailing" secondItem="28i-xZ-1aF" secondAttribute="trailing" constant="20" symbolic="YES" id="xej-9m-5ok"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="55" id="zJI-Lx-dvJ">
+                                        <rect key="frame" x="0.0" y="160" width="393" height="55"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="zJI-Lx-dvJ" id="dgP-L7-tdx">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="55"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pencil.and.list.clipboard" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="71i-CQ-xzX">
+                                                    <rect key="frame" x="16" y="8.6666666666666679" width="36.666666666666671" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="71i-CQ-xzX" secondAttribute="height" multiplier="1:1" id="jyo-1s-PU9"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="상세내역 입력" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="1qg-jf-4kX">
+                                                    <rect key="frame" x="61" y="8.6666666666666679" width="312" height="37.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <textInputTraits key="textInputTraits" autocorrectionType="no" spellCheckingType="no" returnKeyType="done" smartDashesType="no" smartInsertDeleteType="no" smartQuotesType="no"/>
                                                 </textField>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="trailingMargin" secondItem="h8R-vc-FSD" secondAttribute="trailing" id="5Mp-FZ-JcU"/>
-                                                <constraint firstAttribute="bottom" secondItem="HqJ-h4-7gB" secondAttribute="bottom" constant="10" id="5iW-70-Igi"/>
-                                                <constraint firstItem="HqJ-h4-7gB" firstAttribute="leading" secondItem="D9N-eN-ADy" secondAttribute="leading" constant="16" id="6zI-P1-3Q3"/>
-                                                <constraint firstItem="h8R-vc-FSD" firstAttribute="leading" secondItem="HqJ-h4-7gB" secondAttribute="trailing" constant="10" id="UPD-sJ-Fwg"/>
-                                                <constraint firstItem="h8R-vc-FSD" firstAttribute="centerY" secondItem="D9N-eN-ADy" secondAttribute="centerY" id="VFz-NZ-MsK"/>
-                                                <constraint firstItem="HqJ-h4-7gB" firstAttribute="top" secondItem="D9N-eN-ADy" secondAttribute="top" constant="10" id="uGP-nb-u2K"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="1qg-jf-4kX" secondAttribute="trailing" id="AlN-uM-nEa"/>
+                                                <constraint firstAttribute="bottom" secondItem="71i-CQ-xzX" secondAttribute="bottom" constant="10" id="EO4-Ba-BBT"/>
+                                                <constraint firstItem="71i-CQ-xzX" firstAttribute="top" secondItem="dgP-L7-tdx" secondAttribute="top" constant="10" id="VZ9-Um-iZU"/>
+                                                <constraint firstItem="1qg-jf-4kX" firstAttribute="leading" secondItem="71i-CQ-xzX" secondAttribute="trailing" constant="10" id="iZv-DH-0b5"/>
+                                                <constraint firstItem="71i-CQ-xzX" firstAttribute="leading" secondItem="dgP-L7-tdx" secondAttribute="leading" constant="16" id="wMc-xA-jqm"/>
+                                                <constraint firstItem="1qg-jf-4kX" firstAttribute="centerY" secondItem="dgP-L7-tdx" secondAttribute="centerY" id="wuc-OY-z1X"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -700,12 +879,13 @@
                     </tableView>
                     <connections>
                         <outlet property="amountTextField" destination="vNs-8b-LUT" id="FnV-kn-RQd"/>
-                        <outlet property="memoTextField" destination="h8R-vc-FSD" id="df3-3u-qJ4"/>
+                        <outlet property="memoTextField" destination="1qg-jf-4kX" id="k4v-of-6rF"/>
+                        <outlet property="paymentSelectionButton" destination="28i-xZ-1aF" id="RVu-li-oNl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ8-0O-VTW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1854" y="496"/>
+            <point key="canvasLocation" x="1855.7251908396945" y="-466.19718309859155"/>
         </scene>
         <!--Month Picker View Controller-->
         <scene sceneID="xl8-jQ-hNU">
@@ -820,7 +1000,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLc-9q-2wE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856" y="-714"/>
+            <point key="canvasLocation" x="1856" y="-887"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="guq-Kq-nWg">
@@ -845,17 +1025,24 @@
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
         <image name="clock_icon" width="1024" height="1024"/>
+        <image name="creditcard" catalog="system" width="128" height="88"/>
         <image name="equal" catalog="system" width="128" height="73"/>
         <image name="minus" catalog="system" width="128" height="26"/>
         <image name="pencil.and.list.clipboard" catalog="system" width="114" height="128"/>
         <image name="plus" catalog="system" width="128" height="113"/>
         <image name="wallet.bifold" catalog="system" width="128" height="103"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
             <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
