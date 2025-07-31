@@ -128,7 +128,9 @@ class InputTableViewController: UITableViewController {
             fatalError("PaymentSelectionViewController 생성 에러")
         }
         
-        paymentSelectionVC.onPaymentSelected = { [weak self] in
+        paymentSelectionVC.onPaymentSelected = { [weak self] payment in
+            self?.paymentSelectionButton.setTitle(payment, for: .normal)
+            self?.paymentSelectionButton.setTitleColor(.black, for: .normal)
             self?.memoTextField.becomeFirstResponder()
         }
         if let sheet = paymentSelectionVC.sheetPresentationController {

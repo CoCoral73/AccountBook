@@ -18,7 +18,7 @@ class PaymentSelectionViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     
-    var onPaymentSelected: (() -> ())?
+    var onPaymentSelected: ((String) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -53,7 +53,7 @@ extension PaymentSelectionViewController: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         dismiss(animated: true)
-        onPaymentSelected?()
+        onPaymentSelected?("삼성카드")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
