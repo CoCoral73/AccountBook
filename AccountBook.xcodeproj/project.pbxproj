@@ -30,7 +30,6 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				Models/DefaultCategory.json,
 			);
 			target = 90E579552E15002700323D5A /* AccountBook */;
 		};

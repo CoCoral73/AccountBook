@@ -50,7 +50,7 @@ final class CoreDataManager {
         do {
             let count = try context.count(for: fetchRequest)
             if count == 0 {
-                insertDefaultCategoriesFromJSON()
+                seedDefaultCategoriesFromJSON()
             } else {
                 print("이미 기본 카테고리가 존재합니다.")
             }
@@ -59,23 +59,25 @@ final class CoreDataManager {
         }
     }
 
-    private func insertDefaultCategoriesFromJSON() {
-        guard let incomeUrl = Bundle.main.url(forResource: "DefaultIncomeCategory", withExtension: "json"), let expenseUrl = Bundle.main.url(forResource: "DefaultExpenseCategory", withExtension: "json") else {
-            print("기본 카테고리 파일을 찾을 수 없습니다.")
+    private func seedDefaultCategoriesFromJSON() {
+        guard let url = Bundle.main.url(forResource: "DefaultCategory", withExtension: "json") else {
+            print("DefaultCategory.json 파일을 찾을 수 없습니다.")
             return
         }
 
         do {
             let data = try Data(contentsOf: url)
             let decoder = JSONDecoder()
-            let categories = try decoder.decode([CategoryData].self, from: data)
+            let categories = try decoder.decode([CategoryParseModel].self, from: data)
 
-            for categoryData in categories {
+            for category in categories {
                 let newCategory = Category(context: context)
-                newCategory.name = categoryData.name
-                newCategory.isIncome = categoryData.isIncome
-                newCategory.transactionType = categoryData.transactionType
-                newCategory.iconName = categoryData.iconName
+                newCategory.id = UUID()
+                newCategory.name = category.name
+                newCategory.isIncome = category.isIncome
+                newCategory.iconName = category.iconName
+                newCategory.isDefault = true
+                newCategory.transactions = nil
             }
 
             saveContext()

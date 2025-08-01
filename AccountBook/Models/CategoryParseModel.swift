@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct DefaultCategory: Codable {
+struct CategoryParseModel: Codable {
     let name: String
     let isIncome: Bool
     let iconName: String
