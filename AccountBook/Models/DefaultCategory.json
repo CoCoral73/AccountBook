@@ -1,0 +1,125 @@
+[
+  //수입
+  {
+    "name": "월급",
+    "iconName": "💰",
+    "isIncome": true
+  },
+  {
+    "name": "용돈",
+    "iconName": "💵",
+    "isIncome": true
+  },
+  {
+    "name": "이자",
+    "iconName": "🏦",
+    "isIncome": true
+  },
+  {
+    "name": "자산 수정",
+    "iconName": "✍️",
+    "isIncome": true
+  },
+  {
+    "name": "기타",
+    "iconName": "❓",
+    "isIncome": true
+  },
+
+  //지출
+  {
+    "name": "식비",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "간식",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "교통",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "통신",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "생필품",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "구독",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "주거",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "공과금",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "대출이자",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "건강",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "쇼핑",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "미용",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "데이트",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "취미",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "교육",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "경조사",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "회비",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "복권",
+    "iconName": "🍚",
+    "isIncome": false
+  },
+  {
+    "name": "기타",
+    "iconName": "🍚",
+    "isIncome": false
+  }
+]

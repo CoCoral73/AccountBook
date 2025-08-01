@@ -30,7 +30,7 @@
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
-				Models/DefaultExpenseCategory.json,
+				Models/DefaultCategory.json,
 			);
 			target = 90E579552E15002700323D5A /* AccountBook */;
 		};
@@ -41,7 +41,7 @@
 			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
 			buildPhase = 90E579522E15002700323D5A /* Sources */;
 			membershipExceptions = (
-				Models/DefaultExpenseCategory.json,
+				Models/DefaultCategory.json,
 			);
 		};
 /* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
