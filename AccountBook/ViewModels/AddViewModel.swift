@@ -15,16 +15,27 @@ class AddViewModel {
         }
     }
     
+    private var isIncome: Bool
+    
     var onDidSetCurrentDate: (() -> Void)?
     
-    init(currentDate: Date) {
+    init(currentDate: Date, isIncome: Bool) {
         self.currentDate = currentDate
+        self.isIncome = isIncome
     }
     
     var currentDateString: String {
         let df = DateFormatter()
         df.dateFormat = "yyyy년 M월 d일"
         return df.string(from: currentDate)
+    }
+    
+    var numberOfItemsInSection: Int {
+        return isIncome ? CategoryManager.shared.incomeCategories.count : CategoryManager.shared.expenseCategories.count
+    }
+    
+    var categories: [Category] {
+        return isIncome ? CategoryManager.shared.incomeCategories : CategoryManager.shared.expenseCategories
     }
     
     func handleDateButton(storyboard: UIStoryboard?, fromVC: UIViewController) {

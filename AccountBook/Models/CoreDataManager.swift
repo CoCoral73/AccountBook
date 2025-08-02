@@ -26,7 +26,7 @@ final class CoreDataManager {
         persistentContainer = NSPersistentContainer(name: "AccountBook")
         persistentContainer.loadPersistentStores { storeDescription, error in
             if let error = error {
-                fatalError("Unresolved Core Data error: \(error)")
+                fatalError("Core Data error: \(error)")
             }
         }
     }
@@ -86,6 +86,12 @@ final class CoreDataManager {
         } catch {
             print("기본 카테고리 로드 실패: \(error)")
         }
+    }
+    
+    func fetchAllCategories() -> [Category] {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        //request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
+        return (try? context.fetch(request)) ?? []
     }
 //    // MARK: - 특정 날짜 거래 내역 조회
 //    func fetchTransactionsForMonth(containing date: Date) -> [Transaction] {

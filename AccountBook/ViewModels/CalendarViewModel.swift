@@ -92,7 +92,7 @@ class CalendarViewModel {
     
     func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: UIViewController) {
         guard let addVC = storyboard?.instantiateViewController(identifier: "AddViewController", creator: { coder in
-            AddViewController(coder: coder, viewModel: AddViewModel(currentDate: self.selectedDate)) })
+            AddViewController(coder: coder, viewModel: AddViewModel(currentDate: self.selectedDate, isIncome: type == "수입")) })
         else {
             fatalError("AddViewController 생성 에러")
         }
@@ -143,12 +143,11 @@ class CalendarViewModel {
         dayItemsForCurrentMonth = items
     }
     private func loadMonthlyTransactions() {
-        let allTx = CoreDataManager.shared
-                         .fetchTransactionsForMonth(containing: currentMonth)
-        
-        transactions = Dictionary(grouping: allTx) { tx in
-            Calendar.current.component(.day, from: tx.date)
-        }
+//        let allTx = CoreDataManager.shared.fetchTransactionsForMonth(containing: currentMonth)
+//        
+//        transactions = Dictionary(grouping: allTx) { tx in
+//            Calendar.current.component(.day, from: tx.date)
+//        }
     }
     
     private func days(for date: Date) -> [Int?] {
