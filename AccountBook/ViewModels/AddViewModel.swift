@@ -21,8 +21,11 @@ class AddViewModel {
     
     private var isIncome: Bool
     
+    //Add View에서 currentDate가 바뀌면  바 버튼 아이템의 날짜 타이틀이 바뀌도록
     var onDidSetCurrentDate: (() -> Void)?
-    var onDidAddTransaction: (() -> Void)?
+    
+    //Add View에서 내역 추가 동작을 했을 때, Calendar View에서 해야할 일
+    var onDidAddTransaction: ((NewTransactionInfo) -> Void)?
     
     init(currentDate: Date, isIncome: Bool) {
         self.currentDate = currentDate
@@ -54,7 +57,7 @@ class AddViewModel {
         }
         
         TransactionManager.shared.addTransaction(amount: amountInput, date: currentDate, isIncome: isIncome, memo: memoInput, category: getCategory(with: index), asset: asset)
-        onDidAddTransaction?()
+        onDidAddTransaction?(NewTransactionInfo(date: currentDate, isIncome: isIncome, amount: amountInput))
     }
     
     func handleDateButton(storyboard: UIStoryboard?, fromVC: UIViewController) {

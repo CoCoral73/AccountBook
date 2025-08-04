@@ -12,14 +12,13 @@ struct DayItem: Hashable {
     let date: Date
     let income, expense: Int64
     
-    /* index로만 식별
+    //date로만 DayItem을 구분하도록 하기
     func hash(into hasher: inout Hasher) {
-        hasher.combine(index)
+        hasher.combine(date)
     }
     static func == (lhs: DayItem, rhs: DayItem) -> Bool {
-        lhs.index == rhs.index
+        return Calendar.current.isDate(lhs.date, inSameDayAs: rhs.date)
     }
-     */
 }
 
 class DayCollectionViewCell: UICollectionViewCell {

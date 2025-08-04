@@ -7,6 +7,12 @@
 
 import Foundation
 
+struct NewTransactionInfo {
+    let date: Date
+    let isIncome: Bool
+    let amount: Int64
+}
+
 class TransactionManager {
     static let shared = TransactionManager()
     private init() {}

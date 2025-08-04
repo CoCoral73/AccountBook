@@ -96,14 +96,17 @@ final class CoreDataManager {
     }
     
     // MARK: - 특정 날짜 거래 내역 조회
-    func fetchTransactionForDay(date: Date) -> [Transaction] {
+    func fetchTransactions(with date: Date) -> [Transaction] {
         let calendar = Calendar.current
-        
+        let startOfDay = calendar.startOfDay(for: date)
+        guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
+            return []
+        }
+
         let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-        request.predicate = NSPredicate(format: "date == %@", date as NSDate)
-        
+        request.predicate = NSPredicate(format: "date >= %@ AND date < %@", startOfDay as NSDate, endOfDay as NSDate)
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
-        
+
         do {
             return try context.fetch(request)
         } catch {
@@ -112,7 +115,7 @@ final class CoreDataManager {
         }
     }
     
-    func fetchTransactionsForMonth(containing date: Date) -> [Transaction] {
+    func fetchTransactions(containing date: Date) -> [Transaction] {
         let calendar = Calendar.current
         
         // 1) 이번 달 1일 00:00
@@ -150,7 +153,7 @@ final class CoreDataManager {
 //        var totals: [String: Int64] = [:]
 //
 //        for tx in transactions {
-//            let categoryName = tx.category.name 
+//            let categoryName = tx.category.name
 //            let current = totals[categoryName] ?? 0
 //            totals[categoryName] = current + tx.amount
 //        }

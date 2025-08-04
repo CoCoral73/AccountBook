@@ -11,7 +11,7 @@ class CalendarViewModel {
     
     private var currentMonth: Date {
         didSet {
-            loadMonthlyTransactions()
+            loadTransactions()
             generateDayItems()
             onDidSetCurrentMonth?()
         }
@@ -20,7 +20,7 @@ class CalendarViewModel {
     var onDidSetCurrentMonth: (() -> Void)?
     
     private(set) var dayItemsForCurrentMonth: [DayItem] = []
-    private(set) var transactions: [Int: [Transaction]] = [:]
+    private(set) var transactions: [Int: [Transaction]] = [:]  //현재 달이 아닌 날짜는 포함 안됨
     private var dayCache: [Date: [Int?]] = [:]  // 월별 날짜 배열 캐싱
     private let calendar = Calendar.current
     
@@ -32,7 +32,7 @@ class CalendarViewModel {
         selectedDate = currentMonth
         selectedDay = calendar.component(.day, from: currentMonth)
         
-        loadMonthlyTransactions()
+        loadTransactions()
         generateDayItems()
     }
     
@@ -71,6 +71,17 @@ class CalendarViewModel {
         }!
     }
     
+    func updateDayItem(for date: Date, income: Int64, expense: Int64) -> Int? {
+        guard let index = dayItemsForCurrentMonth.firstIndex(where: { Calendar.current.isDate($0.date, inSameDayAs: date) }) else {
+            return nil
+        }
+
+        var item = dayItemsForCurrentMonth[index]
+        item = DayItem(index: index, date: date, income: item.income + income, expense: item.expense + expense)
+        dayItemsForCurrentMonth[index] = item
+        return index
+    }
+    
     func handleMonthButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
         guard let pickerVC = storyboard?
             .instantiateViewController(identifier: "MonthPickerViewController", creator: { coder in
@@ -98,9 +109,10 @@ class CalendarViewModel {
             fatalError("AddViewController 생성 에러")
         }
         
-        addVC.viewModel.onDidAddTransaction = { [weak self] in
+        addVC.viewModel.onDidAddTransaction = { [weak self] transaction in
             guard let self = self else { return }
-            self.currentMonth = self.currentMonth
+            self.loadTransactions(with: transaction.date)
+            (fromVC as! CalendarViewController).reloadDayItem(transaction)
         }
         addVC.modalPresentationStyle = .fullScreen
         fromVC.present(addVC, animated: true)
@@ -147,12 +159,20 @@ class CalendarViewModel {
         
         dayItemsForCurrentMonth = items
     }
-    private func loadMonthlyTransactions() {
-        let allTx = CoreDataManager.shared.fetchTransactionsForMonth(containing: currentMonth)
+    
+    private func loadTransactions() {
+        let allTx = CoreDataManager.shared.fetchTransactions(containing: currentMonth)
         
         transactions = Dictionary(grouping: allTx) { tx in
             Calendar.current.component(.day, from: tx.date)
         }
+    }
+    
+    private func loadTransactions(with date: Date) {
+        let tx = CoreDataManager.shared.fetchTransactions(with: date)
+        dump(tx)
+        let day = calendar.component(.day, from: date)
+        transactions[day] = tx
     }
     
     private func days(for date: Date) -> [Int?] {
