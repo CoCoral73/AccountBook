@@ -88,42 +88,60 @@ final class CoreDataManager {
         }
     }
     
+    // MARK: - 전체 카테고리 로드
     func fetchAllCategories() -> [Category] {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         //request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         return (try? context.fetch(request)) ?? []
     }
-//    // MARK: - 특정 날짜 거래 내역 조회
-//    func fetchTransactionsForMonth(containing date: Date) -> [Transaction] {
-//        let calendar = Calendar.current
-//        
-//        // 1) 이번 달 1일 00:00
-//        let comps = calendar.dateComponents([.year, .month], from: date)
-//        let startOfMonth = calendar.date(from: comps)!
-//        
-//        // 2) 다음 달 1일 00:00
-//        var nextMonthComps = DateComponents()
-//        nextMonthComps.month = 1
-//        let startOfNextMonth = calendar.date(byAdding: nextMonthComps,
-//                                             to: startOfMonth)!
-//        
-//        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-//        request.predicate = NSPredicate(
-//            format: "date >= %@ AND date < %@",
-//            startOfMonth as NSDate,
-//            startOfNextMonth as NSDate
-//        )
-//        request.sortDescriptors = [
-//            NSSortDescriptor(key: "date", ascending: true)
-//        ]
-//        
-//        do {
-//            return try context.fetch(request)
-//        } catch {
-//            print("Core Data fetch error: \(error)")
-//            return []
-//        }
-//    }
+    
+    // MARK: - 특정 날짜 거래 내역 조회
+    func fetchTransactionForDay(date: Date) -> [Transaction] {
+        let calendar = Calendar.current
+        
+        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        request.predicate = NSPredicate(format: "date == %@", date as NSDate)
+        
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Core Data fetch error: \(error)")
+            return []
+        }
+    }
+    
+    func fetchTransactionsForMonth(containing date: Date) -> [Transaction] {
+        let calendar = Calendar.current
+        
+        // 1) 이번 달 1일 00:00
+        let comps = calendar.dateComponents([.year, .month], from: date)
+        let startOfMonth = calendar.date(from: comps)!
+        
+        // 2) 다음 달 1일 00:00
+        var nextMonthComps = DateComponents()
+        nextMonthComps.month = 1
+        let startOfNextMonth = calendar.date(byAdding: nextMonthComps,
+                                             to: startOfMonth)!
+        
+        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        request.predicate = NSPredicate(
+            format: "date >= %@ AND date < %@",
+            startOfMonth as NSDate,
+            startOfNextMonth as NSDate
+        )
+        request.sortDescriptors = [
+            NSSortDescriptor(key: "date", ascending: true)
+        ]
+        
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Core Data fetch error: \(error)")
+            return []
+        }
+    }
 //
 //    // MARK: - 카테고리별 합계 조회 예시
 //    /// 카테고리별 총합을 딕셔너리로 반환합니다.

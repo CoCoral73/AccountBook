@@ -15,9 +15,14 @@ class AddViewModel {
         }
     }
     
+    var amountInput: Int64 = 0
+    var assetInput: AssetItem?
+    var memoInput: String = ""
+    
     private var isIncome: Bool
     
     var onDidSetCurrentDate: (() -> Void)?
+    var onDidAddTransaction: (() -> Void)?
     
     init(currentDate: Date, isIncome: Bool) {
         self.currentDate = currentDate
@@ -34,8 +39,22 @@ class AddViewModel {
         return isIncome ? CategoryManager.shared.incomeCategories.count : CategoryManager.shared.expenseCategories.count
     }
     
-    var categories: [Category] {
+    private var categories: [Category] {
         return isIncome ? CategoryManager.shared.incomeCategories : CategoryManager.shared.expenseCategories
+    }
+    
+    func getCategory(with index: Int) -> Category {
+        return categories[index]
+    }
+    
+    func addTransaction(with index: Int) {
+        guard let asset = assetInput else {
+            //자산 선택 안됐을때 동작 설정하기
+            return
+        }
+        
+        TransactionManager.shared.addTransaction(amount: amountInput, date: currentDate, isIncome: isIncome, memo: memoInput, category: getCategory(with: index), asset: asset)
+        onDidAddTransaction?()
     }
     
     func handleDateButton(storyboard: UIStoryboard?, fromVC: UIViewController) {

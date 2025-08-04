@@ -20,7 +20,7 @@ extension Transaction {
     @NSManaged public var date: Date
     @NSManaged public var id: UUID
     @NSManaged public var isIncome: Bool
-    @NSManaged public var memo: String?
+    @NSManaged public var memo: String
     @NSManaged public var category: Category
     @NSManaged public var asset: AssetItem
 

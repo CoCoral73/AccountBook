@@ -206,6 +206,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         }
         
         monthButton.setTitle(viewModel.monthButtonString, for: .normal)
+        detailTableView.reloadData()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -220,7 +221,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         }
 
         let selectedItem = viewModel.setSelectedDay(with: indexPath.item)
-
+        
         if let newIndexPath = dataSource.indexPath(for: selectedItem) {
  
             calendarCollectionView.selectItem(

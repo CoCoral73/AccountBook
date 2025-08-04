@@ -37,7 +37,7 @@ class DetailTableViewCell: UITableViewCell {
         nameLabel.text = viewModel.nameString
         categoryLabel.text = viewModel.categoryString
         priceLabel.text = viewModel.priceString
-        paymentLabel.text = viewModel.paymentString
+        paymentLabel.text = viewModel.assetString
     }
 
 }

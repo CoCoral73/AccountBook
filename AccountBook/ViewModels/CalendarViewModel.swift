@@ -65,6 +65,7 @@ class CalendarViewModel {
         let date = dayItemsForCurrentMonth[index].date
         selectedDate = date
         currentMonth = selectedDate
+        selectedDay = calendar.component(.day, from: selectedDate)
         return dayItemsForCurrentMonth.first { item in
             calendar.isDate(item.date, inSameDayAs: date)
         }!
@@ -97,6 +98,10 @@ class CalendarViewModel {
             fatalError("AddViewController 생성 에러")
         }
         
+        addVC.viewModel.onDidAddTransaction = { [weak self] in
+            guard let self = self else { return }
+            self.currentMonth = self.currentMonth
+        }
         addVC.modalPresentationStyle = .fullScreen
         fromVC.present(addVC, animated: true)
     }
@@ -143,11 +148,11 @@ class CalendarViewModel {
         dayItemsForCurrentMonth = items
     }
     private func loadMonthlyTransactions() {
-//        let allTx = CoreDataManager.shared.fetchTransactionsForMonth(containing: currentMonth)
-//        
-//        transactions = Dictionary(grouping: allTx) { tx in
-//            Calendar.current.component(.day, from: tx.date)
-//        }
+        let allTx = CoreDataManager.shared.fetchTransactionsForMonth(containing: currentMonth)
+        
+        transactions = Dictionary(grouping: allTx) { tx in
+            Calendar.current.component(.day, from: tx.date)
+        }
     }
     
     private func days(for date: Date) -> [Int?] {

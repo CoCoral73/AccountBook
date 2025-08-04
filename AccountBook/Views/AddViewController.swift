@@ -44,6 +44,11 @@ class AddViewController: UIViewController {
         viewModel.handleDateButton(storyboard: storyboard, fromVC: self)
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let tableVC = segue.destination as? InputTableViewController {
+            tableVC.viewModel = self.viewModel
+        }
+    }
 }
 
 extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -52,10 +57,20 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
         categoryCollectionView.delegate = self
         categoryCollectionView.dataSource = self
         categoryCollectionView.allowsSelection = true
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func didTapOutside() {
+        view.endEditing(true)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
+        view.endEditing(true)
+        viewModel.addTransaction(with: indexPath.item)
+        dismiss(animated: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -64,7 +79,7 @@ extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSourc
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
-        cell.viewModel = CategoryViewModel(category: viewModel.categories[indexPath.item])
+        cell.viewModel = CategoryViewModel(category: viewModel.getCategory(with: indexPath.item))
 
         return cell
     }

@@ -19,7 +19,7 @@
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isIncome" attributeType="Boolean" usesScalarValueType="YES"/>
-        <attribute name="memo" optional="YES" attributeType="String"/>
+        <attribute name="memo" attributeType="String"/>
         <relationship name="asset" maxCount="1" deletionRule="Nullify" destinationEntity="AssetItem" inverseName="transactions" inverseEntity="AssetItem"/>
         <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="transactions" inverseEntity="Category"/>
     </entity>

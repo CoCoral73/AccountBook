@@ -16,7 +16,7 @@ class DetailViewModel {
     }
     
     var image: UIImage? {
-        UIImage(systemName: "cart")
+        return transaction.category.iconName.toImage()
     }
     var nameString: String? {
         return transaction.memo
@@ -25,9 +25,9 @@ class DetailViewModel {
         return transaction.category.name
     }
     var priceString: String {
-        return "+\(transaction.amount)원"
+        return "\(transaction.amount.formattedWithComma)원"
     }
-    var paymentString: String {
-        return "삼성카드"
+    var assetString: String {
+        return transaction.asset.name
     }
 }

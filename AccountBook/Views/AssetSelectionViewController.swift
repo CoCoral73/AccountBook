@@ -1,5 +1,5 @@
 //
-//  PaymentSelectionViewController.swift
+//  AssetSelectionViewController.swift
 //  AccountBook
 //
 //  Created by 김정원 on 7/19/25.
@@ -7,18 +7,18 @@
 
 import UIKit
 
-class PaymentSelectionViewController: UIViewController {
+class AssetSelectionViewController: UIViewController {
 
     @IBOutlet weak var cashButton: UIButton!
     @IBOutlet weak var accountButton: UIButton!
-    @IBOutlet weak var checkcardButton: UIButton!
-    @IBOutlet weak var creditcardButton: UIButton!
+    @IBOutlet weak var debitCardButton: UIButton!
+    @IBOutlet weak var creditCardButton: UIButton!
     
     var buttons: [UIButton] = []
     
     @IBOutlet weak var tableView: UITableView!
     
-    var onPaymentSelected: ((String) -> ())?
+    var onAssetSelected: ((AssetItem) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class PaymentSelectionViewController: UIViewController {
     }
     
     private func configure() {
-        buttons = [cashButton, accountButton, checkcardButton, creditcardButton]
+        buttons = [cashButton, accountButton, debitCardButton, creditCardButton]
     }
     
     @IBAction func PaymentTypeButtonTapped(_ sender: UIButton) {
@@ -42,7 +42,7 @@ class PaymentSelectionViewController: UIViewController {
 
 }
 
-extension PaymentSelectionViewController: UITableViewDelegate, UITableViewDataSource {
+extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSource {
     private func configureTableView() {
         tableView.delegate = self
         tableView.dataSource = self
@@ -52,8 +52,12 @@ extension PaymentSelectionViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let testAsset = AssetItem(context: CoreDataManager.shared.context)
+        testAsset.id = UUID()
+        testAsset.name = "탭탭오"
+        testAsset.typeRawValue = 4
+        onAssetSelected?(testAsset)
         dismiss(animated: true)
-        onPaymentSelected?("삼성카드")
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -61,7 +65,7 @@ extension PaymentSelectionViewController: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "PaymentCell", for: indexPath)
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AssetCell", for: indexPath)
         return cell
     }
     

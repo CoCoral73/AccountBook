@@ -620,10 +620,10 @@
             </objects>
             <point key="canvasLocation" x="1856" y="-27"/>
         </scene>
-        <!--Payment Selection View Controller-->
+        <!--Asset Selection View Controller-->
         <scene sceneID="T3L-cB-FhF">
             <objects>
-                <viewController storyboardIdentifier="PaymentSelectionViewController" id="zZj-xw-xdj" customClass="PaymentSelectionViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AssetSelectionViewController" id="zZj-xw-xdj" customClass="AssetSelectionViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LQr-KX-SCL">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -711,7 +711,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="PaymentCell" rowHeight="136" id="JvP-HC-8Cn">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AssetCell" rowHeight="136" id="JvP-HC-8Cn">
                                         <rect key="frame" x="0.0" y="50" width="196.33333333333337" height="136"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JvP-HC-8Cn" id="wNf-5u-bxV">
@@ -754,8 +754,8 @@
                     <connections>
                         <outlet property="accountButton" destination="ApX-MT-fIt" id="LRS-D8-6JC"/>
                         <outlet property="cashButton" destination="VBT-Hg-1Bw" id="D6b-ci-5J0"/>
-                        <outlet property="checkcardButton" destination="1O4-EQ-5xF" id="krR-zL-Zen"/>
-                        <outlet property="creditcardButton" destination="aHV-r6-WFS" id="hFG-eY-hCi"/>
+                        <outlet property="creditCardButton" destination="aHV-r6-WFS" id="hFG-eY-hCi"/>
+                        <outlet property="debitCardButton" destination="1O4-EQ-5xF" id="krR-zL-Zen"/>
                         <outlet property="tableView" destination="sbB-49-779" id="ZL2-WR-JNY"/>
                     </connections>
                 </viewController>
@@ -879,8 +879,8 @@
                     </tableView>
                     <connections>
                         <outlet property="amountTextField" destination="vNs-8b-LUT" id="FnV-kn-RQd"/>
+                        <outlet property="assetSelectionButton" destination="28i-xZ-1aF" id="RVu-li-oNl"/>
                         <outlet property="memoTextField" destination="1qg-jf-4kX" id="k4v-of-6rF"/>
-                        <outlet property="paymentSelectionButton" destination="28i-xZ-1aF" id="RVu-li-oNl"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ8-0O-VTW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

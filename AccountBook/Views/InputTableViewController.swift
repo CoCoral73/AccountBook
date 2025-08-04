@@ -10,7 +10,7 @@ import UIKit
 class InputTableViewController: UITableViewController {
     
     @IBOutlet weak var amountTextField: AmountTextField!
-    @IBOutlet weak var paymentSelectionButton: UIButton!
+    @IBOutlet weak var assetSelectionButton: UIButton!
     @IBOutlet weak var memoTextField: UITextField!
     
     private enum Operator: Int {
@@ -29,6 +29,8 @@ class InputTableViewController: UITableViewController {
         fmt.maximumFractionDigits = 0       // 소수점 없음
         return fmt
     }()
+    
+    var viewModel: AddViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,6 +64,7 @@ class InputTableViewController: UITableViewController {
         
         let multiply = UIBarButtonItem(image: UIImage(systemName: "multiply"), style: .plain, target: self, action: #selector(handleOperator))
         multiply.tag = 2
+        
         let divide = UIBarButtonItem(image: UIImage(systemName: "divide"), style: .plain, target: self, action: #selector(handleOperator))
         divide.tag = 3
         
@@ -123,20 +126,25 @@ class InputTableViewController: UITableViewController {
     }
     
     @IBAction func paymentSelectionButtonTapped(_ sender: UIButton) {
-        guard let paymentSelectionVC = storyboard?.instantiateViewController(withIdentifier: "PaymentSelectionViewController") as? PaymentSelectionViewController
+        guard let assetSelectionVC = storyboard?.instantiateViewController(withIdentifier: "AssetSelectionViewController") as? AssetSelectionViewController
         else {
-            fatalError("PaymentSelectionViewController 생성 에러")
+            fatalError("AssetSelectionViewController 생성 에러")
         }
         
-        paymentSelectionVC.onPaymentSelected = { [weak self] payment in
-            self?.paymentSelectionButton.setTitle(payment, for: .normal)
-            self?.paymentSelectionButton.setTitleColor(.black, for: .normal)
-            self?.memoTextField.becomeFirstResponder()
+        amountTextField.resignFirstResponder()
+        
+        assetSelectionVC.onAssetSelected = { [weak self] asset in
+            guard let self = self else { return }
+            self.assetSelectionButton.setTitle(asset.name, for: .normal)
+            self.assetSelectionButton.setTitleColor(.black, for: .normal)
+            self.memoTextField.becomeFirstResponder()
+            
+            self.viewModel.assetInput = asset
         }
-        if let sheet = paymentSelectionVC.sheetPresentationController {
+        if let sheet = assetSelectionVC.sheetPresentationController {
             sheet.detents = [.medium()]
         }
-        present(paymentSelectionVC, animated: true, completion: nil)
+        present(assetSelectionVC, animated: true, completion: nil)
     }
 
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -148,9 +156,18 @@ class InputTableViewController: UITableViewController {
 }
 
 extension InputTableViewController: UITextFieldDelegate {
-    
+
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == amountTextField {
+            let text = textField.text ?? ""
+            viewModel.amountInput = Int64(text.replacingOccurrences(of: ",", with: "")) ?? 0
+        } else {
+            viewModel.memoInput = textField.text ?? ""
+        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
