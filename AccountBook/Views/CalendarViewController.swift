@@ -13,10 +13,10 @@ class CalendarViewController: UIViewController {
     
     @IBOutlet weak var boxView: UIView!
     
-    @IBOutlet weak var plusMoneyLabel: UILabel!
-    @IBOutlet weak var minusMoneyLabel: UILabel!
+    @IBOutlet weak var totalIncomeLabel: UILabel!
+    @IBOutlet weak var totalExpenseLabel: UILabel!
     @IBOutlet weak var totalStateLabel: UILabel!
-    @IBOutlet weak var totalMoneyLabel: UILabel!
+    @IBOutlet weak var totalLabel: UILabel!
     
     @IBOutlet weak var calendarCollectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
@@ -32,6 +32,7 @@ class CalendarViewController: UIViewController {
     var viewModel: CalendarViewModel = CalendarViewModel()
     
     private var dataSource: UICollectionViewDiffableDataSource<Int, UUID>!
+    private var isExpanded = false  //Add Button
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,10 +41,18 @@ class CalendarViewController: UIViewController {
             guard let self = self else { return }
             self.applySnapshot()
         }
+        configureTotals()
         configureCollectionView()
         configureTableView()
         addGesture()
         configureAddButtonInitialState()
+    }
+    
+    private func configureTotals() {
+        totalIncomeLabel.text = viewModel.totalIncomeString
+        totalExpenseLabel.text = viewModel.totalExpenseString
+        totalLabel.text = viewModel.totalString
+        totalStateLabel.text = viewModel.totalStateString
     }
     
     func addGesture() {
@@ -68,8 +77,6 @@ class CalendarViewController: UIViewController {
             break
         }
     }
-
-    private var isExpanded = false
     
     private func configureAddButtonInitialState() {
         addButton.transform = addButton.transform.rotated(by: .pi / 4)
@@ -168,6 +175,7 @@ extension CalendarViewController {
             self?.calendarCollectionView.layoutIfNeeded()
             self?.selectDateIfNeeded()
         }
+        configureTotals()
         detailTableView.reloadData()
     }
     
@@ -181,6 +189,7 @@ extension CalendarViewController {
         }
         
         monthButton.setTitle(viewModel.monthButtonString, for: .normal)
+        configureTotals()
         detailTableView.reloadData()
     }
     

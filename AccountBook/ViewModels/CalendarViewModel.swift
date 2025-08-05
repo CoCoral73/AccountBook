@@ -43,6 +43,25 @@ class CalendarViewModel {
         return dateFormatter.string(from: currentMonth)
     }
     
+    private var totals: (income: Int64, expense: Int64, total: Int64) = (0, 0, 0)
+    
+    var totalIncomeString: String {
+        return totals.income.formattedWithComma + "원"
+    }
+    var totalExpenseString: String {
+        return totals.expense.formattedWithComma + "원"
+    }
+    var totalString: String {
+        return totals.total.formattedWithComma + "원"
+    }
+    var totalStateString: String {
+        switch totals.total {
+        case ..<0 : return "적자"
+        case 0 : return "균형"
+        default: return "흑자"
+        }
+    }
+    
     var numberOfRowsInSection: Int {
         guard let count = transactions[selectedDay]?.count else { return 0 }
         return count
@@ -188,6 +207,7 @@ class CalendarViewModel {
         transactions = Dictionary(grouping: allTx) { tx in
             Calendar.current.component(.day, from: tx.date)
         }
+        calculateTotals()
     }
     
     private func loadTransactions(with date: Date) {
@@ -195,6 +215,16 @@ class CalendarViewModel {
         
         let day = calendar.component(.day, from: date)
         transactions[day] = tx
+        calculateTotals()
+    }
+    
+    private func calculateTotals() {
+        let (income, expense) = transactions.values.flatMap { $0 }.reduce(into: (Int64(0), Int64(0))) { acc, tx in
+            if tx.isIncome { acc.0 += tx.amount }
+            else { acc.1 += tx.amount }
+        }
+        
+        totals = (income, expense, income - expense)
     }
     
     private func days(for date: Date) -> [Int?] {
