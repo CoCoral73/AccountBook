@@ -30,7 +30,7 @@ class CalendarViewModel {
     
     init(currentMonth: Date = Date()) {
         self.currentMonth = currentMonth
-        selectedDate = currentMonth
+        selectedDate = calendar.startOfDay(for: currentMonth)
         selectedDay = calendar.component(.day, from: currentMonth)
         
         loadTransactions()
@@ -68,14 +68,16 @@ class CalendarViewModel {
         return calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
     }
     
-    func setSelectedDay(with id: UUID) {
-        guard let item = dayItemsByUUID[id] else { return }
-        selectedDate = item.date
+    func setSelectedDay(with id: UUID) -> UUID? {
+        guard let item = dayItemsByUUID[id] else { return nil }
+        selectedDate = calendar.startOfDay(for: item.date)
         selectedDay = calendar.component(.day, from: selectedDate)
         
         if !isCurrentMonth(with: selectedDate) {    //달이 바뀔 때만 didSet 트리거
             currentMonth = selectedDate
         }
+        
+        return itemIDsByDate[selectedDate]
     }
     
     func updateDayItem(for id: UUID, with transaction: NewTransactionInfo) {
@@ -114,7 +116,15 @@ class CalendarViewModel {
         }
         
         addVC.viewModel.onDidAddTransaction = { [weak self] transaction in
-            guard let self = self, let id = itemIDsByDate[transaction.date] else { return }
+            guard let self = self else { return }
+            
+            if !self.isCurrentMonth(with: transaction.date) {
+                self.currentMonth = transaction.date
+            }
+            
+            guard let id = itemIDsByDate[transaction.date] else { return }
+            
+            self.setSelectedDay(with: id)
             self.loadTransactions(with: transaction.date)
             updateDayItem(for: id, with: transaction)
             (fromVC as! CalendarViewController).reloadDayItem(id)

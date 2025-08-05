@@ -151,16 +151,21 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     private func selectDateIfNeeded() {
         //기존에 선택된 아이템 deselect
         if let selectedIndexPaths = calendarCollectionView.indexPathsForSelectedItems {
-            for ip in selectedIndexPaths {
-                calendarCollectionView.deselectItem(at: ip, animated: false)
+            for oldIndexPath in selectedIndexPaths {
+                calendarCollectionView.deselectItem(at: oldIndexPath, animated: false)
+                if let oldCell = calendarCollectionView.cellForItem(at: oldIndexPath) as? DayCollectionViewCell {
+                    oldCell.viewModel.isSelected = false
+                }
             }
         }
         
         //선택된 date가 현재 월에 포함된 날짜일 때만 선택 상태로 바꾸고 UI 업데이트
         let date = viewModel.selectedDate
+
         if viewModel.isCurrentMonth(with: date) {
             if let id = viewModel.itemIDsByDate[date], let indexPath = dataSource.indexPath(for: id) {
                 calendarCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
+                
                 if let cell = calendarCollectionView.cellForItem(at: indexPath) as? DayCollectionViewCell {
                     cell.viewModel.isSelected = true
                 }
@@ -230,20 +235,12 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
             }
         }
 
-        guard let id = dataSource.itemIdentifier(for: indexPath) else { return }
-        viewModel.setSelectedDay(with: id)
+        guard let id = dataSource.itemIdentifier(for: indexPath), let newID = viewModel.setSelectedDay(with: id) else { return }
         
-        if let newIndexPath = dataSource.indexPath(for: id) {
- 
-            calendarCollectionView.selectItem(
-                at: newIndexPath,
-                animated: false,
-                scrollPosition: []
-            )
+        if let newIndexPath = dataSource.indexPath(for: newID) {
+            calendarCollectionView.selectItem(at: newIndexPath, animated: false, scrollPosition: [])
 
-            if let cell = calendarCollectionView.cellForItem(
-                at: newIndexPath
-            ) as? DayCollectionViewCell {
+            if let cell = calendarCollectionView.cellForItem(at: newIndexPath) as? DayCollectionViewCell {
                 cell.viewModel.isSelected = true
             }
         }
