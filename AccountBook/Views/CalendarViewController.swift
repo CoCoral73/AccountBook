@@ -31,7 +31,7 @@ class CalendarViewController: UIViewController {
     
     var viewModel: CalendarViewModel = CalendarViewModel()
     
-    private var dataSource: UICollectionViewDiffableDataSource<Int, Int>!
+    private var dataSource: UICollectionViewDiffableDataSource<Int, UUID>!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -159,9 +159,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         //선택된 date가 현재 월에 포함된 날짜일 때만 선택 상태로 바꾸고 UI 업데이트
         let date = viewModel.selectedDate
         if viewModel.isCurrentMonth(with: date) {
-            if let index = viewModel.dayItemsForCurrentMonth.firstIndex(
-                where: { Calendar.current.isDate($0.date, inSameDayAs: date) }
-            ), let indexPath = dataSource.indexPath(for: index) {
+            if let id = viewModel.itemIDsByDate[date], let indexPath = dataSource.indexPath(for: id) {
                 calendarCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
                 if let cell = calendarCollectionView.cellForItem(at: indexPath) as? DayCollectionViewCell {
                     cell.viewModel.isSelected = true
@@ -188,22 +186,19 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     }
     
     private func configureCollectionViewDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Int, Int>(collectionView: calendarCollectionView, cellProvider: { [weak self] collectionView, indexPath, index in
-            guard let self = self, let cell = self.calendarCollectionView.dequeueReusableCell(withReuseIdentifier: Cell.dayCell, for: indexPath) as? DayCollectionViewCell else {
+        dataSource = UICollectionViewDiffableDataSource<Int, UUID>(collectionView: calendarCollectionView, cellProvider: { [weak self] collectionView, indexPath, uuid in
+            guard let self = self, let cell = self.calendarCollectionView.dequeueReusableCell(withReuseIdentifier: Cell.dayCell, for: indexPath) as? DayCollectionViewCell, let item = viewModel.dayItemsByUUID[uuid] else {
                 return UICollectionViewCell()
             }
             
-            let item = viewModel.dayItemsForCurrentMonth[index]
             cell.viewModel = DayViewModel(dayItem: item, isCurrentMonth: viewModel.isCurrentMonth(with: item.date))
             return cell
         })
     }
     
-    func reloadDayItem(_ transaction: NewTransactionInfo) {
-        guard let updatedIndex = viewModel.updateDayItem(for: transaction.date, income: transaction.isIncome ? transaction.amount : 0, expense: transaction.isIncome ? 0 : transaction.amount) else { return }
-
+    func reloadDayItem(_ id: UUID) {
         var snap = dataSource.snapshot()
-        snap.reconfigureItems([updatedIndex])
+        snap.reconfigureItems([id])
         dataSource.apply(snap, animatingDifferences: false) { [weak self] in
             self?.calendarCollectionView.layoutIfNeeded()
             self?.selectDateIfNeeded()
@@ -212,9 +207,9 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func applySnapshot() {
-        var snap = NSDiffableDataSourceSnapshot<Int, Int>()
+        var snap = NSDiffableDataSourceSnapshot<Int, UUID>()
         snap.appendSections([0])
-        snap.appendItems((0..<viewModel.dayItemsForCurrentMonth.count).map { Int($0) }, toSection: 0)
+        snap.appendItems(viewModel.snapshotItems, toSection: 0)
         dataSource.apply(snap, animatingDifferences: false) { [weak self] in
             self?.calendarCollectionView.layoutIfNeeded()
             self?.selectDateIfNeeded()
@@ -235,9 +230,10 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
             }
         }
 
-        let selectedItem = viewModel.setSelectedDay(with: indexPath.item)
+        guard let id = dataSource.itemIdentifier(for: indexPath) else { return }
+        viewModel.setSelectedDay(with: id)
         
-        if let newIndexPath = dataSource.indexPath(for: selectedItem.index) {
+        if let newIndexPath = dataSource.indexPath(for: id) {
  
             calendarCollectionView.selectItem(
                 at: newIndexPath,

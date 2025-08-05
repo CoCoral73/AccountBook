@@ -8,17 +8,9 @@
 import UIKit
 
 struct DayItem: Hashable {
-    let index: Int
+    let id: UUID    //ItemIdentifierType
     let date: Date
-    let income, expense: Int64
-    
-    //date로만 DayItem을 구분하도록 하기
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(date)
-    }
-    static func == (lhs: DayItem, rhs: DayItem) -> Bool {
-        return Calendar.current.isDate(lhs.date, inSameDayAs: rhs.date)
-    }
+    var income, expense: Int64
 }
 
 class DayCollectionViewCell: UICollectionViewCell {
