@@ -138,7 +138,7 @@ class CalendarViewController: UIViewController {
 }
 
 //MARK: Collection View
-extension CalendarViewController: UICollectionViewDelegateFlowLayout {
+extension CalendarViewController {
     
     private func configureCollectionView() {
         calendarCollectionView.delegate = self
@@ -146,48 +146,6 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         
         configureCollectionViewDataSource()
         applySnapshot()
-    }
-    
-    private func selectDateIfNeeded() {
-        //기존에 선택된 아이템 deselect
-        if let selectedIndexPaths = calendarCollectionView.indexPathsForSelectedItems {
-            for oldIndexPath in selectedIndexPaths {
-                calendarCollectionView.deselectItem(at: oldIndexPath, animated: false)
-                if let oldCell = calendarCollectionView.cellForItem(at: oldIndexPath) as? DayCollectionViewCell {
-                    oldCell.viewModel.isSelected = false
-                }
-            }
-        }
-        
-        //선택된 date가 현재 월에 포함된 날짜일 때만 선택 상태로 바꾸고 UI 업데이트
-        let date = viewModel.selectedDate
-
-        if viewModel.isCurrentMonth(with: date) {
-            if let id = viewModel.itemIDsByDate[date], let indexPath = dataSource.indexPath(for: id) {
-                calendarCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-                
-                if let cell = calendarCollectionView.cellForItem(at: indexPath) as? DayCollectionViewCell {
-                    cell.viewModel.isSelected = true
-                }
-            }
-        }
-    }
-    
-    // 위 아래 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
-    // 옆 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let width = calendarCollectionView.frame.width / 7
-        let size = CGSize(width: width, height: width)
-        return size
     }
     
     private func configureCollectionViewDataSource() {
@@ -205,6 +163,8 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         var snap = dataSource.snapshot()
         snap.reconfigureItems([id])
         dataSource.apply(snap, animatingDifferences: false) { [weak self] in
+            //id에 해당하는 셀이 다시 생성되면서(reconfigureItems -> cellProvider)
+            //viewModel이 새로 할당됨 -> isSelected가 false로 초기화되므로 다음 코드 필요
             self?.calendarCollectionView.layoutIfNeeded()
             self?.selectDateIfNeeded()
         }
@@ -224,26 +184,47 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
         detailTableView.reloadData()
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        if let existingSelections = calendarCollectionView.indexPathsForSelectedItems {
-            for oldIndexPath in existingSelections {
+    private func deselectOldCell() {
+        //기존에 선택된 모든 셀들 deselect 처리
+        if let selectedIndexPaths = calendarCollectionView.indexPathsForSelectedItems {
+            for oldIndexPath in selectedIndexPaths {
                 calendarCollectionView.deselectItem(at: oldIndexPath, animated: false)
                 if let oldCell = calendarCollectionView.cellForItem(at: oldIndexPath) as? DayCollectionViewCell {
                     oldCell.viewModel.isSelected = false
                 }
             }
         }
-
-        guard let id = dataSource.itemIdentifier(for: indexPath), let newID = viewModel.setSelectedDate(with: id) else { return }
+    }
+    
+    private func selectNewCell(for indexPath: IndexPath) {
+        calendarCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
         
-        if let newIndexPath = dataSource.indexPath(for: newID) {
-            calendarCollectionView.selectItem(at: newIndexPath, animated: false, scrollPosition: [])
-
-            if let cell = calendarCollectionView.cellForItem(at: newIndexPath) as? DayCollectionViewCell {
-                cell.viewModel.isSelected = true
+        if let cell = calendarCollectionView.cellForItem(at: indexPath) as? DayCollectionViewCell {
+            cell.viewModel.isSelected = true
+        }
+    }
+    
+    private func selectDateIfNeeded() {
+        
+        deselectOldCell()
+        
+        //선택된 date가 현재 월에 포함된 날짜일 때만 선택 상태로 바꾸고 UI 업데이트
+        let date = viewModel.selectedDate
+        
+        if viewModel.isCurrentMonth(with: date) {
+            if let id = viewModel.itemIDsByDate[date], let indexPath = dataSource.indexPath(for: id) {
+                selectNewCell(for: indexPath)
             }
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        deselectOldCell()
+        
+        guard let id = dataSource.itemIdentifier(for: indexPath), let newID = viewModel.setSelectedDate(with: id), let newIndexPath = dataSource.indexPath(for: newID) else { return }
+        
+        selectNewCell(for: newIndexPath)
         
         detailTableView.reloadData()
     }
@@ -252,6 +233,27 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
             cell.viewModel.isSelected = false
         }
     }
+    
+}
+
+//MARK: Collection View Layout
+extension CalendarViewController: UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0    //위 아래 간격
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0    //옆 간격
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+
+        let width = calendarCollectionView.frame.width / 7
+        let size = CGSize(width: width, height: width)
+        return size
+    }
+    
 }
 
 //MARK: Table View

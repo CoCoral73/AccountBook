@@ -118,15 +118,21 @@ class CalendarViewModel {
         addVC.viewModel.onDidAddTransaction = { [weak self] transaction in
             guard let self = self else { return }
             
-            if !self.isCurrentMonth(with: transaction.date) {
+            let monthChanged = !self.isCurrentMonth(with: transaction.date)
+            if monthChanged {
                 self.currentMonth = transaction.date
             }
             
-            guard let id = itemIDsByDate[transaction.date] else { return }
-            
+            guard let id = itemIDsByDate[transaction.date] else {
+                print("transaction.date로 UUID 찾기 실패(nil)")
+                return
+            }
             _ = self.setSelectedDate(with: id)
-            self.loadTransactions(with: transaction.date)
-            updateDayItem(for: id, with: transaction)
+            
+            if !monthChanged {
+                self.loadTransactions(with: transaction.date)
+                updateDayItem(for: id, with: transaction)
+            }
             (fromVC as! CalendarViewController).reloadDayItem(id)
         }
         addVC.modalPresentationStyle = .fullScreen
