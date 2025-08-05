@@ -68,8 +68,8 @@ class CalendarViewModel {
         return calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
     }
     
-    func setSelectedDay(with uuid: UUID) {
-        guard let item = dayItemsByUUID[uuid] else { return }
+    func setSelectedDay(with id: UUID) {
+        guard let item = dayItemsByUUID[id] else { return }
         selectedDate = item.date
         selectedDay = calendar.component(.day, from: selectedDate)
         
