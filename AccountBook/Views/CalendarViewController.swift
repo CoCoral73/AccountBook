@@ -191,8 +191,8 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     }
     
     private func configureCollectionViewDataSource() {
-        dataSource = UICollectionViewDiffableDataSource<Int, UUID>(collectionView: calendarCollectionView, cellProvider: { [weak self] collectionView, indexPath, uuid in
-            guard let self = self, let cell = self.calendarCollectionView.dequeueReusableCell(withReuseIdentifier: Cell.dayCell, for: indexPath) as? DayCollectionViewCell, let item = viewModel.dayItemsByUUID[uuid] else {
+        dataSource = UICollectionViewDiffableDataSource<Int, UUID>(collectionView: calendarCollectionView, cellProvider: { [weak self] collectionView, indexPath, id in
+            guard let self = self, let cell = self.calendarCollectionView.dequeueReusableCell(withReuseIdentifier: Cell.dayCell, for: indexPath) as? DayCollectionViewCell, let item = viewModel.dayItemsByUUID[id] else {
                 return UICollectionViewCell()
             }
             
@@ -235,7 +235,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
             }
         }
 
-        guard let id = dataSource.itemIdentifier(for: indexPath), let newID = viewModel.setSelectedDay(with: id) else { return }
+        guard let id = dataSource.itemIdentifier(for: indexPath), let newID = viewModel.setSelectedDate(with: id) else { return }
         
         if let newIndexPath = dataSource.indexPath(for: newID) {
             calendarCollectionView.selectItem(at: newIndexPath, animated: false, scrollPosition: [])

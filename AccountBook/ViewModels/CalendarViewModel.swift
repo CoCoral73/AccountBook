@@ -68,7 +68,7 @@ class CalendarViewModel {
         return calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
     }
     
-    func setSelectedDay(with id: UUID) -> UUID? {
+    func setSelectedDate(with id: UUID) -> UUID? {
         guard let item = dayItemsByUUID[id] else { return nil }
         selectedDate = calendar.startOfDay(for: item.date)
         selectedDay = calendar.component(.day, from: selectedDate)
@@ -124,7 +124,7 @@ class CalendarViewModel {
             
             guard let id = itemIDsByDate[transaction.date] else { return }
             
-            self.setSelectedDay(with: id)
+            _ = self.setSelectedDate(with: id)
             self.loadTransactions(with: transaction.date)
             updateDayItem(for: id, with: transaction)
             (fromVC as! CalendarViewController).reloadDayItem(id)
