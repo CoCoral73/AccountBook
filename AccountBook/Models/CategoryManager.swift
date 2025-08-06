@@ -33,8 +33,4 @@ class CategoryManager {
         CoreDataManager.shared.context.delete(category)
         CoreDataManager.shared.saveContext()
     }
-
-    func reload() {
-        loadCategories()
-    }
 }

@@ -145,6 +145,11 @@ final class CoreDataManager {
             return []
         }
     }
+    
+    func fetchAssetItems() -> [AssetItem] {
+        let request: NSFetchRequest<AssetItem> = AssetItem.fetchRequest()
+        return (try? context.fetch(request)) ?? []
+    }
 //
 //    // MARK: - 카테고리별 합계 조회 예시
 //    /// 카테고리별 총합을 딕셔너리로 반환합니다.
