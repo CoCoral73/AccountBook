@@ -25,7 +25,7 @@ class DetailViewModel {
         return transaction.category.name
     }
     var priceString: String {
-        return "\(transaction.amount.formattedWithComma)원"
+        return (transaction.isIncome ? "+" : "-") + "\(transaction.amount.formattedWithComma)원"
     }
     var assetString: String {
         return transaction.asset.name

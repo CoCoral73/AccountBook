@@ -715,7 +715,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AssetCell" rowHeight="136" id="JvP-HC-8Cn">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AssetCell" rowHeight="136" id="JvP-HC-8Cn" customClass="AssetTableViewCell" customModule="AccountBook" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="196.33333333333337" height="136"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JvP-HC-8Cn" id="wNf-5u-bxV">
@@ -735,6 +735,9 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        <connections>
+                                            <outlet property="nameLabel" destination="1WC-Aa-GzD" id="wqf-g9-0ts"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>

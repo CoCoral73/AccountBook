@@ -12,6 +12,7 @@ class AssetItemManager {
     private init() { }
     
     private var assetItems: [AssetItem] = []
+    private(set) var cash: [AssetItem] = []
     private(set) var bankAccount: [AssetItem] = []
     private(set) var debitCard: [AssetItem] = []
     private(set) var creditCard: [AssetItem] = []
@@ -21,6 +22,7 @@ class AssetItemManager {
         
         for item in assetItems {
             switch item.typeRawValue {
+            case 0: cash.append(item)
             case 1: bankAccount.append(item)
             case 2: debitCard.append(item)
             case 3: creditCard.append(item)
@@ -29,6 +31,17 @@ class AssetItemManager {
         }
     }
     
+    func getAssetItems(with tag: Int) -> [AssetItem] {
+        switch tag {
+        case 0: return cash
+        case 1: return bankAccount
+        case 2: return debitCard
+        case 3: return creditCard
+        default: return []
+        }
+    }
+    
+    //현금 자산 추가 및 삭제 불가. 현금은 현금
     func addAssetItem(with item: AssetItem) {
         switch item.typeRawValue {
         case 1: bankAccount.append(item)

@@ -8,4 +8,5 @@
 struct Cell {
     static let dayCell = "DayCell"
     static let detailCell = "DetailCell"
+    static let assetCell = "AssetCell"
 }

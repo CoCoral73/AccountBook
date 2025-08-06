@@ -17,6 +17,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CoreDataManager.shared.preloadDefaultCategoriesIfNeeded()
         CategoryManager.shared.loadCategories()
         
+        AssetItemManager.shared.loadAssetItems()
+        
         return true
     }
 
