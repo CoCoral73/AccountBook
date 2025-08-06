@@ -47,14 +47,14 @@ class DayViewModel {
     }
     
     var incomeString: String? {
-        return dayItem.income == 0 ? nil : "\(dayItem.income)"
+        return dayItem.income == 0 ? nil : dayItem.income.formattedWithComma
     }
     var incomeTextColor: UIColor {
         return .systemGreen
     }
     
     var expenseString: String? {
-        return dayItem.expense == 0 ? nil : "\(dayItem.expense)"
+        return dayItem.expense == 0 ? nil : dayItem.expense.formattedWithComma
     }
     var expenseTextColor: UIColor {
         return .systemOrange
