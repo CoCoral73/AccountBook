@@ -42,13 +42,18 @@ final class CoreDataManager {
         }
     }
 
+    func seedDataIfNeeded() {
+        seedDefaultCategoriesIfNeeded()
+        seedCashAssetItemIfNeeded()
+    }
+    
     // MARK: - Load and Insert Default Categories from JSON
-    func preloadDefaultCategoriesIfNeeded() {
-        let fetchRequest: NSFetchRequest<Category> = Category.fetchRequest()
-        fetchRequest.fetchLimit = 1
+    func seedDefaultCategoriesIfNeeded() {
+        let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.fetchLimit = 1
 
         do {
-            let count = try context.count(for: fetchRequest)
+            let count = try context.count(for: request)
             if count == 0 {
                 seedDefaultCategoriesFromJSON()
             } else {
@@ -115,6 +120,7 @@ final class CoreDataManager {
         }
     }
     
+    //MARK: - 월별 거래 내역 조회
     func fetchTransactions(containing date: Date) -> [Transaction] {
         let calendar = Calendar.current
         
@@ -143,6 +149,30 @@ final class CoreDataManager {
         } catch {
             print("Core Data fetch error: \(error)")
             return []
+        }
+    }
+    
+    func seedCashAssetItemIfNeeded() {
+        let request: NSFetchRequest<AssetItem> = AssetItem.fetchRequest()
+        request.fetchLimit = 1
+        
+        do {
+            let count = try context.count(for: request)
+            if count == 0 {
+                let cashAsset = AssetItem(context: context)
+                cashAsset.id = UUID()
+                cashAsset.name = "현금"
+                cashAsset.typeRawValue = 0
+                cashAsset.transactions = nil
+                
+                saveContext()
+                print("기본 현금 자산 로드 완료!")
+                
+            } else {
+                print("이미 기본 현금 자산이 존재합니다.")
+            }
+        } catch {
+            print("자산 개수 확인 중 에러 발생: \(error)")
         }
     }
     

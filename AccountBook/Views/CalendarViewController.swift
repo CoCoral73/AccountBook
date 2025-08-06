@@ -18,9 +18,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var totalStateLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     
-    @IBOutlet weak var calendarCollectionView: UICollectionView!
-    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var calendarCollectionView: IntrinsicCollectionView!
     @IBOutlet weak var detailTableView: UITableView!
     
     @IBOutlet weak var addButton: UIButton!
@@ -131,17 +129,6 @@ class CalendarViewController: UIViewController {
         viewModel.handleMonthButton(storyboard: storyboard, fromVC: self)
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
- 
-        //컬렉션뷰의 컨텐츠 크기 만큼 높이 자동 조정
-        let height = calendarCollectionView.collectionViewLayout.collectionViewContentSize.height
-
-        if collectionViewHeightConstraint.constant != height {
-            collectionViewHeightConstraint.constant = height
-            view.layoutIfNeeded()
-        }
-    }
 }
 
 //MARK: Collection View

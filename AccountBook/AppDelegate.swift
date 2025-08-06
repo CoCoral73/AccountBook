@@ -14,9 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         
-        CoreDataManager.shared.preloadDefaultCategoriesIfNeeded()
-        CategoryManager.shared.loadCategories()
+        CoreDataManager.shared.seedDataIfNeeded()
         
+        CategoryManager.shared.loadCategories()
         AssetItemManager.shared.loadAssetItems()
         
         return true

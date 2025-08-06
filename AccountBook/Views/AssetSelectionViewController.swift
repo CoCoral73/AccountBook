@@ -40,6 +40,7 @@ class AssetSelectionViewController: UIViewController {
         sender.backgroundColor = #colorLiteral(red: 1, green: 0.5680983663, blue: 0.6200271249, alpha: 0.2426014073)
         
         selectedButton = sender.tag
+        tableView.reloadData()
     }
     
 
@@ -55,11 +56,8 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let testAsset = AssetItem(context: CoreDataManager.shared.context)
-        testAsset.id = UUID()
-        testAsset.name = "탭탭오"
-        testAsset.typeRawValue = 4
-        onAssetSelected?(testAsset)
+        guard let cell = tableView.cellForRow(at: indexPath) as? AssetTableViewCell else { return }
+        onAssetSelected?(cell.viewModel.assetItem)
         dismiss(animated: true)
     }
     

@@ -9,7 +9,7 @@ import Foundation
 
 class AssetViewModel {
     
-    private var assetItem: AssetItem
+    private(set) var assetItem: AssetItem
     
     init(assetItem: AssetItem) {
         self.assetItem = assetItem
