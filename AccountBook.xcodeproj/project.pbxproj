@@ -35,22 +35,11 @@
 		};
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
-/* Begin PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-		901879B22E3CAAC40070A53B /* Exceptions for "AccountBook" folder in "Compile Sources" phase from "AccountBook" target */ = {
-			isa = PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet;
-			buildPhase = 90E579522E15002700323D5A /* Sources */;
-			membershipExceptions = (
-				Models/DefaultCategory.json,
-			);
-		};
-/* End PBXFileSystemSynchronizedGroupBuildPhaseMembershipExceptionSet section */
-
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		90E579582E15002700323D5A /* AccountBook */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
 				90E5796B2E15002800323D5A /* Exceptions for "AccountBook" folder in "AccountBook" target */,
-				901879B22E3CAAC40070A53B /* Exceptions for "AccountBook" folder in "Compile Sources" phase from "AccountBook" target */,
 			);
 			path = AccountBook;
 			sourceTree = "<group>";

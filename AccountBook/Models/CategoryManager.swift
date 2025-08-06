@@ -16,7 +16,7 @@ class CategoryManager {
     private(set) var expenseCategories: [Category] = []
 
     func loadCategories() {
-        categories = CoreDataManager.shared.fetchAllCategories()
+        categories = CoreDataManager.shared.fetchCategories()
         incomeCategories = categories.filter { $0.isIncome }
         expenseCategories = categories.filter { !$0.isIncome }
     }

@@ -89,7 +89,7 @@ final class CoreDataManager {
     }
     
     // MARK: - 전체 카테고리 로드
-    func fetchAllCategories() -> [Category] {
+    func fetchCategories() -> [Category] {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
         //request.sortDescriptors = [NSSortDescriptor(key: "name", ascending: true)]
         return (try? context.fetch(request)) ?? []
