@@ -172,7 +172,10 @@ extension CalendarViewController {
         snap.appendItems(viewModel.snapshotItems, toSection: 0)
         dataSource.apply(snap, animatingDifferences: false) { [weak self] in
             self?.calendarCollectionView.layoutIfNeeded()
-            self?.selectDateIfNeeded()
+            //컬렉션 뷰의 내부 레이아웃 미완료로 cellForItem에서 nil 반환 -> 다음 런루프로 미루기
+            DispatchQueue.main.async {
+                self?.selectDateIfNeeded()
+            }
         }
         
         monthButton.setTitle(viewModel.monthButtonString, for: .normal)
