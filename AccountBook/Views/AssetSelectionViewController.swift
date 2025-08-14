@@ -73,7 +73,8 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AssetItemManager.shared.getAssetItems(with: selectedButton).count + ((1...3) ~= selectedButton ? 1 : 0)
+        guard let type = AssetType(rawValue: selectedButton) else { return 0 }
+        return AssetItemManager.shared.getAssetItems(with: type).count + (selectedButton != 0 ? 1 : 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,7 +83,7 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
         if selectedButton != 0 && indexPath.row == tableView.numberOfSections - 1 { //자산 추가 셀
             cell.viewModel = nil
         } else {
-            let item = AssetItemManager.shared.getAssetItems(with: selectedButton)[indexPath.row]
+            let item = AssetItemManager.shared.getAssetItems(with: AssetType(rawValue: selectedButton)!)[indexPath.row]
             cell.viewModel = AssetViewModel(assetItem: item)
         }
         

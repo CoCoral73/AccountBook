@@ -153,16 +153,15 @@ final class CoreDataManager {
     }
     
     func seedCashAssetItemIfNeeded() {
-        let request: NSFetchRequest<AssetItem> = AssetItem.fetchRequest()
+        let request: NSFetchRequest<CashItem> = CashItem.fetchRequest()
         request.fetchLimit = 1
         
         do {
             let count = try context.count(for: request)
             if count == 0 {
-                let cashAsset = AssetItem(context: context)
+                let cashAsset = CashItem(context: context)
                 cashAsset.id = UUID()
                 cashAsset.name = "현금"
-                cashAsset.typeRawValue = 0
                 cashAsset.transactions = nil
                 
                 saveContext()

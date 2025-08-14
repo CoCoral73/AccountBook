@@ -7,6 +7,8 @@
     </entity>
     <entity name="BankAccountItem" representedClassName="BankAccountItem" parentEntity="AssetItem" syncable="YES">
         <attribute name="balance" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="linkedCreditCards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CreditCardItem" inverseName="linkedAccount" inverseEntity="CreditCardItem"/>
+        <relationship name="linkedDebitCards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DebitCardItem" inverseName="linkedAccount" inverseEntity="DebitCardItem"/>
     </entity>
     <entity name="CashItem" representedClassName="CashItem" parentEntity="AssetItem" syncable="YES">
         <attribute name="balance" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
@@ -22,10 +24,10 @@
     <entity name="CreditCardItem" representedClassName="CreditCardItem" parentEntity="AssetItem" syncable="YES">
         <attribute name="startDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="withdrawalDate" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
-        <relationship name="linkedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BankAccountItem"/>
+        <relationship name="linkedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BankAccountItem" inverseName="linkedCreditCards" inverseEntity="BankAccountItem"/>
     </entity>
     <entity name="DebitCardItem" representedClassName="DebitCardItem" parentEntity="AssetItem" syncable="YES">
-        <relationship name="linkedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BankAccountItem"/>
+        <relationship name="linkedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BankAccountItem" inverseName="linkedDebitCards" inverseEntity="BankAccountItem"/>
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES">
         <attribute name="amount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>

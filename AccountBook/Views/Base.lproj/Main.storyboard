@@ -339,10 +339,10 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="assetLabel" destination="BcD-3W-Rec" id="uNO-qM-rdN"/>
                                             <outlet property="categoryLabel" destination="ccA-zw-Hz0" id="kgl-lh-iY1"/>
                                             <outlet property="imgView" destination="2Wd-3h-5dA" id="mQj-8K-ee0"/>
                                             <outlet property="nameLabel" destination="Xuu-EL-LcJ" id="eby-LE-Qun"/>
-                                            <outlet property="paymentLabel" destination="BcD-3W-Rec" id="uNO-qM-rdN"/>
                                             <outlet property="priceLabel" destination="y3y-w3-yfk" id="Ayy-S0-UsY"/>
                                         </connections>
                                     </tableViewCell>

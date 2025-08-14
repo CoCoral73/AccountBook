@@ -13,7 +13,7 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
     @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var paymentLabel: UILabel!
+    @IBOutlet weak var assetLabel: UILabel!
     
     var viewModel: DetailViewModel! {
         didSet {
@@ -37,7 +37,7 @@ class DetailTableViewCell: UITableViewCell {
         nameLabel.text = viewModel.nameString
         categoryLabel.text = viewModel.categoryString
         priceLabel.text = viewModel.priceString
-        paymentLabel.text = viewModel.assetString
+        assetLabel.text = viewModel.assetString
     }
 
 }

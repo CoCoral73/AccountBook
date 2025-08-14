@@ -7,63 +7,96 @@
 
 import Foundation
 
+enum AssetType: Int {
+    case cash = 0
+    case bankAccount = 1
+    case debitCard = 2
+    case creditCard = 3
+
+    var displayName: String {
+        switch self {
+        case .cash: return "현금"
+        case .bankAccount: return "계좌"
+        case .debitCard: return "체크카드"
+        case .creditCard: return "신용카드"
+        }
+    }
+
+    var iconName: String {
+        switch self {
+        case .cash: return "💵"
+        case .bankAccount: return "🏦"
+        case .debitCard: return "💳"
+        case .creditCard: return "💳"
+        }
+    }
+}
+
 class AssetItemManager {
     static let shared = AssetItemManager()
     private init() { }
     
-    private var assetItems: [AssetItem] = []
-    private(set) var cash: [AssetItem] = []
-    private(set) var bankAccount: [AssetItem] = []
-    private(set) var debitCard: [AssetItem] = []
-    private(set) var creditCard: [AssetItem] = []
+    private(set) var cash: [CashItem] = []
+    private(set) var bankAccount: [BankAccountItem] = []
+    private(set) var debitCard: [DebitCardItem] = []
+    private(set) var creditCard: [CreditCardItem] = []
     
     func loadAssetItems() {
-        assetItems = CoreDataManager.shared.fetchAssetItems()
+        cash.removeAll()
+        bankAccount.removeAll()
+        debitCard.removeAll()
+        creditCard.removeAll()
         
-        for item in assetItems {
-            switch item.typeRawValue {
-            case 0: cash.append(item)
-            case 1: bankAccount.append(item)
-            case 2: debitCard.append(item)
-            case 3: creditCard.append(item)
-            default: break
+        let assetItems = CoreDataManager.shared.fetchAssetItems()
+        
+        assetItems.forEach { item in
+            switch item {
+            case let c as CashItem:
+                cash.append(c)
+            case let b as BankAccountItem:
+                bankAccount.append(b)
+            case let d as DebitCardItem:
+                debitCard.append(d)
+            case let cr as CreditCardItem:
+                creditCard.append(cr)
+            default:
+                break
             }
         }
     }
     
-    func getAssetItems(with tag: Int) -> [AssetItem] {
-        switch tag {
-        case 0: return cash
-        case 1: return bankAccount
-        case 2: return debitCard
-        case 3: return creditCard
-        default: return []
+    func getAssetItems(with type: AssetType) -> [AssetItem] {
+        switch type {
+        case .cash: return cash
+        case .bankAccount: return bankAccount
+        case .debitCard: return debitCard
+        case .creditCard: return creditCard
         }
     }
     
     //현금 자산 추가 및 삭제 불가. 현금은 현금
-    func addAssetItem(with item: AssetItem) {
-        switch item.typeRawValue {
-        case 1: bankAccount.append(item)
-        case 2: debitCard.append(item)
-        case 3: creditCard.append(item)
+    func addAssetItem<T: AssetItem>(with item: T) {
+        switch item {
+        case let b as BankAccountItem: bankAccount.append(b)
+        case let d as DebitCardItem: debitCard.append(d)
+        case let cr as CreditCardItem: creditCard.append(cr)
         default: break
         }
         CoreDataManager.shared.saveContext()
     }
     
-    func removeAssetItem(with item: AssetItem) {
-        switch item.typeRawValue {
-        case 1:
-            if let index = bankAccount.firstIndex(of: item) {
+    func removeAssetItem<T: AssetItem>(with item: T) {
+        switch item {
+        case let b as BankAccountItem:
+            if let index = bankAccount.firstIndex(of: b) {
                 bankAccount.remove(at: index)
             }
-        case 2:
-            if let index = debitCard.firstIndex(of: item) {
+        case let d as DebitCardItem:
+            if let index = debitCard.firstIndex(of: d) {
                 debitCard.remove(at: index)
             }
-        case 3:
-            if let index = creditCard.firstIndex(of: item) {
+        case let cr as CreditCardItem:
+            if let index = creditCard.firstIndex(of: cr) {
                 creditCard.remove(at: index)
             }
         default: break
