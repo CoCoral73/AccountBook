@@ -11,7 +11,7 @@ class AssetTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     
-    var viewModel: AssetViewModel! {
+    var viewModel: AssetViewModel? {
         didSet {
             configure()
         }
@@ -29,6 +29,10 @@ class AssetTableViewCell: UITableViewCell {
 //    }
 
     func configure() {
-        nameLabel.text = viewModel.nameString
+        if let vm = viewModel {
+            nameLabel.text = vm.nameString
+        } else {
+            nameLabel.text = "자산 추가"
+        }
     }
 }

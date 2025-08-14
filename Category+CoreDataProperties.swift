@@ -2,7 +2,7 @@
 //  Category+CoreDataProperties.swift
 //  AccountBook
 //
-//  Created by 김정원 on 8/1/25.
+//  Created by 김정원 on 8/14/25.
 //
 //
 
@@ -16,11 +16,11 @@ extension Category {
         return NSFetchRequest<Category>(entityName: "Category")
     }
 
-    @NSManaged public var id: UUID
-    @NSManaged public var name: String
-    @NSManaged public var isIncome: Bool
     @NSManaged public var iconName: String
+    @NSManaged public var id: UUID
     @NSManaged public var isDefault: Bool
+    @NSManaged public var isIncome: Bool
+    @NSManaged public var name: String
     @NSManaged public var transactions: NSSet?
 
 }

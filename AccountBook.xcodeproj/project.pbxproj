@@ -13,6 +13,14 @@
 		901879A92E3CA24C0070A53B /* AssetItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901879A12E3CA24C0070A53B /* AssetItem+CoreDataProperties.swift */; };
 		901879AA2E3CA24C0070A53B /* Transaction+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901879A42E3CA24C0070A53B /* Transaction+CoreDataClass.swift */; };
 		901879AB2E3CA24C0070A53B /* Transaction+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 901879A52E3CA24C0070A53B /* Transaction+CoreDataProperties.swift */; };
+		908AA71C2E4DE27800E8B2CE /* CashItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AA7162E4DE27800E8B2CE /* CashItem+CoreDataClass.swift */; };
+		908AA71D2E4DE27800E8B2CE /* BankAccountItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AA7152E4DE27800E8B2CE /* BankAccountItem+CoreDataProperties.swift */; };
+		908AA71E2E4DE27800E8B2CE /* CashItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AA7172E4DE27800E8B2CE /* CashItem+CoreDataProperties.swift */; };
+		908AA71F2E4DE27800E8B2CE /* CreditCardItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AA7192E4DE27800E8B2CE /* CreditCardItem+CoreDataProperties.swift */; };
+		908AA7202E4DE27800E8B2CE /* DebitCardItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AA71A2E4DE27800E8B2CE /* DebitCardItem+CoreDataClass.swift */; };
+		908AA7212E4DE27800E8B2CE /* DebitCardItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AA71B2E4DE27800E8B2CE /* DebitCardItem+CoreDataProperties.swift */; };
+		908AA7222E4DE27800E8B2CE /* CreditCardItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AA7182E4DE27800E8B2CE /* CreditCardItem+CoreDataClass.swift */; };
+		908AA7232E4DE27800E8B2CE /* BankAccountItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 908AA7142E4DE27800E8B2CE /* BankAccountItem+CoreDataClass.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +30,14 @@
 		901879A32E3CA24C0070A53B /* Category+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Category+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		901879A42E3CA24C0070A53B /* Transaction+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataClass.swift"; sourceTree = "<group>"; };
 		901879A52E3CA24C0070A53B /* Transaction+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Transaction+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		908AA7142E4DE27800E8B2CE /* BankAccountItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankAccountItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		908AA7152E4DE27800E8B2CE /* BankAccountItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "BankAccountItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		908AA7162E4DE27800E8B2CE /* CashItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CashItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		908AA7172E4DE27800E8B2CE /* CashItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CashItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		908AA7182E4DE27800E8B2CE /* CreditCardItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreditCardItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		908AA7192E4DE27800E8B2CE /* CreditCardItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CreditCardItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		908AA71A2E4DE27800E8B2CE /* DebitCardItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DebitCardItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		908AA71B2E4DE27800E8B2CE /* DebitCardItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DebitCardItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		90E579562E15002700323D5A /* AccountBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccountBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -60,6 +76,14 @@
 		90E5794D2E15002700323D5A = {
 			isa = PBXGroup;
 			children = (
+				908AA7142E4DE27800E8B2CE /* BankAccountItem+CoreDataClass.swift */,
+				908AA7152E4DE27800E8B2CE /* BankAccountItem+CoreDataProperties.swift */,
+				908AA7162E4DE27800E8B2CE /* CashItem+CoreDataClass.swift */,
+				908AA7172E4DE27800E8B2CE /* CashItem+CoreDataProperties.swift */,
+				908AA7182E4DE27800E8B2CE /* CreditCardItem+CoreDataClass.swift */,
+				908AA7192E4DE27800E8B2CE /* CreditCardItem+CoreDataProperties.swift */,
+				908AA71A2E4DE27800E8B2CE /* DebitCardItem+CoreDataClass.swift */,
+				908AA71B2E4DE27800E8B2CE /* DebitCardItem+CoreDataProperties.swift */,
 				901879A02E3CA24C0070A53B /* AssetItem+CoreDataClass.swift */,
 				901879A12E3CA24C0070A53B /* AssetItem+CoreDataProperties.swift */,
 				901879A22E3CA24C0070A53B /* Category+CoreDataClass.swift */,
@@ -154,6 +178,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				901879A62E3CA24C0070A53B /* Category+CoreDataClass.swift in Sources */,
+				908AA71C2E4DE27800E8B2CE /* CashItem+CoreDataClass.swift in Sources */,
+				908AA71D2E4DE27800E8B2CE /* BankAccountItem+CoreDataProperties.swift in Sources */,
+				908AA71E2E4DE27800E8B2CE /* CashItem+CoreDataProperties.swift in Sources */,
+				908AA71F2E4DE27800E8B2CE /* CreditCardItem+CoreDataProperties.swift in Sources */,
+				908AA7202E4DE27800E8B2CE /* DebitCardItem+CoreDataClass.swift in Sources */,
+				908AA7212E4DE27800E8B2CE /* DebitCardItem+CoreDataProperties.swift in Sources */,
+				908AA7222E4DE27800E8B2CE /* CreditCardItem+CoreDataClass.swift in Sources */,
+				908AA7232E4DE27800E8B2CE /* BankAccountItem+CoreDataClass.swift in Sources */,
 				901879A72E3CA24C0070A53B /* AssetItem+CoreDataClass.swift in Sources */,
 				901879A82E3CA24C0070A53B /* Category+CoreDataProperties.swift in Sources */,
 				901879A92E3CA24C0070A53B /* AssetItem+CoreDataProperties.swift in Sources */,

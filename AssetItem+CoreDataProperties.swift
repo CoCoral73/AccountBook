@@ -2,7 +2,7 @@
 //  AssetItem+CoreDataProperties.swift
 //  AccountBook
 //
-//  Created by 김정원 on 8/1/25.
+//  Created by 김정원 on 8/14/25.
 //
 //
 
@@ -18,7 +18,6 @@ extension AssetItem {
 
     @NSManaged public var id: UUID
     @NSManaged public var name: String
-    @NSManaged public var typeRawValue: Int16
     @NSManaged public var transactions: NSSet?
 
 }

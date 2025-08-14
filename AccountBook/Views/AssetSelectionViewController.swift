@@ -33,8 +33,8 @@ class AssetSelectionViewController: UIViewController {
     }
     
     @IBAction func PaymentTypeButtonTapped(_ sender: UIButton) {
-        buttons.forEach {
-            $0.backgroundColor = .systemBackground
+        if selectedButton <= 3 {
+            buttons[selectedButton].backgroundColor = .systemBackground
         }
         
         sender.backgroundColor = #colorLiteral(red: 1, green: 0.5680983663, blue: 0.6200271249, alpha: 0.2426014073)
@@ -57,19 +57,34 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? AssetTableViewCell else { return }
-        onAssetSelected?(cell.viewModel.assetItem)
-        dismiss(animated: true)
+        
+        if let vm = cell.viewModel {
+            onAssetSelected?(vm.assetItem)
+            dismiss(animated: true)
+        } else {    //자산 추가 뷰로 이동
+            guard let addAssetVC = storyboard?.instantiateViewController(identifier: "AddAssetItemViewController", creator: { coder in AddAssetItemViewController(coder: coder, viewModel: nil) })
+            else {
+                fatalError("AddAssetItemViewController 생성 에러")
+            }
+            
+            addAssetVC.modalPresentationStyle = .fullScreen
+            present(addAssetVC, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return AssetItemManager.shared.getAssetItems(with: selectedButton).count
+        return AssetItemManager.shared.getAssetItems(with: selectedButton).count + ((1...3) ~= selectedButton ? 1 : 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cell.assetCell, for: indexPath) as! AssetTableViewCell
         
-        let item = AssetItemManager.shared.getAssetItems(with: selectedButton)[indexPath.row]
-        cell.viewModel = AssetViewModel(assetItem: item)
+        if selectedButton != 0 && indexPath.row == tableView.numberOfSections - 1 { //자산 추가 셀
+            cell.viewModel = nil
+        } else {
+            let item = AssetItemManager.shared.getAssetItems(with: selectedButton)[indexPath.row]
+            cell.viewModel = AssetViewModel(assetItem: item)
+        }
         
         return cell
     }
