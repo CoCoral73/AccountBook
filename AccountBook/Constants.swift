@@ -6,7 +6,8 @@
 //
 
 struct Cell {
-    static let dayCell = "DayCell"
+    static let calendarCell = "CalendarCell"
     static let detailCell = "DetailCell"
     static let assetCell = "AssetCell"
+    static let dayCell = "DayCell"
 }

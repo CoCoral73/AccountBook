@@ -8,11 +8,13 @@
 import Foundation
 
 class AddAssetItemViewModel {
-    var type: AssetType
-    var linkedAccount: BankAccountItem?
     
-    var name: String = ""
-    var balance: Int64 = 0
+    private var type: AssetType
+    private var name: String = ""
+    private var balance: Int64 = 0
+    private var linkedAccount: BankAccountItem?
+    private var withdrawalDay: Int16 = 1
+    private var startDay: Int16 = 1
     
     var onDidAddAssetItem: (() -> Void)?
     
@@ -29,28 +31,43 @@ class AddAssetItemViewModel {
         }
     }
     
+    var selectWithdrawlDateButtonTitle: String {
+        return "\(withdrawalDay)일"
+    }
+    
+    var selectStartDateButtonTitle: String {
+        return "\(startDay)일"
+    }
+    
     func setType(with type: AssetType) {
         self.type = type
     }
+    func setName(with name: String) {
+        self.name = name
+    }
+    func setBalance(with balance: Int64) {
+        self.balance = balance
+    }
+    func setLinkedAccount(with account: BankAccountItem?) {
+        self.linkedAccount = account
+    }
+    func setWithdrawalDay(with day: Int16) {
+        self.withdrawalDay = day
+    }
+    func setStartDay(with day: Int16) {
+        self.startDay = day
+    }
     
     func handleAddButton() {
-        if name == ""   //이름 없으면 추가 불가능
-        {
-            return
-        }
+        if name == "" { return }    //자산 이름 필수
         
         switch type {
         case .bankAccount:
-            let newItem = BankAccountItem(context: CoreDataManager.shared.context)
-            newItem.id = UUID()
-            newItem.name = name
-            newItem.balance = balance
-            newItem.transactions = nil
-            AssetItemManager.shared.addAssetItem(with: newItem)
+            AssetItemManager.shared.addBankAccount(name: name, balance: balance)
         case .debitCard:
-            break
+            AssetItemManager.shared.addDebitCard(name: name, account: linkedAccount)
         case .creditCard:
-            break
+            AssetItemManager.shared.addCreditCard(name: name, account: linkedAccount, withdrawalDate: withdrawalDay, startDate: startDay)
         default:
             break
         }

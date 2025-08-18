@@ -144,7 +144,7 @@ extension CalendarViewController {
     
     private func configureCollectionViewDataSource() {
         dataSource = UICollectionViewDiffableDataSource<Int, UUID>(collectionView: calendarCollectionView, cellProvider: { [weak self] collectionView, indexPath, id in
-            guard let self = self, let cell = self.calendarCollectionView.dequeueReusableCell(withReuseIdentifier: Cell.dayCell, for: indexPath) as? DayCollectionViewCell, let item = viewModel.dayItemsByUUID[id] else {
+            guard let self = self, let cell = self.calendarCollectionView.dequeueReusableCell(withReuseIdentifier: Cell.calendarCell, for: indexPath) as? CalendarCollectionViewCell, let item = viewModel.dayItemsByUUID[id] else {
                 return UICollectionViewCell()
             }
             
@@ -188,7 +188,7 @@ extension CalendarViewController {
         if let selectedIndexPaths = calendarCollectionView.indexPathsForSelectedItems {
             for oldIndexPath in selectedIndexPaths {
                 calendarCollectionView.deselectItem(at: oldIndexPath, animated: false)
-                if let oldCell = calendarCollectionView.cellForItem(at: oldIndexPath) as? DayCollectionViewCell {
+                if let oldCell = calendarCollectionView.cellForItem(at: oldIndexPath) as? CalendarCollectionViewCell {
                     oldCell.viewModel.isSelected = false
                 }
             }
@@ -198,7 +198,7 @@ extension CalendarViewController {
     private func selectNewCell(for indexPath: IndexPath) {
         calendarCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
         
-        if let cell = calendarCollectionView.cellForItem(at: indexPath) as? DayCollectionViewCell {
+        if let cell = calendarCollectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell {
             cell.viewModel.isSelected = true
         }
     }
@@ -228,7 +228,7 @@ extension CalendarViewController {
         detailTableView.reloadData()
     }
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        if let cell = collectionView.cellForItem(at: indexPath) as? DayCollectionViewCell {
+        if let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell {
             cell.viewModel.isSelected = false
         }
     }

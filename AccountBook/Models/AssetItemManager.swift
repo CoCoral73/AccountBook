@@ -74,15 +74,40 @@ class AssetItemManager {
         }
     }
     
-    //현금 자산 추가 및 삭제 불가. 현금은 현금
-    func addAssetItem<T: AssetItem>(with item: T) {
-        switch item {
-        case let b as BankAccountItem: bankAccount.append(b)
-        case let d as DebitCardItem: debitCard.append(d)
-        case let cr as CreditCardItem: creditCard.append(cr)
-        default: break
-        }
+    private func createItem<T: AssetItem>(_ type: T.Type, configure: (T) -> Void) -> T {
+        let newItem = T(context: CoreDataManager.shared.context)
+        newItem.id = UUID()
+        newItem.transactions = nil
+        configure(newItem)
         CoreDataManager.shared.saveContext()
+        print(newItem)
+        return newItem
+    }
+    
+    func addBankAccount(name: String, balance: Int64) {
+        let newItem: BankAccountItem = createItem(BankAccountItem.self) { item in
+            item.name = name
+            item.balance = balance
+        }
+        bankAccount.append(newItem)
+    }
+    
+    func addDebitCard(name: String, account: BankAccountItem?) {
+        let newItem: DebitCardItem = createItem(DebitCardItem.self) { item in
+            item.name = name
+            item.linkedAccount = account
+        }
+        debitCard.append(newItem)
+    }
+    
+    func addCreditCard(name: String, account: BankAccountItem?, withdrawalDate: Int16, startDate: Int16) {
+        let newItem: CreditCardItem = createItem(CreditCardItem.self) { item in
+            item.name = name
+            item.linkedAccount = account
+            item.withdrawalDate = withdrawalDate
+            item.startDate = startDate
+        }
+        creditCard.append(newItem)
     }
     
     func removeAssetItem<T: AssetItem>(with item: T) {
