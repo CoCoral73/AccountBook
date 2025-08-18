@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddViewController: UIViewController {
+class AddTransactionViewController: UIViewController {
     
     @IBOutlet weak var dateButton: UIBarButtonItem!
     
@@ -51,7 +51,7 @@ class AddViewController: UIViewController {
     }
 }
 
-extension AddViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension AddTransactionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     private func configureCollectionView() {
         categoryCollectionView.delegate = self

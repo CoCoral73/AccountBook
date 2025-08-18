@@ -129,7 +129,7 @@ class CalendarViewModel {
     
     func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: UIViewController) {
         guard let addVC = storyboard?.instantiateViewController(identifier: "AddViewController", creator: { coder in
-            AddViewController(coder: coder, viewModel: AddViewModel(currentDate: self.selectedDate, isIncome: type == "수입")) })
+            AddTransactionViewController(coder: coder, viewModel: AddViewModel(currentDate: self.selectedDate, isIncome: type == "수입")) })
         else {
             fatalError("AddViewController 생성 에러")
         }
