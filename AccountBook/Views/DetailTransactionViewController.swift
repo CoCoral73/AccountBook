@@ -9,6 +9,7 @@ import UIKit
 
 class DetailTransactionViewController: UIViewController {
     
+    @IBOutlet weak var paperView: UIView!
     
     var viewModel: DetailTransactionViewModel
     
@@ -24,10 +25,10 @@ class DetailTransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configurePopGestrue()
+        configurePopGesture()
     }
     
-    private func configurePopGestrue() {
+    private func configurePopGesture() {
         navigationController?.interactivePopGestureRecognizer?.delegate = nil
         navigationController?.interactivePopGestureRecognizer?.isEnabled = true
     }
@@ -39,4 +40,13 @@ class DetailTransactionViewController: UIViewController {
     @IBAction func removeButtonTapped(_ sender: UIBarButtonItem) {
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+
+        // 그림자 설정
+        paperView.layer.shadowColor   = UIColor.black.cgColor
+        paperView.layer.shadowOpacity = 0.2
+        paperView.layer.shadowOffset  = CGSize(width: 0, height: 1)
+        paperView.layer.shadowRadius  = 6
+    }
 }
