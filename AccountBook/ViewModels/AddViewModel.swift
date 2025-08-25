@@ -17,7 +17,7 @@ class AddViewModel {
     
     var amountInput: Int64 = 0
     var assetInput: AssetItem?
-    var memoInput: String = ""
+    var nameInput: String = ""
     
     private var isIncome: Bool
     
@@ -56,7 +56,7 @@ class AddViewModel {
             return
         }
         
-        TransactionManager.shared.addTransaction(amount: amountInput, date: currentDate, isIncome: isIncome, memo: memoInput, category: getCategory(with: index), asset: asset)
+        TransactionManager.shared.addTransaction(amount: amountInput, date: currentDate, isIncome: isIncome, name: nameInput, memo: "", category: getCategory(with: index), asset: asset)
         onDidAddTransaction?(NewTransactionInfo(date: currentDate, isIncome: isIncome, amount: amountInput))
     }
     

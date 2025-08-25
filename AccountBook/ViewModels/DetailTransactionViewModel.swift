@@ -19,7 +19,7 @@ class DetailTransactionViewModel {
         return transaction.category.iconName.toImage()
     }
     var nameString: String? {
-        return transaction.memo
+        return transaction.name
     }
     var categoryString: String {
         return transaction.category.name

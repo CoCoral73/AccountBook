@@ -11,7 +11,7 @@ class InputTableViewController: UITableViewController {
     
     @IBOutlet weak var amountTextField: AmountTextField!
     @IBOutlet weak var assetSelectionButton: UIButton!
-    @IBOutlet weak var memoTextField: UITextField!
+    @IBOutlet weak var nameTextField: UITextField!
     
     private enum Operator: Int {
         case add, subtract, multiply, divide
@@ -42,7 +42,7 @@ class InputTableViewController: UITableViewController {
     
     private func configureTextField() {
         amountTextField.delegate = self
-        memoTextField.delegate = self
+        nameTextField.delegate = self
 
         amountTextField.becomeFirstResponder()
         configureKeyboardAccessory()
@@ -137,7 +137,7 @@ class InputTableViewController: UITableViewController {
             guard let self = self else { return }
             self.assetSelectionButton.setTitle(asset.name, for: .normal)
             self.assetSelectionButton.setTitleColor(.black, for: .normal)
-            self.memoTextField.becomeFirstResponder()
+            self.nameTextField.becomeFirstResponder()
             
             self.viewModel.assetInput = asset
         }
@@ -166,12 +166,12 @@ extension InputTableViewController: UITextFieldDelegate {
             let text = textField.text ?? ""
             viewModel.amountInput = Int64(text.replacingOccurrences(of: ",", with: "")) ?? 0
         } else {
-            viewModel.memoInput = textField.text ?? ""
+            viewModel.nameInput = textField.text ?? ""
         }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-        if textField == memoTextField { return true }
+        if textField == nameTextField { return true }
         
         if currentInput == "" {
             textField.text = ""

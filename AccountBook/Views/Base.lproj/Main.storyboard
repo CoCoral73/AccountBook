@@ -632,7 +632,7 @@
                                         <rect key="frame" x="32" y="32" width="329" height="567"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ode-gA-azq" customClass="DashedLineView" customModule="AccountBook" customModuleProvider="target">
-                                                <rect key="frame" x="12" y="95" width="305" height="2"/>
+                                                <rect key="frame" x="12" y="105" width="305" height="2"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="bQk-kx-sXD"/>
@@ -653,19 +653,19 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="상세내역" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rRh-h4-imc">
-                                                <rect key="frame" x="54" y="105" width="59" height="20.333333333333329"/>
+                                                <rect key="frame" x="54" y="115" width="59" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="금액" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yMe-8t-1HJ">
-                                                <rect key="frame" x="245.33333333333329" y="105" width="29.666666666666657" height="20.333333333333329"/>
+                                                <rect key="frame" x="245.33333333333329" y="115" width="29.666666666666657" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lov-98-2t0" customClass="DashedLineView" customModule="AccountBook" customModuleProvider="target">
-                                                <rect key="frame" x="12" y="133.33333333333331" width="305" height="2"/>
+                                                <rect key="frame" x="12" y="143.33333333333331" width="305" height="2"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="ygK-vP-gic"/>
@@ -686,19 +686,19 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="토마토바질베이글" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qe0-vP-ZLd">
-                                                <rect key="frame" x="20.000000000000007" y="147.33333333333331" width="117.66666666666669" height="20.333333333333343"/>
+                                                <rect key="frame" x="20.000000000000007" y="157.33333333333331" width="117.66666666666669" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2,500" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5i-56-hrC">
-                                                <rect key="frame" x="264.66666666666669" y="147.33333333333331" width="44.333333333333314" height="20.333333333333343"/>
+                                                <rect key="frame" x="264.66666666666669" y="157.33333333333331" width="44.333333333333314" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HCA-LK-V0m" customClass="DashedLineView" customModule="AccountBook" customModuleProvider="target">
-                                                <rect key="frame" x="12" y="179.66666666666669" width="305" height="2"/>
+                                                <rect key="frame" x="12" y="189.66666666666669" width="305" height="2"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="mAN-cf-JrF"/>
@@ -719,37 +719,37 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="**신용카드 결제**" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yqr-si-hI6">
-                                                <rect key="frame" x="103" y="191.66666666666669" width="123.33333333333331" height="20.333333333333343"/>
+                                                <rect key="frame" x="103" y="201.66666666666669" width="123.33333333333331" height="20.333333333333343"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카드명 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iEM-zs-tAg">
-                                                <rect key="frame" x="20" y="232" width="54" height="21"/>
+                                                <rect key="frame" x="20" y="242" width="54" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="삼성카드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gY7-kS-oCx">
-                                                <rect key="frame" x="250" y="232" width="59" height="20.333333333333343"/>
+                                                <rect key="frame" x="250" y="242" width="59" height="20.333333333333314"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="할부 기간 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqh-fU-uoz">
-                                                <rect key="frame" x="20" y="261" width="73" height="21"/>
+                                                <rect key="frame" x="20" y="271" width="73" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일시불" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ri7-qb-Edm">
-                                                <rect key="frame" x="264.66666666666669" y="261" width="44.333333333333314" height="20.333333333333314"/>
+                                                <rect key="frame" x="264.66666666666669" y="271" width="44.333333333333314" height="20.333333333333314"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QfT-uY-hjr" customClass="DashedLineView" customModule="AccountBook" customModuleProvider="target">
-                                                <rect key="frame" x="12" y="338" width="305" height="2"/>
+                                                <rect key="frame" x="12" y="348" width="305" height="2"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="TC0-PV-GhA"/>
@@ -770,25 +770,25 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카테고리 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R6M-dB-RBy">
-                                                <rect key="frame" x="20" y="307" width="68" height="21"/>
+                                                <rect key="frame" x="20" y="317" width="68" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="식비" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9PB-S9-xXw">
-                                                <rect key="frame" x="279" y="307" width="30" height="21"/>
+                                                <rect key="frame" x="279" y="317" width="30" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메모" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nX2-iW-GTh">
-                                                <rect key="frame" x="149.66666666666666" y="348" width="30" height="21"/>
+                                                <rect key="frame" x="149.66666666666666" y="358" width="30" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Yz7-nd-bFi" customClass="DashedLineView" customModule="AccountBook" customModuleProvider="target">
-                                                <rect key="frame" x="12" y="377" width="305" height="2"/>
+                                                <rect key="frame" x="12" y="387" width="305" height="2"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="2" id="bac-eX-1Kk"/>
@@ -809,20 +809,20 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="뿡뿡이 바보 뿡난이 사랑해 히히 으아아아아아아아아아앙아아아앙아아 텍스트채우기 쀼아아아아아앙아앙 아 하기싫어 아우 아러밍나럼니ㅏ러미낭러ㅏㅣㅁ" translatesAutoresizingMaskIntoConstraints="NO" id="ITT-dc-c8H">
-                                                <rect key="frame" x="20" y="391" width="289" height="164"/>
+                                                <rect key="frame" x="20" y="401" width="289" height="154"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <color key="textColor" systemColor="labelColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="거래 명세서" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tTF-JH-dtn">
-                                                <rect key="frame" x="119" y="30" width="91.333333333333314" height="24"/>
+                                                <rect key="frame" x="119" y="35" width="91.333333333333314" height="24"/>
                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2025-08-25" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9cN-c1-IPm">
-                                                <rect key="frame" x="15" y="74" width="86" height="18"/>
+                                                <rect key="frame" x="15" y="84" width="86" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -862,7 +862,7 @@
                                             <constraint firstAttribute="trailing" secondItem="9PB-S9-xXw" secondAttribute="trailing" constant="20" symbolic="YES" id="TZP-Kj-6dJ"/>
                                             <constraint firstItem="R6M-dB-RBy" firstAttribute="leading" secondItem="ZrH-Yn-V1x" secondAttribute="leading" constant="20" symbolic="YES" id="V15-Gh-nFB"/>
                                             <constraint firstAttribute="trailing" secondItem="Ode-gA-azq" secondAttribute="trailing" constant="12" id="XXp-mh-PJh"/>
-                                            <constraint firstItem="tTF-JH-dtn" firstAttribute="top" secondItem="ZrH-Yn-V1x" secondAttribute="top" constant="30" id="XjT-hW-WSq"/>
+                                            <constraint firstItem="tTF-JH-dtn" firstAttribute="top" secondItem="ZrH-Yn-V1x" secondAttribute="top" constant="35" id="XjT-hW-WSq"/>
                                             <constraint firstAttribute="bottom" secondItem="ITT-dc-c8H" secondAttribute="bottom" constant="12" id="auS-0H-lCD"/>
                                             <constraint firstItem="rRh-h4-imc" firstAttribute="leading" secondItem="ZrH-Yn-V1x" secondAttribute="leading" constant="53.999999999999986" id="coz-az-vJd"/>
                                             <constraint firstItem="Yqr-si-hI6" firstAttribute="top" secondItem="HCA-LK-V0m" secondAttribute="bottom" constant="10" id="dBW-oc-fEF"/>
@@ -870,7 +870,7 @@
                                             <constraint firstItem="nX2-iW-GTh" firstAttribute="centerX" secondItem="ZrH-Yn-V1x" secondAttribute="centerX" id="hcW-7q-94c"/>
                                             <constraint firstAttribute="trailing" secondItem="G5i-56-hrC" secondAttribute="trailing" constant="20" symbolic="YES" id="khQ-iy-tBs"/>
                                             <constraint firstAttribute="trailing" secondItem="HCA-LK-V0m" secondAttribute="trailing" constant="12" id="kuB-Vm-XLr"/>
-                                            <constraint firstItem="9cN-c1-IPm" firstAttribute="top" secondItem="tTF-JH-dtn" secondAttribute="bottom" constant="20" id="lPI-FD-MAR"/>
+                                            <constraint firstItem="9cN-c1-IPm" firstAttribute="top" secondItem="tTF-JH-dtn" secondAttribute="bottom" constant="25" id="lPI-FD-MAR"/>
                                             <constraint firstItem="R6M-dB-RBy" firstAttribute="top" secondItem="mqh-fU-uoz" secondAttribute="bottom" constant="25" id="mVP-lU-urR"/>
                                             <constraint firstItem="9cN-c1-IPm" firstAttribute="leading" secondItem="ZrH-Yn-V1x" secondAttribute="leading" constant="15" id="o1n-fk-e2V"/>
                                             <constraint firstItem="gY7-kS-oCx" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iEM-zs-tAg" secondAttribute="trailing" constant="8" symbolic="YES" id="oZ9-dl-PMc"/>
@@ -1578,7 +1578,7 @@
                     <connections>
                         <outlet property="amountTextField" destination="vNs-8b-LUT" id="FnV-kn-RQd"/>
                         <outlet property="assetSelectionButton" destination="28i-xZ-1aF" id="RVu-li-oNl"/>
-                        <outlet property="memoTextField" destination="1qg-jf-4kX" id="k4v-of-6rF"/>
+                        <outlet property="nameTextField" destination="1qg-jf-4kX" id="k4v-of-6rF"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yZ8-0O-VTW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

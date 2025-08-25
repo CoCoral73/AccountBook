@@ -17,13 +17,14 @@ class TransactionManager {
     static let shared = TransactionManager()
     private init() {}
     
-    func addTransaction(amount: Int64, date: Date, isIncome: Bool, memo: String, category: Category, asset: AssetItem){
+    func addTransaction(amount: Int64, date: Date, isIncome: Bool, name: String, memo: String, category: Category, asset: AssetItem){
         
         let transaction = Transaction(context: CoreDataManager.shared.context)
         transaction.amount = amount
         transaction.date = date
         transaction.id = UUID()
         transaction.isIncome = isIncome
+        transaction.name = name
         transaction.memo = memo
         transaction.category = category
         transaction.asset = asset

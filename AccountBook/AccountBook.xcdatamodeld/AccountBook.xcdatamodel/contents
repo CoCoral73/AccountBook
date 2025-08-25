@@ -33,6 +33,7 @@
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="isIncome" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="memo" attributeType="String"/>
+        <attribute name="name" attributeType="String"/>
         <relationship name="asset" maxCount="1" deletionRule="Nullify" destinationEntity="AssetItem" inverseName="transactions" inverseEntity="AssetItem"/>
         <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="transactions" inverseEntity="Category"/>
     </entity>
