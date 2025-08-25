@@ -129,6 +129,14 @@ class CalendarViewController: UIViewController {
         viewModel.handleMonthButton(storyboard: storyboard, fromVC: self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        navigationController?.navigationBar.isHidden = false
+    }
 }
 
 //MARK: Collection View
@@ -265,6 +273,16 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         detailTableView.rowHeight = 50
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) as? DetailTableViewCell else {
+            print("CalendarViewController: 테이블 뷰 셀 불러오기 실패")
+            return
+        }
+
+        viewModel.handleDidSelectRowAt(viewModel: cell.viewModel, storyboard: storyboard, fromVC: self)
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return viewModel.numberOfRowsInSection
     }
@@ -272,7 +290,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = detailTableView.dequeueReusableCell(withIdentifier: Cell.detailCell, for: indexPath) as! DetailTableViewCell
         
-        cell.viewModel = DetailViewModel(transaction: viewModel.cellForRowAt[indexPath.row])
+        cell.viewModel = DetailTransactionViewModel(transaction: viewModel.cellForRowAt[indexPath.row])
         
         return cell
     }

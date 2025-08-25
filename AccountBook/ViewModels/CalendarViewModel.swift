@@ -107,7 +107,7 @@ class CalendarViewModel {
         dayItemsByUUID[id]! = item
     }
     
-    func handleMonthButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+    func handleMonthButton(storyboard: UIStoryboard?, fromVC: CalendarViewController) {
         guard let pickerVC = storyboard?
             .instantiateViewController(identifier: "MonthPickerViewController", creator: { coder in
                 MonthPickerViewController(coder: coder, viewModel: MonthPickerViewModel(startDate: self.currentMonth)) })
@@ -119,12 +119,23 @@ class CalendarViewModel {
             guard let self = self else { return }
             
             self.currentMonth = date
-            (fromVC as! CalendarViewController).applySnapshot()
+            fromVC.applySnapshot()
         }
         
         pickerVC.modalPresentationStyle = .custom
-        pickerVC.transitioningDelegate = fromVC as! CalendarViewController
+        pickerVC.transitioningDelegate = fromVC
         fromVC.present(pickerVC, animated: true, completion: nil)
+    }
+    
+    func handleDidSelectRowAt(viewModel: DetailTransactionViewModel, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
+        
+        guard let detailVC = storyboard?.instantiateViewController(identifier: "DetailTransactionViewController", creator: { coder in
+            DetailTransactionViewController(coder: coder, viewModel: viewModel)
+        }) else {
+            fatalError("DetailTransactionViewController 생성 에러")
+        }
+        
+        fromVC.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: UIViewController) {

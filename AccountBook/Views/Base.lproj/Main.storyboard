@@ -20,7 +20,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="81" translatesAutoresizingMaskIntoConstraints="NO" id="K3Q-sI-xUx">
-                                <rect key="frame" x="16" y="59" width="361" height="40"/>
+                                <rect key="frame" x="16" y="103" width="361" height="40"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MVE-23-Ecb">
                                         <rect key="frame" x="0.0" y="6" width="130" height="28"/>
@@ -52,10 +52,10 @@
                                 </constraints>
                             </stackView>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DEs-YH-E4L" userLabel="계산뷰">
-                                <rect key="frame" x="16" y="109" width="361" height="60"/>
+                                <rect key="frame" x="16" y="153" width="361" height="60"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="8bY-Tw-CsR">
-                                        <rect key="frame" x="2.6666666666666572" y="9.6666666666666714" width="355.66666666666674" height="41"/>
+                                        <rect key="frame" x="2.6666666666666572" y="9.6666666666666572" width="355.66666666666674" height="41"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="VJW-kO-V31">
                                                 <rect key="frame" x="0.0" y="0.0" width="103.33333333333333" height="41"/>
@@ -67,7 +67,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,000,000원" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="V1G-uf-ysx">
-                                                        <rect key="frame" x="11" y="22.999999999999986" width="81.333333333333329" height="18"/>
+                                                        <rect key="frame" x="11" y="23" width="81.333333333333329" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -91,7 +91,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="800,000원" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="jHk-0l-usI">
-                                                        <rect key="frame" x="16" y="22.999999999999986" width="71.666666666666671" height="18"/>
+                                                        <rect key="frame" x="16" y="23" width="71.666666666666671" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -115,7 +115,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="200,000원" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="u1k-vY-5YH">
-                                                        <rect key="frame" x="16" y="22.999999999999986" width="71" height="18"/>
+                                                        <rect key="frame" x="16" y="23" width="71" height="18"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                         <nil key="textColor"/>
                                                         <nil key="highlightedColor"/>
@@ -141,7 +141,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="SPv-hE-Kgg" userLabel="요일 레이블">
-                                <rect key="frame" x="0.0" y="179" width="393" height="12"/>
+                                <rect key="frame" x="0.0" y="223" width="393" height="12"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="일" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0R6-nQ-pCL">
                                         <rect key="frame" x="0.0" y="0.0" width="56" height="12"/>
@@ -188,7 +188,7 @@
                                 </subviews>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dU9-6d-kDc" userLabel="구분선">
-                                <rect key="frame" x="0.0" y="192" width="393" height="0.33333333333334281"/>
+                                <rect key="frame" x="0.0" y="236" width="393" height="0.33333333333334281"/>
                                 <color key="backgroundColor" systemColor="systemGrayColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.29999999999999999" id="I7L-en-jrC"/>
@@ -263,7 +263,7 @@
                                     <constraint firstAttribute="height" constant="0.29999999999999999" id="VYg-1Y-rkb"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="26h-FC-cIP">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="26h-FC-cIP">
                                 <rect key="frame" x="0.0" y="492.66666666666674" width="393" height="276.33333333333326"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -475,9 +475,7 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="26h-FC-cIP" secondAttribute="trailing" id="zsM-Dw-p9U"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="" id="Ajm-R6-x0g">
-                        <imageReference key="image" image="calendar" catalog="system" symbolScale="large"/>
-                    </tabBarItem>
+                    <navigationItem key="navigationItem" id="xLS-j0-VgF"/>
                     <connections>
                         <outlet property="addButton" destination="XVN-SM-19z" id="6aX-Hl-39M"/>
                         <outlet property="addContainerView" destination="peO-yp-c2P" id="yHr-Vh-Bge"/>
@@ -501,7 +499,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="956.48854961832058" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="1883.206106870229" y="-27.464788732394368"/>
         </scene>
         <!--Add Transaction View Controller-->
         <scene sceneID="DMW-2H-Dig">
@@ -617,7 +615,36 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Es4-EV-4rV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856" y="-27"/>
+            <point key="canvasLocation" x="2782.4427480916029" y="-27.464788732394368"/>
+        </scene>
+        <!--거래명세서-->
+        <scene sceneID="dur-26-N6X">
+            <objects>
+                <viewController storyboardIdentifier="DetailTransactionViewController" hidesBottomBarWhenPushed="YES" id="oU4-9V-oZi" customClass="DetailTransactionViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="GBj-GI-baw">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="VjC-T0-wPX"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="거래명세서" id="lkw-Gc-tJE">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="DSs-aQ-lAe">
+                            <connections>
+                                <action selector="backButtonTapped:" destination="oU4-9V-oZi" id="fik-ek-xy4"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="5Yh-EO-FCV">
+                            <color key="tintColor" systemColor="systemRedColor"/>
+                            <connections>
+                                <action selector="removeButtonTapped:" destination="oU4-9V-oZi" id="ghr-ne-fCf"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="o2y-S9-7pS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1852.6717557251907" y="672.53521126760563"/>
         </scene>
         <!--Asset Selection View Controller-->
         <scene sceneID="T3L-cB-FhF">
@@ -767,7 +794,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kx5-X4-AHk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2751.9083969465646" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="3678.6259541984732" y="-27.464788732394368"/>
         </scene>
         <!--Day Picker View Controller-->
         <scene sceneID="Yzo-lp-HVQ">
@@ -1152,7 +1179,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0K-3i-4wP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3681.679389312977" y="-17.605633802816904"/>
+            <point key="canvasLocation" x="4608.3969465648852" y="-17.605633802816904"/>
         </scene>
         <!--Input Table View Controller-->
         <scene sceneID="bIt-QH-zM3">
@@ -1404,17 +1431,39 @@
                         <color key="backgroundColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="0.24260140729999999" colorSpace="custom" customColorSpace="displayP3"/>
                     </tabBar>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="8Xv-6K-Ngp"/>
+                        <segue destination="2yz-Vf-2Oc" kind="relationship" relationship="viewControllers" id="8Xv-6K-Ngp"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x6i-mx-TJj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="29.770992366412212" y="-27.464788732394368"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Hg1-J9-hhS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2yz-Vf-2Oc" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="" id="Ajm-R6-x0g">
+                        <imageReference key="image" image="calendar" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="pLv-hL-ZeH">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="Kzz-36-96h"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="kEH-Wd-E6x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="956.48854961832058" y="-27.464788732394368"/>
+        </scene>
     </scenes>
     <resources>
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
+        <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="clock_icon" width="1024" height="1024"/>
         <image name="creditcard" catalog="system" width="128" height="88"/>
         <image name="equal" catalog="system" width="128" height="73"/>

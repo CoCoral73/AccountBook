@@ -7,9 +7,9 @@
 
 import UIKit
 
-class DetailViewModel {
+class DetailTransactionViewModel {
     
-    private var transaction: Transaction
+    private(set) var transaction: Transaction
     
     init(transaction: Transaction) {
         self.transaction = transaction
@@ -29,5 +29,9 @@ class DetailViewModel {
     }
     var assetString: String {
         return transaction.asset.name
+    }
+    
+    func setTransaction(with transaction: Transaction) {
+        self.transaction = transaction
     }
 }

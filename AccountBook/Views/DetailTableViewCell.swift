@@ -15,7 +15,7 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var assetLabel: UILabel!
     
-    var viewModel: DetailViewModel! {
+    var viewModel: DetailTransactionViewModel! {
         didSet {
             configure()
         }
