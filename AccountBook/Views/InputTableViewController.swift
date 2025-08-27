@@ -30,7 +30,7 @@ class InputTableViewController: UITableViewController {
         return fmt
     }()
     
-    var viewModel: AddViewModel!
+    var viewModel: AddTransactionViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()

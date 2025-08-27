@@ -7,11 +7,11 @@
 
 import UIKit
 
-class AddViewModel {
+class AddTransactionViewModel {
     
-    private var currentDate: Date {
+    private var transactionDate: Date {
         didSet {
-            onDidSetCurrentDate?()
+            onDidSetTransactionDate?()
         }
     }
     
@@ -22,20 +22,20 @@ class AddViewModel {
     private var isIncome: Bool
     
     //Add View에서 currentDate가 바뀌면  바 버튼 아이템의 날짜 타이틀이 바뀌도록
-    var onDidSetCurrentDate: (() -> Void)?
+    var onDidSetTransactionDate: (() -> Void)?
     
     //Add View에서 내역 추가 동작을 했을 때, Calendar View에서 해야할 일
     var onDidAddTransaction: ((NewTransactionInfo) -> Void)?
     
-    init(currentDate: Date, isIncome: Bool) {
-        self.currentDate = currentDate
+    init(date: Date, isIncome: Bool) {
+        self.transactionDate = date
         self.isIncome = isIncome
     }
     
-    var currentDateString: String {
+    var transactionDateString: String {
         let df = DateFormatter()
         df.dateFormat = "yyyy년 M월 d일"
-        return df.string(from: currentDate)
+        return df.string(from: transactionDate)
     }
     
     var numberOfItemsInSection: Int {
@@ -56,15 +56,15 @@ class AddViewModel {
             return
         }
         
-        TransactionManager.shared.addTransaction(amount: amountInput, date: currentDate, isIncome: isIncome, name: nameInput, memo: "", category: getCategory(with: index), asset: asset)
-        onDidAddTransaction?(NewTransactionInfo(date: currentDate, isIncome: isIncome, amount: amountInput))
+        TransactionManager.shared.addTransaction(amount: amountInput, date: transactionDate, isIncome: isIncome, name: nameInput, memo: "", category: getCategory(with: index), asset: asset)
+        onDidAddTransaction?(NewTransactionInfo(date: transactionDate, isIncome: isIncome, amount: amountInput))
     }
     
     func handleDateButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
-        let vm = DatePickerViewModel(initialDate: currentDate)
+        let vm = DatePickerViewModel(initialDate: transactionDate)
         vm.onDatePickerChanged = { [weak self] date in
             guard let self = self else { return }
-            self.currentDate = date
+            self.transactionDate = date
         }
         
         guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in

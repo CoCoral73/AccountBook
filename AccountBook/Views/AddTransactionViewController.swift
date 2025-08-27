@@ -13,9 +13,9 @@ class AddTransactionViewController: UIViewController {
     
     @IBOutlet weak var categoryCollectionView: UICollectionView!
     
-    var viewModel: AddViewModel
+    var viewModel: AddTransactionViewModel
     
-    required init?(coder: NSCoder, viewModel: AddViewModel) {
+    required init?(coder: NSCoder, viewModel: AddTransactionViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -27,11 +27,11 @@ class AddTransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.onDidSetCurrentDate = { [weak self] in
+        viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
-            self.dateButton.title = self.viewModel.currentDateString
+            self.dateButton.title = self.viewModel.transactionDateString
         }
-        dateButton.title = self.viewModel.currentDateString
+        dateButton.title = self.viewModel.transactionDateString
         
         configureCollectionView()
     }
