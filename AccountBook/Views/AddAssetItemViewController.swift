@@ -38,6 +38,7 @@ class AddAssetItemViewController: UIViewController {
         configureSegControl()
         configureSelectAccountButton()
         configureUI()
+        configureTextField()
     }
     
     func configureSegControl() {
@@ -115,6 +116,26 @@ class AddAssetItemViewController: UIViewController {
         dismiss(animated: true)
     }
     
+}
+
+extension AddAssetItemViewController: UITextFieldDelegate {
+    
+    func configureTextField() {
+        nameTextField.delegate = self
+        balanceTextField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if segControl.selectedSegmentIndex == 0 && textField == nameTextField {
+            balanceTextField.becomeFirstResponder()
+        } else {
+            view.endEditing(true)
+        }
+    }
+    
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
 //MARK: Month Picker View, Custom Height
