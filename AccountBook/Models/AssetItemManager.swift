@@ -88,6 +88,7 @@ class AssetItemManager {
         let newItem: BankAccountItem = createItem(BankAccountItem.self) { item in
             item.name = name
             item.balance = balance
+            item.type = 1
         }
         bankAccount.append(newItem)
     }
@@ -96,6 +97,7 @@ class AssetItemManager {
         let newItem: DebitCardItem = createItem(DebitCardItem.self) { item in
             item.name = name
             item.linkedAccount = account
+            item.type = 2
         }
         debitCard.append(newItem)
     }
@@ -106,6 +108,7 @@ class AssetItemManager {
             item.linkedAccount = account
             item.withdrawalDate = withdrawalDate
             item.startDate = startDate
+            item.type = 3
         }
         creditCard.append(newItem)
     }

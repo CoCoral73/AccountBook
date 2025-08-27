@@ -129,6 +129,17 @@ class CalendarViewModel {
     
     func handleDidSelectRowAt(viewModel: DetailTransactionViewModel, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
         
+        viewModel.onDidRemoveTransaction = { [weak self] info in
+            guard let self = self, let id = self.itemIDsByDate[info.date] else {
+                print("transaction.date로 UUID 찾기 실패(nil)")
+                return
+            }
+            
+            self.loadTransactions(with: info.date)
+            self.updateDayItem(for: id, with: info)
+            fromVC.reloadDayItem(id)
+        }
+        
         guard let detailVC = storyboard?.instantiateViewController(identifier: "DetailTransactionViewController", creator: { coder in
             DetailTransactionViewController(coder: coder, viewModel: viewModel)
         }) else {
@@ -149,7 +160,7 @@ class CalendarViewModel {
             guard let self = self else { return }
             
             let monthChanged = !self.isCurrentMonth(with: transaction.date)
-            if monthChanged {
+            if monthChanged {   //거래 추가 뷰 내에서 날짜를 바꿨을 때
                 self.currentMonth = transaction.date
             }
             
