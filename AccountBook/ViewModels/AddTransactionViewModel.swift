@@ -15,9 +15,8 @@ class AddTransactionViewModel {
         }
     }
     
-    var amountInput: Int64 = 0
-    var assetInput: AssetItem?
-    var nameInput: String = ""
+    var inputVC: InputTableViewController?
+    private var assetItemInput: AssetItem?
     
     private(set) var isIncome: Bool
     
@@ -38,11 +37,18 @@ class AddTransactionViewModel {
         return df.string(from: transactionDate)
     }
     
+    func setAssetItemInput(with item: AssetItem) {
+        self.assetItemInput = item
+    }
+    
     func addTransaction(with category: Category) {
-        guard let asset = assetInput else {
+        guard let asset = assetItemInput else {
             //자산 선택 안됐을때 동작 설정하기
             return
         }
+        
+        let amountInput = Int64((inputVC?.amountTextField.text ?? "").replacingOccurrences(of: ",", with: "")) ?? 0
+        let nameInput = inputVC?.nameTextField.text ?? ""
         
         TransactionManager.shared.addTransaction(amount: amountInput, date: transactionDate, isIncome: isIncome, name: nameInput, memo: "", category: category, asset: asset)
         onDidAddTransaction?(NewTransactionInfo(date: transactionDate, isIncome: isIncome, amount: amountInput))
@@ -65,5 +71,26 @@ class AddTransactionViewModel {
             sheet.detents = [.medium()]
         }
         fromVC.present(dateVC, animated: true)
+    }
+    
+    func handleCategoryView(storyboard: UIStoryboard?, fromVC: AddTransactionViewController) {
+        let isIncome = isIncome
+        guard let childVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
+            CategoryViewController(coder: coder, isIncome: isIncome)
+        }) else {
+            fatalError("CategoryViewController 생성 에러")
+        }
+        
+        childVC.onDidSelectCategory = { [weak self] category in
+            guard let self = self else { return }
+            addTransaction(with: category)
+            fromVC.dismiss(animated: true)
+        }
+        
+        //embed 세그웨이 역할
+        fromVC.addChild(childVC)
+        childVC.view.frame = fromVC.containerViewForCategory.bounds
+        fromVC.containerViewForCategory.addSubview(childVC.view)
+        childVC.didMove(toParent: fromVC)
     }
 }

@@ -139,7 +139,7 @@ class InputTableViewController: UITableViewController {
             self.assetSelectionButton.setTitleColor(.black, for: .normal)
             self.nameTextField.becomeFirstResponder()
             
-            self.viewModel.assetInput = asset
+            self.viewModel.setAssetItemInput(with: asset)
         }
         if let sheet = assetSelectionVC.sheetPresentationController {
             sheet.detents = [.medium()]
@@ -159,15 +159,6 @@ extension InputTableViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if textField == amountTextField {
-            let text = textField.text ?? ""
-            viewModel.amountInput = Int64(text.replacingOccurrences(of: ",", with: "")) ?? 0
-        } else {
-            viewModel.nameInput = textField.text ?? ""
-        }
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {

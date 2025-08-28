@@ -41,24 +41,7 @@ class AddTransactionViewController: UIViewController {
     }
     
     private func configureCategoryView() {
-        let isIncome = viewModel.isIncome
-        guard let childVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
-            CategoryViewController(coder: coder, isIncome: isIncome)
-        }) else {
-            fatalError("CategoryViewController 생성 에러")
-        }
-        
-        childVC.onDidSelectCategory = { [weak self] category in
-            guard let self = self else { return }
-            viewModel.addTransaction(with: category)
-            dismiss(animated: true)
-        }
-        
-        //embed 세그웨이 역할
-        self.addChild(childVC)
-        childVC.view.frame = self.containerViewForCategory.bounds
-        self.containerViewForCategory.addSubview(childVC.view)
-        childVC.didMove(toParent: self)
+        viewModel.handleCategoryView(storyboard: storyboard, fromVC: self)
     }
     
     @IBAction func closeButtonTapped(_ sender: UIBarButtonItem) {
@@ -72,6 +55,7 @@ class AddTransactionViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tableVC = segue.destination as? InputTableViewController {
             tableVC.viewModel = self.viewModel
+            viewModel.inputVC = tableVC
         }
     }
 }
