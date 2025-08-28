@@ -9,7 +9,7 @@ import UIKit
 
 class DetailTransactionViewModel {
     
-    private(set) var transaction: Transaction
+    private(set) var transaction: Transaction?
     
     var onDidSetTransactionDate: (() -> Void)?
     var onDidSetCategory: (() -> Void)?
@@ -21,33 +21,37 @@ class DetailTransactionViewModel {
     }
     
     var image: UIImage? {
-        return transaction.category.iconName.toImage()
+        //이모지로만 돼있음. 추후 변경 필요
+        return transaction?.category.iconName.toImage()
     }
     var dateString: String? {
+        guard let transaction = transaction else { return nil }
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: transaction.date)
     }
     var nameString: String? {
-        return transaction.name
+        return transaction?.name
     }
-    var categoryString: String {
-        return transaction.category.name
+    var categoryString: String? {
+        return transaction?.category.name
     }
-    var priceString: String {
-        return (transaction.isIncome ? "+" : "-") + self.amountString
+    var priceString: String? {
+        guard let transaction = transaction else { return nil }
+        return (transaction.isIncome ? "+" : "-") + self.amountString!
     }
-    var amountString: String {
-        return transaction.amount.formattedWithComma
+    var amountString: String? {
+        return transaction?.amount.formattedWithComma
     }
-    var assetItemString: String {
-        return transaction.asset.name
+    var assetItemString: String? {
+        return transaction?.asset.name
     }
-    var assetTypeString: String {
+    var assetTypeString: String? {
+        guard let transaction = transaction else { return nil }
         return "**\(AssetType(rawValue: Int(transaction.asset.type))!.displayName) 결제**"
     }
-    var memoString: String {
-        return transaction.memo
+    var memoString: String? {
+        return transaction?.memo
     }
     
     func setTransaction(with transaction: Transaction) {
@@ -55,11 +59,13 @@ class DetailTransactionViewModel {
     }
     
     func handleDateButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+        guard let transaction = transaction else { return }
+        
         let vm = DatePickerViewModel(initialDate: transaction.date)
         vm.onDatePickerChanged = { [weak self] date in
             guard let self = self else { return }
-            self.transaction.date = date
-            self.onDidSetTransactionDate?()
+            transaction.date = date
+            onDidSetTransactionDate?()
         }
         
         guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
@@ -75,6 +81,8 @@ class DetailTransactionViewModel {
     }
     
     func handleCategoryButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+        guard let transaction = transaction else { return }
+        
         let isIncome = transaction.isIncome
         
         guard let categoryVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
@@ -85,8 +93,8 @@ class DetailTransactionViewModel {
         
         categoryVC.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
-            self.transaction.category = category
-            self.onDidSetCategory?()
+            transaction.category = category
+            onDidSetCategory?()
         }
         
         if let sheet = categoryVC.sheetPresentationController {
@@ -101,13 +109,17 @@ class DetailTransactionViewModel {
     }
     
     func handleRemoveButton(_ fromVC: UIViewController) {
+        guard let transaction = transaction else { return }
+        
         let alert = UIAlertController(title: "삭제", message: "거래내역을 삭제하시겠습니까?", preferredStyle: .actionSheet)
 
         let success = UIAlertAction(title: "확인", style: .destructive) { [weak self] action in
             guard let self = self else { return }
             
-            let info = NewTransactionInfo(date: self.transaction.date, isIncome: self.transaction.isIncome, amount: -self.transaction.amount)
-            TransactionManager.shared.deleteTransaction(self.transaction)
+            let info = NewTransactionInfo(date: transaction.date, isIncome: transaction.isIncome, amount: -transaction.amount)
+            TransactionManager.shared.deleteTransaction(transaction)
+            self.transaction = nil
+            
             onDidRemoveTransaction?(info)
             fromVC.navigationController?.popViewController(animated: true)
         }
@@ -120,8 +132,12 @@ class DetailTransactionViewModel {
     }
     
     func saveUpdatedTransaction(name: String, amount: String, memo: String) {
-        self.transaction.name = name
-        self.transaction.amount = Int64(amount.replacingOccurrences(of: ",", with: "")) ?? 0
-        self.transaction.memo = memo
+        guard let transaction = transaction else { return }
+        
+        transaction.name = name
+        transaction.amount = Int64(amount.replacingOccurrences(of: ",", with: "")) ?? 0
+        transaction.memo = memo
+        
+        CoreDataManager.shared.saveContext()
     }
 }
