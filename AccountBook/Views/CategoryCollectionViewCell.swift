@@ -12,7 +12,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     
-    var viewModel: CategoryViewModel! {
+    var viewModel: CategoryCellViewModel! {
         didSet {
             configure()
         }

@@ -11,7 +11,7 @@ class AddTransactionViewController: UIViewController {
     
     @IBOutlet weak var dateButton: UIBarButtonItem!
     
-    @IBOutlet weak var categoryCollectionView: UICollectionView!
+    @IBOutlet weak var containerViewForCategory: UIView!
     
     var viewModel: AddTransactionViewModel
     
@@ -27,13 +27,38 @@ class AddTransactionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureViewModel()
+        configureCategoryView()
+    }
+    
+    private func configureViewModel() {
         viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
             self.dateButton.title = self.viewModel.transactionDateString
         }
-        dateButton.title = self.viewModel.transactionDateString
         
-        configureCollectionView()
+        dateButton.title = self.viewModel.transactionDateString
+    }
+    
+    private func configureCategoryView() {
+        let isIncome = viewModel.isIncome
+        guard let childVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
+            CategoryViewController(coder: coder, isIncome: isIncome)
+        }) else {
+            fatalError("CategoryViewController 생성 에러")
+        }
+        
+        childVC.onDidSelectCategory = { [weak self] category in
+            guard let self = self else { return }
+            viewModel.addTransaction(with: category)
+            dismiss(animated: true)
+        }
+        
+        //embed 세그웨이 역할
+        self.addChild(childVC)
+        childVC.view.frame = self.containerViewForCategory.bounds
+        self.containerViewForCategory.addSubview(childVC.view)
+        childVC.didMove(toParent: self)
     }
     
     @IBAction func closeButtonTapped(_ sender: UIBarButtonItem) {
@@ -49,63 +74,4 @@ class AddTransactionViewController: UIViewController {
             tableVC.viewModel = self.viewModel
         }
     }
-}
-
-extension AddTransactionViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    
-    private func configureCollectionView() {
-        categoryCollectionView.delegate = self
-        categoryCollectionView.dataSource = self
-        categoryCollectionView.allowsSelection = true
-        
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(didTapOutside))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc func didTapOutside() {
-        view.endEditing(true)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        view.endEditing(true)
-        viewModel.addTransaction(with: indexPath.item)
-        dismiss(animated: true)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return viewModel.numberOfItemsInSection
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = categoryCollectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
-        cell.viewModel = CategoryViewModel(category: viewModel.getCategory(with: indexPath.item))
-
-        return cell
-    }
-    
-    // 위 아래 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return 0
-        
-    }
-
-    // 옆 간격
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return 0
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-
-        let width = categoryCollectionView.frame.width / 5
-        let size = CGSize(width: width, height: width)
-        return size
-    }
-    
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        view.endEditing(true)
-    }
-    
 }

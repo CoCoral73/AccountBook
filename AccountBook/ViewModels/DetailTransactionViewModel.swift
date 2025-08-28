@@ -12,6 +12,8 @@ class DetailTransactionViewModel {
     private(set) var transaction: Transaction
     
     var onDidSetTransactionDate: (() -> Void)?
+    var onDidSetCategory: (() -> Void)?
+    var onDidSetAssetItem: (() -> Void)?
     var onDidRemoveTransaction: ((NewTransactionInfo) -> Void)?
     
     init(transaction: Transaction) {
@@ -38,7 +40,7 @@ class DetailTransactionViewModel {
     var amountString: String {
         return transaction.amount.formattedWithComma
     }
-    var assetString: String {
+    var assetItemString: String {
         return transaction.asset.name
     }
     var assetTypeString: String {
@@ -61,15 +63,41 @@ class DetailTransactionViewModel {
         }
         
         guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
-            DatePickerViewController(coder: coder, viewModel: vm) })
-        else {
+            DatePickerViewController(coder: coder, viewModel: vm)
+        }) else {
             fatalError("DatePickerViewController 생성 에러")
         }
         
         if let sheet = dateVC.sheetPresentationController {
             sheet.detents = [.medium()]
         }
-        fromVC.present(dateVC, animated: true, completion: nil)
+        fromVC.present(dateVC, animated: true)
+    }
+    
+    func handleCategoryButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+        let isIncome = transaction.isIncome
+        
+        guard let categoryVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
+            CategoryViewController(coder: coder, isIncome: isIncome)
+        }) else {
+            fatalError("CategoryViewController 생성 에러")
+        }
+        
+        categoryVC.onDidSelectCategory = { [weak self] category in
+            guard let self = self else { return }
+            self.transaction.category = category
+            self.onDidSetCategory?()
+        }
+        
+        if let sheet = categoryVC.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        
+        fromVC.present(categoryVC, animated: true)
+    }
+    
+    func handleAssetItemButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+        
     }
     
     func handleRemoveButton(_ fromVC: UIViewController) {
@@ -89,5 +117,11 @@ class DetailTransactionViewModel {
         alert.addAction(cancel)
         fromVC.present(alert, animated: true, completion: nil)
         
+    }
+    
+    func saveUpdatedTransaction(name: String, amount: String, memo: String) {
+        self.transaction.name = name
+        self.transaction.amount = Int64(amount.replacingOccurrences(of: ",", with: "")) ?? 0
+        self.transaction.memo = memo
     }
 }

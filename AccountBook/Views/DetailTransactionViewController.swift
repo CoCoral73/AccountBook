@@ -47,13 +47,22 @@ class DetailTransactionViewController: UIViewController {
             guard let self = self else { return }
             self.dateButton.setTitle(self.viewModel.dateString, for: .normal)
         }
+        viewModel.onDidSetCategory = { [weak self] in
+            guard let self = self else { return }
+            self.categoryButton.setTitle(self.viewModel.categoryString, for: .normal)
+        }
+        viewModel.onDidSetAssetItem = { [weak self] in
+            guard let self = self else { return }
+            self.assetItemButton.setTitle(self.viewModel.assetItemString, for: .normal)
+            self.assetTypeLabel.text = self.viewModel.assetTypeString
+        }
         
         dateButton.setTitle(viewModel.dateString, for: .normal)
         nameTextField.text = viewModel.nameString
         amountTextField.text = viewModel.amountString
         assetTypeLabel.text = viewModel.assetTypeString
         categoryButton.setTitle(viewModel.categoryString, for: .normal)
-        assetItemButton.setTitle(viewModel.assetString, for: .normal)
+        assetItemButton.setTitle(viewModel.assetItemString, for: .normal)
         //일시불 버튼 처리
         memoTextView.text = viewModel.memoString
     }
@@ -63,9 +72,11 @@ class DetailTransactionViewController: UIViewController {
     }
     
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
+        viewModel.handleCategoryButton(storyboard: storyboard, fromVC: self)
     }
     
     @IBAction func assetItemButtonTapped(_ sender: UIButton) {
+        viewModel.handleAssetItemButton(storyboard: storyboard, fromVC: self)
     }
     
     @IBAction func installmentButtonTapped(_ sender: UIButton) {
@@ -79,6 +90,12 @@ class DetailTransactionViewController: UIViewController {
     @IBAction func removeButtonTapped(_ sender: UIBarButtonItem) {
         //휴지통 버튼
         viewModel.handleRemoveButton(self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        viewModel.saveUpdatedTransaction(name: nameTextField.text ?? "", amount: amountTextField.text ?? "0", memo: memoTextView.text)
     }
     
     override func viewDidLayoutSubviews() {

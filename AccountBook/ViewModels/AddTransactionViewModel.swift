@@ -19,7 +19,7 @@ class AddTransactionViewModel {
     var assetInput: AssetItem?
     var nameInput: String = ""
     
-    private var isIncome: Bool
+    private(set) var isIncome: Bool
     
     //Add View에서 currentDate가 바뀌면  바 버튼 아이템의 날짜 타이틀이 바뀌도록
     var onDidSetTransactionDate: (() -> Void)?
@@ -38,25 +38,13 @@ class AddTransactionViewModel {
         return df.string(from: transactionDate)
     }
     
-    var numberOfItemsInSection: Int {
-        return isIncome ? CategoryManager.shared.incomeCategories.count : CategoryManager.shared.expenseCategories.count
-    }
-    
-    private var categories: [Category] {
-        return isIncome ? CategoryManager.shared.incomeCategories : CategoryManager.shared.expenseCategories
-    }
-    
-    func getCategory(with index: Int) -> Category {
-        return categories[index]
-    }
-    
-    func addTransaction(with index: Int) {
+    func addTransaction(with category: Category) {
         guard let asset = assetInput else {
             //자산 선택 안됐을때 동작 설정하기
             return
         }
         
-        TransactionManager.shared.addTransaction(amount: amountInput, date: transactionDate, isIncome: isIncome, name: nameInput, memo: "", category: getCategory(with: index), asset: asset)
+        TransactionManager.shared.addTransaction(amount: amountInput, date: transactionDate, isIncome: isIncome, name: nameInput, memo: "", category: category, asset: asset)
         onDidAddTransaction?(NewTransactionInfo(date: transactionDate, isIncome: isIncome, amount: amountInput))
     }
     
@@ -76,6 +64,6 @@ class AddTransactionViewModel {
         if let sheet = dateVC.sheetPresentationController {
             sheet.detents = [.medium()]
         }
-        fromVC.present(dateVC, animated: true, completion: nil)
+        fromVC.present(dateVC, animated: true)
     }
 }

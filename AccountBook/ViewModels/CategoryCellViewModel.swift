@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CategoryViewModel {
+class CategoryCellViewModel {
     
     private var category: Category
     
@@ -25,6 +25,7 @@ class CategoryViewModel {
 }
 
 extension String {
+    //이모지 -> 이미지
     func toImage(withDimension dimension: CGFloat = 40, scale: CGFloat = UIScreen.main.scale) -> UIImage? {
         // Create a UILabel to hold the emoji
         let label = UILabel()
