@@ -724,8 +724,8 @@
                                                     <action selector="categoryButtonTapped:" destination="oU4-9V-oZi" eventType="touchUpInside" id="6IF-iH-8RH"/>
                                                 </connections>
                                             </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카드명 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqh-fU-uoz">
-                                                <rect key="frame" x="20" y="273" width="54" height="21"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자산 :" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mqh-fU-uoz">
+                                                <rect key="frame" x="19.999999999999996" y="273" width="38.666666666666657" height="21"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -816,10 +816,17 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                             </textView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="지출" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0rJ-tO-lY7">
+                                                <rect key="frame" x="288" y="84" width="26" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <nil key="textColor"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
                                             <constraint firstItem="qcq-2D-RLI" firstAttribute="leading" secondItem="ZrH-Yn-V1x" secondAttribute="leading" constant="15" id="15E-cK-4aD"/>
+                                            <constraint firstItem="Ode-gA-azq" firstAttribute="top" secondItem="0rJ-tO-lY7" secondAttribute="bottom" constant="3" id="26W-Ff-17G"/>
                                             <constraint firstAttribute="trailing" secondItem="iJj-eu-E1v" secondAttribute="trailing" constant="20" id="2OZ-4G-28T"/>
                                             <constraint firstItem="Yz7-nd-bFi" firstAttribute="leading" secondItem="ZrH-Yn-V1x" secondAttribute="leading" constant="12" id="4i6-dC-5Da"/>
                                             <constraint firstAttribute="trailing" secondItem="kz7-3j-9QQ" secondAttribute="trailing" constant="20" id="5GY-Sw-vGY"/>
@@ -839,6 +846,7 @@
                                             <constraint firstItem="Yz7-nd-bFi" firstAttribute="top" secondItem="nX2-iW-GTh" secondAttribute="bottom" constant="8" id="GgR-EV-9hb"/>
                                             <constraint firstItem="HCA-LK-V0m" firstAttribute="top" secondItem="Da1-Jo-gAY" secondAttribute="bottom" constant="12" id="HXB-ZF-Ph8"/>
                                             <constraint firstItem="ITT-dc-c8H" firstAttribute="top" secondItem="Yz7-nd-bFi" secondAttribute="bottom" constant="12" id="Js6-2F-wkK"/>
+                                            <constraint firstAttribute="trailing" secondItem="0rJ-tO-lY7" secondAttribute="trailing" constant="15" id="KJQ-gb-vrO"/>
                                             <constraint firstAttribute="trailing" secondItem="ITT-dc-c8H" secondAttribute="trailing" constant="20" symbolic="YES" id="Ksr-rI-5NT"/>
                                             <constraint firstItem="Lov-98-2t0" firstAttribute="top" secondItem="rRh-h4-imc" secondAttribute="bottom" constant="8" id="L7I-0A-hRh"/>
                                             <constraint firstItem="Da1-Jo-gAY" firstAttribute="top" secondItem="Lov-98-2t0" secondAttribute="bottom" constant="12" id="L8y-So-i3G"/>
@@ -909,6 +917,8 @@
                         <outlet property="assetTypeLabel" destination="Yqr-si-hI6" id="Jdp-He-tpG"/>
                         <outlet property="categoryButton" destination="9So-KP-ogq" id="grb-fe-27n"/>
                         <outlet property="dateButton" destination="qcq-2D-RLI" id="1nB-Cz-fhM"/>
+                        <outlet property="installmentLabel" destination="R6M-dB-RBy" id="mic-SK-m4e"/>
+                        <outlet property="isIncomeLabel" destination="0rJ-tO-lY7" id="6QI-aW-g48"/>
                         <outlet property="memoTextView" destination="ITT-dc-c8H" id="ZWT-U8-PIv"/>
                         <outlet property="nameTextField" destination="Da1-Jo-gAY" id="fok-HX-zvm"/>
                         <outlet property="paperView" destination="ZrH-Yn-V1x" id="Vr9-oO-thY"/>

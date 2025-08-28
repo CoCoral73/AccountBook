@@ -30,6 +30,10 @@ class DetailTransactionViewModel {
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: transaction.date)
     }
+    var isIncomeString: String? {
+        guard let transaction = transaction else { return nil }
+        return transaction.isIncome ? "수입" : "지출"
+    }
     var nameString: String? {
         return transaction?.name
     }
@@ -46,9 +50,13 @@ class DetailTransactionViewModel {
     var assetItemString: String? {
         return transaction?.asset.name
     }
-    var assetTypeString: String? {
+    var assetType: AssetType? {
         guard let transaction = transaction else { return nil }
-        return "**\(AssetType(rawValue: Int(transaction.asset.type))!.displayName) 결제**"
+        return AssetType(rawValue: Int(transaction.asset.type))!
+    }
+    var assetTypeString: String {
+        guard let assetType = assetType else { return "" }
+        return transaction!.isIncome ? "**입금**" : "**\(assetType.displayName) 결제**"
     }
     var memoString: String? {
         return transaction?.memo
@@ -105,7 +113,24 @@ class DetailTransactionViewModel {
     }
     
     func handleAssetItemButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+        guard let transaction = transaction else { return }
         
+        guard let assetSelectionVC = storyboard?.instantiateViewController(withIdentifier: "AssetSelectionViewController") as? AssetSelectionViewController
+        else {
+            fatalError("AssetSelectionViewController 생성 에러")
+        }
+        
+        assetSelectionVC.onAssetSelected = { [weak self] asset in
+            guard let self = self else { return }
+            
+            transaction.asset = asset
+            onDidSetAssetItem?()
+        }
+        
+        if let sheet = assetSelectionVC.sheetPresentationController {
+            sheet.detents = [.medium()]
+        }
+        fromVC.present(assetSelectionVC, animated: true, completion: nil)
     }
     
     func handleRemoveButton(_ fromVC: UIViewController) {

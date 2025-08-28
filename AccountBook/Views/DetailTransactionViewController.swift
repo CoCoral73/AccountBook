@@ -11,11 +11,13 @@ class DetailTransactionViewController: UIViewController {
     
     @IBOutlet weak var paperView: UIView!
     @IBOutlet weak var dateButton: UIButton!
+    @IBOutlet weak var isIncomeLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var assetTypeLabel: UILabel!
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var assetItemButton: UIButton!
+    @IBOutlet weak var installmentLabel: UILabel!
     @IBOutlet weak var installmentButton: UIButton!
     @IBOutlet weak var memoTextView: UITextView!
     
@@ -45,25 +47,28 @@ class DetailTransactionViewController: UIViewController {
     private func configureViewModel() {
         viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
-            self.dateButton.setTitle(self.viewModel.dateString, for: .normal)
+            dateButton.setTitle(viewModel.dateString, for: .normal)
         }
         viewModel.onDidSetCategory = { [weak self] in
             guard let self = self else { return }
-            self.categoryButton.setTitle(self.viewModel.categoryString, for: .normal)
+            categoryButton.setTitle(viewModel.categoryString, for: .normal)
         }
         viewModel.onDidSetAssetItem = { [weak self] in
             guard let self = self else { return }
-            self.assetItemButton.setTitle(self.viewModel.assetItemString, for: .normal)
-            self.assetTypeLabel.text = self.viewModel.assetTypeString
+            assetItemButton.setTitle(viewModel.assetItemString, for: .normal)
+            assetTypeLabel.text = viewModel.assetTypeString
+            installmentLabel.isHidden = viewModel.assetType != .creditCard
         }
         
         dateButton.setTitle(viewModel.dateString, for: .normal)
+        isIncomeLabel.text = viewModel.isIncomeString
         nameTextField.text = viewModel.nameString
         amountTextField.text = viewModel.amountString
         assetTypeLabel.text = viewModel.assetTypeString
         categoryButton.setTitle(viewModel.categoryString, for: .normal)
         assetItemButton.setTitle(viewModel.assetItemString, for: .normal)
         //일시불 버튼 처리
+        installmentLabel.isHidden = viewModel.assetType != .creditCard
         memoTextView.text = viewModel.memoString
     }
     
@@ -106,5 +111,15 @@ class DetailTransactionViewController: UIViewController {
         paperView.layer.shadowOpacity = 0.2
         paperView.layer.shadowOffset  = CGSize(width: 0, height: 1)
         paperView.layer.shadowRadius  = 6
+    }
+}
+
+extension DetailTransactionViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
     }
 }
