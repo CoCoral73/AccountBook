@@ -14,7 +14,7 @@ class DetailTransactionViewModel {
     var onDidSetTransactionDate: (() -> Void)?
     var onDidSetCategory: (() -> Void)?
     var onDidSetAssetItem: (() -> Void)?
-    var onDidRemoveTransaction: ((NewTransactionInfo) -> Void)?
+    var onDidUpdateOrRemoveTransaction: ((NewTransactionInfo) -> Void)?
     
     init(transaction: Transaction) {
         self.transaction = transaction
@@ -120,7 +120,7 @@ class DetailTransactionViewModel {
             TransactionManager.shared.deleteTransaction(transaction)
             self.transaction = nil
             
-            onDidRemoveTransaction?(info)
+            onDidUpdateOrRemoveTransaction?(info)
             fromVC.navigationController?.popViewController(animated: true)
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -134,10 +134,16 @@ class DetailTransactionViewModel {
     func saveUpdatedTransaction(name: String, amount: String, memo: String) {
         guard let transaction = transaction else { return }
         
+        let oldAmount = transaction.amount
+        let newAmount = Int64(amount.replacingOccurrences(of: ",", with: "")) ?? 0
+        
         transaction.name = name
-        transaction.amount = Int64(amount.replacingOccurrences(of: ",", with: "")) ?? 0
+        transaction.amount = newAmount
         transaction.memo = memo
         
         CoreDataManager.shared.saveContext()
+        
+        let info = NewTransactionInfo(date: transaction.date, isIncome: transaction.isIncome, amount: newAmount - oldAmount)
+        onDidUpdateOrRemoveTransaction?(info)
     }
 }

@@ -129,14 +129,14 @@ class CalendarViewModel {
     
     func handleDidSelectRowAt(viewModel: DetailTransactionViewModel, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
         
-        viewModel.onDidRemoveTransaction = { [weak self] info in
+        viewModel.onDidUpdateOrRemoveTransaction = { [weak self] info in
             guard let self = self, let id = self.itemIDsByDate[info.date] else {
                 print("transaction.date로 UUID 찾기 실패(nil)")
                 return
             }
             
-            self.loadTransactions(with: info.date)
-            self.updateDayItem(for: id, with: info)
+            loadTransactions(with: info.date)
+            updateDayItem(for: id, with: info)
             fromVC.reloadDayItem(id)
         }
         
