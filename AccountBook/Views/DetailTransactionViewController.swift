@@ -13,7 +13,7 @@ class DetailTransactionViewController: UIViewController {
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var isIncomeLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var amountTextField: UITextField!
+    @IBOutlet weak var amountTextField: FormattedTextField!
     @IBOutlet weak var assetTypeLabel: UILabel!
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var assetItemButton: UIButton!

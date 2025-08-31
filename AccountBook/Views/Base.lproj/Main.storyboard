@@ -668,7 +668,7 @@
                                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                 <textInputTraits key="textInputTraits"/>
                                             </textField>
-                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="333,000,000" textAlignment="right" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="iJj-eu-E1v">
+                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="333,000,000" textAlignment="right" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="iJj-eu-E1v" customClass="FormattedTextField" customModule="AccountBook" customModuleProvider="target">
                                                 <rect key="frame" x="196" y="157.33333333333331" width="113" height="20.333333333333343"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="113" id="Zad-cl-xrX"/>
@@ -1563,7 +1563,7 @@
                                                         <constraint firstAttribute="width" secondItem="1g3-1d-jXk" secondAttribute="height" multiplier="1:1" id="OLn-yb-8lo"/>
                                                     </constraints>
                                                 </imageView>
-                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="금액 입력" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vNs-8b-LUT" customClass="AmountTextField" customModule="AccountBook" customModuleProvider="target">
+                                                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="금액 입력" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vNs-8b-LUT">
                                                     <rect key="frame" x="61" y="8.6666666666666679" width="312" height="37.666666666666657"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <textInputTraits key="textInputTraits" keyboardType="numberPad"/>

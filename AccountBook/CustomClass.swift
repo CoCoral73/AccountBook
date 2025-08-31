@@ -7,16 +7,6 @@
 
 import UIKit
 
-class AmountTextField: UITextField {
-
-    override func canPerformAction(_ action: Selector, withSender sender: Any?) -> Bool {
-            if action == #selector(UIResponderStandardEditActions.paste(_:)) {
-                return false
-            }
-            return super.canPerformAction(action, withSender: sender)
-       }
-}
-
 class IntrinsicCollectionView: UICollectionView {
     override var contentSize: CGSize {
         didSet {
@@ -31,6 +21,7 @@ class IntrinsicCollectionView: UICollectionView {
     }
 }
 
+//점선 UIView
 @IBDesignable
 class DashedLineView: UIView {
 
@@ -61,5 +52,75 @@ class DashedLineView: UIView {
         dashedLineLayer.path = path.cgPath
 
         self.layer.addSublayer(dashedLineLayer)
+    }
+}
+
+//콤마 자동 포맷팅 텍스트필드
+class FormattedTextField: UITextField, UITextFieldDelegate {
+
+    // MARK: - Properties
+
+    private let formatter: NumberFormatter = {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        formatter.locale = Locale(identifier: "ko_KR")
+        formatter.maximumFractionDigits = 0 // 소수점 자릿수 제한
+        return formatter
+    }()
+    
+    // MARK: - Initialization
+    required init?(coder Decoder: NSCoder) {
+        super.init(coder: Decoder)
+        setup()
+    }
+    
+    // MARK: - Setup
+    
+    private func setup() {
+        self.delegate = self
+    }
+    
+    // MARK: - Actions
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let oldText = textField.text ?? ""
+        let onlyNumberString = string.filter { $0.isNumber }.map { String($0) }.joined()
+        let newText = (oldText as NSString).replacingCharacters(in: range, with: onlyNumberString)
+        
+        let cleanText = newText.replacingOccurrences(of: formatter.groupingSeparator, with: "")
+        guard let number = Int64(cleanText) else {
+            textField.text = ""
+            return false
+        }
+        textField.text = formatter.string(for: number)
+        
+        if string.count > 1 {   //붙여넣기
+            let endPosition = textField.endOfDocument
+            textField.selectedTextRange = textField.textRange(from: endPosition, to: endPosition)
+        } else {
+            
+        }
+        
+        return false
+    }
+    
+    @objc private func textFieldDidChange() {
+        guard let text = text, !text.isEmpty else { return }
+        
+        let onlyDigits = text.filter { $0.isNumber }.map { String($0) }.joined()
+        
+        guard let number = Int64(onlyDigits) else {
+            self.text = ""
+            return
+        }
+        
+        self.text = formatter.string(from: NSNumber(value: number))
+    }
+    
+    // MARK: - Public Method
+    
+    // 외부에 포맷되지 않은 숫자 값을 제공하는 메서드
+    public func unformattedValue() -> Int64? {
+        let cleanedText = self.text?.replacingOccurrences(of: formatter.groupingSeparator, with: "")
+        return Int64(cleanedText ?? "0")
     }
 }

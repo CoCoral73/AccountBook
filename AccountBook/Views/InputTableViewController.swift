@@ -9,7 +9,7 @@ import UIKit
 
 class InputTableViewController: UITableViewController {
     
-    @IBOutlet weak var amountTextField: AmountTextField!
+    @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var assetSelectionButton: UIButton!
     @IBOutlet weak var nameTextField: UITextField!
     
