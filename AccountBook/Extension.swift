@@ -5,7 +5,7 @@
 //  Created by 김정원 on 8/2/25.
 //
 
-import Foundation
+import UIKit
 
 extension Formatter {
     static let currency: NumberFormatter = {
@@ -20,5 +20,15 @@ extension Formatter {
 extension Int64 {
     var formattedWithComma: String {
         return Formatter.currency.string(from: NSNumber(value: self)) ?? "\(self)"
+    }
+}
+
+extension UIView {
+    func shake() {
+        let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
+        animation.duration = 0.6
+        animation.values = [-10.0, 10.0, -7.5, 7.5, -5.0, 5.0, -2.5, 2.5, 0.0]
+        layer.add(animation, forKey: "shake")
     }
 }
