@@ -26,7 +26,7 @@ class CategoryManager {
         CoreDataManager.shared.saveContext()
     }
 
-    func removeCategory(_ category: Category) {
+    func deleteCategory(_ category: Category) {
         if let index = categories.firstIndex(of: category) {
             categories.remove(at: index)
         }

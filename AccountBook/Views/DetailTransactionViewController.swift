@@ -61,6 +61,10 @@ class DetailTransactionViewController: UIViewController {
             assetTypeLabel.text = viewModel.assetTypeString
             installmentLabel.isHidden = viewModel.assetType != .creditCard
         }
+        viewModel.onDidSetInstallment = { [weak self] in
+            guard let self = self else { return }
+            installmentButton.setTitle(viewModel.installmentString, for: .normal)
+        }
         
         dateButton.setTitle(viewModel.dateString, for: .normal)
         isIncomeLabel.text = viewModel.isIncomeString
@@ -69,8 +73,9 @@ class DetailTransactionViewController: UIViewController {
         assetTypeLabel.text = viewModel.assetTypeString
         categoryButton.setTitle(viewModel.categoryString, for: .normal)
         assetItemButton.setTitle(viewModel.assetItemString, for: .normal)
-        //일시불 버튼 처리
         installmentLabel.isHidden = viewModel.assetType != .creditCard
+        installmentButton.isHidden = viewModel.assetType != .creditCard
+        installmentButton.setTitle(viewModel.installmentString, for: .normal)
         memoTextView.text = viewModel.memoString
     }
     
@@ -104,6 +109,7 @@ class DetailTransactionViewController: UIViewController {
     }
     
     @IBAction func installmentButtonTapped(_ sender: UIButton) {
+        viewModel.handleInstallmentButton(storyboard: storyboard, fromVC: self)
     }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {

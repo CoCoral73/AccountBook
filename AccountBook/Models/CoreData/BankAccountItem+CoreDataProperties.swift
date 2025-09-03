@@ -17,5 +17,6 @@ extension BankAccountItem {
     }
 
     @NSManaged public var balance: Int64
-
+    @NSManaged public var linkedCreditCards: NSSet?
+    @NSManaged public var linkedDebitCards: NSSet?
 }

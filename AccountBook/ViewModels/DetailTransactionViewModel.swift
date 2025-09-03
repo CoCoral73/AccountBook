@@ -14,6 +14,7 @@ class DetailTransactionViewModel {
     var onDidSetTransactionDate: (() -> Void)?
     var onDidSetCategory: (() -> Void)?
     var onDidSetAssetItem: (() -> Void)?
+    var onDidSetInstallment: (() -> Void)?
     var onDidUpdateOrRemoveTransaction: ((NewTransactionInfo) -> Void)?
     
     init(transaction: Transaction) {
@@ -58,6 +59,11 @@ class DetailTransactionViewModel {
         guard let assetType = assetType else { return "" }
         return transaction!.isIncome ? "**입금**" : "**\(assetType.displayName) 결제**"
     }
+    var installmentString: String {
+        guard let period = transaction?.installment?.numberOfMonths else { return "일시불" }
+        return "\(period)개월"
+    }
+    
     var memoString: String? {
         return transaction?.memo
     }
@@ -133,6 +139,35 @@ class DetailTransactionViewModel {
         fromVC.present(assetSelectionVC, animated: true, completion: nil)
     }
     
+    func handleInstallmentButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+        guard let transaction = transaction else { return }
+        
+        guard let installmentVC = storyboard?.instantiateViewController(withIdentifier: "InstallmentViewController") as? InstallmentViewController
+        else {
+            fatalError("InstallmentViewController 생성 에러")
+        }
+        
+        //이미 할부 정보가 존재할 경우
+        if let oldPeriod = transaction.installment?.numberOfMonths {
+            installmentVC.oldPeriod = oldPeriod
+        }
+        
+        installmentVC.onDidEnterInstallment = { [weak self] period in
+            guard let self = self else { return }
+            
+            if period <= 1 {
+                InstallmentManager.shared.deleteInstallment(transaction)
+            } else if let installment = transaction.installment {
+                InstallmentManager.shared.updateInstallment(with: installment, period: period)
+            } else {
+                InstallmentManager.shared.addInstallment(transaction, period: period)
+            }
+            
+            onDidSetInstallment?()
+        }
+        fromVC.navigationController?.pushViewController(installmentVC, animated: true)
+    }
+    
     func handleRemoveButton(_ fromVC: UIViewController) {
         guard let transaction = transaction else { return }
         
@@ -165,6 +200,10 @@ class DetailTransactionViewModel {
         transaction.name = name
         transaction.amount = newAmount
         transaction.memo = memo
+        
+        if let installment = transaction.installment, oldAmount != newAmount {
+            InstallmentManager.shared.updateInstallment(with: installment, totalAmount: newAmount)
+        }
         
         CoreDataManager.shared.saveContext()
         

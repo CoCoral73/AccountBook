@@ -760,6 +760,9 @@
                                                 <state key="normal" title="일시불">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="installmentButtonTapped:" destination="oU4-9V-oZi" eventType="touchUpInside" id="kUe-2M-AG5"/>
+                                                </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QfT-uY-hjr" customClass="DashedLineView" customModule="AccountBook" customModuleProvider="target">
                                                 <rect key="frame" x="12" y="335" width="305" height="2"/>
@@ -921,6 +924,7 @@
                         <outlet property="assetTypeLabel" destination="Yqr-si-hI6" id="Jdp-He-tpG"/>
                         <outlet property="categoryButton" destination="9So-KP-ogq" id="grb-fe-27n"/>
                         <outlet property="dateButton" destination="qcq-2D-RLI" id="1nB-Cz-fhM"/>
+                        <outlet property="installmentButton" destination="5V6-cj-gp5" id="vWN-FT-gig"/>
                         <outlet property="installmentLabel" destination="R6M-dB-RBy" id="mic-SK-m4e"/>
                         <outlet property="isIncomeLabel" destination="0rJ-tO-lY7" id="6QI-aW-g48"/>
                         <outlet property="memoTextView" destination="ITT-dc-c8H" id="ZWT-U8-PIv"/>
@@ -931,6 +935,77 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2y-S9-7pS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1883" y="673"/>
+        </scene>
+        <!--할부-->
+        <scene sceneID="MTk-8x-ahd">
+            <objects>
+                <viewController storyboardIdentifier="InstallmentViewController" id="iuo-BG-LrV" customClass="InstallmentViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="4AS-p8-0q5">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="chM-jT-N00">
+                                <rect key="frame" x="16" y="123" width="361" height="60"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="할부" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qKT-za-sH9">
+                                        <rect key="frame" x="20" y="18" width="35" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개월" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WRb-gB-4Ct">
+                                        <rect key="frame" x="306" y="18" width="35" height="24"/>
+                                        <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="60" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jU3-b1-hmN">
+                                        <rect key="frame" x="274" y="16" width="29" height="28"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
+                                    </textField>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="0.24260140729999999" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstItem="qKT-za-sH9" firstAttribute="leading" secondItem="chM-jT-N00" secondAttribute="leading" constant="20" id="9CF-xR-YL0"/>
+                                    <constraint firstItem="WRb-gB-4Ct" firstAttribute="centerY" secondItem="chM-jT-N00" secondAttribute="centerY" id="KyG-Dh-u3d"/>
+                                    <constraint firstAttribute="trailing" secondItem="WRb-gB-4Ct" secondAttribute="trailing" constant="20" id="Tk6-Ra-t6i"/>
+                                    <constraint firstItem="jU3-b1-hmN" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qKT-za-sH9" secondAttribute="trailing" constant="8" symbolic="YES" id="bph-KA-3Qb"/>
+                                    <constraint firstAttribute="height" constant="60" id="cWs-WN-YIc"/>
+                                    <constraint firstItem="WRb-gB-4Ct" firstAttribute="leading" secondItem="jU3-b1-hmN" secondAttribute="trailing" constant="3" id="pit-vy-nSU"/>
+                                    <constraint firstItem="qKT-za-sH9" firstAttribute="centerY" secondItem="chM-jT-N00" secondAttribute="centerY" id="pnw-lP-UVT"/>
+                                    <constraint firstItem="jU3-b1-hmN" firstAttribute="centerY" secondItem="chM-jT-N00" secondAttribute="centerY" id="yLg-uO-a6o"/>
+                                </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="6iM-IM-q78"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="6iM-IM-q78" firstAttribute="trailing" secondItem="chM-jT-N00" secondAttribute="trailing" constant="16" id="557-3y-fZA"/>
+                            <constraint firstItem="chM-jT-N00" firstAttribute="top" secondItem="6iM-IM-q78" secondAttribute="top" constant="20" id="PVf-1q-W1L"/>
+                            <constraint firstItem="chM-jT-N00" firstAttribute="leading" secondItem="6iM-IM-q78" secondAttribute="leading" constant="16" id="pBM-MK-b3o"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="할부" id="l9s-rX-Ku1">
+                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="455-Pm-zLc">
+                            <connections>
+                                <action selector="backButtonTapped:" destination="iuo-BG-LrV" id="CJ7-8L-635"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="textField" destination="jU3-b1-hmN" id="tyW-vu-0ti"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gtq-j6-DQn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2780.9160305343512" y="672.53521126760563"/>
         </scene>
         <!--Category View Controller-->
         <scene sceneID="6Cg-It-xgc">
@@ -1005,7 +1080,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ctz-XI-mcA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2782" y="673"/>
+            <point key="canvasLocation" x="2782" y="-704"/>
         </scene>
         <!--Asset Selection View Controller-->
         <scene sceneID="T3L-cB-FhF">

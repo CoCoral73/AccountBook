@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24G84" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="23605" systemVersion="24G90" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="AssetItem" representedClassName="AssetItem" isAbstract="YES" syncable="YES">
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="name" attributeType="String"/>
@@ -28,6 +28,11 @@
     <entity name="DebitCardItem" representedClassName="DebitCardItem" parentEntity="AssetItem" syncable="YES">
         <relationship name="linkedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BankAccountItem" inverseName="linkedDebitCards" inverseEntity="BankAccountItem"/>
     </entity>
+    <entity name="Installment" representedClassName="Installment" syncable="YES">
+        <attribute name="numberOfMonths" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="totalAmount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="transaction" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="installment" inverseEntity="Transaction"/>
+    </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES">
         <attribute name="amount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
@@ -37,5 +42,6 @@
         <attribute name="name" attributeType="String"/>
         <relationship name="asset" maxCount="1" deletionRule="Nullify" destinationEntity="AssetItem" inverseName="transactions" inverseEntity="AssetItem"/>
         <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="transactions" inverseEntity="Category"/>
+        <relationship name="installment" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Installment" inverseName="transaction" inverseEntity="Installment"/>
     </entity>
 </model>
