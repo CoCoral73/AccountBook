@@ -850,6 +850,7 @@
                                             <constraint firstAttribute="trailing" secondItem="ITT-dc-c8H" secondAttribute="trailing" constant="20" symbolic="YES" id="Ksr-rI-5NT"/>
                                             <constraint firstItem="Lov-98-2t0" firstAttribute="top" secondItem="rRh-h4-imc" secondAttribute="bottom" constant="8" id="L7I-0A-hRh"/>
                                             <constraint firstItem="Da1-Jo-gAY" firstAttribute="top" secondItem="Lov-98-2t0" secondAttribute="bottom" constant="12" id="L8y-So-i3G"/>
+                                            <constraint firstItem="9So-KP-ogq" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iEM-zs-tAg" secondAttribute="trailing" constant="8" symbolic="YES" id="MDl-ar-XpH"/>
                                             <constraint firstItem="yMe-8t-1HJ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="rRh-h4-imc" secondAttribute="trailing" constant="8" symbolic="YES" id="MJd-C2-uoN"/>
                                             <constraint firstItem="Yqr-si-hI6" firstAttribute="centerX" secondItem="ZrH-Yn-V1x" secondAttribute="centerX" id="MUZ-v6-ia6"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="qcq-2D-RLI" secondAttribute="trailing" constant="20" symbolic="YES" id="Nnn-Fs-Tde"/>
@@ -866,6 +867,7 @@
                                             <constraint firstAttribute="trailing" secondItem="9So-KP-ogq" secondAttribute="trailing" constant="20" id="cwj-JQ-UDH"/>
                                             <constraint firstItem="kz7-3j-9QQ" firstAttribute="top" secondItem="mqh-fU-uoz" secondAttribute="top" id="d1u-67-pJW"/>
                                             <constraint firstItem="Yqr-si-hI6" firstAttribute="top" secondItem="HCA-LK-V0m" secondAttribute="bottom" constant="12" id="dBW-oc-fEF"/>
+                                            <constraint firstItem="kz7-3j-9QQ" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="mqh-fU-uoz" secondAttribute="trailing" constant="8" symbolic="YES" id="fP6-PC-eZk"/>
                                             <constraint firstItem="nX2-iW-GTh" firstAttribute="top" secondItem="QfT-uY-hjr" secondAttribute="bottom" constant="8" id="ggt-dx-deb"/>
                                             <constraint firstItem="nX2-iW-GTh" firstAttribute="centerX" secondItem="ZrH-Yn-V1x" secondAttribute="centerX" id="hcW-7q-94c"/>
                                             <constraint firstItem="qcq-2D-RLI" firstAttribute="top" secondItem="tTF-JH-dtn" secondAttribute="bottom" constant="25" id="i2V-w8-5CJ"/>
@@ -874,6 +876,8 @@
                                             <constraint firstAttribute="trailing" secondItem="yMe-8t-1HJ" secondAttribute="trailing" constant="54" id="pq9-JR-NQa"/>
                                             <constraint firstItem="QfT-uY-hjr" firstAttribute="leading" secondItem="ZrH-Yn-V1x" secondAttribute="leading" constant="12" id="qMc-PA-1lz"/>
                                             <constraint firstItem="yMe-8t-1HJ" firstAttribute="top" secondItem="Ode-gA-azq" secondAttribute="bottom" constant="8" symbolic="YES" id="quk-Gw-eEK"/>
+                                            <constraint firstItem="0rJ-tO-lY7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="qcq-2D-RLI" secondAttribute="trailing" constant="8" symbolic="YES" id="qwv-JB-8U5"/>
+                                            <constraint firstItem="5V6-cj-gp5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="R6M-dB-RBy" secondAttribute="trailing" constant="8" symbolic="YES" id="w7j-ev-Pm4"/>
                                             <constraint firstItem="tTF-JH-dtn" firstAttribute="centerX" secondItem="ZrH-Yn-V1x" secondAttribute="centerX" id="wdw-d2-ckE"/>
                                             <constraint firstAttribute="trailing" secondItem="QfT-uY-hjr" secondAttribute="trailing" constant="12" id="xPJ-B6-vIa"/>
                                         </constraints>
@@ -926,7 +930,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2y-S9-7pS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1852.6717557251907" y="672.53521126760563"/>
+            <point key="canvasLocation" x="1883" y="673"/>
         </scene>
         <!--Category View Controller-->
         <scene sceneID="6Cg-It-xgc">
@@ -1001,7 +1005,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ctz-XI-mcA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2780.9160305343512" y="672.53521126760563"/>
+            <point key="canvasLocation" x="2782" y="673"/>
         </scene>
         <!--Asset Selection View Controller-->
         <scene sceneID="T3L-cB-FhF">
@@ -1832,37 +1836,37 @@
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="placeholderTextColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.29803921570000003" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29803921568627451" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="secondarySystemBackgroundColor">
-            <color red="0.94901960780000005" green="0.94901960780000005" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemBlueColor">
-            <color red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray3Color">
-            <color red="0.78039215689999997" green="0.78039215689999997" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.7803921568627451" green="0.7803921568627451" blue="0.80000000000000004" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray4Color">
-            <color red="0.81960784310000001" green="0.81960784310000001" blue="0.83921568629999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGray5Color">
-            <color red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGrayColor">
-            <color red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.55686274509803924" green="0.55686274509803924" blue="0.57647058823529407" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemGreenColor">
-            <color red="0.20392156859999999" green="0.78039215689999997" blue="0.34901960780000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
