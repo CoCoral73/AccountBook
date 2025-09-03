@@ -13,9 +13,9 @@ class AddAssetItemViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var balanceTextField: UITextField!
-    @IBOutlet weak var selectAccountButton: UIButton!
-    @IBOutlet weak var selectWithdrawalDateButton: UIButton!
-    @IBOutlet weak var selectStartDateButton: UIButton!
+    @IBOutlet weak var selectAccountButton: AutoDismissKeyboardButton!
+    @IBOutlet weak var selectWithdrawalDateButton: AutoDismissKeyboardButton!
+    @IBOutlet weak var selectStartDateButton: AutoDismissKeyboardButton!
     
     @IBOutlet weak var accountStackView: UIStackView!
     @IBOutlet weak var cardStackView: UIStackView!
@@ -39,6 +39,7 @@ class AddAssetItemViewController: UIViewController {
         configureSelectAccountButton()
         configureUI()
         configureTextField()
+        configureTapGesture()
     }
     
     func configureSegControl() {
@@ -78,6 +79,16 @@ class AddAssetItemViewController: UIViewController {
     func configureUI() {
         selectWithdrawalDateButton.setTitle(viewModel.selectWithdrawlDateButtonTitle, for: .normal)
         selectStartDateButton.setTitle(viewModel.selectStartDateButtonTitle, for: .normal)
+    }
+    
+    func configureTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @IBAction func selectDateButtonTapped(_ sender: UIButton) {
@@ -131,10 +142,6 @@ extension AddAssetItemViewController: UITextFieldDelegate {
         } else {
             view.endEditing(true)
         }
-    }
-    
-    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
     }
 }
 

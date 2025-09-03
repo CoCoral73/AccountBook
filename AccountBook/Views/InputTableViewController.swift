@@ -10,7 +10,7 @@ import UIKit
 class InputTableViewController: UITableViewController {
     
     @IBOutlet weak var amountTextField: UITextField!
-    @IBOutlet weak var assetSelectionButton: UIButton!
+    @IBOutlet weak var assetSelectionButton: AutoDismissKeyboardButton!
     @IBOutlet weak var nameTextField: UITextField!
     
     private enum Operator: Int {
@@ -130,8 +130,6 @@ class InputTableViewController: UITableViewController {
         else {
             fatalError("AssetSelectionViewController 생성 에러")
         }
-        
-        amountTextField.resignFirstResponder()
         
         assetSelectionVC.onAssetSelected = { [weak self] asset in
             guard let self = self else { return }

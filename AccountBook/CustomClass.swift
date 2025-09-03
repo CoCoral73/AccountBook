@@ -7,6 +7,17 @@
 
 import UIKit
 
+class AutoDismissKeyboardButton: UIButton {
+    
+    override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
+        // 액션보다 먼저 호출되는 트래킹 시작 지점에서 키보드 내림
+        self.window?.endEditing(true)
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
+        return super.beginTracking(touch, with: event)
+    }
+    
+}
+
 class IntrinsicCollectionView: UICollectionView {
     override var contentSize: CGSize {
         didSet {
