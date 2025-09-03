@@ -37,6 +37,8 @@ class DetailTransactionViewController: UIViewController {
 
         configurePopGesture()
         configureViewModel()
+        configureKeyboardAccessory()
+        nameTextField.delegate = self
     }
     
     private func configurePopGesture() {
@@ -70,6 +72,23 @@ class DetailTransactionViewController: UIViewController {
         //일시불 버튼 처리
         installmentLabel.isHidden = viewModel.assetType != .creditCard
         memoTextView.text = viewModel.memoString
+    }
+    
+    private func configureKeyboardAccessory() {
+        let toolbar = UIToolbar()
+        toolbar.sizeToFit()                      // 키보드 폭에 맞춰 높이 자동 조정
+        
+        let complete = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(handleComplete))
+        let flexible = UIBarButtonItem(systemItem: .flexibleSpace)
+        
+        toolbar.items = [flexible, complete]
+        
+        amountTextField.inputAccessoryView = toolbar
+        memoTextView.inputAccessoryView = toolbar
+    }
+    
+    @objc func handleComplete(_ sender: UIBarButtonItem) {
+        view.endEditing(true)
     }
     
     @IBAction func dateButtonTapped(_ sender: UIButton) {
