@@ -61,7 +61,7 @@ class DetailTransactionViewModel {
     }
     var installmentString: String {
         guard let period = transaction?.installment?.numberOfMonths else { return "일시불" }
-        return "\(period)개월"
+        return "\(period) 개월"
     }
     
     var memoString: String? {

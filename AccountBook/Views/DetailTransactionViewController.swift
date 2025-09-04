@@ -49,21 +49,30 @@ class DetailTransactionViewController: UIViewController {
     private func configureViewModel() {
         viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
-            dateButton.setTitle(viewModel.dateString, for: .normal)
+            DispatchQueue.main.async {
+                self.dateButton.setTitle(self.viewModel.dateString, for: .normal)
+            }
         }
         viewModel.onDidSetCategory = { [weak self] in
             guard let self = self else { return }
-            categoryButton.setTitle(viewModel.categoryString, for: .normal)
+            DispatchQueue.main.async {
+                self.categoryButton.setTitle(self.viewModel.categoryString, for: .normal)
+            }
         }
         viewModel.onDidSetAssetItem = { [weak self] in
             guard let self = self else { return }
-            assetItemButton.setTitle(viewModel.assetItemString, for: .normal)
-            assetTypeLabel.text = viewModel.assetTypeString
-            installmentLabel.isHidden = viewModel.assetType != .creditCard
+            DispatchQueue.main.async {
+                self.assetItemButton.setTitle(self.viewModel.assetItemString, for: .normal)
+                self.assetTypeLabel.text = self.viewModel.assetTypeString
+                self.installmentLabel.isHidden = self.viewModel.assetType != .creditCard
+                self.installmentButton.isHidden = self.viewModel.assetType != .creditCard
+            }
         }
         viewModel.onDidSetInstallment = { [weak self] in
             guard let self = self else { return }
-            installmentButton.setTitle(viewModel.installmentString, for: .normal)
+            DispatchQueue.main.async {
+                self.installmentButton.setTitle(self.viewModel.installmentString, for: .normal)
+            }
         }
         
         dateButton.setTitle(viewModel.dateString, for: .normal)
@@ -83,7 +92,7 @@ class DetailTransactionViewController: UIViewController {
         let toolbar = UIToolbar()
         toolbar.sizeToFit()                      // 키보드 폭에 맞춰 높이 자동 조정
         
-        let complete = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(handleComplete))
+        let complete = UIBarButtonItem(title: "완료", style: .plain, target: self, action: #selector(dismissKeyboard))
         let flexible = UIBarButtonItem(systemItem: .flexibleSpace)
         
         toolbar.items = [flexible, complete]
@@ -92,7 +101,7 @@ class DetailTransactionViewController: UIViewController {
         memoTextView.inputAccessoryView = toolbar
     }
     
-    @objc func handleComplete(_ sender: UIBarButtonItem) {
+    @objc func dismissKeyboard(_ sender: UIBarButtonItem) {
         view.endEditing(true)
     }
     
@@ -142,9 +151,11 @@ class DetailTransactionViewController: UIViewController {
 extension DetailTransactionViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
+        return true
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         view.endEditing(true)
+        super.touchesBegan(touches, with: event)
     }
 }
