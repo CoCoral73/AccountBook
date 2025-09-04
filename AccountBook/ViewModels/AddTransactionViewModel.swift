@@ -24,7 +24,7 @@ class AddTransactionViewModel {
     var onDidSetTransactionDate: (() -> Void)?
     
     //Add View에서 내역 추가 동작을 했을 때, Calendar View에서 해야할 일
-    var onDidAddTransaction: ((NewTransactionInfo) -> Void)?
+    var onDidAddTransaction: ((TransactionDelta) -> Void)?
     
     init(date: Date, isIncome: Bool) {
         self.transactionDate = date
@@ -51,7 +51,7 @@ class AddTransactionViewModel {
         let nameInput = inputVC?.nameTextField.text ?? ""
         
         TransactionManager.shared.addTransaction(amount: amountInput, date: transactionDate, isIncome: isIncome, name: nameInput, memo: "", category: category, asset: asset)
-        onDidAddTransaction?(NewTransactionInfo(date: transactionDate, isIncome: isIncome, amount: amountInput))
+        onDidAddTransaction?(TransactionDelta(date: transactionDate, isIncome: isIncome, amount: amountInput, reason: .inserted))
     }
     
     func handleDateButton(storyboard: UIStoryboard?, fromVC: UIViewController) {

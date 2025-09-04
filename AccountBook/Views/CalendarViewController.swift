@@ -171,7 +171,6 @@ extension CalendarViewController {
             self?.selectDateIfNeeded()
         }
         configureTotals()
-        detailTableView.reloadData()
     }
     
     func applySnapshot() {

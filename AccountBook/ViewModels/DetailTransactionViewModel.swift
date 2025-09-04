@@ -11,11 +11,15 @@ class DetailTransactionViewModel {
     
     private(set) var transaction: Transaction?
     
+    //DetailTransactionViewControlelr
     var onDidSetTransactionDate: (() -> Void)?
     var onDidSetCategory: (() -> Void)?
     var onDidSetAssetItem: (() -> Void)?
     var onDidSetInstallment: (() -> Void)?
-    var onDidUpdateOrRemoveTransaction: ((NewTransactionInfo) -> Void)?
+    
+    //CalendarViewModel
+    var onDidUpdateOldDateTransaction: ((TransactionDelta) -> Void)?
+    var onDidUpdateOrRemoveTransaction: ((TransactionDelta) -> Void)?
     
     init(transaction: Transaction) {
         self.transaction = transaction
@@ -76,10 +80,20 @@ class DetailTransactionViewModel {
         guard let transaction = transaction else { return }
         
         let vm = DatePickerViewModel(initialDate: transaction.date)
-        vm.onDatePickerChanged = { [weak self] date in
+        vm.onDatePickerChanged = { [weak self] newDate in
             guard let self = self else { return }
-            transaction.date = date
-            onDidSetTransactionDate?()
+            let oldDate = transaction.date
+            let old = TransactionDelta(date: oldDate, isIncome: transaction.isIncome, amount: -transaction.amount, reason: .moveSource)
+            let new = TransactionDelta(date: newDate, isIncome: transaction.isIncome, amount: transaction.amount, reason: .moveDestination)
+            
+            transaction.date = newDate
+            onDidSetTransactionDate?()  //DetailTransactionViewController (타이틀 변경용)
+            
+            //월이 다르면 oldDate에 대해 UI 업데이트 안해줘도 됨. 어차피 변경 후 달력 포커스는 newDate로 감.
+            if Calendar.current.isDate(oldDate, equalTo: newDate, toGranularity: .month) {
+                onDidUpdateOldDateTransaction?(old)
+            }
+            onDidUpdateOrRemoveTransaction?(new)
         }
         
         guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
@@ -176,11 +190,11 @@ class DetailTransactionViewModel {
         let success = UIAlertAction(title: "확인", style: .destructive) { [weak self] action in
             guard let self = self else { return }
             
-            let info = NewTransactionInfo(date: transaction.date, isIncome: transaction.isIncome, amount: -transaction.amount)
+            let delta = TransactionDelta(date: transaction.date, isIncome: transaction.isIncome, amount: -transaction.amount, reason: .deleted)
             TransactionManager.shared.deleteTransaction(transaction)
             self.transaction = nil
             
-            onDidUpdateOrRemoveTransaction?(info)
+            onDidUpdateOrRemoveTransaction?(delta)
             fromVC.navigationController?.popViewController(animated: true)
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -207,7 +221,7 @@ class DetailTransactionViewModel {
         
         CoreDataManager.shared.saveContext()
         
-        let info = NewTransactionInfo(date: transaction.date, isIncome: transaction.isIncome, amount: newAmount - oldAmount)
-        onDidUpdateOrRemoveTransaction?(info)
+        let delta = TransactionDelta(date: transaction.date, isIncome: transaction.isIncome, amount: newAmount - oldAmount, reason: .mutateSameDay)
+        onDidUpdateOrRemoveTransaction?(delta)
     }
 }

@@ -99,7 +99,7 @@ class CalendarViewModel {
         return itemIDsByDate[selectedDate]
     }
     
-    func updateDayItem(for id: UUID, with transaction: NewTransactionInfo) {
+    func updateDayItem(for id: UUID, with transaction: TransactionDelta) {
         guard var item = dayItemsByUUID[id] else { return }
 
         item.income += transaction.isIncome ? transaction.amount : 0
@@ -129,15 +129,40 @@ class CalendarViewModel {
     
     func handleDidSelectRowAt(viewModel: DetailTransactionViewModel, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
         
-        viewModel.onDidUpdateOrRemoveTransaction = { [weak self] info in
-            guard let self = self, let id = self.itemIDsByDate[info.date] else {
+        viewModel.onDidUpdateOldDateTransaction = { [weak self] delta in
+            guard let self = self, let id = self.itemIDsByDate[delta.date] else {
                 print("transaction.date로 UUID 찾기 실패(nil)")
                 return
             }
             
-            loadTransactions(with: info.date)
-            updateDayItem(for: id, with: info)
+            loadTransactions(with: delta.date)
+            updateDayItem(for: id, with: delta)
             fromVC.reloadDayItem(id)
+        }
+        
+        viewModel.onDidUpdateOrRemoveTransaction = { [weak self] delta in
+            guard let self = self else { return }
+            
+            let monthChanged = !self.isCurrentMonth(with: delta.date)
+            if monthChanged {   //거래 추가 뷰 내에서 날짜를 바꿨을 때
+                self.currentMonth = delta.date
+            }
+            
+            guard let id = self.itemIDsByDate[delta.date] else {
+                print("transaction.date로 UUID 찾기 실패(nil)")
+                return
+            }
+            
+            _ = self.setSelectedDate(with: id)
+            
+            if !monthChanged {
+                loadTransactions(with: delta.date)
+                updateDayItem(for: id, with: delta)
+            }
+            DispatchQueue.main.async {
+                fromVC.reloadDayItem(id)
+                fromVC.detailTableView.reloadData()
+            }
         }
         
         guard let detailVC = storyboard?.instantiateViewController(identifier: "DetailTransactionViewController", creator: { coder in
@@ -149,7 +174,7 @@ class CalendarViewModel {
         fromVC.navigationController?.pushViewController(detailVC, animated: true)
     }
     
-    func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: UIViewController) {
+    func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
         guard let addVC = storyboard?.instantiateViewController(identifier: "AddViewController", creator: { coder in
             AddTransactionViewController(coder: coder, viewModel: AddTransactionViewModel(date: self.selectedDate, isIncome: type == "수입")) })
         else {
@@ -174,7 +199,10 @@ class CalendarViewModel {
                 self.loadTransactions(with: transaction.date)
                 updateDayItem(for: id, with: transaction)
             }
-            (fromVC as! CalendarViewController).reloadDayItem(id)
+            DispatchQueue.main.async {
+                fromVC.reloadDayItem(id)
+                fromVC.detailTableView.reloadData()
+            }
         }
         addVC.modalPresentationStyle = .fullScreen
         fromVC.present(addVC, animated: true)

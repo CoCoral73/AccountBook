@@ -7,10 +7,12 @@
 
 import Foundation
 
-struct NewTransactionInfo {
+struct TransactionDelta {
+    enum Reason { case mutateSameDay, moveSource, moveDestination, inserted, deleted }
     let date: Date
     let isIncome: Bool
     let amount: Int64
+    let reason: Reason
 }
 
 class TransactionManager {
