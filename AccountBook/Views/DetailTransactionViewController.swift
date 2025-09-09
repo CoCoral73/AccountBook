@@ -106,6 +106,12 @@ class DetailTransactionViewController: UIViewController {
     }
     
     @IBAction func dateButtonTapped(_ sender: UIButton) {
+        if !viewModel.canEdit {
+            sender.generateFeedback()
+            sender.shake()
+            return
+        }
+        
         viewModel.handleDateButton(storyboard: storyboard, fromVC: self)
     }
     
@@ -114,10 +120,22 @@ class DetailTransactionViewController: UIViewController {
     }
     
     @IBAction func assetItemButtonTapped(_ sender: UIButton) {
+        if !viewModel.canEdit {
+            sender.generateFeedback()
+            sender.shake()
+            return
+        }
+        
         viewModel.handleAssetItemButton(storyboard: storyboard, fromVC: self)
     }
     
     @IBAction func installmentButtonTapped(_ sender: UIButton) {
+        if !viewModel.canEdit {
+            sender.generateFeedback()
+            sender.shake()
+            return
+        }
+        
         viewModel.handleInstallmentButton(storyboard: storyboard, fromVC: self)
     }
     

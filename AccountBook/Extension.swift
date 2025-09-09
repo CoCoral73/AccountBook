@@ -31,4 +31,10 @@ extension UIView {
         animation.values = [-10.0, 10.0, -7.5, 7.5, -5.0, 5.0, -2.5, 2.5, 0.0]
         layer.add(animation, forKey: "shake")
     }
+    
+    func generateFeedback() {
+        let generator = UINotificationFeedbackGenerator()
+        generator.prepare()
+        generator.notificationOccurred(.error)
+    }
 }

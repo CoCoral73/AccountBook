@@ -18,6 +18,14 @@ class AutoDismissKeyboardButton: UIButton {
     
 }
 
+class AutoUpdateColorButton: UIButton {
+    override var isEnabled: Bool {
+        didSet {
+            backgroundColor = isEnabled ? #colorLiteral(red: 1, green: 0.5680983663, blue: 0.6200271249, alpha: 1) : .lightGray
+        }
+    }
+}
+
 class IntrinsicCollectionView: UICollectionView {
     override var contentSize: CGSize {
         didSet {

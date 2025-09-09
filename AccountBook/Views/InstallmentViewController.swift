@@ -10,6 +10,7 @@ import UIKit
 class InstallmentViewController: UIViewController {
 
     @IBOutlet weak var textField: UITextField!
+    @IBOutlet weak var saveButton: AutoUpdateColorButton!
     
     var oldPeriod: Int16?
     var onDidEnterInstallment: ((Int16) -> Void)?
@@ -17,24 +18,44 @@ class InstallmentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        textField.delegate = self
         if let oldPeriod = oldPeriod {
             textField.text = "\(oldPeriod)"
         } else {
             textField.text = ""
         }
-        textField.becomeFirstResponder()
+        
+        textField.delegate = self
+        textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
     }
-
+    
+    @objc func textDidChange(_ textField: UITextField) {
+        let period = Int16(textField.text ?? "0") ?? 0
+        if period > 1 {
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
+    }
+    
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func saveButtonTapped(_ sender: UIButton) {
+        let period = Int16(textField.text ?? "0") ?? 0
+        onDidEnterInstallment?(period)
+        UIImpactFeedbackGenerator(style: .light).impactOccurred()
         navigationController?.popViewController(animated: true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        
-        let period = Int16(textField.text ?? "0") ?? 0
-        onDidEnterInstallment?(period)
+        view.endEditing(true)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        textField.becomeFirstResponder()
+        super.viewDidAppear(animated)
     }
     
 }

@@ -63,6 +63,9 @@ class DetailTransactionViewModel {
         guard let assetType = assetType else { return "" }
         return transaction!.isIncome ? "**입금**" : "**\(assetType.displayName) 결제**"
     }
+    var canEdit: Bool {
+        return transaction?.installment == nil 
+    }
     var installmentString: String {
         guard let period = transaction?.installment?.numberOfMonths else { return "일시불" }
         return "\(period) 개월"
@@ -167,16 +170,9 @@ class DetailTransactionViewModel {
         }
         
         installmentVC.onDidEnterInstallment = { [weak self] period in
-            guard let self = self else { return }
-            
-            if period <= 1 {
-                InstallmentManager.shared.deleteInstallment(transaction)
-            } else if let installment = transaction.installment {
-                InstallmentManager.shared.updateInstallment(with: installment, period: period)
-            } else {
-                InstallmentManager.shared.addInstallment(transaction, period: period)
-            }
-            
+            guard let self = self, period > 1 else { return }
+
+            InstallmentManager.shared.addInstallment(transaction, period: period)
             onDidSetInstallment?()
         }
         fromVC.navigationController?.pushViewController(installmentVC, animated: true)
