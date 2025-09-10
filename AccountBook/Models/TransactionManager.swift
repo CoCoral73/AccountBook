@@ -15,23 +15,47 @@ struct TransactionDelta {
     let reason: Reason
 }
 
+struct TransactionInput {
+    let amount: Int64
+    let date: Date
+    let isIncome: Bool
+    let name, memo: String
+    let category: Category
+    let asset: AssetItem
+}
+
 class TransactionManager {
     static let shared = TransactionManager()
     private init() {}
     
-    func addTransaction(amount: Int64, date: Date, isIncome: Bool, name: String, memo: String, category: Category, asset: AssetItem){
+    @discardableResult
+    func addTransaction(with input: TransactionInput, shouldSave: Bool) -> Transaction {
         
         let transaction = Transaction(context: CoreDataManager.shared.context)
-        transaction.amount = amount
-        transaction.date = date
+        transaction.amount = input.amount
+        transaction.date = input.date
         transaction.id = UUID()
-        transaction.isIncome = isIncome
-        transaction.name = name
-        transaction.memo = memo
-        transaction.category = category
-        transaction.asset = asset
+        transaction.isIncome = input.isIncome
+        transaction.name = input.name
+        transaction.memo = input.memo
+        transaction.category = input.category
+        transaction.asset = input.asset
         
-        CoreDataManager.shared.saveContext()
+        if shouldSave {
+            CoreDataManager.shared.saveContext()
+        }
+        
+        return transaction
+    }
+    
+    //할부 거래 생성용
+    func duplicateTransaction(_ tx: Transaction, count: Int16) -> [Transaction] {
+        var txs = [tx]
+        for i in 1..<Int(count) {
+            let input = TransactionInput(amount: tx.amount, date: Calendar.current.date(byAdding: .month, value: i, to: tx.date)!, isIncome: tx.isIncome, name: tx.name, memo: tx.memo, category: tx.category, asset: tx.asset)
+            txs.append(addTransaction(with: input, shouldSave: false))
+        }
+        return txs
     }
 
     func deleteTransaction(_ transaction: Transaction) {

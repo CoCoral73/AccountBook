@@ -12,17 +12,10 @@ class InstallmentViewController: UIViewController {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var saveButton: AutoUpdateColorButton!
     
-    var oldPeriod: Int16?
     var onDidEnterInstallment: ((Int16) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        if let oldPeriod = oldPeriod {
-            textField.text = "\(oldPeriod)"
-        } else {
-            textField.text = ""
-        }
         
         textField.delegate = self
         textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)

@@ -885,13 +885,33 @@
                                             <constraint firstAttribute="trailing" secondItem="QfT-uY-hjr" secondAttribute="trailing" constant="12" id="xPJ-B6-vIa"/>
                                         </constraints>
                                     </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="x5n-UV-pc2">
+                                        <rect key="frame" x="303" y="629" width="50" height="50"/>
+                                        <color key="backgroundColor" red="1" green="0.83764147150000001" blue="0.83072753340000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="50" id="HQD-6R-Afp"/>
+                                            <constraint firstAttribute="width" constant="50" id="etQ-IR-4lV"/>
+                                        </constraints>
+                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                        <state key="normal" title="Button"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                <integer key="value" value="25"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="removeInstallmentButtonTapped:" destination="oU4-9V-oZi" eventType="touchUpInside" id="bcy-yD-68c"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ZrH-Yn-V1x" secondAttribute="bottom" constant="150" id="44c-mN-vgY"/>
                                     <constraint firstAttribute="trailing" secondItem="ZrH-Yn-V1x" secondAttribute="trailing" constant="32" id="4ZH-gZ-DFP"/>
                                     <constraint firstItem="ZrH-Yn-V1x" firstAttribute="leading" secondItem="dVb-Pm-lLl" secondAttribute="leading" constant="32" id="PhX-Zi-lEP"/>
+                                    <constraint firstAttribute="trailing" secondItem="x5n-UV-pc2" secondAttribute="trailing" constant="40" id="WkS-TL-faF"/>
                                     <constraint firstItem="ZrH-Yn-V1x" firstAttribute="top" secondItem="dVb-Pm-lLl" secondAttribute="top" constant="32" id="g3M-Tt-ifm"/>
+                                    <constraint firstItem="x5n-UV-pc2" firstAttribute="top" secondItem="ZrH-Yn-V1x" secondAttribute="bottom" constant="30" id="pbv-M8-oXK"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -930,6 +950,7 @@
                         <outlet property="memoTextView" destination="ITT-dc-c8H" id="ZWT-U8-PIv"/>
                         <outlet property="nameTextField" destination="Da1-Jo-gAY" id="fok-HX-zvm"/>
                         <outlet property="paperView" destination="ZrH-Yn-V1x" id="Vr9-oO-thY"/>
+                        <outlet property="removeInstallmentButton" destination="x5n-UV-pc2" id="BVI-QD-5pc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2y-S9-7pS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -959,8 +980,8 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="60" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jU3-b1-hmN">
-                                        <rect key="frame" x="274" y="16" width="29" height="28"/>
+                                    <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="right" adjustsFontSizeToFit="NO" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jU3-b1-hmN">
+                                        <rect key="frame" x="298" y="16" width="5" height="28"/>
                                         <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
                                     </textField>

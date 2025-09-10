@@ -50,7 +50,8 @@ class AddTransactionViewModel {
         let amountInput = Int64((inputVC?.amountTextField.text ?? "").replacingOccurrences(of: ",", with: "")) ?? 0
         let nameInput = inputVC?.nameTextField.text ?? ""
         
-        TransactionManager.shared.addTransaction(amount: amountInput, date: transactionDate, isIncome: isIncome, name: nameInput, memo: "", category: category, asset: asset)
+        let input = TransactionInput(amount: amountInput, date: transactionDate, isIncome: isIncome, name: nameInput, memo: "", category: category, asset: asset)
+        TransactionManager.shared.addTransaction(with: input, shouldSave: true)
         onDidAddTransaction?(TransactionDelta(date: transactionDate, isIncome: isIncome, amount: amountInput, reason: .inserted))
     }
     

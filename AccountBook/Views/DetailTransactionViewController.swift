@@ -20,6 +20,7 @@ class DetailTransactionViewController: UIViewController {
     @IBOutlet weak var installmentLabel: UILabel!
     @IBOutlet weak var installmentButton: UIButton!
     @IBOutlet weak var memoTextView: UITextView!
+    @IBOutlet weak var removeInstallmentButton: UIButton!
     
     var viewModel: DetailTransactionViewModel
     
@@ -37,6 +38,7 @@ class DetailTransactionViewController: UIViewController {
 
         configurePopGesture()
         configureViewModel()
+        configureUIByViewModel()
         configureKeyboardAccessory()
         nameTextField.delegate = self
     }
@@ -71,10 +73,12 @@ class DetailTransactionViewController: UIViewController {
         viewModel.onDidSetInstallment = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.installmentButton.setTitle(self.viewModel.installmentString, for: .normal)
+                self.configureUIByViewModel()
             }
         }
-        
+    }
+    
+    private func configureUIByViewModel() {
         dateButton.setTitle(viewModel.dateString, for: .normal)
         isIncomeLabel.text = viewModel.isIncomeString
         nameTextField.text = viewModel.nameString
@@ -86,6 +90,7 @@ class DetailTransactionViewController: UIViewController {
         installmentButton.isHidden = viewModel.assetType != .creditCard
         installmentButton.setTitle(viewModel.installmentString, for: .normal)
         memoTextView.text = viewModel.memoString
+        removeInstallmentButton.isHidden = viewModel.canEdit
     }
     
     private func configureKeyboardAccessory() {
@@ -137,6 +142,11 @@ class DetailTransactionViewController: UIViewController {
         }
         
         viewModel.handleInstallmentButton(storyboard: storyboard, fromVC: self)
+    }
+    
+    @IBAction func removeInstallmentButtonTapped(_ sender: UIButton) {
+        sender.generateFeedback(.success)
+        viewModel.handleRemoveInstallmentButton(fromVC: self)
     }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
