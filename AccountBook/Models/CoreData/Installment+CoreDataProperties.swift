@@ -17,12 +17,12 @@ extension Installment {
     }
 
     @NSManaged public var id: UUID
-    @NSManaged public var totalAmount: Int64
     @NSManaged public var numberOfMonths: Int16
     @NSManaged public var transactions: NSSet
 
-    var monthlyAmount: Int64 {
-        return totalAmount / Int64(numberOfMonths)
+    var totalAmount: Int64 {
+        let transactions = transactions as? Set<Transaction> ?? []
+        return transactions.reduce(0) { $0 + $1.amount }
     }
 }
 
