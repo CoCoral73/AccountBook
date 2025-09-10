@@ -63,7 +63,7 @@ class CalendarViewModel {
     }
     
     var numberOfRowsInSection: Int {
-        guard let count = transactions[selectedDay]?.count else { return 0 }
+        guard isCurrentMonth(with: selectedDate) ,let count = transactions[selectedDay]?.count else { return 0 }
         return count
     }
     
