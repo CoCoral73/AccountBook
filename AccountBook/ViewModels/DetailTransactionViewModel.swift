@@ -200,7 +200,8 @@ class DetailTransactionViewModel {
     func handleRemoveButton(_ fromVC: UIViewController) {
         guard let transaction = transaction else { return }
         
-        let alert = UIAlertController(title: "삭제", message: "거래내역을 삭제하시겠습니까?", preferredStyle: .actionSheet)
+        let deleteType = transaction.installment != nil ? DeleteType.installment : DeleteType.general
+        let alert = UIAlertController(title: "삭제", message: deleteType.alertMessage, preferredStyle: .actionSheet)
 
         let success = UIAlertAction(title: "확인", style: .destructive) { [weak self] action in
             guard let self = self else { return }

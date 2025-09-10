@@ -7,6 +7,7 @@
 
 import Foundation
 
+//달력 동기화용
 struct TransactionDelta {
     enum Reason { case mutateSameDay, moveSource, moveDestination, inserted, deleted }
     let date: Date
@@ -15,6 +16,7 @@ struct TransactionDelta {
     let reason: Reason
 }
 
+//코어데이터 객체 생성용
 struct TransactionInput {
     let amount: Int64
     let date: Date
@@ -22,6 +24,20 @@ struct TransactionInput {
     let name, memo: String
     let category: Category
     let asset: AssetItem
+}
+
+enum DeleteType {
+    case general
+    case installment
+    
+    var alertMessage: String {
+        switch self {
+        case .general:
+            return "거래내역을 삭제하시겠습니까?"
+        case .installment:
+            return "할부내역 전체가 삭제됩니다. 삭제하시겠습니까?"
+        }
+    }
 }
 
 class TransactionManager {
@@ -59,7 +75,10 @@ class TransactionManager {
     }
 
     func deleteTransaction(_ transaction: Transaction) {
-        CoreDataManager.shared.context.delete(transaction)
+        // 할부 거래 중 일부를 삭제하려고 하면 → 전체 할부 삭제
+        for tx in transaction.installment?.transactions.array as? [Transaction] ?? [transaction] {
+            CoreDataManager.shared.context.delete(tx)
+        }
         CoreDataManager.shared.saveContext()
     }
 }
