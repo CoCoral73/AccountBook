@@ -173,6 +173,13 @@ class DetailTransactionViewController: UIViewController {
         paperView.layer.shadowOpacity = 0.2
         paperView.layer.shadowOffset  = CGSize(width: 0, height: 1)
         paperView.layer.shadowRadius  = 6
+        
+        let path = UIBezierPath(roundedRect: removeInstallmentButton.bounds, cornerRadius: removeInstallmentButton.bounds.width / 2)
+        removeInstallmentButton.layer.shadowPath = path.cgPath
+        removeInstallmentButton.layer.shadowColor   = UIColor.black.cgColor
+        removeInstallmentButton.layer.shadowOpacity = 0.2
+        removeInstallmentButton.layer.shadowOffset  = CGSize(width: 0, height: 2)
+        removeInstallmentButton.layer.shadowRadius  = 6
     }
 }
 
