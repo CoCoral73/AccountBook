@@ -29,19 +29,21 @@
         <relationship name="linkedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BankAccountItem" inverseName="linkedDebitCards" inverseEntity="BankAccountItem"/>
     </entity>
     <entity name="Installment" representedClassName="Installment" syncable="YES">
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="numberOfMonths" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="totalAmount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
-        <relationship name="transaction" maxCount="1" deletionRule="Nullify" destinationEntity="Transaction" inverseName="installment" inverseEntity="Transaction"/>
+        <relationship name="transactions" toMany="YES" deletionRule="Nullify" destinationEntity="Transaction" inverseName="installment" inverseEntity="Transaction"/>
     </entity>
     <entity name="Transaction" representedClassName="Transaction" syncable="YES">
         <attribute name="amount" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="installmentIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="isIncome" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="memo" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
         <relationship name="asset" maxCount="1" deletionRule="Nullify" destinationEntity="AssetItem" inverseName="transactions" inverseEntity="AssetItem"/>
         <relationship name="category" maxCount="1" deletionRule="Nullify" destinationEntity="Category" inverseName="transactions" inverseEntity="Category"/>
-        <relationship name="installment" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Installment" inverseName="transaction" inverseEntity="Installment"/>
+        <relationship name="installment" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="Installment" inverseName="transactions" inverseEntity="Installment"/>
     </entity>
 </model>

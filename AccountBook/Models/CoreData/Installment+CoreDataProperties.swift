@@ -16,9 +16,10 @@ extension Installment {
         return NSFetchRequest<Installment>(entityName: "Installment")
     }
 
+    @NSManaged public var id: UUID
     @NSManaged public var totalAmount: Int64
     @NSManaged public var numberOfMonths: Int16
-    @NSManaged public var transaction: Transaction
+    @NSManaged public var transactions: NSSet
 
     var monthlyAmount: Int64 {
         return totalAmount / Int64(numberOfMonths)

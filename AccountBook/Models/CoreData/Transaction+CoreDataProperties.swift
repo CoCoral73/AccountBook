@@ -25,7 +25,12 @@ extension Transaction {
     @NSManaged public var asset: AssetItem
     @NSManaged public var category: Category
     @NSManaged public var installment: Installment?
-
+    @NSManaged public var installmentIndex: NSNumber?
+    
+    var installmentIndexValue: Int16?
+    {
+        get { installmentIndex?.int16Value }
+    }
 }
 
 extension Transaction : Identifiable {
