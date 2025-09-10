@@ -32,9 +32,9 @@ extension UIView {
         layer.add(animation, forKey: "shake")
     }
     
-    func generateFeedback() {
+    func generateFeedback(_ type: UINotificationFeedbackGenerator.FeedbackType) {
         let generator = UINotificationFeedbackGenerator()
         generator.prepare()
-        generator.notificationOccurred(.error)
+        generator.notificationOccurred(type)
     }
 }

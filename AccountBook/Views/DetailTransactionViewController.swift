@@ -107,7 +107,7 @@ class DetailTransactionViewController: UIViewController {
     
     @IBAction func dateButtonTapped(_ sender: UIButton) {
         if !viewModel.canEdit {
-            sender.generateFeedback()
+            sender.generateFeedback(.error)
             sender.shake()
             return
         }
@@ -121,7 +121,7 @@ class DetailTransactionViewController: UIViewController {
     
     @IBAction func assetItemButtonTapped(_ sender: UIButton) {
         if !viewModel.canEdit {
-            sender.generateFeedback()
+            sender.generateFeedback(.error)
             sender.shake()
             return
         }
@@ -131,7 +131,7 @@ class DetailTransactionViewController: UIViewController {
     
     @IBAction func installmentButtonTapped(_ sender: UIButton) {
         if !viewModel.canEdit {
-            sender.generateFeedback()
+            sender.generateFeedback(.error)
             sender.shake()
             return
         }
