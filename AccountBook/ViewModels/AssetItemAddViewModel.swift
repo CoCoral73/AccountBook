@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AddAssetItemViewModel {
+class AssetItemAddViewModel {
     
     private var type: AssetType
     private var name: String = ""

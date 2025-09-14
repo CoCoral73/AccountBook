@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddTransactionViewModel {
+class TransactionAddViewModel {
     
     private var transactionDate: Date {
         didSet {
@@ -15,7 +15,7 @@ class AddTransactionViewModel {
         }
     }
     
-    var inputVC: InputTableViewController?
+    var inputVC: TransactionAddTableViewController?
     private var assetItemInput: AssetItem?
     
     private(set) var isIncome: Bool
@@ -74,7 +74,7 @@ class AddTransactionViewModel {
         fromVC.present(dateVC, animated: true)
     }
     
-    func handleCategoryView(storyboard: UIStoryboard?, fromVC: AddTransactionViewController) {
+    func handleCategoryView(storyboard: UIStoryboard?, fromVC: TransactionAddViewController) {
         let isIncome = isIncome
         guard let childVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
             CategoryViewController(coder: coder, isIncome: isIncome)

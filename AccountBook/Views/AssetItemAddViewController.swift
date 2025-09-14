@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AddAssetItemViewController: UIViewController {
+class AssetItemAddViewController: UIViewController {
 
     @IBOutlet weak var segControl: UISegmentedControl!
     
@@ -21,9 +21,9 @@ class AddAssetItemViewController: UIViewController {
     @IBOutlet weak var cardStackView: UIStackView!
     @IBOutlet weak var creditCardStackView: UIStackView!
     
-    var viewModel: AddAssetItemViewModel
+    var viewModel: AssetItemAddViewModel
     
-    required init?(coder: NSCoder, viewModel: AddAssetItemViewModel) {
+    required init?(coder: NSCoder, viewModel: AssetItemAddViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -129,7 +129,7 @@ class AddAssetItemViewController: UIViewController {
     
 }
 
-extension AddAssetItemViewController: UITextFieldDelegate {
+extension AssetItemAddViewController: UITextFieldDelegate {
     
     func configureTextField() {
         nameTextField.delegate = self
@@ -146,7 +146,7 @@ extension AddAssetItemViewController: UITextFieldDelegate {
 }
 
 //MARK: Month Picker View, Custom Height
-extension AddAssetItemViewController: UIViewControllerTransitioningDelegate {
+extension AssetItemAddViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return DayPickerPresentationController(presentedViewController: presented, presenting: presentingViewController)
     }

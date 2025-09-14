@@ -7,7 +7,7 @@
 
 import Foundation
 
-class AssetViewModel {
+class AssetItemCellViewModel {
     
     private(set) var assetItem: AssetItem
     

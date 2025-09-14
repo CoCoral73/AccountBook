@@ -156,7 +156,7 @@ extension CalendarViewController {
                 return UICollectionViewCell()
             }
             
-            cell.viewModel = DayViewModel(dayItem: item, isCurrentMonth: viewModel.isCurrentMonth(with: item.date))
+            cell.viewModel = CalendarCellViewModel(dayItem: item, isCurrentMonth: viewModel.isCurrentMonth(with: item.date))
             return cell
         })
     }
@@ -273,7 +273,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? DetailTableViewCell else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? TransactionDetailTableViewCell else {
             print("CalendarViewController: 테이블 뷰 셀 불러오기 실패")
             return
         }
@@ -287,9 +287,9 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = detailTableView.dequeueReusableCell(withIdentifier: Cell.detailCell, for: indexPath) as! DetailTableViewCell
+        let cell = detailTableView.dequeueReusableCell(withIdentifier: Cell.detailCell, for: indexPath) as! TransactionDetailTableViewCell
         
-        cell.viewModel = DetailTransactionViewModel(transaction: viewModel.cellForRowAt[indexPath.row])
+        cell.viewModel = TransactionDetailViewModel(transaction: viewModel.cellForRowAt[indexPath.row])
         
         return cell
     }

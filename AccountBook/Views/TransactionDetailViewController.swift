@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailTransactionViewController: UIViewController {
+class TransactionDetailViewController: UIViewController {
     
     @IBOutlet weak var paperView: UIView!
     @IBOutlet weak var dateButton: UIButton!
@@ -22,9 +22,9 @@ class DetailTransactionViewController: UIViewController {
     @IBOutlet weak var memoTextView: UITextView!
     @IBOutlet weak var removeInstallmentButton: UIButton!
     
-    var viewModel: DetailTransactionViewModel
+    var viewModel: TransactionDetailViewModel
     
-    required init?(coder: NSCoder, viewModel: DetailTransactionViewModel) {
+    required init?(coder: NSCoder, viewModel: TransactionDetailViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -183,7 +183,7 @@ class DetailTransactionViewController: UIViewController {
     }
 }
 
-extension DetailTransactionViewController: UITextFieldDelegate {
+extension TransactionDetailViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class InputTableViewController: UITableViewController {
+class TransactionAddTableViewController: UITableViewController {
     
     @IBOutlet weak var amountTextField: UITextField!
     @IBOutlet weak var assetSelectionButton: AutoDismissKeyboardButton!
@@ -30,7 +30,7 @@ class InputTableViewController: UITableViewController {
         return fmt
     }()
     
-    var viewModel: AddTransactionViewModel!
+    var viewModel: TransactionAddViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -153,7 +153,7 @@ class InputTableViewController: UITableViewController {
     }
 }
 
-extension InputTableViewController: UITextFieldDelegate {
+extension TransactionAddTableViewController: UITextFieldDelegate {
 
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)

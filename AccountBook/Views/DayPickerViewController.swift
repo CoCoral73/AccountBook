@@ -49,7 +49,7 @@ extension DayPickerViewController: UICollectionViewDelegateFlowLayout, UICollect
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.dayCell, for: indexPath) as! DayCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell.dayCell, for: indexPath) as! DayPickerCollectionViewCell
         cell.dayLabel.text = "\(indexPath.item + 1)"
         return cell
     }

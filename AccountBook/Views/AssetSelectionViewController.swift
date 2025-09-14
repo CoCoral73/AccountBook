@@ -56,20 +56,20 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? AssetTableViewCell else { return }
+        guard let cell = tableView.cellForRow(at: indexPath) as? AssetItemTableViewCell else { return }
         
         if let vm = cell.viewModel {
             onAssetSelected?(vm.assetItem)
             dismiss(animated: true)
         } else {    //자산 추가 뷰로 이동
-            let vm = AddAssetItemViewModel(type: AssetType(rawValue: selectedButton)!)
+            let vm = AssetItemAddViewModel(type: AssetType(rawValue: selectedButton)!)
             vm.onDidAddAssetItem = { [weak self] in
                 guard let self = self else { return }
                 
                 self.tableView.reloadData()
             }
             
-            guard let addAssetVC = storyboard?.instantiateViewController(identifier: "AddAssetItemViewController", creator: { coder in AddAssetItemViewController(coder: coder, viewModel: vm) })
+            guard let addAssetVC = storyboard?.instantiateViewController(identifier: "AddAssetItemViewController", creator: { coder in AssetItemAddViewController(coder: coder, viewModel: vm) })
             else {
                 fatalError("AddAssetItemViewController 생성 에러")
             }
@@ -85,13 +85,13 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.assetCell, for: indexPath) as! AssetTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.assetCell, for: indexPath) as! AssetItemTableViewCell
         
         if selectedButton != 0 && indexPath.row == tableView.numberOfRows(inSection: 0) - 1 { //자산 추가 셀
             cell.viewModel = nil
         } else {
             let item = AssetItemManager.shared.getAssetItems(with: AssetType(rawValue: selectedButton)!)[indexPath.row]
-            cell.viewModel = AssetViewModel(assetItem: item)
+            cell.viewModel = AssetItemCellViewModel(assetItem: item)
         }
         
         return cell

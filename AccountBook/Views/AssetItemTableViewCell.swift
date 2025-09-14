@@ -7,11 +7,11 @@
 
 import UIKit
 
-class AssetTableViewCell: UITableViewCell {
+class AssetItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     
-    var viewModel: AssetViewModel? {
+    var viewModel: AssetItemCellViewModel? {
         didSet {
             configure()
         }

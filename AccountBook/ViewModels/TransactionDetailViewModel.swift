@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailTransactionViewModel {
+class TransactionDetailViewModel {
     
     private(set) var transaction: Transaction?
     

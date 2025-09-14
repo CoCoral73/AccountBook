@@ -20,7 +20,7 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var incomeLabel: UILabel!
     @IBOutlet weak var expenseLabel: UILabel!
     
-    var viewModel: DayViewModel! {
+    var viewModel: CalendarCellViewModel! {
         didSet {
             configure()
         }

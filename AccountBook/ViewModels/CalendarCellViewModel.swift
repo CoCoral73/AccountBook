@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DayViewModel {
+class CalendarCellViewModel {
     
     private var dayItem: DayItem
     private var isCurrentMonth: Bool

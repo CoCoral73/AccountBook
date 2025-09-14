@@ -127,7 +127,7 @@ class CalendarViewModel {
         fromVC.present(pickerVC, animated: true, completion: nil)
     }
     
-    func handleDidSelectRowAt(viewModel: DetailTransactionViewModel, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
+    func handleDidSelectRowAt(viewModel: TransactionDetailViewModel, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
         
         viewModel.onDidUpdateOldDateTransaction = { [weak self] delta in
             guard let self = self, let id = self.itemIDsByDate[delta.date] else {
@@ -166,7 +166,7 @@ class CalendarViewModel {
         }
         
         guard let detailVC = storyboard?.instantiateViewController(identifier: "DetailTransactionViewController", creator: { coder in
-            DetailTransactionViewController(coder: coder, viewModel: viewModel)
+            TransactionDetailViewController(coder: coder, viewModel: viewModel)
         }) else {
             fatalError("DetailTransactionViewController 생성 에러")
         }
@@ -176,7 +176,7 @@ class CalendarViewModel {
     
     func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
         guard let addVC = storyboard?.instantiateViewController(identifier: "AddViewController", creator: { coder in
-            AddTransactionViewController(coder: coder, viewModel: AddTransactionViewModel(date: self.selectedDate, isIncome: type == "수입")) })
+            TransactionAddViewController(coder: coder, viewModel: TransactionAddViewModel(date: self.selectedDate, isIncome: type == "수입")) })
         else {
             fatalError("AddViewController 생성 에러")
         }

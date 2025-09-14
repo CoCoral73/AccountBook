@@ -7,15 +7,15 @@
 
 import UIKit
 
-class AddTransactionViewController: UIViewController {
+class TransactionAddViewController: UIViewController {
     
     @IBOutlet weak var dateButton: UIBarButtonItem!
     
     @IBOutlet weak var containerViewForCategory: UIView!
     
-    var viewModel: AddTransactionViewModel
+    var viewModel: TransactionAddViewModel
     
-    required init?(coder: NSCoder, viewModel: AddTransactionViewModel) {
+    required init?(coder: NSCoder, viewModel: TransactionAddViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -53,7 +53,7 @@ class AddTransactionViewController: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let tableVC = segue.destination as? InputTableViewController {
+        if let tableVC = segue.destination as? TransactionAddTableViewController {
             tableVC.viewModel = self.viewModel
             viewModel.inputVC = tableVC
         }

@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DetailTableViewCell: UITableViewCell {
+class TransactionDetailTableViewCell: UITableViewCell {
     
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -15,7 +15,7 @@ class DetailTableViewCell: UITableViewCell {
     @IBOutlet weak var priceLabel: UILabel!
     @IBOutlet weak var assetItemLabel: UILabel!
     
-    var viewModel: DetailTransactionViewModel! {
+    var viewModel: TransactionDetailViewModel! {
         didSet {
             configure()
         }

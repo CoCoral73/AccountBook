@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DayCollectionViewCell: UICollectionViewCell {
+class DayPickerCollectionViewCell: UICollectionViewCell {
     
     @IBOutlet weak var dayLabel: UILabel!
 }
