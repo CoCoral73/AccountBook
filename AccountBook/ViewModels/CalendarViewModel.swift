@@ -7,6 +7,10 @@
 
 import UIKit
 
+protocol TransactionUpdatable: AnyObject {
+    var onDidUpdateTransaction: ((Date) -> Void)? { get set }
+}
+
 class CalendarViewModel {
     
     private var currentMonth: Date {
@@ -83,6 +87,10 @@ class CalendarViewModel {
         currentMonth = next
     }
     
+    func setCurrentMonth(_ date: Date) {
+        currentMonth = date
+    }
+    
     func isCurrentMonth(with date: Date) -> Bool {
         return calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
     }
@@ -147,30 +155,7 @@ class CalendarViewModel {
             fromVC.reloadDayItem(id)
         }
         
-        viewModel.onDidUpdateOrRemoveTransaction = { [weak self] date in
-            guard let self = self else { return }
-            
-            let monthChanged = !self.isCurrentMonth(with: date)
-            if monthChanged {   //거래 추가 뷰 내에서 날짜를 바꿨을 때
-                self.currentMonth = date
-            }
-            
-            guard let id = self.itemIDsByDate[date] else {
-                print("transaction.date로 UUID 찾기 실패(nil)")
-                return
-            }
-            
-            _ = self.setSelectedDate(with: id)
-            
-            if !monthChanged {
-                loadTransactions(with: date)
-                updateDayItem(for: id, date: date)
-            }
-            DispatchQueue.main.async {
-                fromVC.reloadDayItem(id)
-                fromVC.detailTableView.reloadData()
-            }
-        }
+        viewModel.bindCalendarUpdate(calendarVM: self, fromVC: fromVC)
         
         guard let detailVC = storyboard?.instantiateViewController(identifier: "TransactionDetailViewController", creator: { coder in
             TransactionDetailViewController(coder: coder, viewModel: viewModel)
@@ -188,29 +173,8 @@ class CalendarViewModel {
             fatalError("TransactionAddViewController 생성 에러")
         }
         
-        addVC.viewModel.onDidAddTransaction = { [weak self] date in
-            guard let self = self else { return }
-            
-            let monthChanged = !self.isCurrentMonth(with: date)
-            if monthChanged {   //거래 추가 뷰 내에서 날짜를 바꿨을 때
-                self.currentMonth = date
-            }
-            
-            guard let id = itemIDsByDate[date] else {
-                print("transaction.date로 UUID 찾기 실패(nil)")
-                return
-            }
-            _ = self.setSelectedDate(with: id)
-            
-            if !monthChanged {
-                self.loadTransactions(with: date)
-                updateDayItem(for: id, date: date)
-            }
-            DispatchQueue.main.async {
-                fromVC.reloadDayItem(id)
-                fromVC.detailTableView.reloadData()
-            }
-        }
+        addVC.viewModel.bindCalendarUpdate(calendarVM: self, fromVC: fromVC)
+        
         addVC.modalPresentationStyle = .fullScreen
         fromVC.present(addVC, animated: true)
     }
@@ -258,7 +222,7 @@ class CalendarViewModel {
         dayItemsByUUID = Dictionary(uniqueKeysWithValues: items.map { ($0.id, $0) })
     }
     
-    private func loadTransactions() {
+    func loadTransactions() {
         let allTx = CoreDataManager.shared.fetchTransactions(containing: currentMonth)
         
         transactions = Dictionary(grouping: allTx) { tx in
@@ -267,7 +231,7 @@ class CalendarViewModel {
         calculateTotals()
     }
     
-    private func loadTransactions(with date: Date) {
+    func loadTransactions(with date: Date) {
         let tx = CoreDataManager.shared.fetchTransactions(with: date)
         
         let day = calendar.component(.day, from: date)
@@ -297,5 +261,31 @@ class CalendarViewModel {
 
         dayCache[date] = arr
         return arr
+    }
+}
+
+extension TransactionUpdatable {
+    func bindCalendarUpdate(calendarVM: CalendarViewModel, fromVC: CalendarViewController) {
+        onDidUpdateTransaction = { [weak calendarVM, weak fromVC] date in
+            guard let calendarVM, let fromVC else { return }
+
+            let monthChanged = !calendarVM.isCurrentMonth(with: date)
+            if monthChanged {
+                calendarVM.setCurrentMonth(date)
+            }
+
+            guard let id = calendarVM.itemIDsByDate[date] else { return }
+            _ = calendarVM.setSelectedDate(with: id)
+
+            if !monthChanged {
+                calendarVM.loadTransactions(with: date)
+                calendarVM.updateDayItem(for: id, date: date)
+            }
+
+            DispatchQueue.main.async {
+                fromVC.reloadDayItem(id)
+                fromVC.detailTableView.reloadData()
+            }
+        }
     }
 }

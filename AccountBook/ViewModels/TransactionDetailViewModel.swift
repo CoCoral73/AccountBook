@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionDetailViewModel {
+class TransactionDetailViewModel: TransactionUpdatable {
     
     private(set) var transaction: Transaction?
     
@@ -19,7 +19,7 @@ class TransactionDetailViewModel {
     
     //CalendarViewModel
     var onDidUpdateOldDateTransaction: ((Date) -> Void)?
-    var onDidUpdateOrRemoveTransaction: ((Date) -> Void)?
+    var onDidUpdateTransaction: ((Date) -> Void)?
     
     init(transaction: Transaction) {
         self.transaction = transaction
@@ -94,7 +94,7 @@ class TransactionDetailViewModel {
             if Calendar.current.isDate(oldDate, equalTo: newDate, toGranularity: .month) {
                 onDidUpdateOldDateTransaction?(oldDate)
             }
-            onDidUpdateOrRemoveTransaction?(newDate)
+            onDidUpdateTransaction?(newDate)
         }
         
         guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
@@ -170,7 +170,7 @@ class TransactionDetailViewModel {
             InstallmentManager.shared.addInstallment(transaction, period: period)
             
             onDidSetInstallment?()
-            onDidUpdateOrRemoveTransaction?(transaction.date)
+            onDidUpdateTransaction?(transaction.date)
         }
         fromVC.navigationController?.pushViewController(installmentVC, animated: true)
     }
@@ -182,7 +182,7 @@ class TransactionDetailViewModel {
         
         //얼럿 띄우기
         InstallmentManager.shared.deleteInstallment(transaction)
-        onDidUpdateOrRemoveTransaction?(transaction.date)
+        onDidUpdateTransaction?(transaction.date)
         
         if isFirst {
             onDidSetInstallment?()
@@ -205,7 +205,7 @@ class TransactionDetailViewModel {
             TransactionManager.shared.deleteTransaction(transaction)
             self.transaction = nil
             
-            onDidUpdateOrRemoveTransaction?(date)
+            onDidUpdateTransaction?(date)
             fromVC.navigationController?.popViewController(animated: true)
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -227,6 +227,6 @@ class TransactionDetailViewModel {
         
         CoreDataManager.shared.saveContext()
         
-        onDidUpdateOrRemoveTransaction?(transaction.date)
+        onDidUpdateTransaction?(transaction.date)
     }
 }
