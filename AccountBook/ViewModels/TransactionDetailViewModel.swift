@@ -19,7 +19,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     
     //CalendarViewModel
     var onDidUpdateOldDateTransaction: ((Date) -> Void)?
-    var onDidUpdateTransaction: ((Date) -> Void)?
+    var onDidUpdateTransaction: ((Date) -> Void)?   //TransactionUpdatable
     
     init(transaction: Transaction) {
         self.transaction = transaction
