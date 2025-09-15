@@ -2,6 +2,7 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="23504" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="XMS-xc-i1N">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -503,7 +504,7 @@
         <!--Transaction Add View Controller-->
         <scene sceneID="DMW-2H-Dig">
             <objects>
-                <viewController storyboardIdentifier="AddViewController" id="czn-PL-81i" customClass="TransactionAddViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionAddViewController" id="czn-PL-81i" customClass="TransactionAddViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="XW6-FZ-G6I">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -573,7 +574,7 @@
         <!--상세 보기-->
         <scene sceneID="dur-26-N6X">
             <objects>
-                <viewController storyboardIdentifier="DetailTransactionViewController" hidesBottomBarWhenPushed="YES" id="oU4-9V-oZi" customClass="TransactionDetailViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TransactionDetailViewController" hidesBottomBarWhenPushed="YES" id="oU4-9V-oZi" customClass="TransactionDetailViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="GBj-GI-baw">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1181,7 +1182,7 @@
                                             <constraint firstAttribute="height" constant="0.33000000000000002" id="fub-xb-eYd"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O4-EQ-5xF">
+                                    <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O4-EQ-5xF" customClass="AutoUpdateColorButton" customModule="AccountBook" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="396.66666666666669" width="196.33333333333334" height="198.00000000000006"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -1199,7 +1200,7 @@
                                             <constraint firstAttribute="height" constant="0.33000000000000002" id="hdP-h8-mgr"/>
                                         </constraints>
                                     </view>
-                                    <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHV-r6-WFS">
+                                    <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHV-r6-WFS" customClass="AutoUpdateColorButton" customModule="AccountBook" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="595" width="196.33333333333334" height="198"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
@@ -1372,7 +1373,7 @@
         <!--Asset Item Add View Controller-->
         <scene sceneID="WF8-Jt-dAI">
             <objects>
-                <viewController storyboardIdentifier="AddAssetItemViewController" id="akc-4k-Z8V" customClass="AssetItemAddViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AssetItemAddViewController" id="akc-4k-Z8V" customClass="AssetItemAddViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dAX-L5-92L">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

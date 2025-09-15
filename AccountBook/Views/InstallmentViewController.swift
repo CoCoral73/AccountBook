@@ -19,6 +19,8 @@ class InstallmentViewController: UIViewController {
         
         textField.delegate = self
         textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
+        
+        saveButton.isEnabled = false
     }
     
     @objc func textDidChange(_ textField: UITextField) {

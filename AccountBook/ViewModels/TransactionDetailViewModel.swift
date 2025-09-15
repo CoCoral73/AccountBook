@@ -138,7 +138,9 @@ class TransactionDetailViewModel {
     func handleAssetItemButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
         guard let transaction = transaction else { return }
         
-        guard let assetSelectionVC = storyboard?.instantiateViewController(withIdentifier: "AssetSelectionViewController") as? AssetSelectionViewController
+        guard let assetSelectionVC = storyboard?.instantiateViewController(identifier: "AssetSelectionViewController", creator: { coder in
+            AssetSelectionViewController(coder: coder, isIncome: transaction.isIncome)
+        })
         else {
             fatalError("AssetSelectionViewController 생성 에러")
         }

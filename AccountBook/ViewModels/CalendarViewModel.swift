@@ -165,20 +165,20 @@ class CalendarViewModel {
             }
         }
         
-        guard let detailVC = storyboard?.instantiateViewController(identifier: "DetailTransactionViewController", creator: { coder in
+        guard let detailVC = storyboard?.instantiateViewController(identifier: "TransactionDetailViewController", creator: { coder in
             TransactionDetailViewController(coder: coder, viewModel: viewModel)
         }) else {
-            fatalError("DetailTransactionViewController 생성 에러")
+            fatalError("TransactionDetailViewController 생성 에러")
         }
         
         fromVC.navigationController?.pushViewController(detailVC, animated: true)
     }
     
     func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
-        guard let addVC = storyboard?.instantiateViewController(identifier: "AddViewController", creator: { coder in
+        guard let addVC = storyboard?.instantiateViewController(identifier: "TransactionAddViewController", creator: { coder in
             TransactionAddViewController(coder: coder, viewModel: TransactionAddViewModel(date: self.selectedDate, isIncome: type == "수입")) })
         else {
-            fatalError("AddViewController 생성 에러")
+            fatalError("TransactionAddViewController 생성 에러")
         }
         
         addVC.viewModel.onDidAddTransaction = { [weak self] transaction in

@@ -126,7 +126,9 @@ class TransactionAddTableViewController: UITableViewController {
     }
     
     @IBAction func paymentSelectionButtonTapped(_ sender: UIButton) {
-        guard let assetSelectionVC = storyboard?.instantiateViewController(withIdentifier: "AssetSelectionViewController") as? AssetSelectionViewController
+        guard let assetSelectionVC = storyboard?.instantiateViewController(identifier: "AssetSelectionViewController", creator: { coder in
+            AssetSelectionViewController(coder: coder, isIncome: self.viewModel.isIncome)
+        })
         else {
             fatalError("AssetSelectionViewController 생성 에러")
         }

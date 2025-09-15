@@ -8,12 +8,22 @@
 import UIKit
 
 class AssetSelectionViewController: UIViewController {
-
+    
+    required init?(coder: NSCoder, isIncome: Bool) {
+        self.isIncome = isIncome
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     @IBOutlet weak var cashButton: UIButton!
     @IBOutlet weak var accountButton: UIButton!
-    @IBOutlet weak var debitCardButton: UIButton!
-    @IBOutlet weak var creditCardButton: UIButton!
+    @IBOutlet weak var debitCardButton: AutoUpdateColorButton!
+    @IBOutlet weak var creditCardButton: AutoUpdateColorButton!
     
+    var isIncome: Bool
     var buttons: [UIButton] = []
     var selectedButton: Int = 5
     
@@ -30,6 +40,10 @@ class AssetSelectionViewController: UIViewController {
     
     private func configure() {
         buttons = [cashButton, accountButton, debitCardButton, creditCardButton]
+        if isIncome {
+            debitCardButton.setInvisible(true)
+            creditCardButton.setInvisible(true)
+        }
     }
     
     @IBAction func AssetTypeButtonTapped(_ sender: UIButton) {
@@ -69,9 +83,9 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
                 self.tableView.reloadData()
             }
             
-            guard let addAssetVC = storyboard?.instantiateViewController(identifier: "AddAssetItemViewController", creator: { coder in AssetItemAddViewController(coder: coder, viewModel: vm) })
+            guard let addAssetVC = storyboard?.instantiateViewController(identifier: "AssetItemAddViewController", creator: { coder in AssetItemAddViewController(coder: coder, viewModel: vm) })
             else {
-                fatalError("AddAssetItemViewController 생성 에러")
+                fatalError("AssetItemAddViewController 생성 에러")
             }
             
             addAssetVC.modalPresentationStyle = .fullScreen

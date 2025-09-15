@@ -19,10 +19,27 @@ class AutoDismissKeyboardButton: UIButton {
 }
 
 class AutoUpdateColorButton: UIButton {
+    private var baseColor: UIColor?
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        baseColor = backgroundColor
+        updateColor()
+    }
+
     override var isEnabled: Bool {
         didSet {
-            backgroundColor = isEnabled ? #colorLiteral(red: 1, green: 0.5680983663, blue: 0.6200271249, alpha: 1) : .lightGray
+            updateColor()
         }
+    }
+
+    private func updateColor() {
+        backgroundColor = isEnabled ? baseColor : .lightGray
+    }
+    
+    func setInvisible(_ invisible: Bool) {
+        self.alpha = invisible ? 0.0 : 1.0
+        self.isEnabled = !invisible
     }
 }
 
