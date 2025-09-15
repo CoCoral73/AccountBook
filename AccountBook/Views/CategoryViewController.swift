@@ -62,7 +62,6 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         
         let selected = categories[indexPath.item]
         onDidSelectCategory?(selected)
-        dismiss(animated: true)
     }
     
     // 위 아래 간격

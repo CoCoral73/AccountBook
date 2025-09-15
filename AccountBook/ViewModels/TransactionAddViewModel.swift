@@ -15,7 +15,7 @@ class TransactionAddViewModel: TransactionUpdatable {
         }
     }
     
-    var inputVC: TransactionAddTableViewController?
+    var inputVC: TransactionAddTableViewController? //텍스트필드 접근 시 사용
     private var assetItemInput: AssetItem?
     
     private(set) var isIncome: Bool
@@ -84,6 +84,13 @@ class TransactionAddViewModel: TransactionUpdatable {
         
         childVC.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
+            
+            guard (inputVC?.amountTextField.text ?? "") != "", assetItemInput != nil else {
+                childVC.view.generateFeedback(.error)
+                ToastManager.shared.show(message: "금액과 자산을 입력해주세요", in: childVC.view)
+                return
+            }
+            
             addTransaction(with: category)
             fromVC.dismiss(animated: true)
         }
