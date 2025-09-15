@@ -99,11 +99,18 @@ class CalendarViewModel {
         return itemIDsByDate[selectedDate]
     }
     
-    func updateDayItem(for id: UUID, with transaction: TransactionDelta) {
-        guard var item = dayItemsByUUID[id] else { return }
-
-        item.income += transaction.isIncome ? transaction.amount : 0
-        item.expense += !transaction.isIncome ? transaction.amount : 0
+    func updateDayItem(for id: UUID, date: Date) {
+        let day = calendar.component(.day, from: date)
+        guard var item = dayItemsByUUID[id], let transaction = transactions[day] else { return }
+        
+        var income: Int64 = 0, expense: Int64 = 0
+        transaction.forEach { tx in
+            income += tx.isIncome ? tx.amount : 0
+            expense += !tx.isIncome ? tx.amount : 0
+        }
+        
+        item.income = income
+        item.expense = expense
         dayItemsByUUID[id]! = item
     }
     
@@ -129,26 +136,26 @@ class CalendarViewModel {
     
     func handleDidSelectRowAt(viewModel: TransactionDetailViewModel, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
         
-        viewModel.onDidUpdateOldDateTransaction = { [weak self] delta in
-            guard let self = self, let id = self.itemIDsByDate[delta.date] else {
+        viewModel.onDidUpdateOldDateTransaction = { [weak self] date in
+            guard let self = self, let id = self.itemIDsByDate[date] else {
                 print("transaction.date로 UUID 찾기 실패(nil)")
                 return
             }
             
-            loadTransactions(with: delta.date)
-            updateDayItem(for: id, with: delta)
+            loadTransactions(with: date)
+            updateDayItem(for: id, date: date)
             fromVC.reloadDayItem(id)
         }
         
-        viewModel.onDidUpdateOrRemoveTransaction = { [weak self] delta in
+        viewModel.onDidUpdateOrRemoveTransaction = { [weak self] date in
             guard let self = self else { return }
             
-            let monthChanged = !self.isCurrentMonth(with: delta.date)
+            let monthChanged = !self.isCurrentMonth(with: date)
             if monthChanged {   //거래 추가 뷰 내에서 날짜를 바꿨을 때
-                self.currentMonth = delta.date
+                self.currentMonth = date
             }
             
-            guard let id = self.itemIDsByDate[delta.date] else {
+            guard let id = self.itemIDsByDate[date] else {
                 print("transaction.date로 UUID 찾기 실패(nil)")
                 return
             }
@@ -156,8 +163,8 @@ class CalendarViewModel {
             _ = self.setSelectedDate(with: id)
             
             if !monthChanged {
-                loadTransactions(with: delta.date)
-                updateDayItem(for: id, with: delta)
+                loadTransactions(with: date)
+                updateDayItem(for: id, date: date)
             }
             DispatchQueue.main.async {
                 fromVC.reloadDayItem(id)
@@ -181,23 +188,23 @@ class CalendarViewModel {
             fatalError("TransactionAddViewController 생성 에러")
         }
         
-        addVC.viewModel.onDidAddTransaction = { [weak self] transaction in
+        addVC.viewModel.onDidAddTransaction = { [weak self] date in
             guard let self = self else { return }
             
-            let monthChanged = !self.isCurrentMonth(with: transaction.date)
+            let monthChanged = !self.isCurrentMonth(with: date)
             if monthChanged {   //거래 추가 뷰 내에서 날짜를 바꿨을 때
-                self.currentMonth = transaction.date
+                self.currentMonth = date
             }
             
-            guard let id = itemIDsByDate[transaction.date] else {
+            guard let id = itemIDsByDate[date] else {
                 print("transaction.date로 UUID 찾기 실패(nil)")
                 return
             }
             _ = self.setSelectedDate(with: id)
             
             if !monthChanged {
-                self.loadTransactions(with: transaction.date)
-                updateDayItem(for: id, with: transaction)
+                self.loadTransactions(with: date)
+                updateDayItem(for: id, date: date)
             }
             DispatchQueue.main.async {
                 fromVC.reloadDayItem(id)

@@ -18,8 +18,8 @@ class TransactionDetailViewModel {
     var onDidSetInstallment: (() -> Void)?
     
     //CalendarViewModel
-    var onDidUpdateOldDateTransaction: ((TransactionDelta) -> Void)?
-    var onDidUpdateOrRemoveTransaction: ((TransactionDelta) -> Void)?
+    var onDidUpdateOldDateTransaction: ((Date) -> Void)?
+    var onDidUpdateOrRemoveTransaction: ((Date) -> Void)?
     
     init(transaction: Transaction) {
         self.transaction = transaction
@@ -86,17 +86,15 @@ class TransactionDetailViewModel {
         vm.onDatePickerChanged = { [weak self] newDate in
             guard let self = self else { return }
             let oldDate = transaction.date
-            let old = TransactionDelta(date: oldDate, isIncome: transaction.isIncome, amount: -transaction.amount, reason: .moveSource)
-            let new = TransactionDelta(date: newDate, isIncome: transaction.isIncome, amount: transaction.amount, reason: .moveDestination)
             
             transaction.date = newDate
-            onDidSetTransactionDate?()  //DetailTransactionViewController (타이틀 변경용)
+            onDidSetTransactionDate?()  //TransactionDetailViewController (Date UI 변경용)
             
             //월이 다르면 oldDate에 대해 UI 업데이트 안해줘도 됨. 어차피 변경 후 달력 포커스는 newDate로 감.
             if Calendar.current.isDate(oldDate, equalTo: newDate, toGranularity: .month) {
-                onDidUpdateOldDateTransaction?(old)
+                onDidUpdateOldDateTransaction?(oldDate)
             }
-            onDidUpdateOrRemoveTransaction?(new)
+            onDidUpdateOrRemoveTransaction?(newDate)
         }
         
         guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
@@ -169,13 +167,10 @@ class TransactionDetailViewModel {
         installmentVC.onDidEnterInstallment = { [weak self] period in
             guard let self = self, period > 1 else { return }
 
-            let oldAmount = transaction.amount
             InstallmentManager.shared.addInstallment(transaction, period: period)
-            let newAmount = transaction.amount
             
-            let delta = TransactionDelta(date: transaction.date, isIncome: transaction.isIncome, amount: newAmount - oldAmount, reason: .mutateSameDay)
             onDidSetInstallment?()
-            onDidUpdateOrRemoveTransaction?(delta)
+            onDidUpdateOrRemoveTransaction?(transaction.date)
         }
         fromVC.navigationController?.pushViewController(installmentVC, animated: true)
     }
@@ -184,12 +179,10 @@ class TransactionDetailViewModel {
         guard let transaction = transaction else { return }
         
         let isFirst = transaction.installmentIndexValue == 1
-        let newAmount = isFirst ? transaction.installment?.totalAmount ?? 0 : 0, oldAmount = transaction.amount
-        let delta = TransactionDelta(date: transaction.date, isIncome: transaction.isIncome, amount: newAmount - oldAmount, reason: .deleted)
         
         //얼럿 띄우기
         InstallmentManager.shared.deleteInstallment(transaction)
-        onDidUpdateOrRemoveTransaction?(delta)
+        onDidUpdateOrRemoveTransaction?(transaction.date)
         
         if isFirst {
             onDidSetInstallment?()
@@ -208,11 +201,11 @@ class TransactionDetailViewModel {
         let success = UIAlertAction(title: "확인", style: .destructive) { [weak self] action in
             guard let self = self else { return }
             
-            let delta = TransactionDelta(date: transaction.date, isIncome: transaction.isIncome, amount: -transaction.amount, reason: .deleted)
+            let date = transaction.date
             TransactionManager.shared.deleteTransaction(transaction)
             self.transaction = nil
             
-            onDidUpdateOrRemoveTransaction?(delta)
+            onDidUpdateOrRemoveTransaction?(date)
             fromVC.navigationController?.popViewController(animated: true)
         }
         let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -226,7 +219,6 @@ class TransactionDetailViewModel {
     func saveUpdatedTransaction(name: String, amount: String, memo: String) {
         guard let transaction = transaction else { return }
         
-        let oldAmount = transaction.amount
         let newAmount = Int64(amount.replacingOccurrences(of: ",", with: "")) ?? 0
         
         transaction.name = name
@@ -235,7 +227,6 @@ class TransactionDetailViewModel {
         
         CoreDataManager.shared.saveContext()
         
-        let delta = TransactionDelta(date: transaction.date, isIncome: transaction.isIncome, amount: newAmount - oldAmount, reason: .mutateSameDay)
-        onDidUpdateOrRemoveTransaction?(delta)
+        onDidUpdateOrRemoveTransaction?(transaction.date)
     }
 }

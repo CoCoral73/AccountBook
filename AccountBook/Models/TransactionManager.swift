@@ -7,15 +7,6 @@
 
 import Foundation
 
-//달력 동기화용
-struct TransactionDelta {
-    enum Reason { case mutateSameDay, moveSource, moveDestination, inserted, deleted }
-    let date: Date
-    let isIncome: Bool
-    let amount: Int64
-    let reason: Reason
-}
-
 //코어데이터 객체 생성용
 struct TransactionInput {
     let amount: Int64
