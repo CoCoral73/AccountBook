@@ -11,28 +11,13 @@ class AssetItemTableViewCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
     
-    var viewModel: AssetItemCellViewModel? {
+    var model: AssetItem? {
         didSet {
             configure()
         }
     }
-    
-//    override func awakeFromNib() {
-//        super.awakeFromNib()
-//        // Initialization code
-//    }
-//
-//    override func setSelected(_ selected: Bool, animated: Bool) {
-//        super.setSelected(selected, animated: animated)
-//
-//        // Configure the view for the selected state
-//    }
 
     func configure() {
-        if let vm = viewModel {
-            nameLabel.text = vm.nameString
-        } else {
-            nameLabel.text = "자산 추가"
-        }
+        nameLabel.text = model?.name ?? "자산 추가"
     }
 }

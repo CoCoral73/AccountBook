@@ -72,8 +72,8 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let cell = tableView.cellForRow(at: indexPath) as? AssetItemTableViewCell else { return }
         
-        if let vm = cell.viewModel {
-            onAssetSelected?(vm.assetItem)
+        if let model = cell.model {
+            onAssetSelected?(model)
             dismiss(animated: true)
         } else {    //자산 추가 뷰로 이동
             let vm = AssetItemAddViewModel(type: AssetType(rawValue: selectedButton)!)
@@ -102,10 +102,10 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
         let cell = tableView.dequeueReusableCell(withIdentifier: Cell.assetCell, for: indexPath) as! AssetItemTableViewCell
         
         if selectedButton != 0 && indexPath.row == tableView.numberOfRows(inSection: 0) - 1 { //자산 추가 셀
-            cell.viewModel = nil
+            cell.model = nil
         } else {
             let item = AssetItemManager.shared.getAssetItems(with: AssetType(rawValue: selectedButton)!)[indexPath.row]
-            cell.viewModel = AssetItemCellViewModel(assetItem: item)
+            cell.model = item
         }
         
         return cell
