@@ -289,7 +289,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = detailTableView.dequeueReusableCell(withIdentifier: Cell.detailCell, for: indexPath) as! TransactionDetailTableViewCell
         
-        cell.viewModel = TransactionDetailViewModel(transaction: viewModel.cellForRowAt[indexPath.row])
+        cell.viewModel = TransactionDetailViewModel(transaction: viewModel.cellForRowAt(indexPath.row))
         
         return cell
     }

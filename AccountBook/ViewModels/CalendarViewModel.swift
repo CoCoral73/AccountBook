@@ -71,15 +71,17 @@ class CalendarViewModel {
         return count
     }
     
-    var cellForRowAt: [Transaction] {
-        guard let datas = transactions[selectedDay] else { return [] }
-        return datas
-    }
-    
     var snapshotItems: [UUID] {
         let sortedDates = itemIDsByDate.keys.sorted()   //날짜 오름차순 정렬
         let sortedUUIDs = sortedDates.compactMap { itemIDsByDate[$0] }  //날짜 순서대로 UUID
         return sortedUUIDs
+    }
+    
+    func cellForRowAt(_ index: Int) -> Transaction {
+        guard let datas = transactions[selectedDay] else {
+            fatalError("Calendar View Model: transactions 조회 실패")
+        }
+        return datas[index]
     }
     
     func changeMonth(by offset: Int) {

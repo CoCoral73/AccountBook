@@ -1402,7 +1402,7 @@
                                 </items>
                                 <navigationBarAppearance key="standardAppearance">
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <color key="shadowColor" white="1" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </navigationBarAppearance>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="keyPath" value="YES"/>
@@ -1908,6 +1908,55 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLc-9q-2wE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1856" y="-887"/>
+        </scene>
+        <!--Category Add View Controller-->
+        <scene sceneID="x3n-4H-7hd">
+            <objects>
+                <viewController storyboardIdentifier="CategoryAddViewController" id="W3J-1n-569" customClass="CategoryAddViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eVb-2Y-hjb">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SBM-mG-Vet">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <items>
+                                    <navigationItem title="Title" id="gBr-ay-XFf">
+                                        <barButtonItem key="leftBarButtonItem" title="취소" id="O6X-tf-92A">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="closeButtonTapped:" destination="W3J-1n-569" id="HMv-Uq-8Iz"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="추가" id="GA9-zL-RN0">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="addButtonTapped:" destination="W3J-1n-569" id="yRm-2J-zxy"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance">
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </navigationBarAppearance>
+                            </navigationBar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="GBB-bk-CFZ"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="SBM-mG-Vet" firstAttribute="leading" secondItem="eVb-2Y-hjb" secondAttribute="leading" id="3mr-9g-aYF"/>
+                            <constraint firstAttribute="trailing" secondItem="SBM-mG-Vet" secondAttribute="trailing" id="Fzv-Vw-7Uh"/>
+                            <constraint firstItem="SBM-mG-Vet" firstAttribute="top" secondItem="GBB-bk-CFZ" secondAttribute="top" id="Ilt-it-JrK"/>
+                        </constraints>
+                    </view>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <connections>
+                        <outlet property="navItem" destination="gBr-ay-XFf" id="kuw-Bv-azX"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5qe-iJ-nG5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2781" y="-1411"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="guq-Kq-nWg">

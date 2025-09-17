@@ -75,17 +75,17 @@ class TransactionAddViewModel: TransactionUpdatable {
     }
     
     func handleCategoryView(storyboard: UIStoryboard?, fromVC: TransactionAddViewController) {
-        let isIncome = isIncome
         guard let childVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
-            CategoryViewController(coder: coder, isIncome: isIncome)
+            CategoryViewController(coder: coder, viewModel: CategoryViewModel(isIncome: self.isIncome))
         }) else {
             fatalError("CategoryViewController 생성 에러")
         }
         
-        childVC.onDidSelectCategory = { [weak self] category in
+        childVC.viewModel.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
             
             guard (inputVC?.amountTextField.text ?? "") != "", assetItemInput != nil else {
+                fromVC.view.endEditing(true)
                 childVC.view.generateFeedback(.error)
                 ToastManager.shared.show(message: "금액과 자산을 입력해주세요", in: childVC.view)
                 return

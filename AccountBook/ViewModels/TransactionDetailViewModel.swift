@@ -112,18 +112,17 @@ class TransactionDetailViewModel: TransactionUpdatable {
     func handleCategoryButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
         guard let transaction = transaction else { return }
         
-        let isIncome = transaction.isIncome
-        
         guard let categoryVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
-            CategoryViewController(coder: coder, isIncome: isIncome)
+            CategoryViewController(coder: coder, viewModel: CategoryViewModel(isIncome: transaction.isIncome))
         }) else {
             fatalError("CategoryViewController 생성 에러")
         }
         
-        categoryVC.onDidSelectCategory = { [weak self] category in
+        categoryVC.viewModel.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
             transaction.category = category
             onDidSetCategory?()
+            categoryVC.dismiss(animated: true)
         }
         
         if let sheet = categoryVC.sheetPresentationController {

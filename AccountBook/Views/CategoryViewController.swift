@@ -11,14 +11,10 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
 
     @IBOutlet weak var collectionView: UICollectionView!
     
-    var isIncome: Bool
-    var categories: [Category] = []
+    var viewModel: CategoryViewModel
     
-    var onDidSelectCategory: ((Category) -> Void)?
-    
-    required init?(coder: NSCoder, isIncome: Bool) {
-        self.isIncome = isIncome
-        self.categories = isIncome ? CategoryManager.shared.incomeCategories : CategoryManager.shared.expenseCategories
+    required init?(coder: NSCoder, viewModel: CategoryViewModel) {
+        self.viewModel = viewModel
         super.init(coder: coder)
     }
     
@@ -48,20 +44,18 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return isIncome ? CategoryManager.shared.incomeCategories.count : CategoryManager.shared.expenseCategories.count
+        return viewModel.numberOfItems
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CategoryCell", for: indexPath) as! CategoryCollectionViewCell
-        cell.viewModel = CategoryCellViewModel(category: categories[indexPath.item])
+        cell.viewModel = viewModel.viewModelOfCell(indexPath.item)
 
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        let selected = categories[indexPath.item]
-        onDidSelectCategory?(selected)
+        viewModel.handleDidSelectItemAt(indexPath.item, storyboard: storyboard, fromVC: self)
     }
     
     // 위 아래 간격
