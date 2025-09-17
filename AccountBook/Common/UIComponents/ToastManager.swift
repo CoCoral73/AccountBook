@@ -31,7 +31,7 @@ class ToastManager {
             view.layoutIfNeeded()
         }) { _ in
             // 1초 후 내려가기
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 bottomConstraint.constant = 100
                 UIView.animate(withDuration: 0.3, animations: {
                     view.layoutIfNeeded()

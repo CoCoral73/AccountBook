@@ -11,7 +11,7 @@ class ToastView: UIView {
     init(message: String) {
         super.init(frame: .zero)
         
-        backgroundColor = UIColor.black.withAlphaComponent(0.8)
+        backgroundColor = .darkGray
         layer.cornerRadius = 8
         clipsToBounds = true
         

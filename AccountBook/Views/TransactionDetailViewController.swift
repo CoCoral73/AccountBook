@@ -114,6 +114,7 @@ class TransactionDetailViewController: UIViewController {
         if !viewModel.canEdit {
             sender.generateFeedback(.error)
             sender.shake()
+            ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
             return
         }
         
@@ -128,6 +129,7 @@ class TransactionDetailViewController: UIViewController {
         if !viewModel.canEdit {
             sender.generateFeedback(.error)
             sender.shake()
+            ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
             return
         }
         
@@ -138,6 +140,7 @@ class TransactionDetailViewController: UIViewController {
         if !viewModel.canEdit {
             sender.generateFeedback(.error)
             sender.shake()
+            ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
             return
         }
         
