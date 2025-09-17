@@ -18,31 +18,6 @@ class AutoDismissKeyboardButton: UIButton {
     
 }
 
-class AutoUpdateColorButton: UIButton {
-    private var baseColor: UIColor?
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        baseColor = backgroundColor
-        updateColor()
-    }
-
-    override var isEnabled: Bool {
-        didSet {
-            updateColor()
-        }
-    }
-
-    private func updateColor() {
-        backgroundColor = isEnabled ? baseColor : .lightGray
-    }
-    
-    func setInvisible(_ invisible: Bool) {
-        self.alpha = invisible ? 0.0 : 1.0
-        self.isEnabled = !invisible
-    }
-}
-
 class IntrinsicCollectionView: UICollectionView {
     override var contentSize: CGSize {
         didSet {
