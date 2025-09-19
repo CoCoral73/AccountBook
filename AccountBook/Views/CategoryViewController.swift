@@ -28,19 +28,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.allowsSelection = true
-        
-        configureGesture()
-    }
-    
-    private func configureGesture() {
-        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture))
-        collectionView.addGestureRecognizer(panGesture)
-    }
-    
-    @objc func handlePanGesture(_ sender: UIPanGestureRecognizer) {
-        if sender.state == .began {
-            self.parent?.view.endEditing(true)
-        }
+        collectionView.keyboardDismissMode = .onDrag
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

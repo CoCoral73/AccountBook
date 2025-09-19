@@ -129,6 +129,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
         
         if let sheet = categoryVC.sheetPresentationController {
             sheet.detents = [.medium()]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = true
         }
         
         fromVC.present(categoryVC, animated: true)
