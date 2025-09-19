@@ -104,7 +104,9 @@ class TransactionDetailViewModel: TransactionUpdatable {
         }
         
         if let sheet = dateVC.sheetPresentationController {
-            sheet.detents = [.medium()]
+            sheet.detents = [.custom { _ in
+                return dateVC.preferredContentSize.height
+            }]
         }
         fromVC.present(dateVC, animated: true)
     }
@@ -150,7 +152,9 @@ class TransactionDetailViewModel: TransactionUpdatable {
         }
         
         if let sheet = assetSelectionVC.sheetPresentationController {
-            sheet.detents = [.medium()]
+            sheet.detents = [.custom { _ in
+                return assetSelectionVC.preferredContentSize.height
+            }]
         }
         fromVC.present(assetSelectionVC, animated: true, completion: nil)
     }

@@ -36,6 +36,8 @@ class AssetSelectionViewController: UIViewController {
 
         configure()
         configureTableView()
+        
+        preferredContentSize.height = 375
     }
     
     private func configure() {

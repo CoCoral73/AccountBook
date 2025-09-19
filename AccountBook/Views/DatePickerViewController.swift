@@ -33,4 +33,9 @@ class DatePickerViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        preferredContentSize = CGSize(width: view.bounds.width, height: datePicker.bounds.height)
+    }
 }

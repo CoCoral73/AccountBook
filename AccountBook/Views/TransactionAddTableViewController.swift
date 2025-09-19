@@ -141,8 +141,11 @@ class TransactionAddTableViewController: UITableViewController {
             
             self.viewModel.setAssetItemInput(with: asset)
         }
+        
         if let sheet = assetSelectionVC.sheetPresentationController {
-            sheet.detents = [.medium()]
+            sheet.detents = [.custom { _ in
+                return assetSelectionVC.preferredContentSize.height
+            }]
         }
         present(assetSelectionVC, animated: true, completion: nil)
     }

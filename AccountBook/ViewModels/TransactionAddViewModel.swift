@@ -69,7 +69,9 @@ class TransactionAddViewModel: TransactionUpdatable {
         }
         
         if let sheet = dateVC.sheetPresentationController {
-            sheet.detents = [.medium()]
+            sheet.detents = [.custom { _ in
+                return dateVC.preferredContentSize.height
+            }]
         }
         fromVC.present(dateVC, animated: true)
     }

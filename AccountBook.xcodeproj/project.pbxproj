@@ -6,11 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-		908B35782E7D5A0C005AF08C /* DGCharts in Frameworks */ = {isa = PBXBuildFile; productRef = 908B35772E7D5A0C005AF08C /* DGCharts */; };
-		908B357A2E7D5A0C005AF08C /* DGChartsDynamic in Frameworks */ = {isa = PBXBuildFile; productRef = 908B35792E7D5A0C005AF08C /* DGChartsDynamic */; };
-/* End PBXBuildFile section */
-
 /* Begin PBXFileReference section */
 		90E579562E15002700323D5A /* AccountBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AccountBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -41,8 +36,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				908B357A2E7D5A0C005AF08C /* DGChartsDynamic in Frameworks */,
-				908B35782E7D5A0C005AF08C /* DGCharts in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,8 +78,6 @@
 			);
 			name = AccountBook;
 			packageProductDependencies = (
-				908B35772E7D5A0C005AF08C /* DGCharts */,
-				908B35792E7D5A0C005AF08C /* DGChartsDynamic */,
 			);
 			productName = AccountBook;
 			productReference = 90E579562E15002700323D5A /* AccountBook.app */;
@@ -117,7 +108,6 @@
 			mainGroup = 90E5794D2E15002700323D5A;
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
-				908B35762E7D5A0C005AF08C /* XCRemoteSwiftPackageReference "Charts" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 90E579572E15002700323D5A /* Products */;
@@ -165,7 +155,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -198,7 +188,7 @@
 				INFOPLIST_KEY_UIMainStoryboardFile = Main;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.6;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.6;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -357,30 +347,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		908B35762E7D5A0C005AF08C /* XCRemoteSwiftPackageReference "Charts" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielgindi/Charts";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 5.1.0;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		908B35772E7D5A0C005AF08C /* DGCharts */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 908B35762E7D5A0C005AF08C /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = DGCharts;
-		};
-		908B35792E7D5A0C005AF08C /* DGChartsDynamic */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 908B35762E7D5A0C005AF08C /* XCRemoteSwiftPackageReference "Charts" */;
-			productName = DGChartsDynamic;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 90E5794E2E15002700323D5A /* Project object */;
 }

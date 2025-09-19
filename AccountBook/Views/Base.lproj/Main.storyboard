@@ -1183,14 +1183,14 @@
             <objects>
                 <viewController storyboardIdentifier="AssetSelectionViewController" id="zZj-xw-xdj" customClass="AssetSelectionViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="LQr-KX-SCL">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="511"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oql-2Z-37e">
-                                <rect key="frame" x="0.0" y="59" width="196.33333333333334" height="793"/>
+                                <rect key="frame" x="0.0" y="59" width="196.33333333333334" height="452"/>
                                 <subviews>
                                     <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBT-Hg-1Bw">
-                                        <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="198"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="112.66666666666667"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="현금">
@@ -1201,14 +1201,14 @@
                                         </connections>
                                     </button>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oA7-r2-QsC">
-                                        <rect key="frame" x="0.0" y="198" width="196.33333333333334" height="0.33333333333334281"/>
+                                        <rect key="frame" x="0.0" y="112.66666666666666" width="196.33333333333334" height="0.3333333333333286"/>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.33000000000000002" id="5Qh-HQ-KTb"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApX-MT-fIt">
-                                        <rect key="frame" x="0.0" y="198.33333333333331" width="196.33333333333334" height="198"/>
+                                        <rect key="frame" x="0.0" y="113" width="196.33333333333334" height="113"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="계좌">
@@ -1219,14 +1219,14 @@
                                         </connections>
                                     </button>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xwA-qE-KZT">
-                                        <rect key="frame" x="0.0" y="396.33333333333331" width="196.33333333333334" height="0.33333333333331439"/>
+                                        <rect key="frame" x="0.0" y="226" width="196.33333333333334" height="0.33333333333334281"/>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.33000000000000002" id="fub-xb-eYd"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O4-EQ-5xF" customClass="AutoUpdateColorButton" customModule="AccountBook" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="396.66666666666669" width="196.33333333333334" height="198.00000000000006"/>
+                                        <rect key="frame" x="0.0" y="226" width="196.33333333333334" height="113"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="체크카드">
@@ -1237,14 +1237,14 @@
                                         </connections>
                                     </button>
                                     <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ezZ-sa-Bxe">
-                                        <rect key="frame" x="0.0" y="594.66666666666663" width="196.33333333333334" height="0.33333333333337123"/>
+                                        <rect key="frame" x="0.0" y="339" width="196.33333333333334" height="0.33333333333331439"/>
                                         <color key="backgroundColor" systemColor="systemGray4Color"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="0.33000000000000002" id="hdP-h8-mgr"/>
                                         </constraints>
                                     </view>
                                     <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHV-r6-WFS" customClass="AutoUpdateColorButton" customModule="AccountBook" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="595" width="196.33333333333334" height="198"/>
+                                        <rect key="frame" x="0.0" y="339.33333333333331" width="196.33333333333334" height="112.66666666666669"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                         <state key="normal" title="신용카드">
@@ -1262,14 +1262,14 @@
                                 </constraints>
                             </stackView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5n-zy-2ws" userLabel="세로경계선">
-                                <rect key="frame" x="196.33333333333334" y="59" width="0.33333333333334281" height="793"/>
+                                <rect key="frame" x="196.33333333333334" y="59" width="0.33333333333334281" height="452"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="0.5" id="vGO-9U-Zwz"/>
                                 </constraints>
                             </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="sbB-49-779">
-                                <rect key="frame" x="196.66666666666663" y="59" width="196.33333333333337" height="793"/>
+                                <rect key="frame" x="196.66666666666663" y="59" width="196.33333333333337" height="452"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
@@ -1316,6 +1316,7 @@
                             <constraint firstAttribute="trailing" secondItem="sbB-49-779" secondAttribute="trailing" id="xRA-rX-0CT"/>
                         </constraints>
                     </view>
+                    <size key="freeformSize" width="393" height="511"/>
                     <connections>
                         <outlet property="accountButton" destination="ApX-MT-fIt" id="LRS-D8-6JC"/>
                         <outlet property="cashButton" destination="VBT-Hg-1Bw" id="D6b-ci-5J0"/>
@@ -1326,7 +1327,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kx5-X4-AHk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3678.6259541984732" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="3495" y="68"/>
         </scene>
         <!--Day Picker View Controller-->
         <scene sceneID="Yzo-lp-HVQ">
@@ -1924,6 +1925,9 @@
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="XoC-Ll-MkV">
                                 <rect key="frame" x="0.0" y="59" width="393" height="374.66666666666669"/>
                                 <color key="tintColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="374.67000000000002" id="DW9-zC-50n"/>
+                                </constraints>
                                 <date key="minimumDate" timeIntervalSinceReferenceDate="599569200">
                                     <!--2020-01-01 11:00:00 +0000-->
                                 </date>
@@ -1950,7 +1954,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLc-9q-2wE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1856" y="-887"/>
+            <point key="canvasLocation" x="1855.7251908396945" y="-887.32394366197184"/>
         </scene>
         <!--Title-->
         <scene sceneID="x3n-4H-7hd">
