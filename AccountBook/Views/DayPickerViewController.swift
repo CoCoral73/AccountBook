@@ -9,8 +9,10 @@ import UIKit
 
 class DayPickerViewController: UIViewController {
     
+    @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var titleLabel: UIBarButtonItem!
     @IBOutlet weak var collectionView: IntrinsicCollectionView!
+    @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
     var titleString: String = ""
     var onDidSelectDay: ((String, Int16) -> Void)?
@@ -31,7 +33,11 @@ class DayPickerViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        preferredContentSize = CGSize(width: view.bounds.width, height: 44 + collectionView.contentSize.height + view.safeAreaInsets.bottom)
+        collectionViewHeightConstraint.constant = collectionView.collectionViewLayout.collectionViewContentSize.height
+            
+        // 툴바 + 컬렉션뷰 + safeArea.bottom 만큼만 뷰 높이 설정
+        let totalHeight = toolBar.bounds.height + collectionViewHeightConstraint.constant
+        preferredContentSize = CGSize(width: view.bounds.width, height: totalHeight)
     }
 
 }

@@ -1338,8 +1338,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="hfa-96-Gmy">
-                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="400"/>
                                 <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="400" id="3Sb-95-YNM"/>
+                                </constraints>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="1zz-Cg-wvh">
                                     <size key="itemSize" width="128" height="128"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
@@ -1401,13 +1404,14 @@
                             <constraint firstItem="hfa-96-Gmy" firstAttribute="top" secondItem="Y3c-G0-h6W" secondAttribute="bottom" id="NeM-6x-xn8"/>
                             <constraint firstItem="xG4-bS-2RL" firstAttribute="trailing" secondItem="Y3c-G0-h6W" secondAttribute="trailing" id="Vb5-59-XOh"/>
                             <constraint firstItem="Y3c-G0-h6W" firstAttribute="leading" secondItem="xG4-bS-2RL" secondAttribute="leading" id="cDq-5p-3IF"/>
-                            <constraint firstItem="xG4-bS-2RL" firstAttribute="bottom" secondItem="hfa-96-Gmy" secondAttribute="bottom" id="de1-wY-lI0"/>
                             <constraint firstItem="Y3c-G0-h6W" firstAttribute="top" secondItem="xG4-bS-2RL" secondAttribute="top" id="gEk-Xe-GL7"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="collectionView" destination="hfa-96-Gmy" id="kwQ-D8-TQs"/>
+                        <outlet property="collectionViewHeightConstraint" destination="3Sb-95-YNM" id="RWU-eL-WXG"/>
                         <outlet property="titleLabel" destination="VyW-Ww-O98" id="2iZ-RO-c0n"/>
+                        <outlet property="toolBar" destination="Y3c-G0-h6W" id="N8W-xW-6tr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0wW-tn-8ly" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -1582,7 +1586,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="selectDateButtonTapped:" destination="akc-4k-Z8V" eventType="touchUpInside" id="09l-37-LQe"/>
+                                                    <action selector="dayButtonTapped:" destination="akc-4k-Z8V" eventType="touchUpInside" id="09l-37-LQe"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="61Q-ap-jkS" userLabel="텍스트필드 밑선">
@@ -1619,7 +1623,7 @@
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="selectDateButtonTapped:" destination="akc-4k-Z8V" eventType="touchUpInside" id="5sp-zq-knZ"/>
+                                                    <action selector="dayButtonTapped:" destination="akc-4k-Z8V" eventType="touchUpInside" id="5sp-zq-knZ"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TSN-qh-nKc" userLabel="텍스트필드 밑선">
@@ -1699,15 +1703,15 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="accountButton" destination="eBh-zZ-ReI" id="aoc-wY-v2D"/>
                         <outlet property="accountStackView" destination="tRj-o0-WGz" id="I8I-Bx-nj2"/>
                         <outlet property="balanceTextField" destination="UNO-ZD-ZtM" id="Vu1-hh-uc7"/>
                         <outlet property="cardStackView" destination="QUs-Zd-ohr" id="inE-uy-ywx"/>
                         <outlet property="creditCardStackView" destination="0SQ-iG-u5E" id="KaT-Rf-sz7"/>
                         <outlet property="nameTextField" destination="sUb-my-ELU" id="B7X-mL-Sk2"/>
                         <outlet property="segControl" destination="RI9-ks-QfJ" id="dpW-Jr-ePn"/>
-                        <outlet property="selectAccountButton" destination="eBh-zZ-ReI" id="aoc-wY-v2D"/>
-                        <outlet property="selectStartDateButton" destination="8By-Pj-mQL" id="GgJ-d0-QtI"/>
-                        <outlet property="selectWithdrawalDateButton" destination="T5E-WP-J54" id="Voh-7X-wte"/>
+                        <outlet property="startDayButton" destination="8By-Pj-mQL" id="GgJ-d0-QtI"/>
+                        <outlet property="withdrawalDayButton" destination="T5E-WP-J54" id="Voh-7X-wte"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0K-3i-4wP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

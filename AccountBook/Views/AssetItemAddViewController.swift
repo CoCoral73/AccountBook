@@ -13,9 +13,9 @@ class AssetItemAddViewController: UIViewController {
     
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var balanceTextField: UITextField!
-    @IBOutlet weak var selectAccountButton: AutoDismissKeyboardButton!
-    @IBOutlet weak var selectWithdrawalDateButton: AutoDismissKeyboardButton!
-    @IBOutlet weak var selectStartDateButton: AutoDismissKeyboardButton!
+    @IBOutlet weak var accountButton: AutoDismissKeyboardButton!
+    @IBOutlet weak var withdrawalDayButton: AutoDismissKeyboardButton!
+    @IBOutlet weak var startDayButton: AutoDismissKeyboardButton!
     
     @IBOutlet weak var accountStackView: UIStackView!
     @IBOutlet weak var cardStackView: UIStackView!
@@ -36,7 +36,7 @@ class AssetItemAddViewController: UIViewController {
         super.viewDidLoad()
 
         configureSegControl()
-        configureSelectAccountButton()
+        configureAccountButton()
         configureUI()
         configureTextField()
         configureTapGesture()
@@ -57,28 +57,28 @@ class AssetItemAddViewController: UIViewController {
         viewModel.setType(with: AssetType(rawValue: idx + 1)!)
     }
     
-    func configureSelectAccountButton() {
+    func configureAccountButton() {
         var items: [UIAction] = []
         items.append(UIAction(title: "선택 안함") { _ in
             self.viewModel.setLinkedAccount(with: nil)
-            self.selectAccountButton.setTitle("선택 안함", for: .normal)
+            self.accountButton.setTitle("선택 안함", for: .normal)
         })
         
         items.append(contentsOf: AssetItemManager.shared.bankAccount.map { account in
           UIAction(title: account.name, image: nil) { _ in
               self.viewModel.setLinkedAccount(with: account)
-              self.selectAccountButton.setTitle(account.name, for: .normal)
+              self.accountButton.setTitle(account.name, for: .normal)
           }
         })
         
         let menu = UIMenu(children: items)
-        selectAccountButton.menu = menu
-        selectAccountButton.showsMenuAsPrimaryAction = true
+        accountButton.menu = menu
+        accountButton.showsMenuAsPrimaryAction = true
     }
     
     func configureUI() {
-        selectWithdrawalDateButton.setTitle(viewModel.selectWithdrawlDateButtonTitle, for: .normal)
-        selectStartDateButton.setTitle(viewModel.selectStartDateButtonTitle, for: .normal)
+        withdrawalDayButton.setTitle(viewModel.selectWithdrawlDateButtonTitle, for: .normal)
+        startDayButton.setTitle(viewModel.selectStartDateButtonTitle, for: .normal)
     }
     
     func configureTapGesture() {
@@ -91,22 +91,8 @@ class AssetItemAddViewController: UIViewController {
         view.endEditing(true)
     }
     
-    @IBAction func selectDateButtonTapped(_ sender: UIButton) {
-        let pickerVC = storyboard?.instantiateViewController(withIdentifier: "DayPickerViewController") as! DayPickerViewController
-        pickerVC.titleString = sender.tag == 0 ? "출금일" : "시작일"
-        pickerVC.onDidSelectDay = { (title, day) in
-            if title == "출금일" {
-                self.viewModel.setWithdrawalDay(with: day)
-                self.selectWithdrawalDateButton.setTitle(self.viewModel.selectWithdrawlDateButtonTitle, for: .normal)
-            } else if title == "시작일" {
-                self.viewModel.setStartDay(with: day)
-                self.selectStartDateButton.setTitle(self.viewModel.selectStartDateButtonTitle, for: .normal)
-            }
-        }
-        
-        pickerVC.modalPresentationStyle = .custom
-        pickerVC.transitioningDelegate = self
-        present(pickerVC, animated: true)
+    @IBAction func dayButtonTapped(_ sender: UIButton) {
+        viewModel.handleDayButton(tag: sender.tag, storyboard: storyboard, fromVC: self)
     }
     
     
@@ -142,19 +128,5 @@ extension AssetItemAddViewController: UITextFieldDelegate {
         } else {
             view.endEditing(true)
         }
-    }
-}
-
-//MARK: Month Picker View, Custom Height
-extension AssetItemAddViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return DayPickerPresentationController(presentedViewController: presented, presenting: presentingViewController)
-    }
-}
-class DayPickerPresentationController: UIPresentationController {
-    override var frameOfPresentedViewInContainerView: CGRect {
-        guard let bounds = containerView?.bounds else { return .zero }
-        let height = 300 + containerView!.safeAreaInsets.bottom
-        return CGRect(x: 0, y: bounds.height - height, width: bounds.width, height: height)
     }
 }
