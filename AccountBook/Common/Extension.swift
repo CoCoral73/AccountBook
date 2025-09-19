@@ -39,6 +39,12 @@ extension UIView {
     }
 }
 
+extension Character {
+    var isEmoji: Bool {
+        return unicodeScalars.contains { $0.properties.isEmoji }
+    }
+}
+
 extension String {
     //이모지 -> 이미지
     func toImage(withDimension dimension: CGFloat = 40, scale: CGFloat = UIScreen.main.scale) -> UIImage? {

@@ -15,11 +15,11 @@ class CategoryViewModel {
     
     init(isIncome: Bool) {
         self.isIncome = isIncome
-        self.categories = isIncome ? CategoryManager.shared.incomeCategories : CategoryManager.shared.expenseCategories
+        loadCategories()
     }
     
     var numberOfItems: Int {
-        return (isIncome ? CategoryManager.shared.incomeCategories.count : CategoryManager.shared.expenseCategories.count) + 1
+        return categories.count + 1
     }
     
     func viewModelOfCell(_ index: Int) -> CategoryCellViewModel {
@@ -34,12 +34,21 @@ class CategoryViewModel {
             }) else {
                 fatalError("CategoryAddViewController 생성 에러")
             }
+            addVC.viewModel.onDidAddCategory = {
+                self.loadCategories()
+                (fromVC as! CategoryViewController).collectionView.reloadData()
+            }
             
-            addVC.modalPresentationStyle = .fullScreen
-            fromVC.present(addVC, animated: true)
+            let navVC = UINavigationController(rootViewController: addVC)
+            navVC.modalPresentationStyle = .fullScreen
+            fromVC.present(navVC, animated: true)
         } else {
             let selected = categories[index]
             onDidSelectCategory?(selected)
         }
+    }
+    
+    func loadCategories() {
+        categories = isIncome ? CategoryManager.shared.incomeCategories : CategoryManager.shared.expenseCategories
     }
 }

@@ -21,15 +21,28 @@ class CategoryManager {
         expenseCategories = categories.filter { !$0.isIncome }
     }
 
-    func addCategory(_ category: Category) {
-        categories.append(category)
+    func addCategory(icon: String, name: String, isIncome: Bool) {
+        let category = Category(context: CoreDataManager.shared.context)
+        category.id = UUID()
+        category.iconName = icon
+        category.name = name
+        category.isIncome = isIncome
+    
+        if isIncome {
+            incomeCategories.append(category)
+        } else {
+            expenseCategories.append(category)
+        }
         CoreDataManager.shared.saveContext()
     }
 
     func deleteCategory(_ category: Category) {
-        if let index = categories.firstIndex(of: category) {
-            categories.remove(at: index)
+        if category.isIncome, let index = incomeCategories.firstIndex(of: category) {
+            incomeCategories.remove(at: index)
+        } else if !category.isIncome, let index = expenseCategories.firstIndex(of: category) {
+            expenseCategories.remove(at: index)
         }
+        
         CoreDataManager.shared.context.delete(category)
         CoreDataManager.shared.saveContext()
     }

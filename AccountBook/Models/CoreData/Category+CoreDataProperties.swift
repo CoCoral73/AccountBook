@@ -18,7 +18,6 @@ extension Category {
 
     @NSManaged public var iconName: String
     @NSManaged public var id: UUID
-    @NSManaged public var isDefault: Bool
     @NSManaged public var isIncome: Bool
     @NSManaged public var name: String
     @NSManaged public var transactions: NSSet?

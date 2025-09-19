@@ -7,6 +7,23 @@
 
 import UIKit
 
+class UIEmojiTextField: UITextField {
+    
+    func setEmoji() {
+        _ = self.textInputMode
+    }
+    
+    override var textInputMode: UITextInputMode? {
+        for mode in UITextInputMode.activeInputModes {
+            if mode.primaryLanguage == "emoji" {
+                self.keyboardType = .default // do not remove this
+                return mode
+            }
+        }
+        return nil
+    }
+}
+
 class AutoDismissKeyboardButton: UIButton {
     
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
