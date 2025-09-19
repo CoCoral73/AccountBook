@@ -571,6 +571,49 @@
             </objects>
             <point key="canvasLocation" x="2782.4427480916029" y="-27.464788732394368"/>
         </scene>
+        <!--Item-->
+        <scene sceneID="pY2-yM-nNx">
+            <objects>
+                <viewController storyboardIdentifier="ChartViewController" id="JqY-wO-l7i" customClass="ChartViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="46b-bo-Q5A">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GnE-q7-d0v">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <items>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="oan-d0-SPd"/>
+                                    <barButtonItem title="2025년 9월" id="J6U-i2-7HT">
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <connections>
+                                            <action selector="periodButtonTapped:" destination="JqY-wO-l7i" id="KOY-hh-xwr"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="kFs-mv-yCk"/>
+                                </items>
+                                <toolbarAppearance key="standardAppearance">
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="shadowColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </toolbarAppearance>
+                            </toolbar>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="8hR-gB-LQf"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="GnE-q7-d0v" firstAttribute="trailing" secondItem="8hR-gB-LQf" secondAttribute="trailing" id="bJa-AQ-MKJ"/>
+                            <constraint firstItem="GnE-q7-d0v" firstAttribute="top" secondItem="8hR-gB-LQf" secondAttribute="top" id="m6y-ta-Gz6"/>
+                            <constraint firstItem="GnE-q7-d0v" firstAttribute="leading" secondItem="8hR-gB-LQf" secondAttribute="leading" id="rWD-6t-Rb8"/>
+                        </constraints>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Item" id="mqR-go-BIU"/>
+                    <connections>
+                        <outlet property="periodButton" destination="J6U-i2-7HT" id="Kzg-Mh-jGh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="wir-cZ-gSn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="956" y="1425"/>
+        </scene>
         <!--상세 보기-->
         <scene sceneID="dur-26-N6X">
             <objects>
@@ -2005,6 +2048,7 @@
                     </tabBar>
                     <connections>
                         <segue destination="2yz-Vf-2Oc" kind="relationship" relationship="viewControllers" id="8Xv-6K-Ngp"/>
+                        <segue destination="JqY-wO-l7i" kind="relationship" relationship="viewControllers" id="oB1-Hm-gdJ"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x6i-mx-TJj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
