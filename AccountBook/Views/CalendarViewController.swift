@@ -27,7 +27,7 @@ class CalendarViewController: UIViewController {
     @IBOutlet weak var incomeButton: UIButton!
     @IBOutlet weak var expenseButton: UIButton!
     
-    var viewModel: CalendarViewModel = CalendarViewModel()
+    var viewModel: CalendarViewModel!
     
     private var dataSource: UICollectionViewDiffableDataSource<Int, UUID>!
     private var isExpanded = false  //Add Button

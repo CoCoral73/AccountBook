@@ -15,12 +15,13 @@ final class CoreDataManager {
 
     // Persistent Container
     let persistentContainer: NSPersistentContainer
-
     // 편의 뷰 컨텍스트 참조
     var context: NSManagedObjectContext {
         return persistentContainer.viewContext
     }
 
+    let calendar = Calendar.current
+    
     // MARK: - 초기화
     private init() {
         persistentContainer = NSPersistentContainer(name: "AccountBook")
@@ -101,7 +102,6 @@ final class CoreDataManager {
     
     // MARK: - 특정 날짜 거래 내역 조회
     func fetchTransactions(with date: Date) -> [Transaction] {
-        let calendar = Calendar.current
         let startOfDay = calendar.startOfDay(for: date)
         guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
             return []
@@ -121,8 +121,6 @@ final class CoreDataManager {
     
     //MARK: - 월별 거래 내역 조회
     func fetchTransactions(containing date: Date) -> [Transaction] {
-        let calendar = Calendar.current
-        
         // 1) 이번 달 1일 00:00
         let comps = calendar.dateComponents([.year, .month], from: date)
         let startOfMonth = calendar.date(from: comps)!
@@ -142,6 +140,40 @@ final class CoreDataManager {
         request.sortDescriptors = [
             NSSortDescriptor(key: "date", ascending: true)
         ]
+        
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Core Data fetch error: \(error)")
+            return []
+        }
+    }
+    
+    //MARK: - 연간 거래 내역 조회
+    func fetchTransactions(containingYear year: Int) -> [Transaction] {
+        let start = calendar.date(from: DateComponents(year: year, month: 1, day: 1))!
+        let end = calendar.date(from: DateComponents(year: year + 1, month: 1, day: 1))!
+        
+        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        request.predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end as NSDate)
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Core Data fetch error: \(error)")
+            return []
+        }
+    }
+    
+    //MARK: - 사용자 설정 기간 거래 내역 조회
+    func fetchTransactions(startDate: Date, endDate: Date) -> [Transaction] {
+        let start = calendar.startOfDay(for: startDate)
+        let end = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: endDate)!)
+        
+        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        request.predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end as NSDate)
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         
         do {
             return try context.fetch(request)
