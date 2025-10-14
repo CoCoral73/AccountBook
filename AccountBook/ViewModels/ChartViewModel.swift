@@ -14,48 +14,82 @@ enum StatisticPeriod {
 
 class ChartViewModel {
     
-    var period: StatisticPeriod = .monthly
-    var startDate: Date  //월별, 연간
-    var endDate: Date?  //커스텀
+    private var periodType: StatisticPeriod = .monthly { didSet { loadTransactions() } }
+    private var startDate: Date, endDate: Date
+    var isIncome: Bool = false
+    
+    private var txs: [Transaction] = []
+    private var incomeData: [Category: Int64] = [:]
+    private var expenseData: [Category: Int64] = [:]
     
     init(_ date: Date = Date()) {
         startDate = date
+        endDate = date
+        
+        loadTransactions()
     }
     
-    func setChartData() -> PieChartData {
-        let categoryData: [(category: String, amount: Double)] = [
-            ("식비", 300.0),
-            ("교통", 150.0),
-            ("취미", 200.0),
-            ("쇼핑", 100.0)
-        ]
+    var chartData: PieChartData { makeChartData() }
+    
+    func setPeriod(_ periodType: StatisticPeriod, _ date: Date, _ endDate: Date = Date()) {
+        self.startDate = date
+        self.endDate = endDate
+        self.periodType = periodType
+    }
+    
+    func aggregateAmountByCategory() {
+        incomeData.removeAll()
+        expenseData.removeAll()
+        
+        for tx in txs {
+            if tx.isIncome {
+                incomeData[tx.category, default: 0] += tx.amount
+            } else {
+                expenseData[tx.category, default: 0] += tx.amount
+            }
+        }
+    }
+    
+    func loadTransactions() {
+        switch periodType {
+        case .monthly:
+            txs = CoreDataManager.shared.fetchTransactions(forMonth: startDate)
+        case .yearly:
+            txs = CoreDataManager.shared.fetchTransactions(forYear: startDate)
+        case .custom:
+            txs = CoreDataManager.shared.fetchTransactions(startDate: startDate, endDate: endDate)
+        }
+        
+        aggregateAmountByCategory()
+    }
 
-        let entries = categoryData.map { PieChartDataEntry(value: $0.amount, label: $0.category) }
+    func makeChartData() -> PieChartData {
+        let data = isIncome ? incomeData : expenseData
+        let sorted = data.sorted(by: { $0.value > $1.value })   //내림차순 정렬
+        let entries = sorted.map { PieChartDataEntry(value: Double($0.value), label: $0.key.name) }
         
         //label: 각 데이터의 레이블 표시
-        let dataSet = PieChartDataSet(entries: entries, label: "테스트")
+        let dataSet = PieChartDataSet(entries: entries)
 
         // 색상 팔레트
-        dataSet.colors = ChartColorTemplates.material() + ChartColorTemplates.pastel()
+        dataSet.colors = ChartColorTemplates.colorful()
 
         // 레이블을 섹션 바깥으로 빼고 선 연결
+        // 값은 섹션 안쪽에 표시, 레이블만 연결선으로 표시
         dataSet.xValuePosition = .outsideSlice
-        dataSet.yValuePosition = .outsideSlice
-        dataSet.valueLinePart1OffsetPercentage = 0.8
-        dataSet.valueLinePart1Length = 0.3
-        dataSet.valueLinePart2Length = 0.4
+        dataSet.yValuePosition = .insideSlice
+        dataSet.valueLinePart1OffsetPercentage = 1.0
+        dataSet.valueLinePart1Length = 0.8
+        dataSet.valueLinePart2Length = 0.3
         dataSet.valueLineWidth = 1.0
         dataSet.valueLineColor = .darkGray
 
-        let data = PieChartData(dataSet: dataSet)
-        let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
-        formatter.maximumFractionDigits = 1
-        data.setValueFormatter(DefaultValueFormatter(formatter: formatter))
-        data.setValueFont(.systemFont(ofSize: 14, weight: .bold))
-        data.setValueTextColor(.black)
+        let chartData = PieChartData(dataSet: dataSet)
+        chartData.setValueFormatter(PercentValueFormatter())
+        chartData.setValueFont(.systemFont(ofSize: 14, weight: .bold))
+        chartData.setValueTextColor(.black)
 
-        return data
+        return chartData
         
     }
 }

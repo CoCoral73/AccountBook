@@ -101,7 +101,7 @@ final class CoreDataManager {
     }
     
     // MARK: - 특정 날짜 거래 내역 조회
-    func fetchTransactions(with date: Date) -> [Transaction] {
+    func fetchTransactions(forDay date: Date) -> [Transaction] {
         let startOfDay = calendar.startOfDay(for: date)
         guard let endOfDay = calendar.date(byAdding: .day, value: 1, to: startOfDay) else {
             return []
@@ -120,7 +120,7 @@ final class CoreDataManager {
     }
     
     //MARK: - 월별 거래 내역 조회
-    func fetchTransactions(containing date: Date) -> [Transaction] {
+    func fetchTransactions(forMonth date: Date) -> [Transaction] {
         // 1) 이번 달 1일 00:00
         let comps = calendar.dateComponents([.year, .month], from: date)
         let startOfMonth = calendar.date(from: comps)!
@@ -150,7 +150,8 @@ final class CoreDataManager {
     }
     
     //MARK: - 연간 거래 내역 조회
-    func fetchTransactions(containingYear year: Int) -> [Transaction] {
+    func fetchTransactions(forYear date: Date) -> [Transaction] {
+        let year = calendar.component(.year, from: date)
         let start = calendar.date(from: DateComponents(year: year, month: 1, day: 1))!
         let end = calendar.date(from: DateComponents(year: year + 1, month: 1, day: 1))!
         
@@ -216,18 +217,5 @@ final class CoreDataManager {
         let request: NSFetchRequest<Installment> = Installment.fetchRequest()
         return (try? context.fetch(request)) ?? []
     }
-//
-//    // MARK: - 카테고리별 합계 조회 예시
-//    /// 카테고리별 총합을 딕셔너리로 반환합니다.
-//    func fetchTotalsByCategory(for date: Date) -> [String: Int64] {
-//        let transactions = fetchTransactionsForMonth(containing: date)
-//        var totals: [String: Int64] = [:]
-//
-//        for tx in transactions {
-//            let categoryName = tx.category.name
-//            let current = totals[categoryName] ?? 0
-//            totals[categoryName] = current + tx.amount
-//        }
-//        return totals
-//    }
+
 }

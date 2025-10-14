@@ -225,7 +225,7 @@ class CalendarViewModel {
     }
     
     func loadTransactions() {
-        let allTx = CoreDataManager.shared.fetchTransactions(containing: currentMonth)
+        let allTx = CoreDataManager.shared.fetchTransactions(forMonth: currentMonth)
         
         transactions = Dictionary(grouping: allTx) { tx in
             Calendar.current.component(.day, from: tx.date)
@@ -234,7 +234,7 @@ class CalendarViewModel {
     }
     
     func loadTransactions(with date: Date) {
-        let tx = CoreDataManager.shared.fetchTransactions(with: date)
+        let tx = CoreDataManager.shared.fetchTransactions(forDay: date)
         
         let day = calendar.component(.day, from: date)
         transactions[day] = tx

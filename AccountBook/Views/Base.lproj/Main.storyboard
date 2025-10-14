@@ -597,10 +597,10 @@
                                 </toolbarAppearance>
                             </toolbar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="moP-oq-Ld5" customClass="PieChartView" customModule="DGCharts">
-                                <rect key="frame" x="0.0" y="103" width="393" height="250"/>
+                                <rect key="frame" x="0.0" y="103" width="393" height="300"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="zUY-J6-O3Y"/>
+                                    <constraint firstAttribute="height" constant="300" id="zUY-J6-O3Y"/>
                                 </constraints>
                             </view>
                         </subviews>
