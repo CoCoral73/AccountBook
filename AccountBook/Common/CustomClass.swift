@@ -8,21 +8,6 @@
 import UIKit
 import DGCharts
 
-final class PercentValueFormatter: ValueFormatter {
-    private let fmt = NumberFormatter()
-
-    init(fractionDigits: Int = 1) {
-        fmt.numberStyle = .decimal
-        fmt.minimumFractionDigits = fractionDigits
-        fmt.maximumFractionDigits = fractionDigits
-        fmt.roundingMode = .halfUp
-    }
-
-    func stringForValue(_ value: Double, entry: ChartDataEntry, dataSetIndex: Int, viewPortHandler: ViewPortHandler?) -> String {
-        return (fmt.string(from: NSNumber(value: value)) ?? "0") + "%"
-    }
-}
-
 class UIEmojiTextField: UITextField {
     
     func setEmoji() {

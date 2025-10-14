@@ -72,7 +72,7 @@ class ChartViewModel {
         let dataSet = PieChartDataSet(entries: entries)
 
         // 색상 팔레트
-        dataSet.colors = ChartColorTemplates.colorful()
+        dataSet.colors = chartColors
 
         // 레이블을 섹션 바깥으로 빼고 선 연결
         // 값은 섹션 안쪽에 표시, 레이블만 연결선으로 표시
