@@ -31,13 +31,17 @@ class ChartViewModel {
     
     var chartData: PieChartData { makeChartData() }
     
+    func reloadChart() {
+        loadTransactions()
+    }
+    
     func setPeriod(_ periodType: StatisticPeriod, _ date: Date, _ endDate: Date = Date()) {
         self.startDate = date
         self.endDate = endDate
         self.periodType = periodType
     }
     
-    func aggregateAmountByCategory() {
+    private func aggregateAmountByCategory() {
         incomeData.removeAll()
         expenseData.removeAll()
         
@@ -50,7 +54,7 @@ class ChartViewModel {
         }
     }
     
-    func loadTransactions() {
+    private func loadTransactions() {
         switch periodType {
         case .monthly:
             txs = CoreDataManager.shared.fetchTransactions(forMonth: startDate)
@@ -63,7 +67,7 @@ class ChartViewModel {
         aggregateAmountByCategory()
     }
 
-    func makeChartData() -> PieChartData {
+    private func makeChartData() -> PieChartData {
         let data = isIncome ? incomeData : expenseData
         let sorted = data.sorted(by: { $0.value > $1.value })   //내림차순 정렬
         let entries = sorted.map { PieChartDataEntry(value: Double($0.value), label: $0.key.name) }
@@ -80,13 +84,13 @@ class ChartViewModel {
         dataSet.yValuePosition = .insideSlice
         dataSet.valueLinePart1OffsetPercentage = 1.0
         dataSet.valueLinePart1Length = 0.8
-        dataSet.valueLinePart2Length = 0.3
+        dataSet.valueLinePart2Length = 0.2
         dataSet.valueLineWidth = 1.0
         dataSet.valueLineColor = .darkGray
 
         let chartData = PieChartData(dataSet: dataSet)
-        chartData.setValueFormatter(PercentValueFormatter())
-        chartData.setValueFont(.systemFont(ofSize: 14, weight: .bold))
+        chartData.setValueFormatter(PercentValueFormatter(entries: entries))
+        chartData.setValueFont(.systemFont(ofSize: 13, weight: .semibold))
         chartData.setValueTextColor(.black)
 
         return chartData
