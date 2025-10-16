@@ -9,15 +9,46 @@ import UIKit
 
 class ChartByCategoryTableViewCell: UITableViewCell {
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        // Initialization code
+    @IBOutlet weak var categoryImgView: UIImageView!
+    @IBOutlet weak var categoryNameLabel: UILabel!
+    @IBOutlet weak var percenBar: UIView!
+    @IBOutlet weak var widthRatioConstraint: NSLayoutConstraint!
+    @IBOutlet weak var percentLabel: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    
+    var viewModel: ChartByCategoryCellViewModel! {
+        didSet {
+            configureUI()
+        }
     }
+    
+    func configureUI() {
+        categoryImgView.image = viewModel.image
+        categoryNameLabel.text = viewModel.nameString
+        percenBar.backgroundColor = viewModel.color
+        updateBarWidth(ratio: viewModel.ratio)
+        percentLabel.text = viewModel.ratioString
+        amountLabel.text = viewModel.amountString
+    }
+    
+    func updateBarWidth(ratio: CGFloat) {
+        
 
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        let newConstraint = NSLayoutConstraint(
+            item: widthRatioConstraint.firstItem as Any,
+            attribute: widthRatioConstraint.firstAttribute,
+            relatedBy: widthRatioConstraint.relation,
+            toItem: widthRatioConstraint.secondItem,
+            attribute: widthRatioConstraint.secondAttribute,
+            multiplier: ratio,
+            constant: widthRatioConstraint.constant
+        )
 
-        // Configure the view for the selected state
+        NSLayoutConstraint.deactivate([widthRatioConstraint])
+        NSLayoutConstraint.activate([newConstraint])
+        widthRatioConstraint = newConstraint
+
+        layoutIfNeeded()
     }
 
 }

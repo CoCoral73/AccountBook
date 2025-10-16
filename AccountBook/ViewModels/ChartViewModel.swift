@@ -30,6 +30,7 @@ class ChartViewModel {
     }
     
     var chartData: PieChartData { makeChartData() }
+    var tableViewViewModels: [ChartByCategoryCellViewModel] = []
     
     func reloadChart() {
         loadTransactions()
@@ -76,7 +77,11 @@ class ChartViewModel {
         let dataSet = PieChartDataSet(entries: entries)
 
         // 색상 팔레트
-        dataSet.colors = chartColors
+        var colors = chartColors
+        if entries.count > colors.count {
+            colors.append(contentsOf: Array(repeating: chartColors.last!, count: entries.count - colors.count))
+        }
+        dataSet.colors = colors
 
         // 레이블을 섹션 바깥으로 빼고 선 연결
         // 값은 섹션 안쪽에 표시, 레이블만 연결선으로 표시
@@ -84,7 +89,7 @@ class ChartViewModel {
         dataSet.yValuePosition = .insideSlice
         dataSet.valueLinePart1OffsetPercentage = 1.0
         dataSet.valueLinePart1Length = 0.8
-        dataSet.valueLinePart2Length = 0.2
+        dataSet.valueLinePart2Length = 0.1
         dataSet.valueLineWidth = 1.0
         dataSet.valueLineColor = .darkGray
 
@@ -93,6 +98,8 @@ class ChartViewModel {
         chartData.setValueFont(.systemFont(ofSize: 13, weight: .semibold))
         chartData.setValueTextColor(.black)
 
+        tableViewViewModels = zip(sorted, colors).map { ChartByCategoryCellViewModel(category: $0.key, amount: Double($0.value), total: chartData.yValueSum, color: $1)}
+        
         return chartData
         
     }

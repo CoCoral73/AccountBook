@@ -15,6 +15,7 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var applyButton: UIBarButtonItem!
     
     @IBOutlet weak var pieChartView: PieChartView!
+    @IBOutlet weak var tableViewByCategory: UITableView!
     
     var viewModel: ChartViewModel!
     
@@ -24,6 +25,7 @@ class ChartViewController: UIViewController {
         super.viewDidLoad()
 
         configurePieChartView()
+        configureTableView()
     }
     
     func configurePieChartView() {
@@ -40,16 +42,25 @@ class ChartViewController: UIViewController {
         pieChartView.data = viewModel.chartData
     }
     
-    func reloadCharts() {
+    func reloadData() {
         viewModel.reloadChart()
         pieChartView.data = viewModel.chartData
         pieChartView.notifyDataSetChanged()
+        
+        tableViewByCategory.reloadData()
+    }
+    
+    func configureTableView() {
+        tableViewByCategory.dataSource = self
+        tableViewByCategory.delegate = self
+        
+        tableViewByCategory.rowHeight = 55
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadCharts()
+        reloadData()
     }
     
     @IBAction func periodButtonTapped(_ sender: UIBarButtonItem) {
@@ -57,6 +68,22 @@ class ChartViewController: UIViewController {
         
         cancelButton.isHidden = !setPeriodMode
         applyButton.isHidden = !setPeriodMode
+    }
+    
+}
+
+extension ChartViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        viewModel.tableViewViewModels.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableViewByCategory.dequeueReusableCell(withIdentifier: Cell.categoryChartCell, for: indexPath) as! ChartByCategoryTableViewCell
+        let vm = viewModel.tableViewViewModels[indexPath.row]
+        
+        cell.viewModel = vm
+        
+        return cell
     }
     
 }
