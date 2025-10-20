@@ -602,26 +602,26 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="1004"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyx-pN-Yrh">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="438"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="586"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="aAw-s8-fha">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="438"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aAw-s8-fha">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="586"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="moP-oq-Ld5" customClass="PieChartView" customModule="DGCharts">
-                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="300"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="270"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="300" id="zUY-J6-O3Y"/>
+                                                            <constraint firstAttribute="height" constant="270" id="zUY-J6-O3Y"/>
                                                         </constraints>
                                                     </view>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-Zj-gJK">
-                                                        <rect key="frame" x="0.0" y="310" width="393" height="128"/>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-Zj-gJK">
+                                                        <rect key="frame" x="0.0" y="270" width="393" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="128" id="JCr-R8-anf"/>
                                                         </constraints>
                                                         <prototypes>
-                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryChartCell" rowHeight="60" id="TUe-uh-LPf" customClass="ChartByCategoryTableViewCell" customModule="AccountBook" customModuleProvider="target">
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableByCategoryInChart" rowHeight="60" id="TUe-uh-LPf" customClass="TableByCategoryCell" customModule="AccountBook" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="50" width="393" height="60"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TUe-uh-LPf" id="H3D-OI-9Nh">
@@ -715,6 +715,77 @@
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iaa-YF-QNB">
+                                                        <rect key="frame" x="0.0" y="398" width="393" height="60"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자산 별 지출" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6un-Tq-IBg">
+                                                                <rect key="frame" x="30" y="30" width="119" height="30"/>
+                                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="YAs-KW-Ua9"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="6un-Tq-IBg" secondAttribute="trailing" constant="20" symbolic="YES" id="dJb-6e-96o"/>
+                                                            <constraint firstAttribute="bottom" secondItem="6un-Tq-IBg" secondAttribute="bottom" id="rPr-vl-tja"/>
+                                                            <constraint firstItem="6un-Tq-IBg" firstAttribute="leading" secondItem="Iaa-YF-QNB" secondAttribute="leading" constant="30" id="xXZ-Re-0f2"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="45" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vAh-nB-O2t">
+                                                        <rect key="frame" x="0.0" y="458" width="393" height="128"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="128" id="tog-x3-9iv"/>
+                                                        </constraints>
+                                                        <prototypes>
+                                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableByAssetInChart" rowHeight="45" id="DdC-o0-IJ7" customClass="TableByAssetCell" customModule="AccountBook" customModuleProvider="target">
+                                                                <rect key="frame" x="0.0" y="50" width="393" height="45"/>
+                                                                <autoresizingMask key="autoresizingMask"/>
+                                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="DdC-o0-IJ7" id="Zky-Yx-TGO">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="393" height="45"/>
+                                                                    <autoresizingMask key="autoresizingMask"/>
+                                                                    <subviews>
+                                                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozg-V6-xVf" userLabel="가로선">
+                                                                            <rect key="frame" x="30" y="22" width="15" height="1"/>
+                                                                            <color key="backgroundColor" systemColor="systemGray3Color"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="1" id="Ng0-If-IvB"/>
+                                                                                <constraint firstAttribute="width" constant="15" id="uZc-Ab-X8X"/>
+                                                                            </constraints>
+                                                                        </view>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="삼성카드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMF-WF-bNI">
+                                                                            <rect key="frame" x="59" y="12.333333333333334" width="59" height="20.333333333333329"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500,000원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lRP-fd-Wo7">
+                                                                            <rect key="frame" x="293.33333333333331" y="12.333333333333334" width="79.666666666666686" height="20.333333333333329"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                            <nil key="textColor"/>
+                                                                            <nil key="highlightedColor"/>
+                                                                        </label>
+                                                                    </subviews>
+                                                                    <constraints>
+                                                                        <constraint firstItem="iMF-WF-bNI" firstAttribute="centerY" secondItem="Zky-Yx-TGO" secondAttribute="centerY" id="D3j-8G-aRf"/>
+                                                                        <constraint firstItem="lRP-fd-Wo7" firstAttribute="trailing" secondItem="Zky-Yx-TGO" secondAttribute="trailingMargin" id="Ox3-jG-tju"/>
+                                                                        <constraint firstItem="iMF-WF-bNI" firstAttribute="leading" secondItem="ozg-V6-xVf" secondAttribute="trailing" constant="14" id="X1g-gA-h5z"/>
+                                                                        <constraint firstItem="lRP-fd-Wo7" firstAttribute="centerY" secondItem="Zky-Yx-TGO" secondAttribute="centerY" id="ex4-Od-vnn"/>
+                                                                        <constraint firstItem="lRP-fd-Wo7" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="iMF-WF-bNI" secondAttribute="trailing" constant="8" symbolic="YES" id="hnj-Wc-5DN"/>
+                                                                        <constraint firstItem="ozg-V6-xVf" firstAttribute="centerY" secondItem="Zky-Yx-TGO" secondAttribute="centerY" id="vdl-k2-dNC"/>
+                                                                        <constraint firstItem="ozg-V6-xVf" firstAttribute="leading" secondItem="Zky-Yx-TGO" secondAttribute="leading" constant="30" id="waF-XU-RYW"/>
+                                                                    </constraints>
+                                                                </tableViewCellContentView>
+                                                                <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                                <connections>
+                                                                    <outlet property="amountLabel" destination="lRP-fd-Wo7" id="6yF-gK-FbH"/>
+                                                                    <outlet property="nameLabel" destination="iMF-WF-bNI" id="vrQ-A2-FcW"/>
+                                                                </connections>
+                                                            </tableViewCell>
+                                                        </prototypes>
+                                                    </tableView>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
@@ -758,8 +829,10 @@
                         <outlet property="cancelButton" destination="zrR-Kp-wS6" id="qBj-00-cbV"/>
                         <outlet property="periodButton" destination="J6U-i2-7HT" id="Kzg-Mh-jGh"/>
                         <outlet property="pieChartView" destination="moP-oq-Ld5" id="NFb-0x-2ta"/>
+                        <outlet property="tableViewByAsset" destination="vAh-nB-O2t" id="I77-wa-AD4"/>
+                        <outlet property="tableViewByAssetHeightConstraint" destination="tog-x3-9iv" id="MI0-bc-n2N"/>
                         <outlet property="tableViewByCategory" destination="lcw-Zj-gJK" id="WDC-NB-9uw"/>
-                        <outlet property="tableViewHeightConstraint" destination="JCr-R8-anf" id="ZTl-iZ-7n5"/>
+                        <outlet property="tableViewByCategoryHeightConstraint" destination="JCr-R8-anf" id="9aK-s9-NJ7"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wir-cZ-gSn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

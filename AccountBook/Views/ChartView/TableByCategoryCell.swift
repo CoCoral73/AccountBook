@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChartByCategoryTableViewCell: UITableViewCell {
+class TableByCategoryCell: UITableViewCell {
 
     @IBOutlet weak var categoryImgView: UIImageView!
     @IBOutlet weak var categoryNameLabel: UILabel!
@@ -16,7 +16,7 @@ class ChartByCategoryTableViewCell: UITableViewCell {
     @IBOutlet weak var percentLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
-    var viewModel: ChartByCategoryCellViewModel! {
+    var viewModel: TableByCategoryCellViewModel! {
         didSet {
             configureUI()
         }

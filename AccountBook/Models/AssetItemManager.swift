@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum AssetType: Int {
+enum AssetType: Int, CaseIterable {
     case cash = 0
     case bankAccount = 1
     case debitCard = 2

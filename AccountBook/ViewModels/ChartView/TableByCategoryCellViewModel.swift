@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ChartByCategoryCellViewModel {
+class TableByCategoryCellViewModel {
     var category: Category
     var amount: Double, total: Double
     var color: UIColor

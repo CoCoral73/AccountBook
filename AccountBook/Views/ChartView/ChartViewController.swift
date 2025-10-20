@@ -16,9 +16,13 @@ class ChartViewController: UIViewController {
     
     @IBOutlet weak var pieChartView: PieChartView!
     @IBOutlet weak var tableViewByCategory: UITableView!
-    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewByCategoryHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var tableViewByAsset: UITableView!
+    @IBOutlet weak var tableViewByAssetHeightConstraint: NSLayoutConstraint!
     
     var viewModel: ChartViewModel!
+    var tableByCategoryHandler: TableByCategoryHandler!
+    var tableByAssetHandler: TableByAssetHandler!
     
     private var setPeriodMode: Bool = false
     
@@ -44,18 +48,25 @@ class ChartViewController: UIViewController {
     }
     
     func reloadData() {
-        viewModel.reloadChart()
+        viewModel.reloadTxs()
         pieChartView.data = viewModel.chartData
         pieChartView.notifyDataSetChanged()
         
         tableViewByCategory.reloadData()
+        tableViewByAsset.reloadData()
     }
     
     func configureTableView() {
-        tableViewByCategory.dataSource = self
-        tableViewByCategory.delegate = self
+        tableByCategoryHandler = TableByCategoryHandler(viewModel: viewModel)
+        tableViewByCategory.dataSource = tableByCategoryHandler
+        tableViewByCategory.delegate = tableByCategoryHandler
         
-        tableViewByCategory.rowHeight = 55
+        tableByAssetHandler = TableByAssetHandler(viewModel: viewModel)
+        tableViewByAsset.dataSource = tableByAssetHandler
+        tableViewByAsset.delegate = tableByAssetHandler
+        
+        let headerNib = UINib(nibName: "AssetSectionHeaderView", bundle: nil)
+        tableViewByAsset.register(headerNib, forHeaderFooterViewReuseIdentifier: "AssetSectionHeaderView")
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -74,23 +85,8 @@ class ChartViewController: UIViewController {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        tableViewHeightConstraint.constant = tableViewByCategory.contentSize.height
-    }
-    
-}
-
-extension ChartViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        viewModel.tableViewViewModels.count
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableViewByCategory.dequeueReusableCell(withIdentifier: Cell.categoryChartCell, for: indexPath) as! ChartByCategoryTableViewCell
-        let vm = viewModel.tableViewViewModels[indexPath.row]
-        
-        cell.viewModel = vm
-        
-        return cell
+        tableViewByCategoryHeightConstraint.constant = tableViewByCategory.contentSize.height
+        tableViewByAssetHeightConstraint.constant = tableViewByAsset.contentSize.height
     }
     
 }

@@ -10,5 +10,6 @@ struct Cell {
     static let detailCell = "DetailCell"
     static let assetCell = "AssetCell"
     static let dayCell = "DayCell"
-    static let categoryChartCell = "CategoryChartCell"
+    static let tableByCategoryCellInChart = "TableByCategoryInChart"
+    static let tableByAssetCellInChart = "TableByAssetInChart"
 }
