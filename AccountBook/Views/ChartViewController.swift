@@ -16,6 +16,7 @@ class ChartViewController: UIViewController {
     
     @IBOutlet weak var pieChartView: PieChartView!
     @IBOutlet weak var tableViewByCategory: UITableView!
+    @IBOutlet weak var tableViewHeightConstraint: NSLayoutConstraint!
     
     var viewModel: ChartViewModel!
     
@@ -68,6 +69,12 @@ class ChartViewController: UIViewController {
         
         cancelButton.isHidden = !setPeriodMode
         applyButton.isHidden = !setPeriodMode
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        tableViewHeightConstraint.constant = tableViewByCategory.contentSize.height
     }
     
 }

@@ -579,7 +579,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="1190"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GnE-q7-d0v">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GnE-q7-d0v">
                                 <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                                 <items>
                                     <barButtonItem title="취소" hidden="YES" id="zrR-Kp-wS6"/>
@@ -617,6 +617,9 @@
                                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-Zj-gJK">
                                                         <rect key="frame" x="0.0" y="310" width="393" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="128" id="JCr-R8-anf"/>
+                                                        </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryChartCell" rowHeight="60" id="TUe-uh-LPf" customClass="ChartByCategoryTableViewCell" customModule="AccountBook" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="50" width="393" height="60"/>
@@ -756,6 +759,7 @@
                         <outlet property="periodButton" destination="J6U-i2-7HT" id="Kzg-Mh-jGh"/>
                         <outlet property="pieChartView" destination="moP-oq-Ld5" id="NFb-0x-2ta"/>
                         <outlet property="tableViewByCategory" destination="lcw-Zj-gJK" id="WDC-NB-9uw"/>
+                        <outlet property="tableViewHeightConstraint" destination="JCr-R8-anf" id="ZTl-iZ-7n5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wir-cZ-gSn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
