@@ -5,7 +5,6 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -16,7 +15,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pz2-rC-KNy">
-                    <rect key="frame" x="10" y="2.6666666666666679" width="4" height="40"/>
+                    <rect key="frame" x="20" y="2.6666666666666679" width="4" height="40"/>
                     <color key="backgroundColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="4" id="Ee8-Kv-9vY"/>
@@ -24,24 +23,23 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현금" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D2-qk-U65">
-                    <rect key="frame" x="26" y="11.666666666666664" width="32" height="22"/>
+                    <rect key="frame" x="36" y="11.666666666666664" width="32" height="22"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500,000원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G37-5J-nz3">
-                    <rect key="frame" x="286" y="11.666666666666664" width="89" height="22"/>
+                    <rect key="frame" x="284" y="11.666666666666664" width="89" height="22"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="Pz2-rC-KNy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3Ci-Bo-iwe"/>
-                <constraint firstItem="Pz2-rC-KNy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="10" id="3Ur-2i-Dx9"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="G37-5J-nz3" secondAttribute="trailing" constant="18" id="BZ1-gP-iSp"/>
+                <constraint firstItem="Pz2-rC-KNy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="3Ur-2i-Dx9"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="G37-5J-nz3" secondAttribute="trailing" constant="20" id="BZ1-gP-iSp"/>
                 <constraint firstItem="4D2-qk-U65" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="DRx-P5-t0P"/>
                 <constraint firstItem="4D2-qk-U65" firstAttribute="leading" secondItem="Pz2-rC-KNy" secondAttribute="trailing" constant="12" id="hE2-QF-ZPY"/>
                 <constraint firstItem="G37-5J-nz3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pYx-IX-rEm"/>
@@ -55,9 +53,4 @@
             <point key="canvasLocation" x="96.946564885496173" y="270.77464788732397"/>
         </view>
     </objects>
-    <resources>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-    </resources>
 </document>

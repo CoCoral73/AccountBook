@@ -52,11 +52,11 @@ class ChartViewModel {
     func cellForRowAtByAsset(indexPath: IndexPath) -> (name: String, amount: String) {
         let (section, row) = (indexPath.section, indexPath.row)
         let data = sectionsByAsset[section].rows[row]
-        return (data.asset.name, data.amount.formattedWithComma)
+        return (data.asset.name, data.amount.formattedWithComma + "원")
     }
     func viewForHeaderInSectionByAsset(section: Int) -> (name: String, amount: String) {
         let data = sectionsByAsset[section]
-        return (data.assetType.displayName, data.totalAmount.formattedWithComma)
+        return (data.assetType.displayName, data.totalAmount.formattedWithComma + "원")
     }
     
     func reloadTxs() {

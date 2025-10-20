@@ -64,6 +64,7 @@ class ChartViewController: UIViewController {
         tableByAssetHandler = TableByAssetHandler(viewModel: viewModel)
         tableViewByAsset.dataSource = tableByAssetHandler
         tableViewByAsset.delegate = tableByAssetHandler
+        tableViewByAsset.sectionHeaderTopPadding = 0
         
         let headerNib = UINib(nibName: "AssetSectionHeaderView", bundle: nil)
         tableViewByAsset.register(headerNib, forHeaderFooterViewReuseIdentifier: "AssetSectionHeaderView")
@@ -72,7 +73,9 @@ class ChartViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        reloadData()
+        DispatchQueue.main.async {
+           self.reloadData()
+       }
     }
     
     @IBAction func periodButtonTapped(_ sender: UIBarButtonItem) {
