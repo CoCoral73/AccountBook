@@ -582,7 +582,6 @@
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GnE-q7-d0v">
                                 <rect key="frame" x="0.0" y="59" width="393" height="44"/>
                                 <items>
-                                    <barButtonItem title="취소" hidden="YES" id="zrR-Kp-wS6"/>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="oan-d0-SPd"/>
                                     <barButtonItem title="2025년 9월" id="J6U-i2-7HT">
                                         <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -591,7 +590,6 @@
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="kFs-mv-yCk"/>
-                                    <barButtonItem title="적용" hidden="YES" id="LUG-fF-3Ic"/>
                                 </items>
                                 <toolbarAppearance key="standardAppearance">
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -727,13 +725,13 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="l6Q-30-mhV">
                                                                             <rect key="frame" x="281" y="9.3333333333333321" width="92" height="36.666666666666671"/>
                                                                             <subviews>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" ambiguous="YES" text="88,888,888원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="GCA-bO-Itz">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="88,888,888원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="11" translatesAutoresizingMaskIntoConstraints="NO" id="GCA-bO-Itz">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="92" height="20.333333333333332"/>
                                                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="75%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QK-PV-hX9">
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="75%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QK-PV-hX9">
                                                                                     <rect key="frame" x="66.666666666666686" y="22.333333333333336" width="25.333333333333329" height="14.333333333333336"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -899,9 +897,7 @@
                     <tabBarItem key="tabBarItem" title="Item" id="mqR-go-BIU"/>
                     <size key="freeformSize" width="393" height="1190"/>
                     <connections>
-                        <outlet property="applyButton" destination="LUG-fF-3Ic" id="euX-To-gvN"/>
                         <outlet property="assetTitleLabel" destination="6un-Tq-IBg" id="mpw-eS-tza"/>
-                        <outlet property="cancelButton" destination="zrR-Kp-wS6" id="qBj-00-cbV"/>
                         <outlet property="categoryTitleLabel" destination="LUd-o4-SpM" id="3S2-yA-L3W"/>
                         <outlet property="periodButton" destination="J6U-i2-7HT" id="Kzg-Mh-jGh"/>
                         <outlet property="pieChartView" destination="moP-oq-Ld5" id="NFb-0x-2ta"/>
