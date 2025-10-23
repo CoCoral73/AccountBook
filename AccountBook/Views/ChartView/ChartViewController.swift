@@ -34,8 +34,16 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureUI()
         configurePieChartView()
         configureTableView()
+    }
+    
+    func configureUI() {
+        totalTitleLabel.text = viewModel.totalTitleString
+        totalAmountLabel.text = viewModel.totalAmountString
+        categoryTitleLabel.text = viewModel.categoryTitleString
+        assetTitleLabel.text = viewModel.assetTitleString
     }
     
     func configurePieChartView() {

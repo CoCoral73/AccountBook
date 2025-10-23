@@ -40,6 +40,11 @@ class ChartViewModel {
         loadTransactions()
     }
     
+    var totalTitleString: String { isIncome ? "총 수입" : "총 지출" }
+    var totalAmountString: String = ""
+    var categoryTitleString: String { isIncome ? "카테고리 별 수입" : "카테고리 별 지출" }
+    var assetTitleString: String { isIncome ? "자산 별 수입" : "자산 별 지출" }
+    
     var chartData: PieChartData { makeChartData() }
     var byCategoryViewModels: [TableByCategoryCellViewModel] = []
     
@@ -73,6 +78,7 @@ class ChartViewModel {
         totalByCategory.removeAll()
         var totalByAsset: [AssetItem: Int64] = [:]
         var totalByAssetType: [AssetType: Int64] = [:]
+        var totalAmount: Int64 = 0
         
         for tx in txs {
             if tx.isIncome == isIncome {
@@ -83,6 +89,7 @@ class ChartViewModel {
                 totalByCategory[category, default: 0] += tx.amount
                 totalByAsset[asset, default: 0] += tx.amount
                 totalByAssetType[type, default: 0] += tx.amount
+                totalAmount += tx.amount
             }
         }
         
@@ -99,6 +106,7 @@ class ChartViewModel {
             sections.append(AssetSection(assetType: type, totalAmount: totalAmount, rows: rows))
         }
         
+        totalAmountString = totalAmount.formattedWithComma + "원"
         sectionsByAsset = sections
     }
     
