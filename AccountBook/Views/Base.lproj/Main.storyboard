@@ -813,7 +813,7 @@
                                                                     <autoresizingMask key="autoresizingMask"/>
                                                                     <subviews>
                                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ozg-V6-xVf" userLabel="가로선">
-                                                                            <rect key="frame" x="35" y="22" width="15" height="1"/>
+                                                                            <rect key="frame" x="40" y="22" width="15" height="1"/>
                                                                             <color key="backgroundColor" systemColor="systemGray3Color"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="1" id="Ng0-If-IvB"/>
@@ -821,7 +821,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="삼성카드" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iMF-WF-bNI">
-                                                                            <rect key="frame" x="64" y="12.333333333333334" width="59" height="20.333333333333329"/>
+                                                                            <rect key="frame" x="69" y="12.333333333333334" width="59" height="20.333333333333329"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -833,8 +833,8 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(1%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9n5-1p-VmZ">
-                                                                            <rect key="frame" x="126.00000000000001" y="13.666666666666664" width="31.666666666666671" height="18"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                                            <rect key="frame" x="131" y="14" width="29.666666666666657" height="17"/>
+                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                             <color key="textColor" systemColor="secondaryLabelColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -848,7 +848,7 @@
                                                                         <constraint firstItem="9n5-1p-VmZ" firstAttribute="leading" secondItem="iMF-WF-bNI" secondAttribute="trailing" constant="3" id="juk-Ia-apO"/>
                                                                         <constraint firstItem="lRP-fd-Wo7" firstAttribute="leading" relation="lessThanOrEqual" secondItem="9n5-1p-VmZ" secondAttribute="trailing" constant="200" id="mEH-ui-ZFy"/>
                                                                         <constraint firstItem="ozg-V6-xVf" firstAttribute="centerY" secondItem="Zky-Yx-TGO" secondAttribute="centerY" id="vdl-k2-dNC"/>
-                                                                        <constraint firstItem="ozg-V6-xVf" firstAttribute="leading" secondItem="Zky-Yx-TGO" secondAttribute="leading" constant="35" id="waF-XU-RYW"/>
+                                                                        <constraint firstItem="ozg-V6-xVf" firstAttribute="leading" secondItem="Zky-Yx-TGO" secondAttribute="leading" constant="40" id="waF-XU-RYW"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
                                                                 <inset key="separatorInset" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
