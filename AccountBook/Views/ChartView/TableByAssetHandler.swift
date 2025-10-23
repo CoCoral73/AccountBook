@@ -28,7 +28,7 @@ class TableByAssetHandler: NSObject, UITableViewDataSource, UITableViewDelegate 
             return UITableViewCell()
         }
         
-        cell.configure(data.name, data.amount)
+        cell.configure(data.name, data.ratio, data.amount)
         
         return cell
     }

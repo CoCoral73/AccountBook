@@ -55,10 +55,16 @@ class ChartViewModel {
     func numberOfRowsInSectionByAsset(section: Int) -> Int {
         sectionsByAsset[section].rows.count
     }
-    func cellForRowAtByAsset(indexPath: IndexPath) -> (name: String, amount: String) {
+    func cellForRowAtByAsset(indexPath: IndexPath) -> (name: String, ratio: String, amount: String) {
         let (section, row) = (indexPath.section, indexPath.row)
         let data = sectionsByAsset[section].rows[row]
-        return (data.asset.name, data.amount.formattedWithComma + "원")
+        let ratioValue = percentage(of: Double(data.amount), in: Double(self.totalAmount))
+        
+        let name = data.asset.name
+        let ratio = "(\(ratioValue)%)"
+        let amount = data.amount.formattedWithComma + "원"
+        
+        return (name, ratio, amount)
     }
     func viewForHeaderInSectionByAsset(section: Int) -> (name: String, ratio: String, amount: String) {
         let data = sectionsByAsset[section]

@@ -855,6 +855,7 @@
                                                                 <connections>
                                                                     <outlet property="amountLabel" destination="lRP-fd-Wo7" id="6yF-gK-FbH"/>
                                                                     <outlet property="nameLabel" destination="iMF-WF-bNI" id="vrQ-A2-FcW"/>
+                                                                    <outlet property="ratioLabel" destination="9n5-1p-VmZ" id="XiU-uZ-iqR"/>
                                                                 </connections>
                                                             </tableViewCell>
                                                         </prototypes>
