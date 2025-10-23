@@ -14,6 +14,11 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var periodButton: UIBarButtonItem!
     @IBOutlet weak var applyButton: UIBarButtonItem!
     
+    @IBOutlet weak var totalTitleLabel: UILabel!
+    @IBOutlet weak var totalAmountLabel: UILabel!
+    @IBOutlet weak var categoryTitleLabel: UILabel!
+    @IBOutlet weak var assetTitleLabel: UILabel!
+    
     @IBOutlet weak var pieChartView: PieChartView!
     @IBOutlet weak var tableViewByCategory: UITableView!
     @IBOutlet weak var tableViewByCategoryHeightConstraint: NSLayoutConstraint!

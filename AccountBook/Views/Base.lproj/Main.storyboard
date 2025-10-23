@@ -884,13 +884,17 @@
                     <size key="freeformSize" width="393" height="1190"/>
                     <connections>
                         <outlet property="applyButton" destination="LUG-fF-3Ic" id="euX-To-gvN"/>
+                        <outlet property="assetTitleLabel" destination="6un-Tq-IBg" id="mpw-eS-tza"/>
                         <outlet property="cancelButton" destination="zrR-Kp-wS6" id="qBj-00-cbV"/>
+                        <outlet property="categoryTitleLabel" destination="LUd-o4-SpM" id="3S2-yA-L3W"/>
                         <outlet property="periodButton" destination="J6U-i2-7HT" id="Kzg-Mh-jGh"/>
                         <outlet property="pieChartView" destination="moP-oq-Ld5" id="NFb-0x-2ta"/>
                         <outlet property="tableViewByAsset" destination="vAh-nB-O2t" id="I77-wa-AD4"/>
                         <outlet property="tableViewByAssetHeightConstraint" destination="tog-x3-9iv" id="MI0-bc-n2N"/>
                         <outlet property="tableViewByCategory" destination="lcw-Zj-gJK" id="WDC-NB-9uw"/>
                         <outlet property="tableViewByCategoryHeightConstraint" destination="JCr-R8-anf" id="9aK-s9-NJ7"/>
+                        <outlet property="totalAmountLabel" destination="ID1-Pv-ob0" id="faO-Rd-6OT"/>
+                        <outlet property="totalTitleLabel" destination="6FG-rG-hCY" id="OPz-bf-K3y"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wir-cZ-gSn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
