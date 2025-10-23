@@ -47,15 +47,6 @@ class ChartViewController: UIViewController {
         pieChartView.data = viewModel.chartData
     }
     
-    func reloadData() {
-        viewModel.reloadTxs()
-        pieChartView.data = viewModel.chartData
-        pieChartView.notifyDataSetChanged()
-        
-        tableViewByCategory.reloadData()
-        tableViewByAsset.reloadData()
-    }
-    
     func configureTableView() {
         tableByCategoryHandler = TableByCategoryHandler(viewModel: viewModel)
         tableViewByCategory.dataSource = tableByCategoryHandler
@@ -70,12 +61,28 @@ class ChartViewController: UIViewController {
         tableViewByAsset.register(headerNib, forHeaderFooterViewReuseIdentifier: "AssetSectionHeaderView")
     }
     
+    func reloadData() {
+        viewModel.reloadTxs()
+        pieChartView.data = viewModel.chartData
+        pieChartView.notifyDataSetChanged()
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            tableViewByCategory.reloadData()
+            tableViewByAsset.reloadData()
+            
+            tableViewByCategory.layoutIfNeeded()
+            tableViewByAsset.layoutIfNeeded()
+            
+            tableViewByCategoryHeightConstraint.constant = tableViewByCategory.contentSize.height
+            tableViewByAssetHeightConstraint.constant = tableViewByAsset.contentSize.height
+        }
+    }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        DispatchQueue.main.async {
-           self.reloadData()
-       }
+        reloadData()
     }
     
     @IBAction func periodButtonTapped(_ sender: UIBarButtonItem) {
@@ -87,9 +94,16 @@ class ChartViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        tableViewByCategoryHeightConstraint.constant = tableViewByCategory.contentSize.height
-        tableViewByAssetHeightConstraint.constant = tableViewByAsset.contentSize.height
+
+        let categoryContentHeight = tableViewByCategory.contentSize.height
+        if tableViewByCategoryHeightConstraint.constant != categoryContentHeight {
+            tableViewByCategoryHeightConstraint.constant = categoryContentHeight
+        }
+
+        let assetContentHeight = tableViewByAsset.contentSize.height
+        if tableViewByAssetHeightConstraint.constant != assetContentHeight {
+            tableViewByAssetHeightConstraint.constant = assetContentHeight
+        }
     }
     
 }
