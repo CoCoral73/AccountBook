@@ -616,8 +616,8 @@
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1,200,000원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ID1-Pv-ob0">
-                                                                <rect key="frame" x="256" y="22.333333333333329" width="117" height="25.333333333333329"/>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ID1-Pv-ob0">
+                                                                <rect key="frame" x="345" y="22.333333333333329" width="28" height="25.333333333333329"/>
                                                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="21"/>
                                                                 <nil key="textColor"/>
                                                                 <nil key="highlightedColor"/>
@@ -627,8 +627,8 @@
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="70" id="7IO-72-Sgu"/>
                                                             <constraint firstItem="6FG-rG-hCY" firstAttribute="centerY" secondItem="qMi-12-Vmx" secondAttribute="centerY" id="FmD-7F-CCs"/>
+                                                            <constraint firstItem="ID1-Pv-ob0" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6FG-rG-hCY" secondAttribute="trailing" constant="265" id="OCp-gF-409"/>
                                                             <constraint firstAttribute="trailing" secondItem="ID1-Pv-ob0" secondAttribute="trailing" constant="20" id="PlA-M9-CLp"/>
-                                                            <constraint firstItem="ID1-Pv-ob0" firstAttribute="leading" relation="lessThanOrEqual" secondItem="6FG-rG-hCY" secondAttribute="trailing" constant="174" id="Z8P-65-0N8"/>
                                                             <constraint firstItem="6FG-rG-hCY" firstAttribute="leading" secondItem="qMi-12-Vmx" secondAttribute="leading" constant="20" id="aO7-19-rWN"/>
                                                             <constraint firstItem="ID1-Pv-ob0" firstAttribute="centerY" secondItem="qMi-12-Vmx" secondAttribute="centerY" id="hgk-Rw-9dW"/>
                                                         </constraints>
