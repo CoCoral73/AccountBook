@@ -38,7 +38,7 @@ class TableByAssetHandler: NSObject, UITableViewDataSource, UITableViewDelegate 
             return nil
         }
 
-        header.configure(section, data.name, data.amount)
+        header.configure(section, data.name, data.ratio, data.amount)
         
         return header
     }

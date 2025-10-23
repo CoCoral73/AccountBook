@@ -41,6 +41,7 @@ class ChartViewModel {
     }
     
     var totalTitleString: String { isIncome ? "총 수입" : "총 지출" }
+    var totalAmount: Int64 = 0
     var totalAmountString: String = ""
     var categoryTitleString: String { isIncome ? "카테고리 별 수입" : "카테고리 별 지출" }
     var assetTitleString: String { isIncome ? "자산 별 수입" : "자산 별 지출" }
@@ -59,9 +60,15 @@ class ChartViewModel {
         let data = sectionsByAsset[section].rows[row]
         return (data.asset.name, data.amount.formattedWithComma + "원")
     }
-    func viewForHeaderInSectionByAsset(section: Int) -> (name: String, amount: String) {
+    func viewForHeaderInSectionByAsset(section: Int) -> (name: String, ratio: String, amount: String) {
         let data = sectionsByAsset[section]
-        return (data.assetType.displayName, data.totalAmount.formattedWithComma + "원")
+        let ratioValue = percentage(of: Double(data.totalAmount), in: Double(self.totalAmount))
+        
+        let name = data.assetType.displayName
+        let ratio = "(\(ratioValue)%)"
+        let amount = data.totalAmount.formattedWithComma + "원"
+        
+        return (name, ratio, amount)
     }
     
     func reloadTxs() {
@@ -106,6 +113,7 @@ class ChartViewModel {
             sections.append(AssetSection(assetType: type, totalAmount: totalAmount, rows: rows))
         }
         
+        self.totalAmount = totalAmount
         totalAmountString = totalAmount.formattedWithComma + "원"
         sectionsByAsset = sections
     }
