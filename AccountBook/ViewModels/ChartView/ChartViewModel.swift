@@ -43,8 +43,8 @@ class ChartViewModel {
     var totalTitleString: String { isIncome ? "총 수입" : "총 지출" }
     var totalAmount: Int64 = 0
     var totalAmountString: String = ""
-    var categoryTitleString: String { isIncome ? "카테고리 별 수입" : "카테고리 별 지출" }
-    var assetTitleString: String { isIncome ? "자산 별 수입" : "자산 별 지출" }
+    var categoryTitleString: String { isIncome ? "카테고리별 수입" : "카테고리별 지출" }
+    var assetTitleString: String { isIncome ? "자산별 수입" : "자산별 지출" }
     
     var chartData: PieChartData { makeChartData() }
     var byCategoryViewModels: [TableByCategoryCellViewModel] = []
