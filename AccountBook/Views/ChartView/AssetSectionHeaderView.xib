@@ -5,6 +5,7 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="23506"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -15,11 +16,11 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pz2-rC-KNy">
-                    <rect key="frame" x="20" y="2.6666666666666679" width="4" height="40"/>
+                    <rect key="frame" x="20" y="4" width="4" height="37"/>
                     <color key="backgroundColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="4" id="Ee8-Kv-9vY"/>
-                        <constraint firstAttribute="height" constant="40" id="Ysp-G6-N3l"/>
+                        <constraint firstAttribute="height" constant="37" id="Ysp-G6-N3l"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현금" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D2-qk-U65">
@@ -34,15 +35,24 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(1%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjA-dA-p1u">
+                    <rect key="frame" x="71" y="13.666666666666664" width="32" height="18"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" systemColor="secondaryLabelColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <constraints>
                 <constraint firstItem="Pz2-rC-KNy" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="3Ci-Bo-iwe"/>
                 <constraint firstItem="Pz2-rC-KNy" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="20" id="3Ur-2i-Dx9"/>
+                <constraint firstItem="bjA-dA-p1u" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7xS-OB-LeP"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="G37-5J-nz3" secondAttribute="trailing" constant="20" id="BZ1-gP-iSp"/>
                 <constraint firstItem="4D2-qk-U65" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="DRx-P5-t0P"/>
+                <constraint firstItem="G37-5J-nz3" firstAttribute="leading" relation="lessThanOrEqual" secondItem="bjA-dA-p1u" secondAttribute="trailing" constant="181" id="cRp-vl-ZPt"/>
                 <constraint firstItem="4D2-qk-U65" firstAttribute="leading" secondItem="Pz2-rC-KNy" secondAttribute="trailing" constant="12" id="hE2-QF-ZPY"/>
                 <constraint firstItem="G37-5J-nz3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pYx-IX-rEm"/>
+                <constraint firstItem="bjA-dA-p1u" firstAttribute="leading" secondItem="4D2-qk-U65" secondAttribute="trailing" constant="3" id="uFe-T4-RDb"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
@@ -53,4 +63,9 @@
             <point key="canvasLocation" x="96.946564885496173" y="270.77464788732397"/>
         </view>
     </objects>
+    <resources>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
 </document>
