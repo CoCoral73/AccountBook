@@ -998,6 +998,17 @@
                                     <constraint firstItem="cvi-OP-jYj" firstAttribute="top" secondItem="5ZE-QF-TUN" secondAttribute="top" constant="20" id="eB2-Ne-1X2"/>
                                     <constraint firstAttribute="trailing" secondItem="Alc-PD-Rh1" secondAttribute="trailing" constant="20" id="sNW-RX-z1Y"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" systemColor="opaqueSeparatorColor"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="uCk-ek-FQZ"/>

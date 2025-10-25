@@ -17,11 +17,4 @@ class PeriodSelectionViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        borderView.layer.cornerRadius = 20
-        borderView.layer.borderWidth = 2
-        borderView.layer.borderColor = UIColor.lightGray.cgColor
-    }
 }
