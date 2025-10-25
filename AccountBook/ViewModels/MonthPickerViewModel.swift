@@ -8,8 +8,8 @@
 import UIKit
 
 class MonthPickerViewModel {
-    let years: [Int] = Array(2020...2100)
-    let months: [Int] = Array(1...12)
+    let years = DefaultSetting.years
+    let months = DefaultSetting.months
     
     private(set) var selectedYear: Int
     private(set) var selectedMonth: Int

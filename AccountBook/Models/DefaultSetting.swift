@@ -6,6 +6,6 @@
 //
 
 struct DefaultSetting {
-    static let year: [Int] = Array(2020...2100)
-    static let month: [Int] = Array(1...12)
+    static let years: [Int] = Array(2020...2100)
+    static let months: [Int] = Array(1...12)
 }
