@@ -932,6 +932,9 @@
                                     <segment title="직접 입력"/>
                                 </segments>
                                 <color key="selectedSegmentTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="segControlChanged:" destination="sXO-fH-Pmj" eventType="valueChanged" id="gOC-y0-224"/>
+                                </connections>
                             </segmentedControl>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Y9I-IL-bHy">
                                 <rect key="frame" x="30" y="119" width="333" height="40"/>
@@ -949,6 +952,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="dateButtonTapped:" destination="sXO-fH-Pmj" eventType="touchUpInside" id="qFO-Wo-k9P"/>
+                                        </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="~" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hvb-sf-QVj">
                                         <rect key="frame" x="160.66666666666666" y="0.0" width="11.666666666666657" height="40"/>
@@ -969,6 +975,9 @@
                                                 <integer key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="dateButtonTapped:" destination="sXO-fH-Pmj" eventType="touchUpInside" id="YzS-SS-SMx"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <constraints>
@@ -982,6 +991,9 @@
                                     <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="cvi-OP-jYj">
                                         <rect key="frame" x="20" y="20" width="293" height="304.66666666666669"/>
                                         <locale key="locale" localeIdentifier="ko_KR"/>
+                                        <connections>
+                                            <action selector="datePickerChanged:" destination="sXO-fH-Pmj" eventType="valueChanged" id="VGR-G2-652"/>
+                                        </connections>
                                     </datePicker>
                                     <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Alc-PD-Rh1">
                                         <rect key="frame" x="20" y="20" width="293" height="304.66666666666669"/>
@@ -1027,6 +1039,11 @@
                     </view>
                     <connections>
                         <outlet property="borderView" destination="5ZE-QF-TUN" id="OJs-bE-NfW"/>
+                        <outlet property="datePicker" destination="cvi-OP-jYj" id="KfV-FC-nNI"/>
+                        <outlet property="endDateButton" destination="9PV-nc-SNV" id="xUC-yJ-pZS"/>
+                        <outlet property="pickerView" destination="Alc-PD-Rh1" id="vxK-ji-SPO"/>
+                        <outlet property="segControl" destination="7Rw-LD-dva" id="IN4-hk-fIn"/>
+                        <outlet property="startDateButton" destination="UlG-2a-wgd" id="HYc-Y8-WJw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7Ra-TF-Q32" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
