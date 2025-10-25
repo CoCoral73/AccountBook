@@ -8,7 +8,7 @@
 import UIKit
 import DGCharts
 
-enum StatisticPeriod {
+enum StatisticPeriod: Int {
     case monthly, yearly, custom
 }
 
