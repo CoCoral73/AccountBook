@@ -7,6 +7,23 @@
 
 import UIKit
 
+extension Date {
+    var startOfMonth: Date {
+        let calendar = Calendar.current
+        let components = calendar.dateComponents([.year, .month], from: self)
+        return calendar.date(from: components)!
+    }
+    
+    var endOfMonth: Date {
+        let calendar = Calendar.current
+        // 다음 달의 1일을 구한 다음 하루 전으로 이동
+        guard let startOfNextMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth),
+              let endOfMonth = calendar.date(byAdding: .second, value: -1, to: startOfNextMonth)
+        else { fatalError("Date 계산 실패") }
+        return endOfMonth
+    }
+}
+
 extension Formatter {
     static let currency: NumberFormatter = {
         let formatter = NumberFormatter()
