@@ -976,7 +976,7 @@
                                                 <state key="normal" title="0000.00.00">
                                                     <color key="titleColor" systemColor="labelColor"/>
                                                 </state>
-                                                <state key="highlighted">
+                                                <state key="selected">
                                                     <color key="titleColor" systemColor="systemPinkColor"/>
                                                 </state>
                                                 <userDefinedRuntimeAttributes>

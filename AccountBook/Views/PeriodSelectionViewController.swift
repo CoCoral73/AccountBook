@@ -35,8 +35,8 @@ class PeriodSelectionViewController: UIViewController {
 
         viewModel.onDidChangedDatePicker = { [weak self] in
             guard let self = self else { return }
-            startDateButton.setTitle(viewModel.startDateButtonString, for: .selected)
-            endDateButton.setTitle(viewModel.endDateButtonString, for: .selected)
+            startDateButton.setTitle(viewModel.startDateButtonString, for: .normal)
+            endDateButton.setTitle(viewModel.endDateButtonString, for: .normal)
         }
         
         configurePickerView()
@@ -73,6 +73,7 @@ class PeriodSelectionViewController: UIViewController {
         viewModel.handleDateButton(sender.tag)
         startDateButton.isSelected = startDateButton.tag == sender.tag
         endDateButton.isSelected = endDateButton.tag == sender.tag
+        print(startDateButton.isSelected, endDateButton.isSelected)
     }
     
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
