@@ -59,17 +59,26 @@ class PeriodSelectionViewController: UIViewController {
         
         pickerView.isHidden = viewModel.isHiddenForPickerView
         datePicker.isHidden = viewModel.isHiddenForDatePicker
-        
-        pickerView.selectRow(viewModel.selectedRowForYear, inComponent: 0, animated: false)
-        pickerView.selectRow(viewModel.selectedRowForMonth, inComponent: 1, animated: false)
     }
     
     @IBAction func segControlChanged(_ sender: UISegmentedControl) {
         viewModel.setPeriodType(sender.selectedSegmentIndex)
         bindViewModel()
         
-        if sender.selectedSegmentIndex == 2 {
-            datePicker.setDate(viewModel.handleDateButton(0), animated: false)
+        pickerView.reloadAllComponents()
+        
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            
+            if sender.selectedSegmentIndex == 0 {
+                pickerView.selectRow(viewModel.selectedRowForYear, inComponent: 0, animated: false)
+                pickerView.selectRow(viewModel.selectedRowForMonth, inComponent: 1, animated: false)
+            } else if sender.selectedSegmentIndex == 1 {
+                pickerView.selectRow(viewModel.selectedRowForYear, inComponent: 0, animated: false)
+            }
+            else {
+                datePicker.setDate(viewModel.handleDateButton(0), animated: false)
+            }
         }
     }
     
@@ -107,7 +116,7 @@ extension PeriodSelectionViewController: UIPickerViewDelegate, UIPickerViewDataS
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return 2
+        return viewModel.numberOfComponents
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {

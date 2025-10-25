@@ -44,6 +44,9 @@ class PeriodSelectionViewModel {
     var isHiddenForDatePicker: Bool {
         periodType != .custom
     }
+    var numberOfComponents: Int {
+        periodType == .monthly ? 2 : 1
+    }
     var selectedRowForYear: Int {
         let year = calendar.component(.year, from: startDate)
         let index = years.firstIndex(of: year)!
