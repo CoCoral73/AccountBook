@@ -81,6 +81,23 @@ class ChartViewModel {
         loadTransactions()
     }
     
+    func handlePeriodButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+        guard let periodVC = storyboard?.instantiateViewController(identifier: "PeriodSelectionViewController", creator: { coder in
+            PeriodSelectionViewController(coder: coder, viewModel: PeriodSelectionViewModel())
+        }) else {
+            fatalError("PeriodSelectionViewController 생성 에러")
+        }
+        
+        if let sheet = periodVC.sheetPresentationController {
+            sheet.detents = [.custom { _ in
+                return periodVC.preferredContentSize.height
+            }]
+            sheet.prefersGrabberVisible = true
+        }
+
+        fromVC.present(periodVC, animated: true, completion: nil)
+    }
+    
     func setPeriod(_ periodType: StatisticPeriod, _ date: Date, _ endDate: Date = Date()) {
         self.startDate = date
         self.endDate = endDate

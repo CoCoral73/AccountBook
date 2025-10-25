@@ -9,6 +9,9 @@ import UIKit
 
 class PeriodSelectionViewController: UIViewController {
 
+    @IBOutlet weak var stackView: UIStackView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    
     @IBOutlet weak var segControl: UISegmentedControl!
     @IBOutlet weak var startDateButton: UIButton!
     @IBOutlet weak var endDateButton: UIButton!
@@ -75,6 +78,24 @@ class PeriodSelectionViewController: UIViewController {
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         viewModel.handleDatePicker(sender.date)
     }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        // 레이아웃 계산을 보장
+        view.layoutIfNeeded()
+
+        // 스택뷰의 실제 높이
+        let stackViewHeight = stackView.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize).height
+
+        // 최종 preferredContentSize 반영
+        preferredContentSize = CGSize(
+            width: view.bounds.width,
+            height: topConstraint.constant + stackViewHeight
+        )
+    }
+}
+
 extension PeriodSelectionViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {

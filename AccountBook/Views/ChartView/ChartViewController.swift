@@ -10,9 +10,7 @@ import DGCharts
 
 class ChartViewController: UIViewController {
 
-    @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var periodButton: UIBarButtonItem!
-    @IBOutlet weak var applyButton: UIBarButtonItem!
     
     @IBOutlet weak var totalTitleLabel: UILabel!
     @IBOutlet weak var totalAmountLabel: UILabel!
@@ -28,8 +26,6 @@ class ChartViewController: UIViewController {
     var viewModel: ChartViewModel!
     var tableByCategoryHandler: TableByCategoryHandler!
     var tableByAssetHandler: TableByAssetHandler!
-    
-    private var setPeriodMode: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -99,10 +95,7 @@ class ChartViewController: UIViewController {
     }
     
     @IBAction func periodButtonTapped(_ sender: UIBarButtonItem) {
-        setPeriodMode.toggle()
-        
-        cancelButton.isHidden = !setPeriodMode
-        applyButton.isHidden = !setPeriodMode
+        viewModel.handlePeriodButton(storyboard: storyboard, fromVC: self)
     }
     
     override func viewDidLayoutSubviews() {
