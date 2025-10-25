@@ -67,13 +67,16 @@ class PeriodSelectionViewController: UIViewController {
     @IBAction func segControlChanged(_ sender: UISegmentedControl) {
         viewModel.setPeriodType(sender.selectedSegmentIndex)
         bindViewModel()
+        
+        if sender.selectedSegmentIndex == 2 {
+            datePicker.setDate(viewModel.handleDateButton(0), animated: false)
+        }
     }
     
     @IBAction func dateButtonTapped(_ sender: UIButton) {
-        viewModel.handleDateButton(sender.tag)
+        datePicker.setDate(viewModel.handleDateButton(sender.tag), animated: false)
         startDateButton.isSelected = startDateButton.tag == sender.tag
         endDateButton.isSelected = endDateButton.tag == sender.tag
-        print(startDateButton.isSelected, endDateButton.isSelected)
     }
     
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {

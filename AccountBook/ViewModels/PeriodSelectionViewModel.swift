@@ -59,8 +59,9 @@ class PeriodSelectionViewModel {
         periodType = StatisticPeriod(rawValue: value)!
     }
     
-    func handleDateButton(_ tag: Int) {
+    func handleDateButton(_ tag: Int) -> Date {
         selectedDateButtonTag = tag
+        return selectedDateButtonTag == 0 ? startDate : endDate
     }
     
     func handleDatePicker(_ date: Date) {
