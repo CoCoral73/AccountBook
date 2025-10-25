@@ -24,6 +24,29 @@ extension Int64 {
 }
 
 extension UIView {
+    @IBInspectable var cornerRadius: CGFloat {
+        set {
+            layer.cornerRadius = newValue
+        }
+        get { layer.cornerRadius }
+    }
+    @IBInspectable var borderWidth: CGFloat {
+        set {
+            layer.borderWidth = newValue
+        }
+        get { layer.borderWidth }
+    }
+    @IBInspectable var borderColor: UIColor? {
+        set {
+            guard let uiColor = newValue else { return }
+            layer.borderColor = newValue?.cgColor
+        }
+        get {
+            guard let cgColor = layer.borderColor else { return nil }
+            return UIColor(cgColor: cgColor)
+        }
+    }
+    
     func shake() {
         let animation = CAKeyframeAnimation(keyPath: "transform.translation.x")
         animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
