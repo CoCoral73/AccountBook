@@ -27,13 +27,14 @@ class ChartViewModel {
     
     private var periodType: StatisticPeriod = .monthly
     private var startDate: Date, endDate: Date
-    var isIncome: Bool = false
+    private var isIncome: Bool = false
     
     private var txs: [Transaction] = [] { didSet { calculateTotals() } }
     private var totalByCategory: [Category: Int64] = [:]
     private var sectionsByAsset: [AssetSection] = []
     
     var onDidSetPeriod: (() -> ())?
+    var onDidSetIsIncome: (() -> ())?
     
     init(_ date: Date = Date()) {
         startDate = date
@@ -126,6 +127,11 @@ class ChartViewModel {
         
         onDidSetPeriod?()
     }
+    
+    func setIsIncome(_ value: Int) {
+        self.isIncome = value == 0 ? true : false
+        calculateTotals()
+        onDidSetIsIncome?()
     }
     
     private func calculateTotals() {    //수입, 지출 모드 바뀔 때 호출

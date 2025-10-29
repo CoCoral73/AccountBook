@@ -37,9 +37,18 @@ class ChartViewController: UIViewController {
     }
     
     func bindViewModel() {
-        viewModel.onDidSetPeriod = {
-            self.periodButton.title = self.viewModel.periodButtonTitleString
-            self.reloadData()
+        viewModel.onDidSetPeriod = { [weak self] in
+            guard let self = self else { return }
+            periodButton.title = viewModel.periodButtonTitleString
+            reloadData()
+        }
+        
+        viewModel.onDidSetIsIncome = { [weak self] in
+            guard let self = self else { return }
+            totalTitleLabel.text = viewModel.totalTitleString
+            categoryTitleLabel.text = viewModel.categoryTitleString
+            assetTitleLabel.text = viewModel.assetTitleString
+            reloadData(shouldReloadTxs: false)
         }
     }
     
