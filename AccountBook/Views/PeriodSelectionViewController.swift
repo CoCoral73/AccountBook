@@ -92,6 +92,11 @@ class PeriodSelectionViewController: UIViewController {
         viewModel.handleDatePicker(sender.date)
     }
     
+    @IBAction func applyButtonTapped(_ sender: UIButton) {
+        viewModel.handleApplyButton()
+        dismiss(animated: true)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

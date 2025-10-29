@@ -23,6 +23,7 @@ class PeriodSelectionViewModel {
     private var selectedDateButtonTag: Int = 0
     
     var onDidChangeDate: (() -> ())?
+    var onDidApplyPeriod: ((StatisticPeriod, Date, Date) -> ())?
     
     init(_ currentMonth: Date = Date()) {
         startDate = currentMonth.startOfMonth
@@ -118,5 +119,8 @@ class PeriodSelectionViewModel {
         
         onDidChangeDate?()
     }
+    
+    func handleApplyButton() {
+        onDidApplyPeriod?(periodType, startDate, endDate)
     }
 }

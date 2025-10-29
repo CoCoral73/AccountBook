@@ -103,6 +103,10 @@ class ChartViewModel {
             fatalError("PeriodSelectionViewController 생성 에러")
         }
         
+        periodVC.viewModel.onDidApplyPeriod = { (type, start, end) in
+            self.setPeriod(type, start, end)
+        }
+        
         if let sheet = periodVC.sheetPresentationController {
             sheet.detents = [.custom { _ in
                 return periodVC.preferredContentSize.height

@@ -1047,6 +1047,9 @@
                                                 <real key="value" value="10"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="applyButtonTapped:" destination="sXO-fH-Pmj" eventType="touchUpInside" id="uRb-1s-wWb"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                             </stackView>
