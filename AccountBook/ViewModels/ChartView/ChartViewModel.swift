@@ -25,7 +25,7 @@ struct AssetRow {
 
 class ChartViewModel {
     
-    private var periodType: StatisticPeriod = .monthly { didSet { onDidSetPeriod?() } }
+    private var periodType: StatisticPeriod = .monthly
     private var startDate: Date, endDate: Date
     var isIncome: Bool = false
     
@@ -123,6 +123,9 @@ class ChartViewModel {
         self.startDate = date
         self.endDate = endDate
         self.periodType = periodType
+        
+        onDidSetPeriod?()
+    }
     }
     
     private func calculateTotals() {    //수입, 지출 모드 바뀔 때 호출
