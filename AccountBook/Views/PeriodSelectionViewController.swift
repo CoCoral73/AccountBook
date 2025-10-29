@@ -33,7 +33,7 @@ class PeriodSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.onDidChangedDatePicker = { [weak self] in
+        viewModel.onDidChangedDate = { [weak self] in
             guard let self = self else { return }
             startDateButton.setTitle(viewModel.startDateButtonString, for: .normal)
             endDateButton.setTitle(viewModel.endDateButtonString, for: .normal)
@@ -121,6 +121,10 @@ extension PeriodSelectionViewController: UIPickerViewDelegate, UIPickerViewDataS
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return component == 0 ? "\(viewModel.years[row])년" : "\(viewModel.months[row])월"
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        viewModel.handleSelectRow(component: component, row: row)
     }
     
 }

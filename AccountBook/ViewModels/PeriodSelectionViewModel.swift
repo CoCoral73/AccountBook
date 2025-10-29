@@ -22,7 +22,7 @@ class PeriodSelectionViewModel {
     private var endDate: Date
     private var selectedDateButtonTag: Int = 0
     
-    var onDidChangedDatePicker: (() -> ())?
+    var onDidChangedDate: (() -> ())?
     
     init(_ currentMonth: Date = Date()) {
         startDate = currentMonth.startOfMonth
@@ -113,6 +113,6 @@ class PeriodSelectionViewModel {
             endDate = calendar.startOfDay(for: date)
         }
         
-        onDidChangedDatePicker?()
+        onDidChangedDate?()
     }
 }
