@@ -62,7 +62,7 @@ class PeriodSelectionViewModel {
         periodType = StatisticPeriod(rawValue: value)!
         
         let (year, month) = (calendar.component(.year, from: startDate), calendar.component(.month, from: startDate))
-        updateAfterPickerView(year: year, month: month)
+        updatePeriodDates(year: year, month: month)
     }
     
     func handleDateButton(_ tag: Int) -> Date {
@@ -79,10 +79,10 @@ class PeriodSelectionViewModel {
             month = months[row]
         }
         
-        updateAfterPickerView(year: year, month: month)
+        updatePeriodDates(year: year, month: month)
     }
     
-    func updateAfterPickerView(year: Int, month: Int) {
+    func updatePeriodDates(year: Int, month: Int) {
         let (year, month) = (year, periodType == .yearly ? 1 : month)
         let startComp = DateComponents(year: year, month: month, day: 1)
         
