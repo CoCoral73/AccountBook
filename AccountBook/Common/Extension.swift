@@ -22,6 +22,14 @@ extension Date {
         else { fatalError("Date 계산 실패") }
         return endOfMonth
     }
+    
+    var kstString: String {
+        let fmt = DateFormatter()
+        fmt.timeZone = TimeZone(identifier: "Asia/Seoul")
+        fmt.locale = Locale(identifier: "ko_KR")
+        fmt.dateFormat = "yyyy년 MM월 dd일 EEEE HH시 mm분 ss초"
+        return fmt.string(from: self)
+    }
 }
 
 extension Formatter {
