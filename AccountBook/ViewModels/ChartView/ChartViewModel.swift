@@ -25,13 +25,15 @@ struct AssetRow {
 
 class ChartViewModel {
     
-    private var periodType: StatisticPeriod = .monthly { didSet { loadTransactions() } }
+    private var periodType: StatisticPeriod = .monthly { didSet { onDidSetPeriod?() } }
     private var startDate: Date, endDate: Date
     var isIncome: Bool = false
     
     private var txs: [Transaction] = [] { didSet { calculateTotals() } }
     private var totalByCategory: [Category: Int64] = [:]
     private var sectionsByAsset: [AssetSection] = []
+    
+    var onDidSetPeriod: (() -> ())?
     
     init(_ date: Date = Date()) {
         startDate = date

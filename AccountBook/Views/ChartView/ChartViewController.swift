@@ -30,9 +30,17 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bindViewModel()
         configureUI()
         configurePieChartView()
         configureTableView()
+    }
+    
+    func bindViewModel() {
+        viewModel.onDidSetPeriod = {
+            self.reloadData()
+            self.configureUI()
+        }
     }
     
     func configureUI() {
