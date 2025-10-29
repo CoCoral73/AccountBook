@@ -36,6 +36,7 @@ class ChartViewController: UIViewController {
     }
     
     func configureUI() {
+        periodButton.title = viewModel.periodButtonTitleString
         totalTitleLabel.text = viewModel.totalTitleString
         totalAmountLabel.text = viewModel.totalAmountString
         categoryTitleLabel.text = viewModel.categoryTitleString

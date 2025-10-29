@@ -40,6 +40,21 @@ class ChartViewModel {
         loadTransactions()
     }
     
+    var periodButtonTitleString: String {
+        let fmt = DateFormatter()
+        
+        switch periodType {
+        case .monthly:
+            fmt.dateFormat = "yyyy년 MM월"
+        case .yearly:
+            fmt.dateFormat = "yyyy년"
+        case .custom:
+            fmt.dateFormat = "yy.MM.dd"
+            return "\(fmt.string(from: startDate)) ~ \(fmt.string(from: endDate))"
+        }
+        
+        return fmt.string(from: startDate)
+    }
     var totalTitleString: String { isIncome ? "총 수입" : "총 지출" }
     var totalAmount: Int64 = 0
     var totalAmountString: String = ""
