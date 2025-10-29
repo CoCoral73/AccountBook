@@ -33,7 +33,7 @@ class PeriodSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        viewModel.onDidChangedDate = { [weak self] in
+        viewModel.onDidChangeDate = { [weak self] in
             guard let self = self else { return }
             startDateButton.setTitle(viewModel.startDateButtonString, for: .normal)
             endDateButton.setTitle(viewModel.endDateButtonString, for: .normal)

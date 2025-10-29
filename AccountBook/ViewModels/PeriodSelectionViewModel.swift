@@ -22,7 +22,7 @@ class PeriodSelectionViewModel {
     private var endDate: Date
     private var selectedDateButtonTag: Int = 0
     
-    var onDidChangedDate: (() -> ())?
+    var onDidChangeDate: (() -> ())?
     
     init(_ currentMonth: Date = Date()) {
         startDate = currentMonth.startOfMonth
@@ -106,7 +106,7 @@ class PeriodSelectionViewModel {
         startDate = start
         endDate = end
         
-        onDidChangedDate?()
+        onDidChangeDate?()
     }
     
     func handleDatePicker(_ date: Date) {
@@ -116,6 +116,7 @@ class PeriodSelectionViewModel {
             endDate = calendar.startOfDay(for: date)
         }
         
-        onDidChangedDate?()
+        onDidChangeDate?()
+    }
     }
 }
