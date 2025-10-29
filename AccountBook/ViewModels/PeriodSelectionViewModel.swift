@@ -60,6 +60,9 @@ class PeriodSelectionViewModel {
     
     func setPeriodType(_ value: Int) {
         periodType = StatisticPeriod(rawValue: value)!
+        
+        let (year, month) = (calendar.component(.year, from: startDate), calendar.component(.month, from: startDate))
+        updateAfterPickerView(year: year, month: month)
     }
     
     func handleDateButton(_ tag: Int) -> Date {
