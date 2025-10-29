@@ -38,8 +38,8 @@ class ChartViewController: UIViewController {
     
     func bindViewModel() {
         viewModel.onDidSetPeriod = {
+            self.periodButton.title = self.viewModel.periodButtonTitleString
             self.reloadData()
-            self.configureUI()
         }
     }
     
@@ -79,8 +79,13 @@ class ChartViewController: UIViewController {
         tableViewByAsset.register(headerNib, forHeaderFooterViewReuseIdentifier: "AssetSectionHeaderView")
     }
     
-    func reloadData() {
-        viewModel.reloadTxs()
+    func reloadData(shouldReloadTxs: Bool = true) {
+        if shouldReloadTxs {
+            viewModel.reloadTxs()
+        }
+        
+        totalAmountLabel.text = viewModel.totalAmountString
+        
         pieChartView.data = viewModel.chartData
         pieChartView.notifyDataSetChanged()
         
