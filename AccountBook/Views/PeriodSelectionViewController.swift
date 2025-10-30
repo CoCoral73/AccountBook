@@ -40,7 +40,7 @@ class PeriodSelectionViewController: UIViewController {
         }
         
         configurePickerView()
-        bindViewModel()
+        configureUI()
     }
     
     func configurePickerView() {
@@ -51,7 +51,7 @@ class PeriodSelectionViewController: UIViewController {
         pickerView.selectRow(viewModel.selectedRowForMonth, inComponent: 1, animated: false)
     }
     
-    func bindViewModel() {
+    func configureUI() {
         startDateButton.setTitle(viewModel.startDateButtonString, for: .normal)
         endDateButton.setTitle(viewModel.endDateButtonString, for: .normal)
         startDateButton.isEnabled = viewModel.dateButtonEnabled
@@ -63,7 +63,7 @@ class PeriodSelectionViewController: UIViewController {
     
     @IBAction func segControlChanged(_ sender: UISegmentedControl) {
         viewModel.setPeriodType(sender.selectedSegmentIndex)
-        bindViewModel()
+        configureUI()
         
         pickerView.reloadAllComponents()
         
