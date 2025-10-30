@@ -87,25 +87,22 @@ class PeriodSelectionViewModel {
         let (year, month) = (year, periodType == .yearly ? 1 : month)
         let startComp = DateComponents(year: year, month: month, day: 1)
         
-        guard let start = calendar.date(from: startComp) else {
+        guard let startDate = calendar.date(from: startComp) else {
             fatalError("PeriodSelectionViewModel: startComp -> Date 변환 실패")
         }
         
-        let end: Date
+        let endDate: Date
         switch periodType {
         case .monthly:
-            end = start.endOfMonth
+            endDate = startDate.endOfMonth
         case .yearly:
-            guard let startOfNextYear = calendar.date(byAdding: .year, value: 1, to: start),
-                  let endOfYear = calendar.date(byAdding: .second, value: -1, to: startOfNextYear)
-            else { fatalError("PeriodSelectionViewModel: 연말 Date 계산 실패") }
-            end = endOfYear
+            endDate = startDate.endOfYear
         case .custom:
             return
         }
         
-        startDate = start
-        endDate = end
+        self.startDate = startDate
+        self.endDate = endDate
         
         onDidChangeDate?()
     }
