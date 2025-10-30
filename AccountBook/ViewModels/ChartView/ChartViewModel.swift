@@ -101,8 +101,9 @@ class ChartViewModel {
     }
     
     func handlePeriodButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+        let initialDate = startDate
         guard let periodVC = storyboard?.instantiateViewController(identifier: "PeriodSelectionViewController", creator: { coder in
-            PeriodSelectionViewController(coder: coder, viewModel: PeriodSelectionViewModel())
+            PeriodSelectionViewController(coder: coder, viewModel: PeriodSelectionViewModel(initialDate))
         }) else {
             fatalError("PeriodSelectionViewController 생성 에러")
         }

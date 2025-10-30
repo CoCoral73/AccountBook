@@ -25,9 +25,9 @@ class PeriodSelectionViewModel {
     var onDidChangeDate: (() -> ())?
     var onDidApplyPeriod: ((StatisticPeriod, Date, Date) -> ())?
     
-    init(_ currentMonth: Date = Date()) {
-        startDate = currentMonth.startOfMonth
-        endDate = currentMonth.endOfMonth
+    init(_ initialDate: Date) {
+        startDate = initialDate.startOfMonth
+        endDate = initialDate.endOfMonth
     }
     
     var startDateButtonString: String {
