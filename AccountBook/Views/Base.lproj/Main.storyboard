@@ -588,6 +588,9 @@
                                         <state key="normal" title="00.00.00 ~ 00.00.00">
                                             <color key="titleColor" systemColor="labelColor"/>
                                         </state>
+                                        <connections>
+                                            <action selector="periodButtonTapped:" destination="JqY-wO-l7i" eventType="touchUpInside" id="t0G-SY-Hpu"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tf7-tt-IVf">
                                         <rect key="frame" x="325" y="5" width="60" height="34"/>
@@ -604,6 +607,9 @@
                                                 <real key="value" value="15"/>
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="modeButtonTapped:" destination="JqY-wO-l7i" eventType="touchUpInside" id="LXt-5A-UoD"/>
+                                        </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>

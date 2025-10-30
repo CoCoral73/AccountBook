@@ -10,7 +10,8 @@ import DGCharts
 
 class ChartViewController: UIViewController {
 
-    @IBOutlet weak var periodButton: UIBarButtonItem!
+    @IBOutlet weak var periodButton: UIButton!
+    @IBOutlet weak var modeButton: UIButton!
     
     @IBOutlet weak var totalTitleLabel: UILabel!
     @IBOutlet weak var totalAmountLabel: UILabel!
@@ -39,7 +40,7 @@ class ChartViewController: UIViewController {
     func bindViewModel() {
         viewModel.onDidSetPeriod = { [weak self] in
             guard let self = self else { return }
-            periodButton.title = viewModel.periodButtonTitleString
+            periodButton.setTitle(viewModel.periodButtonTitleString, for: .normal)
             reloadData()
         }
         
@@ -53,7 +54,7 @@ class ChartViewController: UIViewController {
     }
     
     func configureUI() {
-        periodButton.title = viewModel.periodButtonTitleString
+        periodButton.setTitle(viewModel.periodButtonTitleString, for: .normal)
         totalTitleLabel.text = viewModel.totalTitleString
         totalAmountLabel.text = viewModel.totalAmountString
         categoryTitleLabel.text = viewModel.categoryTitleString
@@ -117,8 +118,11 @@ class ChartViewController: UIViewController {
         reloadData()
     }
     
-    @IBAction func periodButtonTapped(_ sender: UIBarButtonItem) {
+    @IBAction func periodButtonTapped(_ sender: UIButton) {
         viewModel.handlePeriodButton(storyboard: storyboard, fromVC: self)
+    }
+    
+    @IBAction func modeButtonTapped(_ sender: UIButton) {
     }
     
     override func viewDidLayoutSubviews() {
