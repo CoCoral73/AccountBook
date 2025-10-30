@@ -58,6 +58,7 @@ class ChartViewModel {
         
         return fmt.string(from: startDate)
     }
+    var modeButtonString: String { isIncome ? "수입" : "지출" }
     var totalTitleString: String { isIncome ? "총 수입" : "총 지출" }
     var totalAmount: Int64 = 0
     var totalAmountString: String = ""
@@ -128,8 +129,8 @@ class ChartViewModel {
         onDidSetPeriod?()
     }
     
-    func setIsIncome(_ value: Int) {
-        self.isIncome = value == 0 ? true : false
+    func handleModeButton() {
+        self.isIncome.toggle()
         calculateTotals()
         onDidSetIsIncome?()
     }
