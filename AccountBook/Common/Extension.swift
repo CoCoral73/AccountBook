@@ -19,8 +19,22 @@ extension Date {
         // 다음 달의 1일을 구한 다음 하루 전으로 이동
         guard let startOfNextMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth),
               let endOfMonth = calendar.date(byAdding: .second, value: -1, to: startOfNextMonth)
-        else { fatalError("Date 계산 실패") }
+        else { fatalError("endOfMonth 계산 실패") }
         return endOfMonth
+    }
+    
+    var startOfYear: Date {
+        let calendar = Calendar.current
+        let component = calendar.dateComponents([.year], from: self)
+        return calendar.date(from: component)!
+    }
+    
+    var endOfYear: Date {
+        let calendar = Calendar.current
+        guard let startOfNextYear = calendar.date(byAdding: .year, value: 1, to: startOfYear),
+              let endOfYear = calendar.date(byAdding: .second, value: -1, to: startOfNextYear)
+        else { fatalError("endOfYear 계산 실패") }
+        return endOfYear
     }
     
     var kstString: String {
