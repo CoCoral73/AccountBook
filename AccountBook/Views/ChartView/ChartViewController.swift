@@ -46,6 +46,7 @@ class ChartViewController: UIViewController {
         
         viewModel.onDidSetIsIncome = { [weak self] in
             guard let self = self else { return }
+            modeButton.setTitle(viewModel.modeButtonString, for: .normal)
             totalTitleLabel.text = viewModel.totalTitleString
             categoryTitleLabel.text = viewModel.categoryTitleString
             assetTitleLabel.text = viewModel.assetTitleString
@@ -55,6 +56,7 @@ class ChartViewController: UIViewController {
     
     func configureUI() {
         periodButton.setTitle(viewModel.periodButtonTitleString, for: .normal)
+        modeButton.setTitle(viewModel.modeButtonString, for: .normal)
         totalTitleLabel.text = viewModel.totalTitleString
         totalAmountLabel.text = viewModel.totalAmountString
         categoryTitleLabel.text = viewModel.categoryTitleString
@@ -123,6 +125,7 @@ class ChartViewController: UIViewController {
     }
     
     @IBAction func modeButtonTapped(_ sender: UIButton) {
+        viewModel.handleModeButton()
     }
     
     override func viewDidLayoutSubviews() {
