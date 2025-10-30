@@ -17,7 +17,7 @@ class PeriodSelectionViewModel {
         return fmt
     }()
     
-    private var periodType: StatisticPeriod = .monthly
+    private var periodType: StatisticPeriod
     private var startDate: Date
     private var endDate: Date
     private var selectedDateButtonTag: Int = 0
@@ -25,9 +25,20 @@ class PeriodSelectionViewModel {
     var onDidChangeDate: (() -> ())?
     var onDidApplyPeriod: ((StatisticPeriod, Date, Date) -> ())?
     
-    init(_ initialDate: Date) {
-        startDate = initialDate.startOfMonth
-        endDate = initialDate.endOfMonth
+    init(_ periodType: StatisticPeriod, _ startDate: Date, _ endDate: Date) {
+        self.periodType = periodType
+        
+        switch periodType {
+        case .monthly:
+            self.startDate = startDate.startOfMonth
+            self.endDate = startDate.endOfMonth
+        case .yearly:
+            self.startDate = startDate.startOfYear
+            self.endDate = startDate.endOfYear
+        case .custom:
+            self.startDate = startDate
+            self.endDate = endDate
+        }
     }
     
     var startDateButtonString: String {
