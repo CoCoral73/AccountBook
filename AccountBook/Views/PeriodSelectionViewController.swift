@@ -33,24 +33,19 @@ class PeriodSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+
         bindViewModel()
+        configureUI()
+        configurePickerView()
+        configureSegControl()
+    }
+    
     func bindViewModel() {
         viewModel.onDidChangeDate = { [weak self] in
             guard let self = self else { return }
             startDateButton.setTitle(viewModel.startDateButtonString, for: .normal)
             endDateButton.setTitle(viewModel.endDateButtonString, for: .normal)
         }
-        
-        configurePickerView()
-        configureUI()
-    }
-    
-    func configurePickerView() {
-        pickerView.delegate = self
-        pickerView.dataSource = self
-        
-        pickerView.selectRow(viewModel.selectedRowForYear, inComponent: 0, animated: false)
-        pickerView.selectRow(viewModel.selectedRowForMonth, inComponent: 1, animated: false)
     }
     
     func configureUI() {
@@ -61,6 +56,16 @@ class PeriodSelectionViewController: UIViewController {
         
         pickerView.isHidden = viewModel.isHiddenForPickerView
         datePicker.isHidden = viewModel.isHiddenForDatePicker
+    }
+    
+    func configurePickerView() {
+        pickerView.delegate = self
+        pickerView.dataSource = self
+    }
+    
+    func configureSegControl() {
+        segControl.selectedSegmentIndex = viewModel.initialSegmentIndex
+        segControlChanged(segControl)
     }
     
     @IBAction func segControlChanged(_ sender: UISegmentedControl) {

@@ -41,6 +41,9 @@ class PeriodSelectionViewModel {
         }
     }
     
+    var initialSegmentIndex: Int {
+        periodType.rawValue
+    }
     var startDateButtonString: String {
         dateFormatter.string(from: startDate)
     }
