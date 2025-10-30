@@ -66,6 +66,7 @@ class ChartViewModel {
     var assetTitleString: String { isIncome ? "자산별 수입" : "자산별 지출" }
     
     var chartData: PieChartData { makeChartData() }
+    var chartCenterText: String { byCategoryViewModels.isEmpty ? "데이터 없음" : "" }
     var byCategoryViewModels: [TableByCategoryCellViewModel] = []
     
     var numberOfSectionsByAsset: Int {
@@ -186,6 +187,19 @@ class ChartViewModel {
 
     private func makeChartData() -> PieChartData {
         let data = totalByCategory
+        
+        if data.isEmpty {
+            let entry = PieChartDataEntry(value: 1.0, label: "")
+            let dataSet = PieChartDataSet(entries: [entry])
+            
+            dataSet.colors = [.lightGray.withAlphaComponent(0.3)]
+            dataSet.drawValuesEnabled = false   // 퍼센트 값 숨김
+            
+            let chartData = PieChartData(dataSet: dataSet)
+            byCategoryViewModels = []   // 테이블뷰 데이터도 비움
+            return chartData
+        }
+        
         let sorted = data.sorted(by: { $0.value > $1.value })   //내림차순 정렬
         let entries = sorted.map { PieChartDataEntry(value: Double($0.value), label: $0.key.name) }
         

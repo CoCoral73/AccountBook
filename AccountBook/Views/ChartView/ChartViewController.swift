@@ -99,6 +99,7 @@ class ChartViewController: UIViewController {
         totalAmountLabel.text = viewModel.totalAmountString
         
         pieChartView.data = viewModel.chartData
+        pieChartView.centerText = viewModel.chartCenterText
         pieChartView.notifyDataSetChanged()
         
         DispatchQueue.main.async { [weak self] in
