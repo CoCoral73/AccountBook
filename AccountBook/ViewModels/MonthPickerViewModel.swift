@@ -41,7 +41,7 @@ class MonthPickerViewModel {
         selectedMonth = months[month]
         
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyM"
+        dateFormatter.dateFormat = "yyyyMM"
         let date = dateFormatter.date(from: "\(selectedYear)\(selectedMonth)")!
         //캘린더 뷰컨트롤러에 selectedYear, selectedMonth 전달
         onDidSelect?(date)
