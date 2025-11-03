@@ -167,7 +167,7 @@ extension CalendarViewController {
         dataSource.apply(snap, animatingDifferences: false) { [weak self] in
             //id에 해당하는 셀이 다시 생성되면서(reconfigureItems -> cellProvider)
             //viewModel이 새로 할당됨 -> isSelected가 false로 초기화되므로 다음 코드 필요
-            self?.calendarCollectionView.layoutIfNeeded()
+            //self?.calendarCollectionView.layoutIfNeeded()
             self?.selectDateIfNeeded()
         }
         configureTotals()
@@ -178,7 +178,7 @@ extension CalendarViewController {
         snap.appendSections([0])
         snap.appendItems(viewModel.snapshotItems, toSection: 0)
         dataSource.apply(snap, animatingDifferences: false) { [weak self] in
-            self?.calendarCollectionView.layoutIfNeeded()
+            //self?.calendarCollectionView.layoutIfNeeded()
             //컬렉션 뷰의 내부 레이아웃 미완료로 cellForItem에서 nil 반환 -> 다음 런루프로 미루기
             DispatchQueue.main.async {
                 self?.selectDateIfNeeded()
