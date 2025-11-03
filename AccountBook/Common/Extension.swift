@@ -7,6 +7,13 @@
 
 import UIKit
 
+extension Calendar {
+    func date(year: Int, month: Int) -> Date? {
+        let comps = DateComponents(year: year, month: month, day: 1)
+        return self.date(from: comps)
+    }
+}
+
 extension Date {
     var startOfMonth: Date {
         let calendar = Calendar.current
