@@ -890,45 +890,50 @@
                                                     <constraint firstAttribute="height" constant="25" id="9yI-Ee-rDh"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9v-qx-cet" userLabel="구분선">
-                                                <rect key="frame" x="0.0" y="825" width="393" height="0.33333333333337123"/>
-                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="0.29999999999999999" id="ixA-px-8ae"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ayp-kO-EJQ" userLabel="추이 타이틀">
-                                                <rect key="frame" x="0.0" y="825.33333333333337" width="393" height="70"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oNZ-Mx-UcR">
+                                                <rect key="frame" x="0.0" y="825" width="393" height="365.33333333333326"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 6개월 지출 추이" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0l-YD-POy">
-                                                        <rect key="frame" x="20" y="21.666666666666629" width="181" height="26.333333333333329"/>
-                                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R9v-qx-cet" userLabel="구분선">
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="0.33333333333333331"/>
+                                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="0.29999999999999999" id="ixA-px-8ae"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Ayp-kO-EJQ" userLabel="추이 타이틀">
+                                                        <rect key="frame" x="0.0" y="0.33333333333337123" width="393" height="70"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 6개월 추이" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0l-YD-POy">
+                                                                <rect key="frame" x="20" y="21.666666666666629" width="138" height="26.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="70" id="5me-51-nUg"/>
+                                                            <constraint firstItem="E0l-YD-POy" firstAttribute="leading" secondItem="Ayp-kO-EJQ" secondAttribute="leading" constant="20" id="P6z-nY-mot"/>
+                                                            <constraint firstItem="E0l-YD-POy" firstAttribute="centerY" secondItem="Ayp-kO-EJQ" secondAttribute="centerY" id="aPH-YR-mSz"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E0l-YD-POy" secondAttribute="trailing" constant="20" symbolic="YES" id="pEy-gg-V47"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFL-9E-4u2" customClass="BarChartView" customModule="DGCharts">
+                                                        <rect key="frame" x="0.0" y="70.333333333333371" width="393" height="270"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="270" id="Eex-zi-99X"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGT-Jv-0o6" userLabel="여백">
+                                                        <rect key="frame" x="0.0" y="340.33333333333326" width="393" height="25"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="wZj-Vd-hZk"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="70" id="5me-51-nUg"/>
-                                                    <constraint firstItem="E0l-YD-POy" firstAttribute="leading" secondItem="Ayp-kO-EJQ" secondAttribute="leading" constant="20" id="P6z-nY-mot"/>
-                                                    <constraint firstItem="E0l-YD-POy" firstAttribute="centerY" secondItem="Ayp-kO-EJQ" secondAttribute="centerY" id="aPH-YR-mSz"/>
-                                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E0l-YD-POy" secondAttribute="trailing" constant="20" symbolic="YES" id="pEy-gg-V47"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bFL-9E-4u2" customClass="BarChartView" customModule="DGCharts">
-                                                <rect key="frame" x="0.0" y="895.33333333333348" width="393" height="270"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="270" id="Eex-zi-99X"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MGT-Jv-0o6" userLabel="여백">
-                                                <rect key="frame" x="0.0" y="1165.3333333333333" width="393" height="25"/>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="25" id="wZj-Vd-hZk"/>
-                                                </constraints>
-                                            </view>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -959,8 +964,7 @@
                     <size key="freeformSize" width="393" height="1351"/>
                     <connections>
                         <outlet property="assetTitleLabel" destination="6un-Tq-IBg" id="mpw-eS-tza"/>
-                        <outlet property="barChartTitleLabel" destination="E0l-YD-POy" id="4Sr-2f-R7i"/>
-                        <outlet property="barChartTitleView" destination="Ayp-kO-EJQ" id="yDu-OM-LCK"/>
+                        <outlet property="barChartStackView" destination="oNZ-Mx-UcR" id="hin-zn-jZB"/>
                         <outlet property="barChartView" destination="bFL-9E-4u2" id="9uU-sN-Bam"/>
                         <outlet property="categoryTitleLabel" destination="LUd-o4-SpM" id="3S2-yA-L3W"/>
                         <outlet property="modeButton" destination="Tf7-tt-IVf" id="Q3C-Mc-NSH"/>
