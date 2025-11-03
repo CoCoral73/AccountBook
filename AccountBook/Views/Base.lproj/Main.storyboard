@@ -579,7 +579,7 @@
             <objects>
                 <viewController storyboardIdentifier="ChartViewController" id="JqY-wO-l7i" customClass="ChartViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="46b-bo-Q5A">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="1190"/>
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="1351"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nVE-YV-FAs">
@@ -624,14 +624,14 @@
                                     <constraint firstAttribute="trailing" secondItem="Tf7-tt-IVf" secondAttribute="trailing" constant="8" id="oYM-mq-brh"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="O2n-Bz-vEQ">
-                                <rect key="frame" x="0.0" y="103" width="393" height="1004"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="O2n-Bz-vEQ">
+                                <rect key="frame" x="0.0" y="103" width="393" height="1165"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyx-pN-Yrh">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="786.66666666666663"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="tyx-pN-Yrh">
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="1106.6666666666667"/>
                                         <subviews>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aAw-s8-fha">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="786.66666666666663"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aAw-s8-fha">
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="1126.6666666666667"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMi-12-Vmx" userLabel="총 금액 타이틀">
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
@@ -691,7 +691,7 @@
                                                             <constraint firstAttribute="height" constant="270" id="zUY-J6-O3Y"/>
                                                         </constraints>
                                                     </view>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-Zj-gJK" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-Zj-gJK" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="410.33333333333337" width="393" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
@@ -792,21 +792,21 @@
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rUB-oQ-nFC" userLabel="여백">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="rUB-oQ-nFC" userLabel="여백">
                                                         <rect key="frame" x="0.0" y="538.33333333333337" width="393" height="25"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="nhQ-XJ-Jo4"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fnY-QA-Ozn" userLabel="구분선">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="fnY-QA-Ozn" userLabel="구분선">
                                                         <rect key="frame" x="0.0" y="563.33333333333337" width="393" height="0.33333333333337123"/>
                                                         <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="0.29999999999999999" id="joU-Nh-SDj"/>
                                                         </constraints>
                                                     </view>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Iaa-YF-QNB" userLabel="자산 타이틀">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Iaa-YF-QNB" userLabel="자산 타이틀">
                                                         <rect key="frame" x="0.0" y="563.66666666666663" width="393" height="70"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자산 별 지출" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6un-Tq-IBg">
@@ -824,9 +824,12 @@
                                                             <constraint firstItem="6un-Tq-IBg" firstAttribute="leading" secondItem="Iaa-YF-QNB" secondAttribute="leading" constant="20" id="xXZ-Re-0f2"/>
                                                         </constraints>
                                                     </view>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="45" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vAh-nB-O2t" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="45" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vAh-nB-O2t" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="633.66666666666663" width="393" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" priority="250" constant="128" id="zYc-qP-ShF"/>
+                                                        </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableByAssetInChart" rowHeight="45" id="DdC-o0-IJ7" customClass="TableByAssetCell" customModule="AccountBook" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="50" width="393" height="45"/>
@@ -883,11 +886,36 @@
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XD-R2-q2P" userLabel="여백">
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0XD-R2-q2P" userLabel="여백">
                                                         <rect key="frame" x="0.0" y="761.66666666666663" width="393" height="25"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="9yI-Ee-rDh"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Ayp-kO-EJQ" userLabel="추이">
+                                                        <rect key="frame" x="0.0" y="786.66666666666663" width="393" height="70"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="최근 6개월 지출 추이" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0l-YD-POy">
+                                                                <rect key="frame" x="20" y="21.666666666666742" width="181" height="26.333333333333329"/>
+                                                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="22"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="70" id="5me-51-nUg"/>
+                                                            <constraint firstItem="E0l-YD-POy" firstAttribute="leading" secondItem="Ayp-kO-EJQ" secondAttribute="leading" constant="20" id="P6z-nY-mot"/>
+                                                            <constraint firstItem="E0l-YD-POy" firstAttribute="centerY" secondItem="Ayp-kO-EJQ" secondAttribute="centerY" id="aPH-YR-mSz"/>
+                                                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="E0l-YD-POy" secondAttribute="trailing" constant="20" symbolic="YES" id="pEy-gg-V47"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bFL-9E-4u2" customClass="BarChartView" customModule="DGCharts">
+                                                        <rect key="frame" x="0.0" y="856.66666666666663" width="393" height="269.99999999999989"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="270" id="9vy-EL-1rP"/>
                                                         </constraints>
                                                     </view>
                                                 </subviews>
@@ -927,9 +955,12 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="mqR-go-BIU"/>
-                    <size key="freeformSize" width="393" height="1190"/>
+                    <size key="freeformSize" width="393" height="1351"/>
                     <connections>
                         <outlet property="assetTitleLabel" destination="6un-Tq-IBg" id="mpw-eS-tza"/>
+                        <outlet property="barChartTitleLabel" destination="E0l-YD-POy" id="4Sr-2f-R7i"/>
+                        <outlet property="barChartTitleView" destination="Ayp-kO-EJQ" id="yDu-OM-LCK"/>
+                        <outlet property="barChartView" destination="bFL-9E-4u2" id="9uU-sN-Bam"/>
                         <outlet property="categoryTitleLabel" destination="LUd-o4-SpM" id="3S2-yA-L3W"/>
                         <outlet property="modeButton" destination="Tf7-tt-IVf" id="Q3C-Mc-NSH"/>
                         <outlet property="periodButton" destination="jqv-vr-QIH" id="ndi-6E-vC2"/>
@@ -942,7 +973,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wir-cZ-gSn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1009.9236641221373" y="1424.6478873239437"/>
+            <point key="canvasLocation" x="1009.9236641221373" y="1414.7887323943662"/>
         </scene>
         <!--Period Selection View Controller-->
         <scene sceneID="iv7-7L-qjo">
