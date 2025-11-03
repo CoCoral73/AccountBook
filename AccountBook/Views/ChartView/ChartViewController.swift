@@ -22,6 +22,9 @@ class ChartViewController: UIViewController {
     @IBOutlet weak var tableViewByCategory: IntrinsicTableView!
     @IBOutlet weak var tableViewByAsset: IntrinsicTableView!
     
+    @IBOutlet weak var barChartStackView: UIStackView!
+    @IBOutlet weak var barChartView: BarChartView!
+    
     var viewModel: ChartViewModel!
     var tableByCategoryHandler: TableByCategoryHandler!
     var tableByAssetHandler: TableByAssetHandler!
@@ -33,12 +36,15 @@ class ChartViewController: UIViewController {
         configureUI()
         configurePieChartView()
         configureTableView()
+        configureBarChartView()
     }
     
     func bindViewModel() {
         viewModel.onDidSetPeriod = { [weak self] in
             guard let self = self else { return }
             periodButton.setTitle(viewModel.periodButtonTitleString, for: .normal)
+            barChartStackView.isHidden = viewModel.isHiddenForBarChart
+            barChartView.isHidden = viewModel.isHiddenForBarChart
             reloadData()
         }
         
@@ -59,6 +65,8 @@ class ChartViewController: UIViewController {
         totalAmountLabel.text = viewModel.totalAmountString
         categoryTitleLabel.text = viewModel.categoryTitleString
         assetTitleLabel.text = viewModel.assetTitleString
+        barChartStackView.isHidden = viewModel.isHiddenForBarChart
+        barChartView.isHidden = viewModel.isHiddenForBarChart
     }
     
     func configurePieChartView() {
@@ -71,8 +79,6 @@ class ChartViewController: UIViewController {
         pieChartView.rotationEnabled = false
         pieChartView.setExtraOffsets(left: 0, top: 20, right: 0, bottom: 0)
         pieChartView.minOffset = 10
-        
-        pieChartView.data = viewModel.chartDataForPieChart
     }
     
     func configureTableView() {
@@ -89,6 +95,18 @@ class ChartViewController: UIViewController {
         tableViewByAsset.register(headerNib, forHeaderFooterViewReuseIdentifier: "AssetSectionHeaderView")
     }
     
+    func configureBarChartView() {
+        barChartView.legend.enabled = false     //범례 표시
+        barChartView.leftAxis.enabled = false   //좌측 y축 표시
+        barChartView.rightAxis.enabled = false  //우측 y축 표시
+        barChartView.xAxis.labelPosition = .bottomInside
+        barChartView.xAxis.drawGridLinesEnabled = false     //true: 바 중심축 생김
+        barChartView.xAxis.labelTextColor = .secondaryLabel
+        barChartView.xAxis.axisLineColor = .clear
+        barChartView.highlightPerTapEnabled = false
+        barChartView.setExtraOffsets(left: 20, top: 0, right: 20, bottom: 0)
+    }
+    
     func reloadData(shouldReloadTxs: Bool = true) {
         if shouldReloadTxs {
             viewModel.reloadTxs()
@@ -99,6 +117,11 @@ class ChartViewController: UIViewController {
         pieChartView.data = viewModel.chartDataForPieChart
         pieChartView.centerText = viewModel.chartCenterText
         pieChartView.notifyDataSetChanged()
+        
+        let chartData = viewModel.chartDataForBarChart
+        barChartView.data = chartData.data
+        barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: chartData.label)
+        barChartView.notifyDataSetChanged()
         
         tableViewByCategory.reloadData()
         tableViewByAsset.reloadData()

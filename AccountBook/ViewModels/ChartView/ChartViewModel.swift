@@ -64,10 +64,13 @@ class ChartViewModel {
     var totalAmountString: String = ""
     var categoryTitleString: String { isIncome ? "카테고리별 수입" : "카테고리별 지출" }
     var assetTitleString: String { isIncome ? "자산별 수입" : "자산별 지출" }
+    var isHiddenForBarChart: Bool { periodType == .monthly ? false : true }
     
     var chartDataForPieChart: PieChartData { makeChartDataForPieChart() }
     var chartCenterText: String { byCategoryViewModels.isEmpty ? "데이터 없음" : "" }
     var byCategoryViewModels: [TableByCategoryCellViewModel] = []
+    
+    var chartDataForBarChart: (data: BarChartData, label: [String]) { makeChartDataForBarChart() }
     
     var numberOfSectionsByAsset: Int {
         sectionsByAsset.count
@@ -232,5 +235,28 @@ class ChartViewModel {
         
         return chartData
         
+    }
+    
+    private func makeChartDataForBarChart() -> (BarChartData, [String]) {
+        let data = loadTotalsFor6Months()
+        let entries = data.enumerated().map { BarChartDataEntry(x: Double($0.offset), y: Double($0.element.1)) }
+        let dataSet = BarChartDataSet(entries: entries)
+        dataSet.colors = [UIColor.systemPink]
+        
+        let chartData = BarChartData(dataSet: dataSet)
+        return (chartData, data.map { $0.0 })
+    }
+    
+    private func loadTotalsFor6Months() -> [(String, Int64)] {
+        var data: [(String, Int64)] = []
+        let calendar = Calendar.current
+        for i in -5...0 {
+            let month = calendar.date(byAdding: .month, value: i, to: startDate)!
+            let txs = CoreDataManager.shared.fetchTransactions(forMonth: month)
+            let total = txs.filter { $0.isIncome == self.isIncome }.reduce(0) { $0 + $1.amount }
+            
+            data.append((month.monthString, total))
+        }
+        return data
     }
 }
