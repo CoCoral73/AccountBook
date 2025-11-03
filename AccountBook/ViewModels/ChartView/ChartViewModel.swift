@@ -65,7 +65,7 @@ class ChartViewModel {
     var categoryTitleString: String { isIncome ? "카테고리별 수입" : "카테고리별 지출" }
     var assetTitleString: String { isIncome ? "자산별 수입" : "자산별 지출" }
     
-    var chartData: PieChartData { makeChartData() }
+    var chartDataForPieChart: PieChartData { makeChartData() }
     var chartCenterText: String { byCategoryViewModels.isEmpty ? "데이터 없음" : "" }
     var byCategoryViewModels: [TableByCategoryCellViewModel] = []
     

@@ -72,7 +72,7 @@ class ChartViewController: UIViewController {
         pieChartView.setExtraOffsets(left: 0, top: 20, right: 0, bottom: 0)
         pieChartView.minOffset = 10
         
-        pieChartView.data = viewModel.chartData
+        pieChartView.data = viewModel.chartDataForPieChart
     }
     
     func configureTableView() {
@@ -96,7 +96,7 @@ class ChartViewController: UIViewController {
         
         totalAmountLabel.text = viewModel.totalAmountString
         
-        pieChartView.data = viewModel.chartData
+        pieChartView.data = viewModel.chartDataForPieChart
         pieChartView.centerText = viewModel.chartCenterText
         pieChartView.notifyDataSetChanged()
         
