@@ -688,11 +688,11 @@
                                                             <constraint firstAttribute="height" constant="270" id="zUY-J6-O3Y"/>
                                                         </constraints>
                                                     </view>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-Zj-gJK">
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="55" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lcw-Zj-gJK" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="410.33333333333337" width="393" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                         <constraints>
-                                                            <constraint firstAttribute="height" constant="128" id="JCr-R8-anf"/>
+                                                            <constraint firstAttribute="height" priority="250" constant="128" id="7Yk-zP-rVf"/>
                                                         </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableByCategoryInChart" id="TUe-uh-LPf" customClass="TableByCategoryCell" customModule="AccountBook" customModuleProvider="target">
@@ -821,12 +821,9 @@
                                                             <constraint firstItem="6un-Tq-IBg" firstAttribute="leading" secondItem="Iaa-YF-QNB" secondAttribute="leading" constant="20" id="xXZ-Re-0f2"/>
                                                         </constraints>
                                                     </view>
-                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="45" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vAh-nB-O2t">
+                                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="45" estimatedRowHeight="-1" sectionHeaderHeight="45" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="vAh-nB-O2t" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="633.66666666666663" width="393" height="128"/>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="height" constant="128" id="tog-x3-9iv"/>
-                                                        </constraints>
                                                         <prototypes>
                                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="TableByAssetInChart" rowHeight="45" id="DdC-o0-IJ7" customClass="TableByAssetCell" customModule="AccountBook" customModuleProvider="target">
                                                                 <rect key="frame" x="0.0" y="50" width="393" height="45"/>
@@ -928,9 +925,7 @@
                         <outlet property="periodButton" destination="jqv-vr-QIH" id="ndi-6E-vC2"/>
                         <outlet property="pieChartView" destination="moP-oq-Ld5" id="NFb-0x-2ta"/>
                         <outlet property="tableViewByAsset" destination="vAh-nB-O2t" id="I77-wa-AD4"/>
-                        <outlet property="tableViewByAssetHeightConstraint" destination="tog-x3-9iv" id="MI0-bc-n2N"/>
                         <outlet property="tableViewByCategory" destination="lcw-Zj-gJK" id="WDC-NB-9uw"/>
-                        <outlet property="tableViewByCategoryHeightConstraint" destination="JCr-R8-anf" id="9aK-s9-NJ7"/>
                         <outlet property="totalAmountLabel" destination="ID1-Pv-ob0" id="faO-Rd-6OT"/>
                         <outlet property="totalTitleLabel" destination="6FG-rG-hCY" id="OPz-bf-K3y"/>
                     </connections>
