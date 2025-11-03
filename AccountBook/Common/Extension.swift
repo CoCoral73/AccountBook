@@ -15,6 +15,12 @@ extension Calendar {
 }
 
 extension Date {
+    var monthString: String {
+        let fmt = DateFormatter()
+        fmt.dateFormat = "M월"
+        return fmt.string(from: self)
+    }
+    
     var startOfMonth: Date {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month], from: self)
