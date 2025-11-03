@@ -99,7 +99,8 @@ class ChartViewController: UIViewController {
         barChartView.legend.enabled = false     //범례 표시
         barChartView.leftAxis.enabled = false   //좌측 y축 표시
         barChartView.rightAxis.enabled = false  //우측 y축 표시
-        barChartView.xAxis.labelPosition = .bottomInside
+        barChartView.leftAxis.axisMinimum = 0
+        barChartView.xAxis.labelPosition = .bottom
         barChartView.xAxis.drawGridLinesEnabled = false     //true: 바 중심축 생김
         barChartView.xAxis.labelTextColor = .secondaryLabel
         barChartView.xAxis.axisLineColor = .clear
