@@ -40,9 +40,10 @@ class MonthPickerViewModel {
         selectedYear = years[year]
         selectedMonth = months[month]
         
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMM"
-        let date = dateFormatter.date(from: "\(selectedYear)\(selectedMonth)")!
+        guard let date = calendar.date(year: selectedYear, month: selectedMonth) else {
+            print("MonthPickerViewModel: date 생성 실패")
+            return
+        }
         //캘린더 뷰컨트롤러에 selectedYear, selectedMonth 전달
         onDidSelect?(date)
     }
