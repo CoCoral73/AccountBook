@@ -628,10 +628,10 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="1004"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyx-pN-Yrh">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="761.66666666666663"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="786.66666666666663"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="aAw-s8-fha">
-                                                <rect key="frame" x="0.0" y="0.0" width="393" height="761.66666666666663"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="393" height="786.66666666666663"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qMi-12-Vmx" userLabel="총 금액 타이틀">
                                                         <rect key="frame" x="0.0" y="0.0" width="393" height="70"/>
@@ -883,6 +883,13 @@
                                                             </tableViewCell>
                                                         </prototypes>
                                                     </tableView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0XD-R2-q2P" userLabel="여백">
+                                                        <rect key="frame" x="0.0" y="761.66666666666663" width="393" height="25"/>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="25" id="9yI-Ee-rDh"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
                                             </stackView>
                                         </subviews>
