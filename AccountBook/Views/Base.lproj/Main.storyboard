@@ -2418,9 +2418,6 @@
                             <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" style="inline" translatesAutoresizingMaskIntoConstraints="NO" id="XoC-Ll-MkV">
                                 <rect key="frame" x="0.0" y="59" width="393" height="374.66666666666669"/>
                                 <color key="tintColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="374.67000000000002" id="DW9-zC-50n"/>
-                                </constraints>
                                 <date key="minimumDate" timeIntervalSinceReferenceDate="599569200">
                                     <!--2020-01-01 11:00:00 +0000-->
                                 </date>
