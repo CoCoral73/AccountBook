@@ -37,6 +37,10 @@
                 <constraint firstItem="YOx-pf-8hY" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="25" id="sUE-8J-ZsD"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="amountLabel" destination="fgM-65-5md" id="wxh-gR-Kzk"/>
+                <outlet property="nameLabel" destination="YOx-pf-8hY" id="lxE-Px-feW"/>
+            </connections>
             <point key="canvasLocation" x="63.358778625954194" y="-225"/>
         </view>
     </objects>
