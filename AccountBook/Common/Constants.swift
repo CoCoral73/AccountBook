@@ -12,4 +12,6 @@ struct Cell {
     static let dayCell = "DayCell"
     static let tableByCategoryCellInChart = "TableByCategoryInChart"
     static let tableByAssetCellInChart = "TableByAssetInChart"
+    static let assetManageForNotCreditCardCell = "AssetManageForNotCreditCardCell"
+    static let assetManageForCreditCardCell = "AssetManageForCreditCardCell"
 }
