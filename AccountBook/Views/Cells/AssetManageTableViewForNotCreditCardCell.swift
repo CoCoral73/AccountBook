@@ -12,4 +12,15 @@ class AssetManageTableViewForNotCreditCardCell: UITableViewCell {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
+    
+    var viewModel: AssetManageForNotCreditCardCellViewModel! {
+        didSet {
+            configure()
+        }
+    }
+    
+    func configure() {
+        nameLabel.text = viewModel.nameString
+        amountLabel.text = viewModel.amountString
+    }
 }
