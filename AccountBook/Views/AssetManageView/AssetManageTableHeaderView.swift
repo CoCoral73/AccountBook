@@ -12,4 +12,8 @@ class AssetManageTableHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
+    func configure(_ name: String, _ amount: String) {
+        nameLabel.text = name
+        amountLabel.text = amount
+    }
 }
