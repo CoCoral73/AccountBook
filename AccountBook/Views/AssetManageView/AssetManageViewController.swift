@@ -12,6 +12,8 @@ class AssetManageViewController: UIViewController {
     @IBOutlet weak var assetTotalAmountLabel: UILabel!
     @IBOutlet weak var tableView: IntrinsicTableView!
     
+    var viewModel: AssetManageViewModel!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

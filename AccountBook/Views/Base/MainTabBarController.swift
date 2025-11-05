@@ -10,6 +10,7 @@ import UIKit
 class MainTabBarController: UITabBarController {
     private let calendarViewModel = CalendarViewModel()
     private let chartViewModel = ChartViewModel()
+    private let assetManageViewModel = AssetManageViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,8 +24,13 @@ class MainTabBarController: UITabBarController {
             calendarVC.viewModel = calendarViewModel
         }
         
-        if let chartVC = viewControllers?[1] as? ChartViewController {
+        else if let chartVC = viewControllers?[1] as? ChartViewController {
             chartVC.viewModel = chartViewModel
+        }
+        
+        else if let navVC = viewControllers?[2] as? UINavigationController,
+                let assetManageVC = navVC.topViewController as? AssetManageViewController {
+            assetManageVC.viewModel = assetManageViewModel
         }
     }
 }
