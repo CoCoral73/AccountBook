@@ -502,7 +502,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1883.206106870229" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="2809.9236641221373" y="-27.464788732394368"/>
         </scene>
         <!--Transaction Add View Controller-->
         <scene sceneID="DMW-2H-Dig">
@@ -572,7 +572,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Es4-EV-4rV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2782.4427480916029" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="3709.1603053435115" y="-27.464788732394368"/>
         </scene>
         <!--통계-->
         <scene sceneID="pY2-yM-nNx">
@@ -990,11 +990,11 @@
                         <viewLayoutGuide key="safeArea" id="Eub-zi-e6M"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
-                    <tabBarItem key="tabBarItem" title="자산 관리" id="Cg2-EC-pBQ"/>
+                    <navigationItem key="navigationItem" title="자산 관리" id="iwF-Og-tYR"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfd-CR-34v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1218" y="-27"/>
+            <point key="canvasLocation" x="-149" y="673"/>
         </scene>
         <!--Period Selection View Controller-->
         <scene sceneID="iv7-7L-qjo">
@@ -1873,7 +1873,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kx5-X4-AHk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3495" y="68"/>
+            <point key="canvasLocation" x="4420.6106870229005" y="67.957746478873247"/>
         </scene>
         <!--Day Picker View Controller-->
         <scene sceneID="Yzo-lp-HVQ">
@@ -2262,7 +2262,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0K-3i-4wP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4608.3969465648852" y="-17.605633802816904"/>
+            <point key="canvasLocation" x="5535.1145038167933" y="-17.605633802816904"/>
         </scene>
         <!--Transaction Add Table View Controller-->
         <scene sceneID="bIt-QH-zM3">
@@ -2600,12 +2600,12 @@
                     <connections>
                         <segue destination="2yz-Vf-2Oc" kind="relationship" relationship="viewControllers" id="8Xv-6K-Ngp"/>
                         <segue destination="JqY-wO-l7i" kind="relationship" relationship="viewControllers" id="oB1-Hm-gdJ"/>
-                        <segue destination="RC5-wZ-3Wx" kind="relationship" relationship="viewControllers" id="4sX-J0-tbX"/>
+                        <segue destination="Jig-8d-Mff" kind="relationship" relationship="viewControllers" id="4sX-J0-tbX"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x6i-mx-TJj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29.770992366412212" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="956.48854961832058" y="-27.464788732394368"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Hg1-J9-hhS">
@@ -2626,7 +2626,26 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kEH-Wd-E6x" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="956.48854961832058" y="-27.464788732394368"/>
+            <point key="canvasLocation" x="1883.206106870229" y="-27.464788732394368"/>
+        </scene>
+        <!--자산 관리-->
+        <scene sceneID="Y4x-6a-2W8">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jig-8d-Mff" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="자산 관리" id="Cg2-EC-pBQ"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="dNw-Ek-Q8w">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="RC5-wZ-3Wx" kind="relationship" relationship="rootViewController" id="V3B-eC-dDb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="nis-Q9-3PP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-149" y="-27"/>
         </scene>
     </scenes>
     <resources>
