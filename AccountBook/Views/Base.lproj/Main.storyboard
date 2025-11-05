@@ -574,7 +574,7 @@
             </objects>
             <point key="canvasLocation" x="2782.4427480916029" y="-27.464788732394368"/>
         </scene>
-        <!--Item-->
+        <!--통계-->
         <scene sceneID="pY2-yM-nNx">
             <objects>
                 <viewController storyboardIdentifier="ChartViewController" id="JqY-wO-l7i" customClass="ChartViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
@@ -960,7 +960,7 @@
                             <constraint firstItem="nVE-YV-FAs" firstAttribute="leading" secondItem="8hR-gB-LQf" secondAttribute="leading" id="bhd-hu-9Ck"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="mqR-go-BIU"/>
+                    <tabBarItem key="tabBarItem" title="통계" id="mqR-go-BIU"/>
                     <size key="freeformSize" width="393" height="1351"/>
                     <connections>
                         <outlet property="assetTitleLabel" destination="6un-Tq-IBg" id="mpw-eS-tza"/>
