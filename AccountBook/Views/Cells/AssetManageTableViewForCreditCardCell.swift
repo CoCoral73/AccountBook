@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AssetManageForCreditCardTableViewCell: UITableViewCell {
+class AssetManageTableViewForCreditCardCell: UITableViewCell {
 
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
