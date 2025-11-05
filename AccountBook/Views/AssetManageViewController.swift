@@ -9,10 +9,16 @@ import UIKit
 
 class AssetManageViewController: UIViewController {
 
+    @IBOutlet weak var assetTotalAmountLabel: UILabel!
+    @IBOutlet weak var tableView: IntrinsicTableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         
     }
 
+    @IBAction func infoButtonTapped(_ sender: UIButton) {
+    }
+    
 }

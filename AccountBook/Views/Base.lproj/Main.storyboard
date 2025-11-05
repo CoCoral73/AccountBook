@@ -1019,6 +1019,9 @@
                                                         <state key="normal">
                                                             <imageReference key="image" image="info.circle" catalog="system" symbolScale="small"/>
                                                         </state>
+                                                        <connections>
+                                                            <action selector="infoButtonTapped:" destination="RC5-wZ-3Wx" eventType="touchUpInside" id="iGT-Xv-Slw"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1196,6 +1199,10 @@
                     </view>
                     <navigationItem key="navigationItem" title="자산 관리" id="iwF-Og-tYR"/>
                     <size key="freeformSize" width="393" height="949"/>
+                    <connections>
+                        <outlet property="assetTotalAmountLabel" destination="Xpw-He-dsd" id="bCT-gP-gch"/>
+                        <outlet property="tableView" destination="Cap-Xd-beh" id="FaR-e9-f9j"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfd-CR-34v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
