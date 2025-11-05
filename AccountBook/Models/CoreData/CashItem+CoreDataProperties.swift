@@ -16,4 +16,5 @@ extension CashItem {
         return NSFetchRequest<CashItem>(entityName: "CashItem")
     }
 
+    @NSManaged public var balance: Int64
 }
