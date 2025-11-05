@@ -13,4 +13,16 @@ class AssetManageForCreditCardTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var currentMonthSpendingLabel: UILabel!
     @IBOutlet weak var upcomingPaymentAmountLabel: UILabel!
+    
+    var viewModel: AssetManageForCreditCardCellViewModel! {
+        didSet {
+            configure()
+        }
+    }
+    
+    func configure() {
+        nameLabel.text = viewModel.nameString
+        currentMonthSpendingLabel.text = viewModel.currentMonthSpendingString
+        upcomingPaymentAmountLabel.text = viewModel.upcomingPaymentAmountString
+    }
 }
