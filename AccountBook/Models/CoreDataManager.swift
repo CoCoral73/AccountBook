@@ -25,6 +25,11 @@ final class CoreDataManager {
     // MARK: - 초기화
     private init() {
         persistentContainer = NSPersistentContainer(name: "AccountBook")
+        
+        let description = persistentContainer.persistentStoreDescriptions.first
+        description?.shouldMigrateStoreAutomatically = true
+        description?.shouldInferMappingModelAutomatically = true
+        
         persistentContainer.loadPersistentStores { storeDescription, error in
             if let error = error {
                 fatalError("Core Data error: \(error)")
