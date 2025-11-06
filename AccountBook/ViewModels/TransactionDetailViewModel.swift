@@ -145,10 +145,14 @@ class TransactionDetailViewModel: TransactionUpdatable {
             fatalError("AssetSelectionViewController 생성 에러")
         }
         
-        assetSelectionVC.onAssetSelected = { [weak self] asset in
+        assetSelectionVC.onAssetSelected = { [weak self] newAsset in
             guard let self = self else { return }
             
-            transaction.asset = asset
+            let oldAsset = transaction.asset, amount = transaction.amount
+            TransactionManager.shared.adjustBalance(amount: amount, asset: oldAsset)
+            TransactionManager.shared.adjustBalance(amount: -amount, asset: newAsset)
+            
+            transaction.asset = newAsset
             onDidSetAssetItem?()
         }
         
