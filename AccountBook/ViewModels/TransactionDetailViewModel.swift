@@ -148,11 +148,20 @@ class TransactionDetailViewModel: TransactionUpdatable {
         assetSelectionVC.onAssetSelected = { [weak self] newAsset in
             guard let self = self else { return }
             
-            let oldAsset = transaction.asset, amount = transaction.amount
-            TransactionManager.shared.adjustBalance(amount: amount, asset: oldAsset)
-            TransactionManager.shared.adjustBalance(amount: -amount, asset: newAsset)
+            let oldAsset = transaction.asset
+            let amount = transaction.amount * (transaction.isIncome ? 1 : -1)
+            let oldIsCompleted = transaction.isCompleted
+            let newIsCompleted = newAsset.type != AssetType.creditCard.rawValue
+            
+            //롤백
+            TransactionManager.shared.adjustBalance(amount: -amount, asset: oldAsset, isCompleted: oldIsCompleted)
+            
+            //업데이트
+            TransactionManager.shared.adjustBalance(amount: amount, asset: newAsset, isCompleted: newIsCompleted)
             
             transaction.asset = newAsset
+            transaction.isCompleted = newIsCompleted
+            
             onDidSetAssetItem?()
         }
         

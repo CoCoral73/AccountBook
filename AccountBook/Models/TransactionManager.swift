@@ -48,7 +48,10 @@ class TransactionManager {
         transaction.category = input.category
         transaction.asset = input.asset
         
-        adjustBalance(amount: -input.amount, asset: input.asset)
+        let amount = input.amount * (input.isIncome ? 1 : -1)
+        let isCompleted = input.asset.type != AssetType.creditCard.rawValue
+        
+        adjustBalance(amount: amount, asset: input.asset, isCompleted: isCompleted)
         
         if shouldSave {
             CoreDataManager.shared.saveContext()
@@ -68,14 +71,15 @@ class TransactionManager {
     }
     
     func updateTransaction(_ tx: Transaction, name: String, amount: Int64, memo: String) {
-        let (oldAmount, newAmount) = (tx.amount, amount)
+        let isIncome = tx.isIncome
+        let (oldAmount, newAmount) = (tx.amount * (isIncome ? 1 : -1), amount * (isIncome ? 1 : -1))
         let asset = tx.asset
         
         tx.name = name
         tx.amount = amount
         tx.memo = memo
         
-        adjustBalance(amount: oldAmount - newAmount, asset: asset)
+        adjustBalance(amount: newAmount - oldAmount, asset: asset, isCompleted: tx.isCompleted)
         
         CoreDataManager.shared.saveContext()
     }
@@ -83,14 +87,15 @@ class TransactionManager {
     func deleteTransaction(_ transaction: Transaction) {
         // 할부 거래 중 일부를 삭제하려고 하면 → 전체 할부 삭제
         for tx in transaction.installment?.transactions.array as? [Transaction] ?? [transaction] {
-            let (amount, asset) = (tx.amount, tx.asset)
-            adjustBalance(amount: amount, asset: asset)
+            let (amount, asset) = (tx.amount * (tx.isIncome ? 1 : -1), tx.asset)
+            adjustBalance(amount: -amount, asset: asset, isCompleted: tx.isCompleted)
             CoreDataManager.shared.context.delete(tx)
         }
         CoreDataManager.shared.saveContext()
     }
     
-    func adjustBalance(amount: Int64, asset: AssetItem) {
+    func adjustBalance(amount: Int64, asset: AssetItem, isCompleted: Bool) {
+        guard isCompleted else { return }
         switch asset {
         case let cash as CashItem:
             cash.balance += amount
@@ -102,7 +107,14 @@ class TransactionManager {
             } else {
                 AssetItemManager.shared.cash[0].balance += amount
             }
-        default: break
+        case let credit as CreditCardItem:
+            if let account = credit.linkedAccount {
+                account.balance += amount
+            } else {
+                AssetItemManager.shared.cash[0].balance += amount
+            }
+        default:
+            return
         }
     }
 }
