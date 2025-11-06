@@ -30,8 +30,19 @@ class AssetManageViewController: UIViewController {
         let headerNib = UINib(nibName: "AssetManageTableHeaderView", bundle: nil)
         tableView.register(headerNib, forHeaderFooterViewReuseIdentifier: "AssetManageTableHeaderView")
     }
+    
+    func reloadData() {
+        assetTotalAmountLabel.text = viewModel.assetTotalAmountString
+        tableView.reloadData()
+    }
 
     @IBAction func infoButtonTapped(_ sender: UIButton) {
     }
     
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        reloadData()
+    }
 }
