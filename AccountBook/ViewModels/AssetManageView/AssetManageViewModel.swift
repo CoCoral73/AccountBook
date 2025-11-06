@@ -9,4 +9,41 @@ import UIKit
 
 class AssetManageViewModel {
     
+    func numberOfRowsInSection(section: Int) -> Int {
+        guard let type = AssetType(rawValue: section) else {
+            print("AssetManageViewModel: AssetType 생성 오류")
+            return 0
+        }
+        return AssetItemManager.shared.getAssetItems(with: type).count
+    }
+    
+    func withIdentifier(section: Int) -> String {
+        return section == 3 ? Cell.assetManageForCreditCardCell : Cell.assetManageForNotCreditCardCell
+    }
+    
+    func cellForRowAt(indexPath: IndexPath) -> AssetItem {
+        guard let type = AssetType(rawValue: indexPath.section) else {
+            fatalError("AssetManageViewModel: AssetType 생성 오류")
+        }
+        
+        return AssetItemManager.shared.getAssetItems(with: type)[indexPath.row]
+    }
+    
+    func viewForHeaderInSection(section: Int) -> (name: String, amount: String) {
+        guard let type = AssetType(rawValue: section) else {
+            fatalError("AssetManageViewModel: AssetType 생성 오류")
+        }
+        
+        let name = type.displayName
+        if section == 1 {
+            let amount = calculateTotalBalance().formattedWithComma + "원"
+            return (name, amount)
+        } else {
+            return (name, "")
+        }
+    }
+    
+    func calculateTotalBalance() -> Int64 {
+        return AssetItemManager.shared.bankAccount.reduce(0) { $0 + $1.balance }
+    }
 }
