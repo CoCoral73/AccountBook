@@ -48,6 +48,8 @@ class TransactionManager {
         transaction.category = input.category
         transaction.asset = input.asset
         
+        adjustBalance(amount: -input.amount, asset: input.asset)
+        
         if shouldSave {
             CoreDataManager.shared.saveContext()
         }
@@ -68,8 +70,26 @@ class TransactionManager {
     func deleteTransaction(_ transaction: Transaction) {
         // 할부 거래 중 일부를 삭제하려고 하면 → 전체 할부 삭제
         for tx in transaction.installment?.transactions.array as? [Transaction] ?? [transaction] {
+            let (amount, asset) = (tx.amount, tx.asset)
+            adjustBalance(amount: amount, asset: asset)
             CoreDataManager.shared.context.delete(tx)
         }
         CoreDataManager.shared.saveContext()
+    }
+    
+    func adjustBalance(amount: Int64, asset: AssetItem) {
+        switch asset {
+        case let cash as CashItem:
+            cash.balance += amount
+        case let bank as BankAccountItem:
+            bank.balance += amount
+        case let debit as DebitCardItem:
+            if let account = debit.linkedAccount {
+                account.balance += amount
+            } else {
+                AssetItemManager.shared.cash[0].balance += amount
+            }
+        default: break
+        }
     }
 }
