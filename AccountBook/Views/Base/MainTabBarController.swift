@@ -24,12 +24,12 @@ class MainTabBarController: UITabBarController {
             calendarVC.viewModel = calendarViewModel
         }
         
-        else if let chartVC = viewControllers?[1] as? ChartViewController {
+        if let chartVC = viewControllers?[1] as? ChartViewController {
             chartVC.viewModel = chartViewModel
         }
         
-        else if let navVC = viewControllers?[2] as? UINavigationController,
-                let assetManageVC = navVC.topViewController as? AssetManageViewController {
+        if let navVC = viewControllers?[2] as? UINavigationController,
+            let assetManageVC = navVC.topViewController as? AssetManageViewController {
             assetManageVC.viewModel = assetManageViewModel
         }
     }
