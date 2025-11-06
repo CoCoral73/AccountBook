@@ -24,6 +24,7 @@ extension Transaction {
     @NSManaged public var name: String
     @NSManaged public var asset: AssetItem
     @NSManaged public var category: Category
+    @NSManaged public var isCompleted: Bool
     @NSManaged public var installment: Installment?
     @NSManaged public var installmentIndex: NSNumber?
     

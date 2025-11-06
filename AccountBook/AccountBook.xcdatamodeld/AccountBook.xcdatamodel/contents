@@ -11,7 +11,9 @@
         <relationship name="linkedCreditCards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CreditCardItem" inverseName="linkedAccount" inverseEntity="CreditCardItem"/>
         <relationship name="linkedDebitCards" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="DebitCardItem" inverseName="linkedAccount" inverseEntity="DebitCardItem"/>
     </entity>
-    <entity name="CashItem" representedClassName="CashItem" parentEntity="AssetItem" syncable="YES"/>
+    <entity name="CashItem" representedClassName="CashItem" parentEntity="AssetItem" syncable="YES">
+        <attribute name="balance" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+    </entity>
     <entity name="Category" representedClassName="Category" syncable="YES">
         <attribute name="iconName" attributeType="String"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
@@ -37,6 +39,7 @@
         <attribute name="date" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="id" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="installmentIndex" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="isCompleted" attributeType="Boolean" defaultValueString="YES" usesScalarValueType="YES"/>
         <attribute name="isIncome" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="memo" attributeType="String"/>
         <attribute name="name" attributeType="String"/>
