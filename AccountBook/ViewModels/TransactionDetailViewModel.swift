@@ -225,11 +225,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
         
         let newAmount = Int64(amount.replacingOccurrences(of: ",", with: "")) ?? 0
         
-        transaction.name = name
-        transaction.amount = newAmount
-        transaction.memo = memo
-        
-        CoreDataManager.shared.saveContext()
+        TransactionManager.shared.updateTransaction(transaction, name: name, amount: newAmount, memo: memo)
         
         onDidUpdateTransaction?(transaction.date)
     }

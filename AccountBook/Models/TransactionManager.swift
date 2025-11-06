@@ -66,6 +66,19 @@ class TransactionManager {
         }
         return txs
     }
+    
+    func updateTransaction(_ tx: Transaction, name: String, amount: Int64, memo: String) {
+        let (oldAmount, newAmount) = (tx.amount, amount)
+        let asset = tx.asset
+        
+        tx.name = name
+        tx.amount = amount
+        tx.memo = memo
+        
+        adjustBalance(amount: oldAmount - newAmount, asset: asset)
+        
+        CoreDataManager.shared.saveContext()
+    }
 
     func deleteTransaction(_ transaction: Transaction) {
         // 할부 거래 중 일부를 삭제하려고 하면 → 전체 할부 삭제
