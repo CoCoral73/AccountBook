@@ -9,8 +9,11 @@ class AssetManageForCreditCardCellViewModel {
     
     var asset: CreditCardItem!
     
-    init(asset: CreditCardItem!) {
-        self.asset = asset
+    init(asset: AssetItem) {
+        guard let asset = asset as? CreditCardItem else {
+            fatalError("AssetManageForCreditCardCellViewModel: init 타입캐스팅 실패")
+        }
+        self.asset = asset 
     }
     
     var nameString: String { asset.name }    
