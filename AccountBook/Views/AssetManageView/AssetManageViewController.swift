@@ -9,6 +9,7 @@ import UIKit
 
 class AssetManageViewController: UIViewController {
 
+    @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var assetTotalAmountLabel: UILabel!
     @IBOutlet weak var tableView: IntrinsicTableView!
     
@@ -37,6 +38,10 @@ class AssetManageViewController: UIViewController {
     }
 
     @IBAction func infoButtonTapped(_ sender: UIButton) {
+        infoView.isHidden = false
+    }
+    @IBAction func closeInfoButtonTapped(_ sender: UIButton) {
+        infoView.isHidden = true
     }
     
     
@@ -44,5 +49,14 @@ class AssetManageViewController: UIViewController {
         super.viewWillAppear(animated)
         
         reloadData()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        infoView.layer.shadowColor = UIColor.black.cgColor
+        infoView.layer.shadowOpacity = 0.2
+        infoView.layer.shadowOffset = CGSize(width: 1, height: 1)
+        infoView.layer.shadowRadius = 2
     }
 }
