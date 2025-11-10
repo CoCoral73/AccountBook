@@ -94,6 +94,13 @@ class TransactionAddViewModel: TransactionUpdatable {
             }
             
             addTransaction(with: category)
+            guard let amount = Int64((inputVC?.amountTextField.text ?? "").replacingOccurrences(of: ",", with: "")), amount > 0 else {
+                fromVC.view.endEditing(true)
+                HapticFeedback.notify(.error)
+                ToastManager.shared.show(message: "0원 이하의 금액은 입력 불가합니다.", in: fromVC.view)
+                return
+            }
+            
             fromVC.dismiss(animated: true)
         }
         
