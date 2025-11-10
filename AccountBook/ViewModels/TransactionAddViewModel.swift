@@ -41,7 +41,6 @@ class TransactionAddViewModel: TransactionUpdatable {
         self.assetItemInput = item
     }
     
-    func addTransaction(with category: Category) {
         guard let asset = assetItemInput else {
             //자산 선택 안됐을때 동작 설정하기
             return
@@ -49,6 +48,7 @@ class TransactionAddViewModel: TransactionUpdatable {
         
         let amountInput = Int64((inputVC?.amountTextField.text ?? "").replacingOccurrences(of: ",", with: "")) ?? 0
         let nameInput = inputVC?.nameTextField.text ?? ""
+    func addTransaction(amount: Int64, asset: AssetItem, category: Category) {
         
         let input = TransactionInput(amount: amountInput, date: transactionDate, isIncome: isIncome, name: nameInput, memo: "", category: category, asset: asset)
         TransactionManager.shared.addTransaction(with: input, shouldSave: true)
