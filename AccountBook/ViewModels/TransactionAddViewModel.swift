@@ -88,7 +88,7 @@ class TransactionAddViewModel: TransactionUpdatable {
             
             guard (inputVC?.amountTextField.text ?? "") != "", assetItemInput != nil else {
                 fromVC.view.endEditing(true)
-                childVC.view.generateFeedback(.error)
+                HapticFeedback.notify(.error)
                 ToastManager.shared.show(message: "금액과 자산을 입력해주세요", in: childVC.view)
                 return
             }

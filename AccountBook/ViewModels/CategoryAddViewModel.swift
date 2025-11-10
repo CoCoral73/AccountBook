@@ -28,7 +28,7 @@ class CategoryAddViewModel {
     func handleAddButton(fromVC: UIViewController, icon: String, name: String) {
         guard icon != " ", !name.isEmpty else {
             fromVC.view.endEditing(true)
-            fromVC.view.generateFeedback(.error)
+            HapticFeedback.notify(.error)
             ToastManager.shared.show(message: "아이콘과 이름을 입력해주세요.", in: fromVC.view)
             return
         }

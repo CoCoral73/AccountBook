@@ -112,7 +112,7 @@ class TransactionDetailViewController: UIViewController {
     
     @IBAction func dateButtonTapped(_ sender: UIButton) {
         if !viewModel.canEdit {
-            sender.generateFeedback(.error)
+            HapticFeedback.notify(.error)
             sender.shake()
             ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
             return
@@ -127,7 +127,7 @@ class TransactionDetailViewController: UIViewController {
     
     @IBAction func assetItemButtonTapped(_ sender: UIButton) {
         if !viewModel.canEdit {
-            sender.generateFeedback(.error)
+            HapticFeedback.notify(.error)
             sender.shake()
             ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
             return
@@ -138,7 +138,7 @@ class TransactionDetailViewController: UIViewController {
     
     @IBAction func installmentButtonTapped(_ sender: UIButton) {
         if !viewModel.canEdit {
-            sender.generateFeedback(.error)
+            HapticFeedback.notify(.error)
             sender.shake()
             ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
             return
@@ -148,7 +148,7 @@ class TransactionDetailViewController: UIViewController {
     }
     
     @IBAction func removeInstallmentButtonTapped(_ sender: UIButton) {
-        sender.generateFeedback(.success)
+        HapticFeedback.notify(.success)
         viewModel.handleRemoveInstallmentButton(fromVC: self)
     }
     
