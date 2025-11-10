@@ -41,16 +41,10 @@ class TransactionAddViewModel: TransactionUpdatable {
         self.assetItemInput = item
     }
     
-        guard let asset = assetItemInput else {
-            //자산 선택 안됐을때 동작 설정하기
-            return
-        }
-        
-        let amountInput = Int64((inputVC?.amountTextField.text ?? "").replacingOccurrences(of: ",", with: "")) ?? 0
-        let nameInput = inputVC?.nameTextField.text ?? ""
     func addTransaction(amount: Int64, asset: AssetItem, category: Category) {
+        let name = inputVC?.nameTextField.text ?? ""
         
-        let input = TransactionInput(amount: amountInput, date: transactionDate, isIncome: isIncome, name: nameInput, memo: "", category: category, asset: asset)
+        let input = TransactionInput(amount: amount, date: transactionDate, isIncome: isIncome, name: name, memo: "", category: category, asset: asset)
         TransactionManager.shared.addTransaction(with: input, shouldSave: true)
         onDidUpdateTransaction?(transactionDate)
     }
@@ -86,14 +80,13 @@ class TransactionAddViewModel: TransactionUpdatable {
         childVC.viewModel.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
             
-            guard (inputVC?.amountTextField.text ?? "") != "", assetItemInput != nil else {
+            guard (inputVC?.amountTextField.text ?? "") != "", let asset = assetItemInput else {
                 fromVC.view.endEditing(true)
                 HapticFeedback.notify(.error)
                 ToastManager.shared.show(message: "금액과 자산을 입력해주세요", in: childVC.view)
                 return
             }
             
-            addTransaction(with: category)
             guard let amount = Int64((inputVC?.amountTextField.text ?? "").replacingOccurrences(of: ",", with: "")), amount > 0 else {
                 fromVC.view.endEditing(true)
                 HapticFeedback.notify(.error)
@@ -101,6 +94,7 @@ class TransactionAddViewModel: TransactionUpdatable {
                 return
             }
             
+            addTransaction(amount: amount, asset: asset, category: category)
             fromVC.dismiss(animated: true)
         }
         
