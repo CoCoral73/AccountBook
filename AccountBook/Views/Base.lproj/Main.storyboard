@@ -2482,7 +2482,7 @@
                             <constraint firstItem="QUs-Zd-ohr" firstAttribute="width" secondItem="dAX-L5-92L" secondAttribute="width" multiplier="0.85" id="8mP-KN-pXs"/>
                             <constraint firstItem="T5E-WP-J54" firstAttribute="height" secondItem="sUb-my-ELU" secondAttribute="height" id="9vP-S4-9dH"/>
                             <constraint firstItem="8By-Pj-mQL" firstAttribute="height" secondItem="sUb-my-ELU" secondAttribute="height" id="BxP-ky-yAD"/>
-                            <constraint firstItem="VvW-Ru-8GZ" firstAttribute="top" secondItem="RI9-ks-QfJ" secondAttribute="bottom" constant="40" id="EHh-pL-PYj"/>
+                            <constraint firstItem="VvW-Ru-8GZ" firstAttribute="top" secondItem="PsT-9p-N7b" secondAttribute="bottom" constant="91" id="EHh-pL-PYj"/>
                             <constraint firstItem="0SQ-iG-u5E" firstAttribute="centerX" secondItem="dAX-L5-92L" secondAttribute="centerX" id="HaT-Li-mq8"/>
                             <constraint firstItem="RI9-ks-QfJ" firstAttribute="centerX" secondItem="dAX-L5-92L" secondAttribute="centerX" id="Hcs-TH-ZQe"/>
                             <constraint firstItem="QUs-Zd-ohr" firstAttribute="top" secondItem="VvW-Ru-8GZ" secondAttribute="bottom" constant="30" id="P1N-zb-nXM"/>
@@ -2508,6 +2508,7 @@
                         <outlet property="nameTextField" destination="sUb-my-ELU" id="B7X-mL-Sk2"/>
                         <outlet property="segControl" destination="RI9-ks-QfJ" id="dpW-Jr-ePn"/>
                         <outlet property="startDayButton" destination="8By-Pj-mQL" id="GgJ-d0-QtI"/>
+                        <outlet property="topConstraint" destination="EHh-pL-PYj" id="Jpe-Bh-VqR"/>
                         <outlet property="withdrawalDayButton" destination="T5E-WP-J54" id="Voh-7X-wte"/>
                     </connections>
                 </viewController>
