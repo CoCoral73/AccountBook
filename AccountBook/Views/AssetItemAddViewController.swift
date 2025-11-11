@@ -9,6 +9,7 @@ import UIKit
 
 class AssetItemAddViewController: UIViewController {
 
+    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var segControl: UISegmentedControl!
     
     @IBOutlet weak var nameTextField: UITextField!
@@ -20,6 +21,8 @@ class AssetItemAddViewController: UIViewController {
     @IBOutlet weak var accountStackView: UIStackView!
     @IBOutlet weak var cardStackView: UIStackView!
     @IBOutlet weak var creditCardStackView: UIStackView!
+    
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
     var viewModel: AssetItemAddViewModel
     var presentationStyle: PresentationStyle = .modal
@@ -51,9 +54,9 @@ class AssetItemAddViewController: UIViewController {
     @IBAction func segControlChanged(_ sender: UISegmentedControl) {
         let idx = segControl.selectedSegmentIndex
         
-        accountStackView.isHidden = (idx != 0)
-        cardStackView.isHidden = (idx == 0)
-        creditCardStackView.isHidden = (idx != 2)
+        accountStackView.isHidden = viewModel.isHiddenForAccount
+        cardStackView.isHidden = viewModel.isHiddenForCard
+        creditCardStackView.isHidden = viewModel.isHiddenForCredit
         
         viewModel.setType(with: AssetType(rawValue: idx + 1)!)
     }
@@ -78,6 +81,13 @@ class AssetItemAddViewController: UIViewController {
     }
     
     func configureUI() {
+        navItem.title = viewModel.title
+        segControl.isHidden = viewModel.isHiddenForSegControl
+        topConstraint.constant = viewModel.topConstraintConstant
+        nameTextField.isEnabled = viewModel.isEnabledForNameTextField
+        nameTextField.text = viewModel.nameTextFieldString
+        balanceTextField.text = viewModel.balanceTextFieldString
+        accountButton.setTitle(viewModel.accountButtonTitleString, for: .normal)
         withdrawalDayButton.setTitle(viewModel.selectWithdrawlDateButtonTitle, for: .normal)
         startDayButton.setTitle(viewModel.selectStartDateButtonTitle, for: .normal)
     }
@@ -101,17 +111,19 @@ class AssetItemAddViewController: UIViewController {
         close()
     }
     
-    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
-        guard let name = nameTextField.text else { return }
-        viewModel.setName(with: name)
-        
-        if segControl.selectedSegmentIndex == 0 {
-            let balance = Int64(balanceTextField.text ?? "") ?? 0
-            viewModel.setBalance(with: balance)
+    @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
+        guard let name = nameTextField.text, name != "" else {
+            ToastManager.shared.show(message: "이름을 입력해주세요", in: view)
+            HapticFeedback.notify(.error)
+            return
         }
         
-        viewModel.handleAddButton()
-        dismiss(animated: true)
+        viewModel.setName(with: name)
+        
+        let balance = Int64(balanceTextField.text ?? "") ?? 0
+        viewModel.setBalance(with: balance)
+        
+        viewModel.handleDoneButton()
         close()
     }
     
