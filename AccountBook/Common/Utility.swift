@@ -20,3 +20,8 @@ func percentage(of part: Double, in total: Double) -> Double {
     let ratio = (part / total) * 100
     return (ratio * 10).rounded() / 10
 }
+
+enum PresentationStyle {
+    case modal
+    case push
+}
