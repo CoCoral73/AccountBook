@@ -54,11 +54,11 @@ class AssetItemAddViewController: UIViewController {
     @IBAction func segControlChanged(_ sender: UISegmentedControl) {
         let idx = segControl.selectedSegmentIndex
         
+        viewModel.setType(with: idx)
+        
         accountStackView.isHidden = viewModel.isHiddenForAccount
         cardStackView.isHidden = viewModel.isHiddenForCard
         creditCardStackView.isHidden = viewModel.isHiddenForCredit
-        
-        viewModel.setType(with: AssetType(rawValue: idx + 1)!)
     }
     
     func configureAccountButton() {

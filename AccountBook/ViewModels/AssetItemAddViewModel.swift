@@ -71,7 +71,8 @@ class AssetItemAddViewModel {
     var selectWithdrawlDateButtonTitle: String { "\(withdrawalDay)일" }
     var selectStartDateButtonTitle: String { "\(startDay)일" }
     
-    func setType(with type: AssetType) {
+    func setType(with index: Int) { //0: 계좌, 1: 체크카드, 2: 신용카드
+        let type = AssetType(rawValue: index + 1)!
         self.type = type
     }
     func setName(with name: String) {
