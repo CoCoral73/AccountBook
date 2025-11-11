@@ -19,7 +19,22 @@ class AssetManageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bindViewModel()
         configureTableView()
+    }
+    
+    func bindViewModel() {
+        viewModel.onPushAssetItemEditor = { vm in 
+            guard let vc = self.storyboard?.instantiateViewController(identifier: "AssetItemAddViewController", creator: { coder in
+                AssetItemAddViewController(coder: coder, viewModel: vm)
+            }) else {
+                print("AssetManageViewController: VC 생성 오류")
+                return
+            }
+            vc.presentationStyle = .push
+            
+            self.navigationController?.pushViewController(vc, animated: true)
+        }
     }
     
     func configureTableView() {
