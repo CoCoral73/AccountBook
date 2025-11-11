@@ -2506,6 +2506,7 @@
                         <outlet property="cardStackView" destination="QUs-Zd-ohr" id="inE-uy-ywx"/>
                         <outlet property="creditCardStackView" destination="0SQ-iG-u5E" id="KaT-Rf-sz7"/>
                         <outlet property="nameTextField" destination="sUb-my-ELU" id="B7X-mL-Sk2"/>
+                        <outlet property="navItem" destination="o9B-xE-U4N" id="CmB-h4-A0v"/>
                         <outlet property="segControl" destination="RI9-ks-QfJ" id="dpW-Jr-ePn"/>
                         <outlet property="startDayButton" destination="8By-Pj-mQL" id="GgJ-d0-QtI"/>
                         <outlet property="topConstraint" destination="EHh-pL-PYj" id="Jpe-Bh-VqR"/>
