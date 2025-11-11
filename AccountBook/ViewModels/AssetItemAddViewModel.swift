@@ -18,6 +18,8 @@ class AssetItemAddViewModel {
     private var startDay: Int16 = 1
     
     private var isModifyMode: Bool
+    
+    //거래 추가 안에서 자산 추가했을 때
     var onDidAddAssetItem: (() -> Void)?
     
     init(type: AssetType) {
@@ -46,6 +48,11 @@ class AssetItemAddViewModel {
         }
     }
     
+    var title: String { isModifyMode ? "자산 수정" : "자산 추가" }
+    var isHiddenForSegControl: Bool { isModifyMode }
+    var topConstraintConstant: CGFloat {
+        isModifyMode ? 40 : 91
+    }
     var selectedSegmentIndex: Int {
         switch self.type {
         case .bankAccount: return 0
@@ -54,14 +61,15 @@ class AssetItemAddViewModel {
         default: return -1
         }
     }
-    
-    var selectWithdrawlDateButtonTitle: String {
-        return "\(withdrawalDay)일"
-    }
-    
-    var selectStartDateButtonTitle: String {
-        return "\(startDay)일"
-    }
+    var isEnabledForNameTextField: Bool { type != .cash }
+    var isHiddenForAccount: Bool { type == .debitCard || type == .creditCard }
+    var isHiddenForCard: Bool { type == .cash || type == .bankAccount }
+    var isHiddenForCredit: Bool { type != .creditCard }
+    var nameTextFieldString: String { name }
+    var balanceTextFieldString: String { String(balance) }
+    var accountButtonTitleString: String { linkedAccount?.name ?? "선택 안함" }
+    var selectWithdrawlDateButtonTitle: String { "\(withdrawalDay)일" }
+    var selectStartDateButtonTitle: String { "\(startDay)일" }
     
     func setType(with type: AssetType) {
         self.type = type
@@ -107,9 +115,11 @@ class AssetItemAddViewModel {
         fromVC.present(pickerVC, animated: true)
     }
     
-    func handleAddButton() {
-        if name == "" { return }    //자산 이름 필수
-        
+    func handleDoneButton() {
+        isModifyMode ? modifyAssetItem() : addAssetItem()
+    }
+    
+    func addAssetItem() {
         switch type {
         case .bankAccount:
             AssetItemManager.shared.addBankAccount(name: name, balance: balance)
@@ -122,5 +132,23 @@ class AssetItemAddViewModel {
         }
         
         onDidAddAssetItem?()
+    }
+    
+    func modifyAssetItem() {
+        guard let asset = asset else {
+            print("수정할 자산 없음")
+            return
+        }
+        
+        switch type {
+        case .cash:
+            AssetItemManager.shared.updateAssetItem(with: asset, name: name, balance: balance)
+        case .bankAccount:
+            AssetItemManager.shared.updateAssetItem(with: asset, name: name, balance: balance)
+        case .debitCard:
+            AssetItemManager.shared.updateAssetItem(with: asset, name: name, account: linkedAccount)
+        case .creditCard:
+            AssetItemManager.shared.updateAssetItem(with: asset, name: name, account: linkedAccount, withdrawalDate: withdrawalDay, startDate: startDay)
+        }
     }
 }
