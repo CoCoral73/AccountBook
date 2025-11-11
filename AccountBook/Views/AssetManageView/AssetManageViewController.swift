@@ -52,6 +52,17 @@ class AssetManageViewController: UIViewController {
         tableView.reloadData()
     }
 
+    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+        guard let vc = storyboard?.instantiateViewController(identifier: "AssetItemAddViewController", creator: { coder in
+            AssetItemAddViewController(coder: coder, viewModel: AssetItemAddViewModel())
+        }) else {
+            print("AssetManageViewController: VC 생성 오류")
+            return
+        }
+        vc.presentationStyle = .push
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
     @IBAction func infoButtonTapped(_ sender: UIButton) {
         infoView.isHidden = false
     }
