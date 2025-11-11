@@ -22,7 +22,7 @@ class AssetItemAddViewModel {
     //거래 추가 안에서 자산 추가했을 때
     var onDidAddAssetItem: (() -> Void)?
     
-    init(type: AssetType) {
+    init(type: AssetType = .bankAccount) {
         self.type = type
         self.isModifyMode = false
     }
