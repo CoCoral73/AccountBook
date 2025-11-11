@@ -22,6 +22,7 @@ class AssetItemAddViewController: UIViewController {
     @IBOutlet weak var creditCardStackView: UIStackView!
     
     var viewModel: AssetItemAddViewModel
+    var presentationStyle: PresentationStyle = .modal
     
     required init?(coder: NSCoder, viewModel: AssetItemAddViewModel) {
         self.viewModel = viewModel
@@ -97,7 +98,7 @@ class AssetItemAddViewController: UIViewController {
     
     
     @IBAction func closeButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
+        close()
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
@@ -111,6 +112,16 @@ class AssetItemAddViewController: UIViewController {
         
         viewModel.handleAddButton()
         dismiss(animated: true)
+        close()
+    }
+    
+    func close() {
+        switch presentationStyle {
+        case .modal:
+            dismiss(animated: true)
+        case .push:
+            self.navigationController?.popViewController(animated: true)
+        }
     }
     
 }
