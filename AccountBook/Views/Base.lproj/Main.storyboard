@@ -1235,7 +1235,13 @@
                             <constraint firstItem="Eub-zi-e6M" firstAttribute="bottom" secondItem="loc-n3-gcA" secondAttribute="bottom" id="ThI-sb-gzk"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="자산 관리" id="iwF-Og-tYR"/>
+                    <navigationItem key="navigationItem" title="자산 관리" id="iwF-Og-tYR">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="tEk-gc-3nB">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="RC5-wZ-3Wx" id="Msg-Vx-BP3"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <size key="freeformSize" width="393" height="949"/>
                     <connections>
                         <outlet property="assetTotalAmountLabel" destination="Xpw-He-dsd" id="bCT-gP-gch"/>
