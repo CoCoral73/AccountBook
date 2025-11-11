@@ -113,7 +113,7 @@ class AssetItemManager {
         creditCard.append(newItem)
     }
     
-    func deleteAssetItem<T: AssetItem>(with item: T) {
+    func deleteAssetItem(with item: AssetItem) {
         switch item {
         case let b as BankAccountItem:
             if let index = bankAccount.firstIndex(of: b) {
