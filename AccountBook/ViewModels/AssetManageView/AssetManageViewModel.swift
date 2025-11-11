@@ -9,6 +9,8 @@ import UIKit
 
 class AssetManageViewModel {
     
+    var onPushAssetItemEditor: ((AssetItemAddViewModel) -> Void)?
+    
     var assetTotalAmountString: String {
         return totalBalance.formattedWithComma + "원"
     }
@@ -55,4 +57,14 @@ class AssetManageViewModel {
         }
     }
     
+    func didSelectRowAt(indexPath: IndexPath) {
+        guard let type = AssetType(rawValue: indexPath.section) else {
+            print("AssetManageViewModel: AssetType 생성 오류")
+            return
+        }
+        
+        let asset = AssetItemManager.shared.getAssetItems(with: type)[indexPath.row]
+        let vm = AssetItemAddViewModel(asset: asset)
+        onPushAssetItemEditor?(vm)
+    }
 }
