@@ -14,6 +14,8 @@ class AssetManageTableViewHandler: NSObject, UITableViewDataSource, UITableViewD
         self.viewModel = viewModel
     }
     
+    //MARK: DataSource
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return indexPath.section == 3 ? 130 : 70
     }
@@ -75,4 +77,9 @@ class AssetManageTableViewHandler: NSObject, UITableViewDataSource, UITableViewD
         return header
     }
     
+    //MARK: Delegate
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        viewModel?.didSelectRowAt(indexPath: indexPath)
+    }
 }
