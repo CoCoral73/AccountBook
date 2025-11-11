@@ -9,6 +9,7 @@ import UIKit
 
 class AssetItemAddViewModel {
     
+    private var asset: AssetItem?
     private var type: AssetType
     private var name: String = ""
     private var balance: Int64 = 0
@@ -16,10 +17,33 @@ class AssetItemAddViewModel {
     private var withdrawalDay: Int16 = 1
     private var startDay: Int16 = 1
     
+    private var isModifyMode: Bool
     var onDidAddAssetItem: (() -> Void)?
     
     init(type: AssetType) {
         self.type = type
+        self.isModifyMode = false
+    }
+    
+    init(asset: AssetItem) {
+        self.asset = asset
+        self.type = AssetType(rawValue: Int(asset.type))!
+        self.isModifyMode = true
+        
+        self.name = asset.name
+        switch asset {
+        case let cash as CashItem:
+            self.balance = cash.balance
+        case let bank as BankAccountItem:
+            self.balance = bank.balance
+        case let debit as DebitCardItem:
+            self.linkedAccount = debit.linkedAccount
+        case let credit as CreditCardItem:
+            self.linkedAccount = credit.linkedAccount
+            self.withdrawalDay = credit.withdrawalDate
+            self.startDay = credit.startDate
+        default: break
+        }
     }
     
     var selectedSegmentIndex: Int {
