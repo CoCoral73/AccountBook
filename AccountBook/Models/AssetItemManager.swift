@@ -113,6 +113,24 @@ class AssetItemManager {
         creditCard.append(newItem)
     }
     
+    func updateAssetItem(with item: AssetItem, name: String, balance: Int64 = 0, account: BankAccountItem? = nil, withdrawalDate: Int16 = 1, startDate: Int16 = 1) {
+        item.name = name
+        switch item {
+        case let cash as CashItem:
+            cash.balance = balance
+        case let bank as BankAccountItem:
+            bank.balance = balance
+        case let debit as DebitCardItem:
+            debit.linkedAccount = account
+        case let credit as CreditCardItem:
+            credit.linkedAccount = account
+            credit.startDate = startDate
+            credit.withdrawalDate = withdrawalDate
+        default: break
+        }
+        CoreDataManager.shared.saveContext()
+    }
+    
     func deleteAssetItem(with item: AssetItem) {
         switch item {
         case let b as BankAccountItem:
