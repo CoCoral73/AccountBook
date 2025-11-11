@@ -25,8 +25,8 @@ class AssetManageViewController: UIViewController {
     
     func bindViewModel() {
         viewModel.onPushAssetItemEditor = { vm in 
-            guard let vc = self.storyboard?.instantiateViewController(identifier: "AssetItemAddViewController", creator: { coder in
-                AssetItemAddViewController(coder: coder, viewModel: vm)
+            guard let vc = self.storyboard?.instantiateViewController(identifier: "AssetItemEditViewController", creator: { coder in
+                AssetItemEditViewController(coder: coder, viewModel: vm)
             }) else {
                 print("AssetManageViewController: VC 생성 오류")
                 return
@@ -53,8 +53,8 @@ class AssetManageViewController: UIViewController {
     }
 
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
-        guard let vc = storyboard?.instantiateViewController(identifier: "AssetItemAddViewController", creator: { coder in
-            AssetItemAddViewController(coder: coder, viewModel: AssetItemAddViewModel())
+        guard let vc = storyboard?.instantiateViewController(identifier: "AssetItemEditViewController", creator: { coder in
+            AssetItemEditViewController(coder: coder, viewModel: AssetItemEditViewModel())
         }) else {
             print("AssetManageViewController: VC 생성 오류")
             return

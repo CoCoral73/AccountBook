@@ -1,5 +1,5 @@
 //
-//  AddAssetItemViewController.swift
+//  AssetItemEditViewController.swift
 //  AccountBook
 //
 //  Created by 김정원 on 8/14/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AssetItemAddViewController: UIViewController {
+class AssetItemEditViewController: UIViewController {
 
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var segControl: UISegmentedControl!
@@ -24,10 +24,10 @@ class AssetItemAddViewController: UIViewController {
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
-    var viewModel: AssetItemAddViewModel
+    var viewModel: AssetItemEditViewModel
     var presentationStyle: PresentationStyle = .modal
     
-    required init?(coder: NSCoder, viewModel: AssetItemAddViewModel) {
+    required init?(coder: NSCoder, viewModel: AssetItemEditViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -147,7 +147,7 @@ class AssetItemAddViewController: UIViewController {
     }
 }
 
-extension AssetItemAddViewController: UITextFieldDelegate {
+extension AssetItemEditViewController: UITextFieldDelegate {
     
     func configureTextField() {
         nameTextField.delegate = self

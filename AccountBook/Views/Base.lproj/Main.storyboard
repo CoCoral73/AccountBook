@@ -2221,10 +2221,10 @@
             </objects>
             <point key="canvasLocation" x="1636" y="901"/>
         </scene>
-        <!--Asset Item Add View Controller-->
+        <!--Asset Item Edit View Controller-->
         <scene sceneID="WF8-Jt-dAI">
             <objects>
-                <viewController storyboardIdentifier="AssetItemAddViewController" hidesBottomBarWhenPushed="YES" id="akc-4k-Z8V" customClass="AssetItemAddViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AssetItemEditViewController" hidesBottomBarWhenPushed="YES" id="akc-4k-Z8V" customClass="AssetItemEditViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="dAX-L5-92L">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

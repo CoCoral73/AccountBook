@@ -1,5 +1,5 @@
 //
-//  AddAssetItemViewModel.swift
+//  AssetItemEditViewModel.swift
 //  AccountBook
 //
 //  Created by 김정원 on 8/14/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AssetItemAddViewModel {
+class AssetItemEditViewModel {
     
     private var asset: AssetItem?
     private var type: AssetType
@@ -91,7 +91,7 @@ class AssetItemAddViewModel {
         self.startDay = day
     }
     
-    func handleDayButton(tag: Int, storyboard: UIStoryboard?, fromVC: AssetItemAddViewController) {
+    func handleDayButton(tag: Int, storyboard: UIStoryboard?, fromVC: AssetItemEditViewController) {
         let pickerVC = storyboard?.instantiateViewController(withIdentifier: "DayPickerViewController") as! DayPickerViewController
         pickerVC.titleString = tag == 0 ? "출금일" : "시작일"
         pickerVC.onDidSelectDay = { [weak self] (title, day) in

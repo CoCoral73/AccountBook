@@ -78,16 +78,16 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
             onAssetSelected?(model)
             dismiss(animated: true)
         } else {    //자산 추가 뷰로 이동
-            let vm = AssetItemAddViewModel(type: AssetType(rawValue: selectedButton)!)
+            let vm = AssetItemEditViewModel(type: AssetType(rawValue: selectedButton)!)
             vm.onDidAddAssetItem = { [weak self] in
                 guard let self = self else { return }
                 
                 self.tableView.reloadData()
             }
             
-            guard let addAssetVC = storyboard?.instantiateViewController(identifier: "AssetItemAddViewController", creator: { coder in AssetItemAddViewController(coder: coder, viewModel: vm) })
+            guard let addAssetVC = storyboard?.instantiateViewController(identifier: "AssetItemEditViewController", creator: { coder in AssetItemEditViewController(coder: coder, viewModel: vm) })
             else {
-                fatalError("AssetItemAddViewController 생성 에러")
+                fatalError("AssetItemEditViewController 생성 에러")
             }
             
             addAssetVC.modalPresentationStyle = .fullScreen
