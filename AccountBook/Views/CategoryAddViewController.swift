@@ -14,6 +14,7 @@ class CategoryAddViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     
     var viewModel: CategoryAddViewModel
+    var presentationStyle: PresentationStyle = .modal
     
     required init?(coder: NSCoder, viewModel: CategoryAddViewModel) {
         self.viewModel = viewModel
@@ -61,11 +62,20 @@ class CategoryAddViewController: UIViewController {
     }
     
     @IBAction func closeButtonTapped(_ sender: UIBarButtonItem) {
-        dismiss(animated: true)
+        close()
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         viewModel.handleAddButton(fromVC: self, icon: iconTextField.text ?? " ", name: nameTextField.text ?? "")
+    }
+    
+    func close() {
+        switch presentationStyle {
+        case .modal:
+            dismiss(animated: true)
+        case .push:
+            navigationController?.popViewController(animated: true)
+        }
     }
     
 }
