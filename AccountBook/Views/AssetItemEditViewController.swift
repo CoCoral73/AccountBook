@@ -19,8 +19,12 @@ class AssetItemEditViewController: UIViewController {
     @IBOutlet weak var startDayButton: AutoDismissKeyboardButton!
     
     @IBOutlet weak var accountStackView: UIStackView!
+    @IBOutlet weak var accountStackViewForModifyMode: UIStackView!
     @IBOutlet weak var cardStackView: UIStackView!
     @IBOutlet weak var creditCardStackView: UIStackView!
+    
+    @IBOutlet weak var linkedCardsTableView: IntrinsicTableView!
+    @IBOutlet weak var removeButton: UIButton!
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
@@ -43,6 +47,7 @@ class AssetItemEditViewController: UIViewController {
         configureAccountButton()
         configureUI()
         configureTextField()
+        configureTableView()
         configureTapGesture()
     }
     
@@ -87,9 +92,11 @@ class AssetItemEditViewController: UIViewController {
         nameTextField.isEnabled = viewModel.isEnabledForNameTextField
         nameTextField.text = viewModel.nameTextFieldString
         balanceTextField.text = viewModel.balanceTextFieldString
+        accountStackViewForModifyMode.isHidden = viewModel.isHiddenForTableView
         accountButton.setTitle(viewModel.accountButtonTitleString, for: .normal)
         withdrawalDayButton.setTitle(viewModel.selectWithdrawlDateButtonTitle, for: .normal)
         startDayButton.setTitle(viewModel.selectStartDateButtonTitle, for: .normal)
+        removeButton.isHidden = viewModel.isHiddenForRemoveButton
     }
     
     func configureTapGesture() {
@@ -127,6 +134,20 @@ class AssetItemEditViewController: UIViewController {
         close()
     }
     
+    @IBAction func removeButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: "삭제", message: "해당 자산을 삭제하시겠습니까?", preferredStyle: .alert)
+        
+        let success = UIAlertAction(title: "삭제", style: .destructive) { action in
+            self.viewModel.handleRemoveButton()
+            self.close()
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+
+        alert.addAction(success)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
+    }
+    
     func close() {
         switch presentationStyle {
         case .modal:
@@ -144,6 +165,22 @@ class AssetItemEditViewController: UIViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
+    }
+}
+
+extension AssetItemEditViewController: UITableViewDataSource {
+    func configureTableView() {
+        linkedCardsTableView.dataSource = self
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRowsInSection
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.linkedCardsCell, for: indexPath) as! LinkedCardsTableViewCell
+        cell.model = viewModel.cellForRowAt[indexPath.row]
+        return cell
     }
 }
 
