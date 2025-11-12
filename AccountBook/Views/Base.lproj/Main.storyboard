@@ -2754,7 +2754,7 @@
             </objects>
             <point key="canvasLocation" x="1445" y="-1093"/>
         </scene>
-        <!--Table View Controller-->
+        <!--설정-->
         <scene sceneID="1g0-fw-znT">
             <objects>
                 <tableViewController id="VnY-cG-oma" sceneMemberID="viewController">
@@ -2989,10 +2989,11 @@
                             <outlet property="delegate" destination="VnY-cG-oma" id="kK6-Ve-YEX"/>
                         </connections>
                     </tableView>
+                    <navigationItem key="navigationItem" title="설정" id="ose-4z-eUu"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hxI-vP-yAA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1239" y="1696"/>
+            <point key="canvasLocation" x="-234" y="1696"/>
         </scene>
         <!--Month Picker View Controller-->
         <scene sceneID="xl8-jQ-hNU">
@@ -3191,7 +3192,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qe-iJ-nG5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-230" y="1696"/>
+            <point key="canvasLocation" x="703" y="1696"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="guq-Kq-nWg">
@@ -3207,6 +3208,7 @@
                         <segue destination="2yz-Vf-2Oc" kind="relationship" relationship="viewControllers" id="8Xv-6K-Ngp"/>
                         <segue destination="JqY-wO-l7i" kind="relationship" relationship="viewControllers" id="oB1-Hm-gdJ"/>
                         <segue destination="Jig-8d-Mff" kind="relationship" relationship="viewControllers" id="4sX-J0-tbX"/>
+                        <segue destination="o7M-5S-cdE" kind="relationship" relationship="viewControllers" id="Qzk-sC-J69"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x6i-mx-TJj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -3252,6 +3254,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nis-Q9-3PP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-1236" y="901"/>
+        </scene>
+        <!--설정-->
+        <scene sceneID="FJK-8j-x1H">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o7M-5S-cdE" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="설정" id="10r-JJ-sZU"/>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="sNc-Zr-aSd">
+                        <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="VnY-cG-oma" kind="relationship" relationship="rootViewController" id="w2Q-1K-8OS"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ExI-9A-V00" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1236" y="1696"/>
         </scene>
     </scenes>
     <resources>
