@@ -63,10 +63,19 @@ class AssetItemEditViewModel {
     }
     var isEnabledForNameTextField: Bool { type != .cash }
     var isHiddenForAccount: Bool { type == .debitCard || type == .creditCard }
+    var isHiddenForTableView: Bool { !(isModifyMode && type == .bankAccount && numberOfRowsInSection > 0) }
     var isHiddenForCard: Bool { type == .cash || type == .bankAccount }
     var isHiddenForCredit: Bool { type != .creditCard }
+    var isHiddenForRemoveButton: Bool { !isModifyMode }
     var nameTextFieldString: String { name }
     var balanceTextFieldString: String { String(balance) }
+    var numberOfRowsInSection: Int { cellForRowAt.count }
+    var cellForRowAt: [AssetItem] {
+        guard let bank = asset as? BankAccountItem else { return [] }
+        let debits = Array(bank.linkedDebitCards as? Set<AssetItem> ?? [])
+        let credits = Array(bank.linkedCreditCards as? Set<AssetItem> ?? [])
+        return debits + credits
+    }
     var accountButtonTitleString: String { linkedAccount?.name ?? "선택 안함" }
     var selectWithdrawlDateButtonTitle: String { "\(withdrawalDay)일" }
     var selectStartDateButtonTitle: String { "\(startDay)일" }
@@ -151,5 +160,13 @@ class AssetItemEditViewModel {
         case .creditCard:
             AssetItemManager.shared.updateAssetItem(with: asset, name: name, account: linkedAccount, withdrawalDate: withdrawalDay, startDate: startDay)
         }
+    }
+    
+    func handleRemoveButton() {
+        guard let asset = asset else {
+            print("삭제할 자산 없음")
+            return 
+        }
+        AssetItemManager.shared.deleteAssetItem(with: asset)
     }
 }
