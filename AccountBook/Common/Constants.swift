@@ -14,4 +14,5 @@ struct Cell {
     static let tableByAssetCellInChart = "TableByAssetInChart"
     static let assetManageForNotCreditCardCell = "AssetManageForNotCreditCardCell"
     static let assetManageForCreditCardCell = "AssetManageForCreditCardCell"
+    static let linkedCardsCell = "LinkedCardsCell"
 }
