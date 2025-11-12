@@ -2996,6 +2996,80 @@
             </objects>
             <point key="canvasLocation" x="-234" y="1696"/>
         </scene>
+        <!--카테고리-->
+        <scene sceneID="gKO-io-1Kh">
+            <objects>
+                <viewController storyboardIdentifier="CategoryListViewController" id="xUd-uB-nxP" customClass="CategoryListViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="9iv-3F-fJR">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5k1-gJ-89N">
+                                <rect key="frame" x="0.0" y="103" width="393" height="715"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="CategoryListCell" rowHeight="50" id="0pC-6H-nmu" customClass="CategoryListTableViewCell" customModule="AccountBook" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="393" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0pC-6H-nmu" id="eIw-QA-NOy">
+                                            <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vyc-sW-ayw">
+                                                    <rect key="frame" x="16" y="5" width="40" height="40"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="40" id="2W8-0l-xh6"/>
+                                                        <constraint firstAttribute="height" constant="40" id="KEt-z5-rGB"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="월급" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NWc-aj-aTE">
+                                                    <rect key="frame" x="68" y="14" width="32" height="22"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="Vyc-sW-ayw" firstAttribute="centerY" secondItem="eIw-QA-NOy" secondAttribute="centerY" id="His-wd-Pcp"/>
+                                                <constraint firstItem="NWc-aj-aTE" firstAttribute="centerY" secondItem="eIw-QA-NOy" secondAttribute="centerY" id="OaG-ZX-0He"/>
+                                                <constraint firstItem="NWc-aj-aTE" firstAttribute="leading" secondItem="Vyc-sW-ayw" secondAttribute="trailing" constant="12" id="bRD-7G-Hxz"/>
+                                                <constraint firstItem="Vyc-sW-ayw" firstAttribute="leading" secondItem="eIw-QA-NOy" secondAttribute="leading" constant="16" id="eYn-qI-o3o"/>
+                                                <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="NWc-aj-aTE" secondAttribute="trailing" constant="20" symbolic="YES" id="lnU-Oq-LP3"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="iconImageView" destination="Vyc-sW-ayw" id="xG2-tx-l1x"/>
+                                            <outlet property="nameLabel" destination="NWc-aj-aTE" id="g6L-XL-ngw"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="1lv-eX-Vol"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="1lv-eX-Vol" firstAttribute="trailing" secondItem="5k1-gJ-89N" secondAttribute="trailing" id="AoW-5K-PST"/>
+                            <constraint firstItem="1lv-eX-Vol" firstAttribute="bottom" secondItem="5k1-gJ-89N" secondAttribute="bottom" id="Gk6-Mo-HBH"/>
+                            <constraint firstItem="5k1-gJ-89N" firstAttribute="top" secondItem="1lv-eX-Vol" secondAttribute="top" id="J0L-1T-Abu"/>
+                            <constraint firstItem="5k1-gJ-89N" firstAttribute="leading" secondItem="1lv-eX-Vol" secondAttribute="leading" id="TxK-ux-cdE"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="카테고리" id="XKp-hY-xxg">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Oep-ah-1gV">
+                            <connections>
+                                <action selector="addButtonTapped:" destination="xUd-uB-nxP" id="tx8-fF-OXB"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+                    <connections>
+                        <outlet property="tableView" destination="5k1-gJ-89N" id="4Da-60-lhl"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="CpV-Pk-PWx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="701.52671755725191" y="1695.7746478873241"/>
+        </scene>
         <!--Month Picker View Controller-->
         <scene sceneID="xl8-jQ-hNU">
             <objects>
@@ -3193,7 +3267,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qe-iJ-nG5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="703" y="1696"/>
+            <point key="canvasLocation" x="1636" y="1696"/>
         </scene>
         <!--Main Tab Bar Controller-->
         <scene sceneID="guq-Kq-nWg">
