@@ -39,4 +39,56 @@ class SettingTableViewController: UITableViewController {
         
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let option = SettingOption(indexPath: indexPath)
+        
+        switch option {
+        case .incomeCategory:
+            showCategoryListView(true)
+        case .expenseCategory:
+            showCategoryListView(false)
+        case .theme:
+            showThemeView()
+        case .lockApp:
+            showLockAppView()
+        case .help:
+            showHelpView()
+        case .contact:
+            showContactView()
+        case .rating:
+            showRatingView()
+        }
+    }
+    
+    func showCategoryListView(_ isIncome: Bool) {
+        let vm = CategoryListViewModel(isIncome: isIncome)
+        guard let vc = storyboard?.instantiateViewController(identifier: "CategoryListViewController", creator: { coder in
+            CategoryListViewController(coder: coder, viewModel: vm)
+        }) else {
+            print("SettingTableViewController: VC 생성 오류")
+            return
+        }
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func showThemeView() {
+        
+    }
+    
+    func showLockAppView() {
+        
+    }
+    
+    func showHelpView() {
+        
+    }
+    
+    func showContactView() {
+        
+    }
+    
+    func showRatingView() {
+        
+    }
 }
