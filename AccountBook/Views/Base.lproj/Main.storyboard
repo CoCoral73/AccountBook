@@ -709,7 +709,7 @@
                                                                         <constraint firstAttribute="height" constant="35" id="dAF-v7-Uvl"/>
                                                                     </constraints>
                                                                 </imageView>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="문화생활" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sk1-yz-izF">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="문화생활" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="sk1-yz-izF">
                                                                     <rect key="frame" x="63" y="18.666666666666668" width="52" height="18.000000000000004"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="52" id="Lzs-lt-2aE"/>
@@ -748,16 +748,22 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="bottom" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="l6Q-30-mhV">
-                                                                    <rect key="frame" x="281" y="9.3333333333333321" width="92" height="36.666666666666671"/>
+                                                                    <rect key="frame" x="281" y="9.3333333333333321" width="92" height="36.333333333333343"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="88,888,888원" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="13" translatesAutoresizingMaskIntoConstraints="NO" id="GCA-bO-Itz">
                                                                             <rect key="frame" x="0.0" y="0.0" width="92" height="20.333333333333332"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="20.329999999999998" placeholder="YES" id="pz2-f4-z0D"/>
+                                                                            </constraints>
                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="17"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="75%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3QK-PV-hX9">
-                                                                            <rect key="frame" x="66.666666666666686" y="22.333333333333336" width="25.333333333333329" height="14.333333333333336"/>
+                                                                            <rect key="frame" x="66.666666666666686" y="22.333333333333336" width="25.333333333333329" height="14"/>
+                                                                            <constraints>
+                                                                                <constraint firstAttribute="height" constant="14.33" placeholder="YES" id="yLB-Ko-rId"/>
+                                                                            </constraints>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                                             <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                             <nil key="highlightedColor"/>
