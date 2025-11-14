@@ -32,6 +32,7 @@ class CategoryListViewController: UIViewController {
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         let vm = CategoryEditViewModel(isIncome: viewModel.isIncome, mode: .add)
         vm.onDidEditCategory = {
+            self.viewModel.loadCategories()
             self.tableView.reloadData()
         }
         
@@ -84,6 +85,10 @@ extension CategoryListViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vm = viewModel.didSelectRowAt(row: indexPath.row)
+        vm.onDidEditCategory = {
+            self.viewModel.loadCategories()
+            self.tableView.reloadData()
+        }
         guard let vc = storyboard?.instantiateViewController(identifier: "CategoryEditViewController", creator: { coder in
             CategoryEditViewController(coder: coder, viewModel: vm)
         }) else {
