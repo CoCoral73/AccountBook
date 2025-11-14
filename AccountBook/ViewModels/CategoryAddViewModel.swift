@@ -5,6 +5,10 @@
 //  Created by 김정원 on 9/17/25.
 //
 
+enum CategoryInputError {
+    case emptyIcon
+    case emptyName
+}
 
 class CategoryAddViewModel {
     var isIncome: Bool
@@ -15,11 +19,15 @@ class CategoryAddViewModel {
     }
     
     var title: String {
-        return isIncome ? "수입 카테고리 추가" : "지출 카테고리 추가"
+        return isIncome ? "수입 카테고리" : "지출 카테고리"
     }
     
     var textForIcon: String = "☺️"
     
+    func validateInput(icon: String?, name: String?) -> CategoryInputError? {
+        guard let icon = icon, !icon.isEmpty else { return .emptyIcon }
+        guard let name = name, !name.isEmpty else { return .emptyName }
+        return nil
     }
     
     func handleAddButton(icon: String, name: String) {
