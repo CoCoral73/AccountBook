@@ -5,7 +5,6 @@
 //  Created by 김정원 on 9/17/25.
 //
 
-import UIKit
 
 class CategoryAddViewModel {
     var isIncome: Bool
@@ -21,20 +20,10 @@ class CategoryAddViewModel {
     
     var textForIcon: String = "☺️"
     
-    var iconImage: UIImage? {
-        return textForIcon.toImage()
     }
     
-    func handleAddButton(fromVC: UIViewController, icon: String, name: String) {
-        guard icon != " ", !name.isEmpty else {
-            fromVC.view.endEditing(true)
-            HapticFeedback.notify(.error)
-            ToastManager.shared.show(message: "아이콘과 이름을 입력해주세요.", in: fromVC.view)
-            return
-        }
-        
+    func handleAddButton(icon: String, name: String) {
         CategoryManager.shared.addCategory(icon: icon, name: name, isIncome: isIncome)
         onDidAddCategory?()
-        fromVC.dismiss(animated: true)
     }
 }
