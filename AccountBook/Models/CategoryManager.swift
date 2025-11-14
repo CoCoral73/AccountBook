@@ -37,6 +37,13 @@ class CategoryManager {
         }
         CoreDataManager.shared.saveContext()
     }
+    
+    func updateCategory(with category: Category, icon: String, name: String) {
+        category.iconName = icon
+        category.name = name
+        
+        CoreDataManager.shared.saveContext()
+    }
 
     func deleteCategory(_ category: Category) {
         if category.isIncome, let index = incomeCategories.firstIndex(of: category) {
