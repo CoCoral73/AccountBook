@@ -31,7 +31,7 @@ class CategoryListViewController: UIViewController {
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         let vm = CategoryEditViewModel(isIncome: viewModel.isIncome, mode: .add)
-        vm.onDidAddCategory = {
+        vm.onDidEditCategory = {
             self.tableView.reloadData()
         }
         

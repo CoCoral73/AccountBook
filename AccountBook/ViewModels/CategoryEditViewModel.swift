@@ -27,7 +27,7 @@ enum CategoryInputError {
 class CategoryEditViewModel {
     var mode: CategoryEditMode
     var isIncome: Bool
-    var onDidAddCategory: (() -> ())?
+    var onDidEditCategory: (() -> ())?
     
     init(isIncome: Bool, mode: CategoryEditMode) {
         self.isIncome = isIncome
@@ -65,5 +65,6 @@ class CategoryEditViewModel {
     }
     
     func handleDoneButton(icon: String, name: String) {
+        onDidEditCategory?()
     }
 }

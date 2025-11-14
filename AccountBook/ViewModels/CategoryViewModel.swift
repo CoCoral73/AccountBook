@@ -34,7 +34,7 @@ class CategoryViewModel {
             }) else {
                 fatalError("CategoryEditViewController 생성 에러")
             }
-            addVC.viewModel.onDidAddCategory = {
+            addVC.viewModel.onDidEditCategory = {
                 self.loadCategories()
                 (fromVC as! CategoryViewController).collectionView.reloadData()
             }
