@@ -96,11 +96,12 @@ extension CategoryAddViewController: UITextFieldDelegate {
         if textField == iconTextField {
             if string.count == 1, let char = string.first, char.isEmoji {
                 textField.text = string   // 마지막 이모지만 유지
+                iconImageView.image = textField.text?.toImage()
             } else {
                 textField.text = ""
+                iconImageView.image = UIImage(systemName: "photo.circle")
             }
             
-            iconImageView.image = textField.text?.toImage()
             return false
         } else {
             if (textField.text ?? "") == "", let first = string.first, first.isWhitespace {
