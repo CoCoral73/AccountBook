@@ -41,8 +41,17 @@ class CategoryManager {
     func deleteCategory(_ category: Category) {
         if category.isIncome, let index = incomeCategories.firstIndex(of: category) {
             incomeCategories.remove(at: index)
+            
+            for (i, item) in incomeCategories.enumerated() {
+                item.orderIndex = Int16(i)
+            }
+            
         } else if !category.isIncome, let index = expenseCategories.firstIndex(of: category) {
             expenseCategories.remove(at: index)
+            
+            for (i, item) in expenseCategories.enumerated() {
+                item.orderIndex = Int16(i)
+            }
         }
         
         CoreDataManager.shared.context.delete(category)
