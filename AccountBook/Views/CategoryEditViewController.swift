@@ -30,14 +30,11 @@ class CategoryEditViewController: UIViewController {
 
         configure()
         configureTextField()
+        configureTapGesture()
     }
     
     func configure() {
         navigationItem.title = viewModel.title
-        
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
-        iconImageView.addGestureRecognizer(tap)
-        
         iconImageView.image = viewModel.textForIcon.toImage()
     }
    
@@ -53,6 +50,11 @@ class CategoryEditViewController: UIViewController {
         accessoryLabel.backgroundColor = .secondarySystemBackground
         accessoryLabel.frame.size.height = 44
         iconTextField.inputAccessoryView = accessoryLabel
+    }
+    
+    func configureTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
+        iconImageView.addGestureRecognizer(tap)
     }
     
     @objc func handleTapGesture() {
