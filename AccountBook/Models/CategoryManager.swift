@@ -29,8 +29,10 @@ class CategoryManager {
         category.isIncome = isIncome
     
         if isIncome {
+            category.orderIndex = Int16(incomeCategories.count)
             incomeCategories.append(category)
         } else {
+            category.orderIndex = Int16(expenseCategories.count)
             expenseCategories.append(category)
         }
         CoreDataManager.shared.saveContext()
