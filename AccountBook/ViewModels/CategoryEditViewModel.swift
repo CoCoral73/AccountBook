@@ -58,6 +58,8 @@ class CategoryEditViewModel {
         }
     }
     
+    var isHiddenForRemoveButton: Bool { mode == .add }
+    
     func validateInput(icon: String?, name: String?) -> CategoryInputError? {
         guard let icon = icon, !icon.isEmpty else { return .emptyIcon }
         guard let name = name, !name.isEmpty else { return .emptyName }
@@ -73,5 +75,15 @@ class CategoryEditViewModel {
         }
         
         onDidEditCategory?()
+    }
+    
+    func handleRemoveButton() {
+        switch mode {
+        case .add:
+            return
+        case .edit(let category):
+            CategoryManager.shared.deleteCategory(category)
+            onDidEditCategory?()
+        }
     }
 }
