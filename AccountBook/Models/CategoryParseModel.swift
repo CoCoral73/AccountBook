@@ -11,4 +11,5 @@ struct CategoryParseModel: Codable {
     let name: String
     let isIncome: Bool
     let iconName: String
+    let orderIndex: Int16
 }

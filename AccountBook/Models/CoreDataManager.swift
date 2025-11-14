@@ -87,6 +87,7 @@ final class CoreDataManager {
                 newCategory.name = category.name
                 newCategory.isIncome = category.isIncome
                 newCategory.iconName = category.iconName
+                newCategory.orderIndex = category.orderIndex
                 newCategory.transactions = nil
             }
 
