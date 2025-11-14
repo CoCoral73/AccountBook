@@ -2999,7 +2999,7 @@
         <!--카테고리-->
         <scene sceneID="gKO-io-1Kh">
             <objects>
-                <viewController storyboardIdentifier="CategoryListViewController" id="xUd-uB-nxP" customClass="CategoryListViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryListViewController" hidesBottomBarWhenPushed="YES" id="xUd-uB-nxP" customClass="CategoryListViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="9iv-3F-fJR">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -3188,7 +3188,7 @@
         <!--Title-->
         <scene sceneID="x3n-4H-7hd">
             <objects>
-                <viewController storyboardIdentifier="CategoryAddViewController" id="W3J-1n-569" customClass="CategoryAddViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryAddViewController" hidesBottomBarWhenPushed="YES" id="W3J-1n-569" customClass="CategoryAddViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eVb-2Y-hjb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
