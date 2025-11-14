@@ -65,6 +65,13 @@ class CategoryEditViewModel {
     }
     
     func handleDoneButton(icon: String, name: String) {
+        switch mode {
+        case .add:
+            CategoryManager.shared.addCategory(icon: icon, name: name, isIncome: isIncome)
+        case .edit(let category):
+            CategoryManager.shared.updateCategory(with: category, icon: icon, name: name)
+        }
+        
         onDidEditCategory?()
     }
 }
