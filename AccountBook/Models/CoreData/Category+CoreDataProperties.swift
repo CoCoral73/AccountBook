@@ -20,6 +20,7 @@ extension Category {
     @NSManaged public var id: UUID
     @NSManaged public var isIncome: Bool
     @NSManaged public var name: String
+    @NSManaged public var orderIndex: Int16
     @NSManaged public var transactions: NSSet?
 
 }
