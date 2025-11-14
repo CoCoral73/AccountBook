@@ -25,6 +25,7 @@ class CategoryListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        title = viewModel.title
         configureTableView()
     }
     
@@ -79,5 +80,18 @@ extension CategoryListViewController: UITableViewDataSource, UITableViewDelegate
     
     func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
         false
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vm = viewModel.didSelectRowAt(row: indexPath.row)
+        guard let vc = storyboard?.instantiateViewController(identifier: "CategoryEditViewController", creator: { coder in
+            CategoryEditViewController(coder: coder, viewModel: vm)
+        }) else {
+            print("CategoryListViewController: VC 생성 오류")
+            return
+        }
+        
+        vc.presentationStyle = .push
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
