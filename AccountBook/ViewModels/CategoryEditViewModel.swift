@@ -5,7 +5,7 @@
 //  Created by 김정원 on 9/17/25.
 //
 
-enum CategoryEditMode {
+enum CategoryEditMode: Equatable {
     case add
     case edit(Category)
 }
@@ -35,7 +35,9 @@ class CategoryEditViewModel {
     }
     
     var title: String {
-        return isIncome ? "수입 카테고리" : "지출 카테고리"
+        let income = isIncome ? "수입" : "지출"
+        let mode = (mode == .add) ? "추가" : "수정"
+        return "\(income) 카테고리 \(mode)"
     }
     
     var textForIcon: String {
