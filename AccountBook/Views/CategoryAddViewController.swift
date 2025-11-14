@@ -53,8 +53,6 @@ class CategoryAddViewController: UIViewController {
         accessoryLabel.backgroundColor = .secondarySystemBackground
         accessoryLabel.frame.size.height = 44
         iconTextField.inputAccessoryView = accessoryLabel
-        
-        iconTextField.becomeFirstResponder()
     }
     
     @objc func handleTapGesture() {
@@ -87,6 +85,10 @@ class CategoryAddViewController: UIViewController {
         }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        iconTextField.becomeFirstResponder()
+    }
 }
 
 extension CategoryAddViewController: UITextFieldDelegate {
