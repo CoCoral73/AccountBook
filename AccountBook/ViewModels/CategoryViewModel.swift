@@ -30,7 +30,7 @@ class CategoryViewModel {
     func handleDidSelectItemAt(_ index: Int, storyboard: UIStoryboard?, fromVC: UIViewController) {
         if index == numberOfItems - 1 { //추가 뷰
             guard let addVC = storyboard?.instantiateViewController(identifier: "CategoryEditViewController", creator: { coder in
-                CategoryEditViewController(coder: coder, viewModel: CategoryEditViewModel(isIncome: self.isIncome))
+                CategoryEditViewController(coder: coder, viewModel: CategoryEditViewModel(isIncome: self.isIncome, mode: .add))
             }) else {
                 fatalError("CategoryEditViewController 생성 에러")
             }

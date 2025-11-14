@@ -5,6 +5,11 @@
 //  Created by 김정원 on 9/17/25.
 //
 
+enum CategoryEditMode {
+    case add
+    case edit(Category)
+}
+
 enum CategoryInputError {
     case emptyIcon
     case emptyName
@@ -20,18 +25,36 @@ enum CategoryInputError {
 }
 
 class CategoryEditViewModel {
+    var mode: CategoryEditMode
     var isIncome: Bool
     var onDidAddCategory: (() -> ())?
     
-    init(isIncome: Bool) {
+    init(isIncome: Bool, mode: CategoryEditMode) {
         self.isIncome = isIncome
+        self.mode = mode
     }
     
     var title: String {
         return isIncome ? "수입 카테고리" : "지출 카테고리"
     }
     
-    var textForIcon: String = "☺️"
+    var textForIcon: String {
+        switch mode {
+        case .add:
+            "☺️"
+        case .edit(let category):
+            category.iconName
+        }
+    }
+    
+    var nameString: String {
+        switch mode {
+        case .add:
+            ""
+        case .edit(let category):
+            category.name
+        }
+    }
     
     func validateInput(icon: String?, name: String?) -> CategoryInputError? {
         guard let icon = icon, !icon.isEmpty else { return .emptyIcon }

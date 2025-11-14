@@ -28,21 +28,21 @@ class CategoryEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configure()
+        configureUI()
         configureTextField()
         configureTapGesture()
     }
     
-    func configure() {
+    func configureUI() {
         navigationItem.title = viewModel.title
+        iconTextField.text = viewModel.textForIcon
         iconImageView.image = viewModel.textForIcon.toImage()
+        nameTextField.text = viewModel.nameString
     }
    
     func configureTextField() {
         iconTextField.delegate = self
         nameTextField.delegate = self
-        
-        iconTextField.text = viewModel.textForIcon
         
         let accessoryLabel = UILabel()
         accessoryLabel.text = "아이콘 입력 중... 이모지를 선택하세요"
