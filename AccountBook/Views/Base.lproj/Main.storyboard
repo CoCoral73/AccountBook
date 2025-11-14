@@ -3229,10 +3229,25 @@
                                     <constraint firstAttribute="height" constant="0.29999999999999999" id="nJR-Mx-C7a"/>
                                 </constraints>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0V5-tb-ZUr">
+                                <rect key="frame" x="30" y="336.66666666666669" width="333" height="40"/>
+                                <color key="backgroundColor" systemColor="systemRedColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="H6e-5d-TRQ"/>
+                                </constraints>
+                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                <state key="normal" title="삭제"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GBB-bk-CFZ"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="0V5-tb-ZUr" firstAttribute="width" secondItem="Mgg-Eg-y3W" secondAttribute="width" id="0Dz-tx-76H"/>
                             <constraint firstItem="Mgg-Eg-y3W" firstAttribute="leading" secondItem="GBB-bk-CFZ" secondAttribute="leading" constant="30" id="0XI-KY-eca"/>
                             <constraint firstItem="7D7-Og-oFU" firstAttribute="centerX" secondItem="eVb-2Y-hjb" secondAttribute="centerX" id="7uv-0K-L0l"/>
                             <constraint firstItem="pyb-X2-jJs" firstAttribute="top" secondItem="GBB-bk-CFZ" secondAttribute="top" constant="30" id="AXg-vK-2Fk"/>
@@ -3240,9 +3255,11 @@
                             <constraint firstItem="Mgg-Eg-y3W" firstAttribute="top" secondItem="pyb-X2-jJs" secondAttribute="bottom" constant="40" id="BmT-Vx-9QX"/>
                             <constraint firstItem="GBB-bk-CFZ" firstAttribute="trailing" secondItem="Mgg-Eg-y3W" secondAttribute="trailing" constant="30" id="JAo-Fo-AoR"/>
                             <constraint firstItem="pyb-X2-jJs" firstAttribute="centerX" secondItem="eVb-2Y-hjb" secondAttribute="centerX" id="Zaj-5c-1Es"/>
+                            <constraint firstItem="0V5-tb-ZUr" firstAttribute="top" secondItem="HMx-WK-hVs" secondAttribute="bottom" constant="50" id="ZdY-wW-WRr"/>
                             <constraint firstItem="7D7-Og-oFU" firstAttribute="centerY" secondItem="pyb-X2-jJs" secondAttribute="centerY" id="aKH-58-jwe"/>
                             <constraint firstItem="HMx-WK-hVs" firstAttribute="top" secondItem="Mgg-Eg-y3W" secondAttribute="bottom" constant="4" id="o8F-Nc-Hzf"/>
                             <constraint firstItem="HMx-WK-hVs" firstAttribute="centerX" secondItem="af6-hT-a9o" secondAttribute="centerX" id="pNZ-Ek-i6K"/>
+                            <constraint firstItem="0V5-tb-ZUr" firstAttribute="centerX" secondItem="eVb-2Y-hjb" secondAttribute="centerX" id="r4T-S9-WlU"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Title" id="HkG-qD-i13">
