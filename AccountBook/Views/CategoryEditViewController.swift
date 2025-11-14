@@ -39,6 +39,7 @@ class CategoryEditViewController: UIViewController {
         iconTextField.text = viewModel.textForIcon
         iconImageView.image = viewModel.textForIcon.toImage()
         nameTextField.text = viewModel.nameString
+        removeButton.isHidden = viewModel.isHiddenForRemoveButton
     }
    
     func configureTextField() {
@@ -80,7 +81,21 @@ class CategoryEditViewController: UIViewController {
     }
     
     @IBAction func removeButtonTapped(_ sender: UIButton) {
+        view.endEditing(true)
+        
+        let alert = UIAlertController(title: "삭제", message: "해당 카테고리를 삭제하시겠습니까?", preferredStyle: .alert)
+
+        let success = UIAlertAction(title: "삭제", style: .destructive) { action in
+            self.viewModel.handleRemoveButton()
+            self.close()
+        }
+        let cancel = UIAlertAction(title: "취소", style: .cancel)
+
+        alert.addAction(success)
+        alert.addAction(cancel)
+        present(alert, animated: true, completion: nil)
     }
+    
     func close() {
         switch presentationStyle {
         case .modal:
