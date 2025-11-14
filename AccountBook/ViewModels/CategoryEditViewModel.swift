@@ -64,8 +64,6 @@ class CategoryEditViewModel {
         return nil
     }
     
-    func handleAddButton(icon: String, name: String) {
-        CategoryManager.shared.addCategory(icon: icon, name: name, isIncome: isIncome)
-        onDidAddCategory?()
+    func handleDoneButton(icon: String, name: String) {
     }
 }

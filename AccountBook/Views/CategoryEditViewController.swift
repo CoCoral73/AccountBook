@@ -65,7 +65,7 @@ class CategoryEditViewController: UIViewController {
         close()
     }
     
-    @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
+    @IBAction func doneButtonTapped(_ sender: UIBarButtonItem) {
         let icon = iconTextField.text, name = nameTextField.text
         if let error = viewModel.validateInput(icon: icon, name: name) {
             view.endEditing(true)
@@ -74,7 +74,7 @@ class CategoryEditViewController: UIViewController {
             return
         }
         
-        viewModel.handleAddButton(icon: icon!, name: name!)
+        viewModel.handleDoneButton(icon: icon!, name: name!)
         close()
     }
     

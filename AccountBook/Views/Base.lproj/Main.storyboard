@@ -3254,7 +3254,7 @@
                         <barButtonItem key="rightBarButtonItem" title="완료" id="w4s-vC-4sh">
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="addButtonTapped:" destination="W3J-1n-569" id="Yyi-Rh-jpX"/>
+                                <action selector="doneButtonTapped:" destination="W3J-1n-569" id="Yyi-Rh-jpX"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
