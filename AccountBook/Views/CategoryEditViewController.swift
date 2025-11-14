@@ -1,5 +1,5 @@
 //
-//  CategoryAddViewController.swift
+//  CategoryEditViewController.swift
 //  AccountBook
 //
 //  Created by 김정원 on 9/17/25.
@@ -7,16 +7,16 @@
 
 import UIKit
 
-class CategoryAddViewController: UIViewController {
+class CategoryEditViewController: UIViewController {
 
     @IBOutlet weak var iconTextField: UIEmojiTextField!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
     
-    var viewModel: CategoryAddViewModel
+    var viewModel: CategoryEditViewModel
     var presentationStyle: PresentationStyle = .modal
     
-    required init?(coder: NSCoder, viewModel: CategoryAddViewModel) {
+    required init?(coder: NSCoder, viewModel: CategoryEditViewModel) {
         self.viewModel = viewModel
         super.init(coder: coder)
     }
@@ -91,7 +91,7 @@ class CategoryAddViewController: UIViewController {
     }
 }
 
-extension CategoryAddViewController: UITextFieldDelegate {
+extension CategoryEditViewController: UITextFieldDelegate {
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if textField == iconTextField {
             if string.count == 1, let char = string.first, char.isEmoji {

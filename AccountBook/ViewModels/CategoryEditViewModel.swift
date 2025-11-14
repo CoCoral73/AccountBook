@@ -1,5 +1,5 @@
 //
-//  CategoryAddViewModel.swift
+//  CategoryEditViewModel.swift
 //  AccountBook
 //
 //  Created by 김정원 on 9/17/25.
@@ -19,7 +19,7 @@ enum CategoryInputError {
     }
 }
 
-class CategoryAddViewModel {
+class CategoryEditViewModel {
     var isIncome: Bool
     var onDidAddCategory: (() -> ())?
     

@@ -29,13 +29,13 @@ class CategoryListViewController: UIViewController {
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
-        let vm = CategoryAddViewModel(isIncome: viewModel.isIncome)
+        let vm = CategoryEditViewModel(isIncome: viewModel.isIncome)
         vm.onDidAddCategory = {
             self.tableView.reloadData()
         }
         
-        guard let vc = storyboard?.instantiateViewController(identifier: "CategoryAddViewController", creator: { coder in
-            CategoryAddViewController(coder: coder, viewModel: vm)
+        guard let vc = storyboard?.instantiateViewController(identifier: "CategoryEditViewController", creator: { coder in
+            CategoryEditViewController(coder: coder, viewModel: vm)
         }) else {
             print("CategoryListViewController: VC 생성 오류")
             return

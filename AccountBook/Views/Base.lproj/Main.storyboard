@@ -3188,7 +3188,7 @@
         <!--Title-->
         <scene sceneID="x3n-4H-7hd">
             <objects>
-                <viewController storyboardIdentifier="CategoryAddViewController" hidesBottomBarWhenPushed="YES" id="W3J-1n-569" customClass="CategoryAddViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CategoryEditViewController" hidesBottomBarWhenPushed="YES" id="W3J-1n-569" customClass="CategoryEditViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="eVb-2Y-hjb">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
