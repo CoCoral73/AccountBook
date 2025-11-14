@@ -12,6 +12,7 @@ class CategoryEditViewController: UIViewController {
     @IBOutlet weak var iconTextField: UIEmojiTextField!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var removeButton: UIButton!
     
     var viewModel: CategoryEditViewModel
     var presentationStyle: PresentationStyle = .modal
@@ -78,6 +79,8 @@ class CategoryEditViewController: UIViewController {
         close()
     }
     
+    @IBAction func removeButtonTapped(_ sender: UIButton) {
+    }
     func close() {
         switch presentationStyle {
         case .modal:

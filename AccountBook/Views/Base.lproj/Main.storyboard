@@ -3242,6 +3242,9 @@
                                         <real key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="removeButtonTapped:" destination="W3J-1n-569" eventType="touchUpInside" id="uZb-6i-FkY"/>
+                                </connections>
                             </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="GBB-bk-CFZ"/>
@@ -3281,6 +3284,7 @@
                         <outlet property="iconImageView" destination="pyb-X2-jJs" id="f7d-IS-AGE"/>
                         <outlet property="iconTextField" destination="7D7-Og-oFU" id="vJq-Lp-iDG"/>
                         <outlet property="nameTextField" destination="af6-hT-a9o" id="xiC-f3-vXl"/>
+                        <outlet property="removeButton" destination="0V5-tb-ZUr" id="5IK-zP-yvt"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5qe-iJ-nG5" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
