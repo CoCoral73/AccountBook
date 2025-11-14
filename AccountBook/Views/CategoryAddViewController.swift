@@ -38,7 +38,7 @@ class CategoryAddViewController: UIViewController {
         let tap = UITapGestureRecognizer(target: self, action: #selector(handleTapGesture))
         iconImageView.addGestureRecognizer(tap)
         
-        iconImageView.image = viewModel.iconImage
+        iconImageView.image = viewModel.textForIcon.toImage()
     }
    
     func configureTextField() {
@@ -66,7 +66,16 @@ class CategoryAddViewController: UIViewController {
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
-        viewModel.handleAddButton(fromVC: self, icon: iconTextField.text ?? " ", name: nameTextField.text ?? "")
+        let icon = iconTextField.text, name = nameTextField.text
+        guard viewModel.validateInput(icon: icon, name: name) == nil else {
+            view.endEditing(true)
+            HapticFeedback.notify(.error)
+            ToastManager.shared.show(message: "아이콘과 이름을 입력해주세요.", in: view)
+            return
+        }
+        
+        viewModel.handleAddButton(icon: icon!, name: name!)
+        close()
     }
     
     func close() {
@@ -86,7 +95,7 @@ extension CategoryAddViewController: UITextFieldDelegate {
             if string.count == 1, let char = string.first, char.isEmoji {
                 textField.text = string   // 마지막 이모지만 유지
             } else {
-                textField.text = " "
+                textField.text = ""
             }
             
             iconImageView.image = textField.text?.toImage()
