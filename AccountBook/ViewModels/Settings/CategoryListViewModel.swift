@@ -14,12 +14,18 @@ class CategoryListViewModel {
         loadCategories()
     }
     
+    var title: String { isIncome ? "수입 카테고리" : "지출 카테고리" }
     var numberOfRowsInSection: Int { categories.count }
     func cellForRowAt(row: Int) -> Category { categories[row] }
     
     func moveRowAt(source: Int, destination: Int) {
         CategoryManager.shared.reorderCategory(isIncome: isIncome, source: source, destination: destination)
         loadCategories()
+    }
+    
+    func didSelectRowAt(row: Int) -> CategoryEditViewModel {
+        let category = categories[row]
+        return CategoryEditViewModel(isIncome: isIncome, mode: CategoryEditMode.edit(category))
     }
     
     func loadCategories() {
