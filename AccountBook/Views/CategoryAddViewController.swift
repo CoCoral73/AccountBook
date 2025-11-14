@@ -65,10 +65,10 @@ class CategoryAddViewController: UIViewController {
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         let icon = iconTextField.text, name = nameTextField.text
-        guard viewModel.validateInput(icon: icon, name: name) == nil else {
+        if let error = viewModel.validateInput(icon: icon, name: name) {
             view.endEditing(true)
             HapticFeedback.notify(.error)
-            ToastManager.shared.show(message: "아이콘과 이름을 입력해주세요.", in: view)
+            ToastManager.shared.show(message: error.message, in: view)
             return
         }
         

@@ -8,6 +8,15 @@
 enum CategoryInputError {
     case emptyIcon
     case emptyName
+    
+    var message: String {
+        switch self {
+        case .emptyIcon:
+            "아이콘을 입력해주세요"
+        case .emptyName:
+            "이름을 입력해주세요"
+        }
+    }
 }
 
 class CategoryAddViewModel {
