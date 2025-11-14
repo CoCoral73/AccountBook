@@ -46,4 +46,25 @@ class CategoryManager {
         CoreDataManager.shared.context.delete(category)
         CoreDataManager.shared.saveContext()
     }
+    
+    func reorderCategory(isIncome: Bool, source: Int, destination: Int) {
+        if isIncome {
+            let item = incomeCategories.remove(at: source)
+            incomeCategories.insert(item, at: destination)
+
+            for i in 0..<incomeCategories.count {
+                incomeCategories[i].orderIndex = Int16(i)
+            }
+
+        } else {
+            let item = expenseCategories.remove(at: source)
+            expenseCategories.insert(item, at: destination)
+
+            for i in 0..<expenseCategories.count {
+                expenseCategories[i].orderIndex = Int16(i)
+            }
+        }
+
+        CoreDataManager.shared.saveContext()
+    }
 }

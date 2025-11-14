@@ -18,9 +18,8 @@ class CategoryListViewModel {
     func cellForRowAt(row: Int) -> Category { categories[row] }
     
     func moveRowAt(source: Int, destination: Int) {
-        //코어데이터 모델 순서 프로퍼티 수정 필요
-        let item = categories.remove(at: source)
-        categories.insert(item, at: destination)
+        CategoryManager.shared.reorderCategory(isIncome: isIncome, source: source, destination: destination)
+        loadCategories()
     }
     
     func loadCategories() {
