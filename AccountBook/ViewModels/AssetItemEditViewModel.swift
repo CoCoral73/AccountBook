@@ -7,6 +7,11 @@
 
 import UIKit
 
+enum AssetEditMode: Equatable {
+    case add
+    case edit(AssetItem)
+}
+
 class AssetItemEditViewModel {
     
     private var asset: AssetItem?
