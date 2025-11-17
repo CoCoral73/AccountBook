@@ -5,7 +5,7 @@
 //  Created by 김정원 on 7/4/25.
 //
 
-import UIKit
+import Foundation
 
 class CalendarCellViewModel {
     
@@ -25,39 +25,26 @@ class CalendarCellViewModel {
         self.isCurrentMonth = isCurrentMonth
     }
     
-    var dayStringAndColor: (text: String, color: UIColor) {
+    var dayStringAndWeekday: (text: String, weekday: Int) {
         let date = dayItem.date
         let cal = Calendar.current
-        let weekday = cal.component(.weekday, from: date) // 일=1, 토=7
+        var weekday = cal.component(.weekday, from: date) // 일=1, 토=7
         
         let dayString = "\(cal.component(.day, from: date))"
-        let dayColor: UIColor
         
         if !isCurrentMonth {
-            dayColor = .systemGray
-        } else {
-            switch weekday {
-            case 1: dayColor = .systemRed
-            case 7: dayColor = .systemBlue
-            default: dayColor = .label
-            }
+            weekday = 0
         }
         
-        return (dayString, dayColor)
+        return (dayString, weekday)
     }
     
     var incomeString: String? {
         return dayItem.income == 0 ? nil : dayItem.income.formattedWithComma
     }
-    var incomeTextColor: UIColor {
-        return .systemGreen
-    }
     
     var expenseString: String? {
         return dayItem.expense == 0 ? nil : dayItem.expense.formattedWithComma
-    }
-    var expenseTextColor: UIColor {
-        return .systemOrange
     }
     
 }
