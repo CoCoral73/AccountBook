@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MonthPickerViewController: UIViewController {
+class MonthPickerViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var cancelButton: UIBarButtonItem!
     @IBOutlet weak var todayButton: UIBarButtonItem!
@@ -29,23 +29,38 @@ class MonthPickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        stopObservingTheme()
         initPickerView()
     }
 
+    func applyTheme(_ theme: any AppTheme) {
+        todayButton.tintColor = theme.accentColor
+        selectButton.tintColor = theme.accentColor
+    }
+    
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
     }
+    
     @IBAction func todayButtonTapped(_ sender: UIBarButtonItem) {
         viewModel.handleTodayButton()
         pickerView.selectRow(viewModel.selectedYearIndex, inComponent: 0, animated: true)
         pickerView.selectRow(viewModel.selectedMonthIndex, inComponent: 1, animated: true)
     }
+    
     @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
         viewModel.handleSelectButton(year: pickerView.selectedRow(inComponent: 0), month: pickerView.selectedRow(inComponent: 1))
         dismiss(animated: true)
     }
     
-
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyInitialTheme()
+    }
+    
+    deinit {
+        stopObservingTheme()
+    }
 }
 
 extension MonthPickerViewController: UIPickerViewDelegate, UIPickerViewDataSource {
