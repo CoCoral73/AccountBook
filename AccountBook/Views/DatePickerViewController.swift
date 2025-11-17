@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DatePickerViewController: UIViewController {
+class DatePickerViewController: UIViewController, ThemeApplicable {
     
     @IBOutlet weak var datePicker: UIDatePicker!
     
@@ -25,7 +25,12 @@ class DatePickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startObservingTheme()
         datePicker.date = viewModel.currentDate
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        datePicker.tintColor = theme.accentColor
     }
     
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
@@ -33,9 +38,18 @@ class DatePickerViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyInitialTheme()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         preferredContentSize = CGSize(width: view.bounds.width, height: datePicker.bounds.height)
+    }
+    
+    deinit {
+        stopObservingTheme()
     }
 }
