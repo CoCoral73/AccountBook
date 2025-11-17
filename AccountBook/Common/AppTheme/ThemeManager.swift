@@ -1,0 +1,62 @@
+//
+//  ThemeManager.swift
+//  AccountBook
+//
+//  Created by 김정원 on 11/17/25.
+//
+
+import UIKit
+
+extension Notification.Name {
+    static let themeDidChange = Notification.Name("ThemeManager.themeDidChange")
+}
+
+final class ThemeManager {
+
+    static let shared = ThemeManager()
+
+    private init() {
+        currentKind = ThemeManager.loadSavedKind()
+    }
+
+    private(set) var currentKind: AppThemeKind {
+        didSet {
+            save(kind: currentKind)
+            NotificationCenter.default.post(name: .themeDidChange, object: nil)
+        }
+    }
+
+    var currentTheme: AppTheme {
+        switch currentKind {
+        case .pink:
+            PinkTheme()
+        case .orange:
+            OrangeTheme()
+        case .yellow:
+            YellowTheme()
+        case .green:
+            GreenTheme()
+        case .blue:
+            BlueTheme()
+        case .purple:
+            PurpleTheme()
+        }
+    }
+
+    // 외부에서 테마 변경 요청
+    func apply(kind: AppThemeKind) {
+        guard currentKind != kind else { return }
+        currentKind = kind
+    }
+
+    // MARK: - 저장/로드 (UserDefaults)
+
+    private func save(kind: AppThemeKind) {
+        UserDefaults.standard.set(kind.rawValue, forKey: "AppThemeKind")
+    }
+
+    private static func loadSavedKind() -> AppThemeKind {
+        let raw = UserDefaults.standard.string(forKey: "AppThemeKind") ?? AppThemeKind.pink.rawValue
+        return AppThemeKind(rawValue: raw) ?? .pink
+    }
+}
