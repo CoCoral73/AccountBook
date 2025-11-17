@@ -7,8 +7,10 @@
 
 import UIKit
 
-class InstallmentViewController: UIViewController {
+class InstallmentViewController: UIViewController, ThemeApplicable {
 
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var saveButton: AutoUpdateColorButton!
     
@@ -17,10 +19,26 @@ class InstallmentViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startObservingTheme()
+        configureNavigationBar()
+        configureTextField()
+        saveButton.isEnabled = false
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        boxView.backgroundColor = theme.baseColor
+        saveButton.applyBaseColor(theme.accentColor)
+    }
+    
+    func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationBar.standardAppearance = appearance
+    }
+    
+    func configureTextField() {
         textField.delegate = self
         textField.addTarget(self, action: #selector(textDidChange), for: .editingChanged)
-        
-        saveButton.isEnabled = false
     }
     
     @objc func textDidChange(_ textField: UITextField) {
@@ -43,6 +61,11 @@ class InstallmentViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyInitialTheme()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         view.endEditing(true)
@@ -53,6 +76,9 @@ class InstallmentViewController: UIViewController {
         super.viewDidAppear(animated)
     }
     
+    deinit {
+        stopObservingTheme()
+    }
 }
 
 extension InstallmentViewController: UITextFieldDelegate {
