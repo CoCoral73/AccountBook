@@ -6,7 +6,7 @@
 //
 import UIKit
 
-enum AppThemeKind {
+enum AppThemeKind: String {
     case pink
     case orange
     case yellow
