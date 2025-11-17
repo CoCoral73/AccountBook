@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PeriodSelectionViewController: UIViewController {
+class PeriodSelectionViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var stackView: UIStackView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
@@ -18,6 +18,7 @@ class PeriodSelectionViewController: UIViewController {
     @IBOutlet weak var borderView: UIView!
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var pickerView: UIPickerView!
+    @IBOutlet weak var applyButton: UIButton!
     
     var viewModel: PeriodSelectionViewModel
     
@@ -33,11 +34,18 @@ class PeriodSelectionViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        startObservingTheme()
         bindViewModel()
         configureUI()
         configurePickerView()
         configureSegControl()
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        startDateButton.backgroundColor = theme.baseColor
+        endDateButton.backgroundColor = theme.baseColor
+        datePicker.tintColor = theme.accentColor
+        applyButton.backgroundColor = theme.accentColor
     }
     
     func bindViewModel() {
@@ -104,6 +112,11 @@ class PeriodSelectionViewController: UIViewController {
         dismiss(animated: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyInitialTheme()
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -118,6 +131,10 @@ class PeriodSelectionViewController: UIViewController {
             width: view.bounds.width,
             height: topConstraint.constant + stackViewHeight
         )
+    }
+    
+    deinit {
+        stopObservingTheme()
     }
 }
 

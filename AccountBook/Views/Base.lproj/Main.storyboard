@@ -1409,6 +1409,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="applyButton" destination="VYa-qp-7v3" id="mgF-xb-oQc"/>
                         <outlet property="borderView" destination="5ZE-QF-TUN" id="OJs-bE-NfW"/>
                         <outlet property="datePicker" destination="cvi-OP-jYj" id="KfV-FC-nNI"/>
                         <outlet property="endDateButton" destination="9PV-nc-SNV" id="xUC-yJ-pZS"/>
