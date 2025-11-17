@@ -6,6 +6,15 @@
 //
 import UIKit
 
+enum AppThemeKind {
+    case pink
+    case orange
+    case yellow
+    case green
+    case blue
+    case pupple
+}
+
 protocol AppTheme {
     var baseColor: UIColor { get }
     var primaryTextColor: UIColor { get }
