@@ -25,6 +25,7 @@ protocol AppTheme {
     var expenseTextColor: UIColor { get }
     
     var chartColors: [UIColor] { get }
+    var calendarColors: [UIColor] { get }
 }
 
 extension AppTheme {
@@ -44,5 +45,8 @@ extension AppTheme {
             UIColor(red: 1.00, green: 0.78, blue: 0.78, alpha: 1.00),
             UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
         ]
+    }
+    var calendarColors: [UIColor] {
+        [.systemGray, .systemRed, .label, .label, .label, .label, .label, .systemBlue ]
     }
 }
