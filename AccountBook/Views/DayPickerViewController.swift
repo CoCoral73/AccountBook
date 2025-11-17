@@ -7,7 +7,7 @@
 
 import UIKit
 
-class DayPickerViewController: UIViewController {
+class DayPickerViewController: UIViewController, ThemeApplicable {
     
     @IBOutlet weak var toolBar: UIToolbar!
     @IBOutlet weak var titleLabel: UIBarButtonItem!
@@ -20,14 +20,24 @@ class DayPickerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startObservingTheme()
         titleLabel.title = titleString
         collectionView.delegate = self
         collectionView.dataSource = self
     
     }
     
+    func applyTheme(_ theme: any AppTheme) {
+        toolBar.standardAppearance.backgroundColor = theme.baseColor
+    }
+    
     @IBAction func closeButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyInitialTheme()
     }
     
     override func viewDidLayoutSubviews() {
@@ -40,6 +50,9 @@ class DayPickerViewController: UIViewController {
         preferredContentSize = CGSize(width: view.bounds.width, height: totalHeight)
     }
 
+    deinit {
+        stopObservingTheme()
+    }
 }
 
 extension DayPickerViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
