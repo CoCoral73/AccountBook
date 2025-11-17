@@ -7,7 +7,7 @@
 
 import UIKit
 
-class CalendarViewController: UIViewController {
+class CalendarViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var monthButton: UIButton!
     
@@ -35,12 +35,18 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startObservingTheme()
         bindViewModel()
         configureTotals()
         configureCollectionView()
         configureTableView()
         addGesture()
         configureAddButtonInitialState()
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        boxView.backgroundColor = theme.baseColor
+        addButton.backgroundColor = theme.accentColor
     }
     
     private func bindViewModel() {
@@ -136,10 +142,11 @@ class CalendarViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        applyInitialTheme()
     }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        navigationController?.navigationBar.isHidden = false
+    
+    deinit {
+        stopObservingTheme()
     }
 }
 
