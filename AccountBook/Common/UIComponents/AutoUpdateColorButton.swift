@@ -13,7 +13,6 @@ class AutoUpdateColorButton: UIButton {
     //스토리보드 사용 시
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        baseColor = backgroundColor
         updateColor()
     }
 
@@ -21,6 +20,11 @@ class AutoUpdateColorButton: UIButton {
         didSet {
             updateColor()
         }
+    }
+    
+    func applyBaseColor(_ color: UIColor) {
+        self.baseColor = color
+        updateColor()
     }
 
     private func updateColor() {
