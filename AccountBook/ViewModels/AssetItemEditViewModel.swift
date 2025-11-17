@@ -14,7 +14,7 @@ enum AssetEditMode: Equatable {
 
 class AssetItemEditViewModel {
     
-    private var asset: AssetItem?
+    var mode: AssetEditMode
     private var type: AssetType
     private var name: String = ""
     private var balance: Int64 = 0
@@ -22,20 +22,17 @@ class AssetItemEditViewModel {
     private var withdrawalDay: Int16 = 1
     private var startDay: Int16 = 1
     
-    private var isModifyMode: Bool
-    
     //거래 추가 안에서 자산 추가했을 때
     var onDidAddAssetItem: (() -> Void)?
-    
+
     init(type: AssetType = .bankAccount) {
         self.type = type
-        self.isModifyMode = false
+        self.mode = .add
     }
     
     init(asset: AssetItem) {
-        self.asset = asset
+        self.mode = .edit(asset)
         self.type = AssetType(rawValue: Int(asset.type))!
-        self.isModifyMode = true
         
         self.name = asset.name
         switch asset {
@@ -53,10 +50,10 @@ class AssetItemEditViewModel {
         }
     }
     
-    var title: String { isModifyMode ? "자산 수정" : "자산 추가" }
-    var isHiddenForSegControl: Bool { isModifyMode }
+    var title: String { mode == .add ? "자산 추가" : "자산 수정" }
+    var isHiddenForSegControl: Bool { mode != .add }    //수정 모드일 때는 숨김
     var topConstraintConstant: CGFloat {
-        isModifyMode ? 40 : 91
+        mode != .add ? 40 : 91
     }
     var selectedSegmentIndex: Int {
         switch self.type {
@@ -68,15 +65,15 @@ class AssetItemEditViewModel {
     }
     var isEnabledForNameTextField: Bool { type != .cash }
     var isHiddenForAccount: Bool { type == .debitCard || type == .creditCard }
-    var isHiddenForTableView: Bool { !(isModifyMode && type == .bankAccount && numberOfRowsInSection > 0) }
+    var isHiddenForTableView: Bool { !(mode != .add && type == .bankAccount && numberOfRowsInSection > 0) }
     var isHiddenForCard: Bool { type == .cash || type == .bankAccount }
     var isHiddenForCredit: Bool { type != .creditCard }
-    var isHiddenForRemoveButton: Bool { !isModifyMode }
+    var isHiddenForRemoveButton: Bool { mode == .add }
     var nameTextFieldString: String { name }
     var balanceTextFieldString: String { String(balance) }
     var numberOfRowsInSection: Int { cellForRowAt.count }
     var cellForRowAt: [AssetItem] {
-        guard let bank = asset as? BankAccountItem else { return [] }
+        guard case let .edit(asset) = mode, let bank = asset as? BankAccountItem else { return [] }
         let debits = Array(bank.linkedDebitCards as? Set<AssetItem> ?? [])
         let credits = Array(bank.linkedCreditCards as? Set<AssetItem> ?? [])
         return debits + credits
@@ -131,7 +128,12 @@ class AssetItemEditViewModel {
     }
     
     func handleDoneButton() {
-        isModifyMode ? modifyAssetItem() : addAssetItem()
+        switch mode {
+        case .add:
+            addAssetItem()
+        case .edit(let asset):
+            editAssetItem(with: asset)
+        }
     }
     
     func addAssetItem() {
@@ -149,12 +151,7 @@ class AssetItemEditViewModel {
         onDidAddAssetItem?()
     }
     
-    func modifyAssetItem() {
-        guard let asset = asset else {
-            print("수정할 자산 없음")
-            return
-        }
-        
+    func editAssetItem(with asset: AssetItem) {
         switch type {
         case .cash:
             AssetItemManager.shared.updateAssetItem(with: asset, name: name, balance: balance)
@@ -168,7 +165,7 @@ class AssetItemEditViewModel {
     }
     
     func handleRemoveButton() {
-        guard let asset = asset else {
+        guard case let .edit(asset) = mode else {
             print("삭제할 자산 없음")
             return 
         }
