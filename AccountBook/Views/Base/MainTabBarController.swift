@@ -7,7 +7,7 @@
 
 import UIKit
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, ThemeApplicable {
     private let calendarViewModel = CalendarViewModel()
     private let chartViewModel = ChartViewModel()
     private let assetManageViewModel = AssetManageViewModel()
@@ -15,7 +15,12 @@ class MainTabBarController: UITabBarController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startObservingTheme()
         injectViewModel()
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        tabBar.backgroundColor = theme.baseColor
     }
     
     private func injectViewModel() {
@@ -32,5 +37,14 @@ class MainTabBarController: UITabBarController {
             let assetManageVC = navVC.topViewController as? AssetManageViewController {
             assetManageVC.viewModel = assetManageViewModel
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyInitialTheme()
+    }
+    
+    deinit {
+        stopObservingTheme()
     }
 }
