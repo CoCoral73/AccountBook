@@ -7,8 +7,10 @@
 
 import UIKit
 
-class TransactionDetailViewController: UIViewController {
+class TransactionDetailViewController: UIViewController, ThemeApplicable {
     
+    @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var backView: UIView!
     @IBOutlet weak var paperView: UIView!
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var isIncomeLabel: UILabel!
@@ -36,11 +38,23 @@ class TransactionDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startObservingTheme()
         configurePopGesture()
         configureViewModel()
         configureUIByViewModel()
         configureKeyboardAccessory()
         nameTextField.delegate = self
+    }
+    
+    //ThemeApplicable
+    func applyTheme(_ theme: any AppTheme) {
+        view.backgroundColor = theme.baseColor
+        
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationBar.standardAppearance = appearance
+        
+        removeInstallmentButton.backgroundColor = theme.accentColor
     }
     
     private func configurePopGesture() {
@@ -162,6 +176,11 @@ class TransactionDetailViewController: UIViewController {
         viewModel.handleRemoveButton(self)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        applyInitialTheme()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         
@@ -183,6 +202,10 @@ class TransactionDetailViewController: UIViewController {
         removeInstallmentButton.layer.shadowOpacity = 0.2
         removeInstallmentButton.layer.shadowOffset  = CGSize(width: 0, height: 2)
         removeInstallmentButton.layer.shadowRadius  = 6
+    }
+    
+    deinit {
+        stopObservingTheme()
     }
 }
 
