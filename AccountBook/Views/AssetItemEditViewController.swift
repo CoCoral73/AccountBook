@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AssetItemEditViewController: UIViewController {
+class AssetItemEditViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var segControl: UISegmentedControl!
@@ -22,6 +22,7 @@ class AssetItemEditViewController: UIViewController {
     @IBOutlet weak var accountStackViewForModifyMode: UIStackView!
     @IBOutlet weak var cardStackView: UIStackView!
     @IBOutlet weak var creditCardStackView: UIStackView!
+    @IBOutlet weak var boxViewForCreditCard: UIView!
     
     @IBOutlet weak var linkedCardsTableView: IntrinsicTableView!
     @IBOutlet weak var removeButton: UIButton!
@@ -43,12 +44,17 @@ class AssetItemEditViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startObservingTheme()
         configureSegControl()
         configureAccountButton()
         configureUI()
         configureTextField()
         configureTableView()
         configureTapGesture()
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        boxViewForCreditCard.backgroundColor = theme.baseColor
     }
     
     func configureSegControl() {
@@ -160,11 +166,16 @@ class AssetItemEditViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
+        applyInitialTheme()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = false
+    }
+    
+    deinit {
+        stopObservingTheme()
     }
 }
 

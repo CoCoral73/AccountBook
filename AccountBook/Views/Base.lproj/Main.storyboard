@@ -2643,6 +2643,7 @@
                         <outlet property="accountStackView" destination="tRj-o0-WGz" id="I8I-Bx-nj2"/>
                         <outlet property="accountStackViewForModifyMode" destination="PRD-nX-mHt" id="74M-iU-5LM"/>
                         <outlet property="balanceTextField" destination="UNO-ZD-ZtM" id="Vu1-hh-uc7"/>
+                        <outlet property="boxViewForCreditCard" destination="s4D-4d-QCr" id="sdw-ES-dMh"/>
                         <outlet property="cardStackView" destination="QUs-Zd-ohr" id="inE-uy-ywx"/>
                         <outlet property="creditCardStackView" destination="0SQ-iG-u5E" id="KaT-Rf-sz7"/>
                         <outlet property="linkedCardsTableView" destination="M6O-Fk-2x0" id="hWH-oS-sx8"/>
