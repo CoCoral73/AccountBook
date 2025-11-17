@@ -9,7 +9,7 @@ import UIKit
 //MARK: - Pink
 struct PinkTheme: AppTheme {
     
-    var baseColor: UIColor { UIColor(red: 1.00, green: 0.87, blue: 0.87, alpha: 1.00) }
+    var baseColor: UIColor { UIColor(red: 1.00, green: 0.92, blue: 0.92, alpha: 1.00) }
     
     var accentColor: UIColor { UIColor(red: 1.00, green: 0.73, blue: 0.73, alpha: 1.00) }
     
