@@ -1423,7 +1423,7 @@
             </objects>
             <point key="canvasLocation" x="-231" y="-27"/>
         </scene>
-        <!--상세 보기-->
+        <!--Transaction Detail View Controller-->
         <scene sceneID="dur-26-N6X">
             <objects>
                 <viewController storyboardIdentifier="TransactionDetailViewController" hidesBottomBarWhenPushed="YES" id="oU4-9V-oZi" customClass="TransactionDetailViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
@@ -1431,6 +1431,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mJ4-Vm-wgX">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1g5-KI-1Kt"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="상세 보기" id="lkw-Gc-tJE">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="DSs-aQ-lAe">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="oU4-9V-oZi" id="fik-ek-xy4"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="5Yh-EO-FCV">
+                                            <color key="tintColor" systemColor="systemRedColor"/>
+                                            <connections>
+                                                <action selector="removeButtonTapped:" destination="oU4-9V-oZi" id="ghr-ne-fCf"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance">
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </navigationBarAppearance>
+                            </navigationBar>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dVb-Pm-lLl">
                                 <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <subviews>
@@ -1756,7 +1780,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
-                                <color key="backgroundColor" systemColor="secondarySystemBackgroundColor"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="ZrH-Yn-V1x" secondAttribute="bottom" constant="150" id="44c-mN-vgY"/>
                                     <constraint firstAttribute="trailing" secondItem="ZrH-Yn-V1x" secondAttribute="trailing" constant="32" id="4ZH-gZ-DFP"/>
@@ -1771,29 +1795,19 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="VjC-T0-wPX" firstAttribute="trailing" secondItem="dVb-Pm-lLl" secondAttribute="trailing" id="OCg-BW-BU2"/>
-                            <constraint firstItem="dVb-Pm-lLl" firstAttribute="top" secondItem="VjC-T0-wPX" secondAttribute="top" id="QoP-mA-dd3"/>
+                            <constraint firstItem="dVb-Pm-lLl" firstAttribute="top" secondItem="mJ4-Vm-wgX" secondAttribute="bottom" id="QoP-mA-dd3"/>
                             <constraint firstItem="dVb-Pm-lLl" firstAttribute="leading" secondItem="VjC-T0-wPX" secondAttribute="leading" id="SNl-7v-PnQ"/>
+                            <constraint firstItem="mJ4-Vm-wgX" firstAttribute="trailing" secondItem="VjC-T0-wPX" secondAttribute="trailing" id="Ueg-70-jzV"/>
+                            <constraint firstItem="mJ4-Vm-wgX" firstAttribute="top" secondItem="VjC-T0-wPX" secondAttribute="top" id="Uyd-93-GiL"/>
                             <constraint firstAttribute="bottom" secondItem="dVb-Pm-lLl" secondAttribute="bottom" id="qJQ-1A-3Tc"/>
+                            <constraint firstItem="mJ4-Vm-wgX" firstAttribute="leading" secondItem="VjC-T0-wPX" secondAttribute="leading" id="vj1-Zz-9gc"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="상세 보기" id="lkw-Gc-tJE">
-                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="DSs-aQ-lAe">
-                            <connections>
-                                <action selector="backButtonTapped:" destination="oU4-9V-oZi" id="fik-ek-xy4"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="5Yh-EO-FCV">
-                            <color key="tintColor" systemColor="systemRedColor"/>
-                            <connections>
-                                <action selector="removeButtonTapped:" destination="oU4-9V-oZi" id="ghr-ne-fCf"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="amountTextField" destination="iJj-eu-E1v" id="r2t-uZ-pN5"/>
                         <outlet property="assetItemButton" destination="kz7-3j-9QQ" id="ERk-8Z-sTn"/>
                         <outlet property="assetTypeLabel" destination="Yqr-si-hI6" id="Jdp-He-tpG"/>
+                        <outlet property="backView" destination="dVb-Pm-lLl" id="dge-Zb-Iob"/>
                         <outlet property="categoryButton" destination="9So-KP-ogq" id="grb-fe-27n"/>
                         <outlet property="dateButton" destination="qcq-2D-RLI" id="1nB-Cz-fhM"/>
                         <outlet property="installmentButton" destination="5V6-cj-gp5" id="vWN-FT-gig"/>
@@ -1801,6 +1815,7 @@
                         <outlet property="isIncomeLabel" destination="0rJ-tO-lY7" id="6QI-aW-g48"/>
                         <outlet property="memoTextView" destination="ITT-dc-c8H" id="ZWT-U8-PIv"/>
                         <outlet property="nameTextField" destination="Da1-Jo-gAY" id="fok-HX-zvm"/>
+                        <outlet property="navigationBar" destination="mJ4-Vm-wgX" id="fUN-nl-vir"/>
                         <outlet property="paperView" destination="ZrH-Yn-V1x" id="Vr9-oO-thY"/>
                         <outlet property="removeInstallmentButton" destination="x5n-UV-pc2" id="BVI-QD-5pc"/>
                     </connections>
