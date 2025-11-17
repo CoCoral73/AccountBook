@@ -8,7 +8,7 @@
 import UIKit
 import DGCharts
 
-class ChartViewController: UIViewController {
+class ChartViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var periodButton: UIButton!
     @IBOutlet weak var modeButton: UIButton!
@@ -32,11 +32,16 @@ class ChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startObservingTheme()
         bindViewModel()
         configureUI()
         configurePieChartView()
         configureTableView()
         configureBarChartView()
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        modeButton.backgroundColor = theme.accentColor
     }
     
     func bindViewModel() {
@@ -128,18 +133,23 @@ class ChartViewController: UIViewController {
         tableViewByAsset.reloadData()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        reloadData()
-    }
-    
     @IBAction func periodButtonTapped(_ sender: UIButton) {
         viewModel.handlePeriodButton(storyboard: storyboard, fromVC: self)
     }
     
     @IBAction func modeButtonTapped(_ sender: UIButton) {
         viewModel.handleModeButton()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        applyInitialTheme()
+        reloadData()
+    }
+    
+    deinit {
+        stopObservingTheme()
     }
     
 }
