@@ -35,15 +35,19 @@ class CalendarViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        viewModel.onDidSetCurrentMonth = { [weak self] in
-            guard let self = self else { return }
-            self.applySnapshot()
-        }
+        bindViewModel()
         configureTotals()
         configureCollectionView()
         configureTableView()
         addGesture()
         configureAddButtonInitialState()
+    }
+    
+    private func bindViewModel() {
+        viewModel.onDidSetCurrentMonth = { [weak self] in
+            guard let self = self else { return }
+            self.applySnapshot()
+        }
     }
     
     private func configureTotals() {
