@@ -34,3 +34,25 @@ extension ThemeApplicable where Self: UIViewController {
         applyTheme(ThemeManager.shared.currentTheme)
     }
 }
+
+extension ThemeApplicable where Self: UILabel {
+
+    func startObservingTheme() {
+        NotificationCenter.default.addObserver(
+            forName: .themeDidChange,
+            object: nil,
+            queue: .main
+        ) { [weak self] _ in
+            guard let self else { return }
+            self.applyTheme(ThemeManager.shared.currentTheme)
+        }
+    }
+
+    func stopObservingTheme() {
+        NotificationCenter.default.removeObserver(
+            self,
+            name: .themeDidChange,
+            object: nil
+        )
+    }
+}
