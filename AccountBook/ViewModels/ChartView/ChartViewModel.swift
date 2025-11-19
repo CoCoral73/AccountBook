@@ -4,9 +4,7 @@
 //
 //  Created by 김정원 on 9/19/25.
 //
-
-import UIKit
-import DGCharts
+import Foundation
 
 enum StatisticPeriod: Int {
     case monthly, yearly, custom
@@ -30,11 +28,12 @@ class ChartViewModel {
     private var isIncome: Bool = false
     
     private var txs: [Transaction] = [] { didSet { calculateTotals() } }
-    private var totalByCategory: [Category: Int64] = [:]
+    private(set) var totalByCategory: [Category: Int64] = [:]
     private var sectionsByAsset: [AssetSection] = []
     
     var onDidSetPeriod: (() -> ())?
     var onDidSetIsIncome: (() -> ())?
+    var onPresentPeriodSelectionVC: ((PeriodSelectionViewModel) -> ())?
     
     init(_ date: Date = Date()) {
         startDate = date
@@ -66,11 +65,8 @@ class ChartViewModel {
     var assetTitleString: String { isIncome ? "자산별 수입" : "자산별 지출" }
     var isHiddenForBarChart: Bool { periodType == .monthly ? false : true }
     
-    var chartDataForPieChart: PieChartData { makeChartDataForPieChart() }
     var chartCenterText: String { byCategoryViewModels.isEmpty ? "데이터 없음" : "" }
     var byCategoryViewModels: [TableByCategoryCellViewModel] = []
-    
-    var chartDataForBarChart: (data: BarChartData, label: [String]) { makeChartDataForBarChart() }
     
     var numberOfSectionsByAsset: Int {
         sectionsByAsset.count
@@ -104,26 +100,13 @@ class ChartViewModel {
         loadTransactions()
     }
     
-    func handlePeriodButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
-        let (periodType, startDate, endDate) = (periodType, startDate, endDate)
-        guard let periodVC = storyboard?.instantiateViewController(identifier: "PeriodSelectionViewController", creator: { coder in
-            PeriodSelectionViewController(coder: coder, viewModel: PeriodSelectionViewModel(periodType, startDate, endDate))
-        }) else {
-            fatalError("PeriodSelectionViewController 생성 에러")
-        }
-        
-        periodVC.viewModel.onDidApplyPeriod = { (type, start, end) in
+    func handlePeriodButton() {
+        let vm = PeriodSelectionViewModel(periodType, startDate, endDate)
+        vm.onDidApplyPeriod = { (type, start, end) in
             self.setPeriod(type, start, end)
         }
         
-        if let sheet = periodVC.sheetPresentationController {
-            sheet.detents = [.custom { _ in
-                return periodVC.preferredContentSize.height
-            }]
-            sheet.prefersGrabberVisible = true
-        }
-
-        fromVC.present(periodVC, animated: true, completion: nil)
+        onPresentPeriodSelectionVC?(vm)
     }
     
     func setPeriod(_ periodType: StatisticPeriod, _ date: Date, _ endDate: Date = Date()) {
@@ -138,6 +121,10 @@ class ChartViewModel {
         self.isIncome.toggle()
         calculateTotals()
         onDidSetIsIncome?()
+    }
+    
+    func setViewModelsForTableView(with vms: [TableByCategoryCellViewModel]) {
+        byCategoryViewModels = vms
     }
     
     private func calculateTotals() {    //수입, 지출 모드 바뀔 때 호출
@@ -188,66 +175,7 @@ class ChartViewModel {
         }
     }
 
-    private func makeChartDataForPieChart() -> PieChartData {
-        let data = totalByCategory
-        
-        if data.isEmpty {
-            let entry = PieChartDataEntry(value: 1.0, label: "")
-            let dataSet = PieChartDataSet(entries: [entry])
-            
-            dataSet.colors = [.lightGray.withAlphaComponent(0.3)]
-            dataSet.drawValuesEnabled = false   // 퍼센트 값 숨김
-            
-            let chartData = PieChartData(dataSet: dataSet)
-            byCategoryViewModels = []   // 테이블뷰 데이터도 비움
-            return chartData
-        }
-        
-        let sorted = data.sorted(by: { $0.value > $1.value })   //내림차순 정렬
-        let entries = sorted.map { PieChartDataEntry(value: Double($0.value), label: $0.key.name) }
-        
-        //label: 각 데이터의 레이블 표시
-        let dataSet = PieChartDataSet(entries: entries)
-
-        // 색상 팔레트
-        var colors = chartColors
-        if entries.count > colors.count {
-            colors.append(contentsOf: Array(repeating: chartColors.last!, count: entries.count - colors.count))
-        }
-        dataSet.colors = colors
-
-        // 레이블을 섹션 바깥으로 빼고 선 연결
-        // 값은 섹션 안쪽에 표시, 레이블만 연결선으로 표시
-        dataSet.xValuePosition = .outsideSlice
-        dataSet.yValuePosition = .insideSlice
-        dataSet.valueLinePart1OffsetPercentage = 1.0
-        dataSet.valueLinePart1Length = 0.8
-        dataSet.valueLinePart2Length = 0.1
-        dataSet.valueLineWidth = 1.0
-        dataSet.valueLineColor = .darkGray
-
-        let chartData = PieChartData(dataSet: dataSet)
-        chartData.setValueFormatter(PercentValueFormatter(entries: entries))
-        chartData.setValueFont(.systemFont(ofSize: 13, weight: .semibold))
-        chartData.setValueTextColor(.black)
-
-        byCategoryViewModels = zip(sorted, colors).map { TableByCategoryCellViewModel(category: $0.key, amount: Double($0.value), total: chartData.yValueSum, color: $1)}
-        
-        return chartData
-        
-    }
-    
-    private func makeChartDataForBarChart() -> (BarChartData, [String]) {
-        let data = loadTotalsFor6Months()
-        let entries = data.enumerated().map { BarChartDataEntry(x: Double($0.offset), y: Double($0.element.1)) }
-        let dataSet = BarChartDataSet(entries: entries)
-        dataSet.colors = [UIColor.systemPink]
-        
-        let chartData = BarChartData(dataSet: dataSet)
-        return (chartData, data.map { $0.0 })
-    }
-    
-    private func loadTotalsFor6Months() -> [(String, Int64)] {
+    func loadTotalsFor6Months() -> [(String, Int64)] {
         var data: [(String, Int64)] = []
         let calendar = Calendar.current
         for i in -5...0 {
