@@ -5,7 +5,7 @@
 //  Created by 김정원 on 7/5/25.
 //
 
-import UIKit
+import Foundation
 
 protocol TransactionUpdatable: AnyObject {
     var onDidUpdateTransaction: ((Date) -> Void)? { get set }
@@ -22,6 +22,7 @@ class CalendarViewModel {
     }
     
     var onDidSetCurrentMonth: (() -> Void)?
+    var onDidUpdateDayItem: ((UUID) -> Void)?
     
     private(set) var itemIDsByDate: [Date: UUID] = [:]
     private(set) var dayItemsByUUID: [UUID: DayItem] = [:]
@@ -124,28 +125,18 @@ class CalendarViewModel {
         dayItemsByUUID[id]! = item
     }
     
-    func handleMonthButton(storyboard: UIStoryboard?, fromVC: CalendarViewController) {
-        guard let pickerVC = storyboard?
-            .instantiateViewController(identifier: "MonthPickerViewController", creator: { coder in
-                MonthPickerViewController(coder: coder, viewModel: MonthPickerViewModel(startDate: self.currentMonth)) })
-        else {
-            fatalError("MonthPickerViewController 생성 에러")
-        }
-        
-        pickerVC.viewModel.onDidSelect = { [weak self] date in
+    func handleMonthButton() -> MonthPickerViewModel {
+        let vm = MonthPickerViewModel(startDate: currentMonth)
+        vm.onDidSelect = { [weak self] date in
             guard let self = self else { return }
             
-            self.currentMonth = date
-            fromVC.applySnapshot()
+            setCurrentMonth(date)
+            onDidSetCurrentMonth?()
         }
-        
-        pickerVC.modalPresentationStyle = .custom
-        pickerVC.transitioningDelegate = fromVC
-        fromVC.present(pickerVC, animated: true, completion: nil)
+        return vm
     }
     
-    func handleDidSelectRowAt(viewModel: TransactionDetailViewModel, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
-        
+    func handleDidSelectRowAt(viewModel: TransactionDetailViewModel, completion: @escaping () -> ()) {
         viewModel.onDidUpdateOldDateTransaction = { [weak self] date in
             guard let self = self, let id = self.itemIDsByDate[date] else {
                 print("transaction.date로 UUID 찾기 실패(nil)")
@@ -154,31 +145,14 @@ class CalendarViewModel {
             
             loadTransactions(with: date)
             updateDayItem(for: id, date: date)
-            fromVC.reloadDayItem(id)
+            onDidUpdateDayItem?(id)
         }
         
-        viewModel.bindCalendarUpdate(calendarVM: self, fromVC: fromVC)
-        
-        guard let detailVC = storyboard?.instantiateViewController(identifier: "TransactionDetailViewController", creator: { coder in
-            TransactionDetailViewController(coder: coder, viewModel: viewModel)
-        }) else {
-            fatalError("TransactionDetailViewController 생성 에러")
-        }
-        
-        fromVC.navigationController?.pushViewController(detailVC, animated: true)
+        completion()
     }
     
-    func handleAddTransactionButton(type: String, storyboard: UIStoryboard?, fromVC: CalendarViewController) {
-        guard let addVC = storyboard?.instantiateViewController(identifier: "TransactionAddViewController", creator: { coder in
-            TransactionAddViewController(coder: coder, viewModel: TransactionAddViewModel(date: self.selectedDate, isIncome: type == "수입")) })
-        else {
-            fatalError("TransactionAddViewController 생성 에러")
-        }
-        
-        addVC.viewModel.bindCalendarUpdate(calendarVM: self, fromVC: fromVC)
-        
-        addVC.modalPresentationStyle = .fullScreen
-        fromVC.present(addVC, animated: true)
+    func handleAddTransactionButton(tag: Int) -> TransactionAddViewModel {
+        return TransactionAddViewModel(date: selectedDate, isIncome: tag == 0)
     }
     
     private func generateDayItems() {
