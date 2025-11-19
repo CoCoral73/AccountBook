@@ -116,7 +116,28 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func dayButtonTapped(_ sender: UIButton) {
-        viewModel.handleDayButton(tag: sender.tag, storyboard: storyboard, fromVC: self)
+        let pickerVC = storyboard?.instantiateViewController(withIdentifier: "DayPickerViewController") as! DayPickerViewController
+        pickerVC.titleTag = sender.tag
+        pickerVC.onDidSelectDay = { [weak self] (tag, day) in
+            guard let self = self else { return }
+            
+            if tag == 0 {
+                viewModel.setWithdrawalDay(with: day)
+                withdrawalDayButton.setTitle(viewModel.selectWithdrawlDateButtonTitle, for: .normal)
+            } else {
+                viewModel.setStartDay(with: day)
+                startDayButton.setTitle(viewModel.selectStartDateButtonTitle, for: .normal)
+            }
+        }
+        
+        if let sheet = pickerVC.sheetPresentationController {
+            sheet.detents = [.custom { _ in
+                return pickerVC.preferredContentSize.height
+            }]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = true
+        }
+        
+        present(pickerVC, animated: true)
     }
     
     
