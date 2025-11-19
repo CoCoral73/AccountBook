@@ -47,7 +47,7 @@ class CalendarViewModel {
         return dateFormatter.string(from: currentMonth)
     }
     
-    private var totals: (income: Int64, expense: Int64, total: Int64) = (0, 0, 0)
+    private(set) var totals: (income: Int64, expense: Int64, total: Int64) = (0, 0, 0)
     
     var totalIncomeString: String {
         return totals.income.formattedWithComma + "원"
