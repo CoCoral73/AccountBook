@@ -13,7 +13,7 @@ struct DayItem: Hashable {
     var income, expense: Int64
 }
 
-class CalendarCollectionViewCell: UICollectionViewCell {
+class CalendarCollectionViewCell: UICollectionViewCell, ThemeApplicable {
     
     @IBOutlet weak var dayLabel: UILabel!
     
@@ -23,30 +23,56 @@ class CalendarCollectionViewCell: UICollectionViewCell {
     var viewModel: CalendarCellViewModel! {
         didSet {
             configure()
+            applyTheme(ThemeManager.shared.currentTheme)
         }
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleThemeChange),
+            name: .themeDidChange,
+            object: nil
+        )
+        
+        applyStaticTheme(ThemeManager.shared.currentTheme)
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
-
-        viewModel.onSelectionChanged = nil
         contentView.backgroundColor = .clear
     }
     
+    @objc private func handleThemeChange() {
+        applyStaticTheme(ThemeManager.shared.currentTheme)
+        if viewModel != nil { applyTheme(ThemeManager.shared.currentTheme)}
+    }
+    
     func configure() {
-        let dayStringAndColor = viewModel.dayStringAndColor
-        dayLabel.text = dayStringAndColor.text
-        dayLabel.textColor = dayStringAndColor.color
+        let (day, _) = viewModel.dayStringAndWeekday
         
+        dayLabel.text = day
         incomeLabel.text = viewModel.incomeString
-        incomeLabel.textColor = viewModel.incomeTextColor
         expenseLabel.text = viewModel.expenseString
-        expenseLabel.textColor = viewModel.expenseTextColor
-        
-        contentView.backgroundColor = .clear
         
         viewModel.onSelectionChanged = { [weak self] isSelected in
-            self?.contentView.backgroundColor = isSelected ? #colorLiteral(red: 1, green: 0.5680983663, blue: 0.6200271249, alpha: 0.2426014073) : .clear
+            self?.contentView.backgroundColor = isSelected ? ThemeManager.shared.currentTheme.baseColor : .clear
         }
+    }
+    
+    func applyStaticTheme(_ theme: AppTheme) {
+        incomeLabel.textColor = theme.incomeTextColor
+        expenseLabel.textColor = theme.expenseTextColor
+    }
+    
+    func applyTheme(_ theme: AppTheme) {
+        let (_, weekday) = viewModel.dayStringAndWeekday
+        dayLabel.textColor = theme.calendarColors[weekday]
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
