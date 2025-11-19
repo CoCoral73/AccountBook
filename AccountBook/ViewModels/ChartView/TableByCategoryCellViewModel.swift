@@ -5,22 +5,20 @@
 //  Created by 김정원 on 10/15/25.
 //
 
-import UIKit
+import Foundation
 
 class TableByCategoryCellViewModel {
     var category: Category
     var amount: Double, total: Double
-    var color: UIColor
     
-    init(category: Category, amount: Double, total: Double, color: UIColor) {
+    init(category: Category, amount: Double, total: Double) {
         self.category = category
         self.amount = amount
         self.total = total
-        self.color = color
     }
     
-    var image: UIImage {
-        category.iconName.toImage()!
+    var imageName: String {
+        category.iconName
     }
     var nameString: String {
         category.name
