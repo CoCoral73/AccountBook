@@ -54,6 +54,11 @@ class CalendarViewController: UIViewController, ThemeApplicable {
             guard let self = self else { return }
             self.applySnapshot()
         }
+        
+        viewModel.onDidUpdateDayItem = { [weak self] id in
+            guard let self = self else { return }
+            reloadDayItem(id)
+        }
     }
     
     private func configureTotals() {
@@ -137,12 +142,33 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     
     @IBAction func addTransactionButtonTapped(_ sender: UIButton) {
         let vm = viewModel.handleAddTransactionButton(tag: sender.tag)
+        vm.bindCalendarUpdate(calendarVM: viewModel, fromVC: self)
+        
+        guard let addVC = storyboard?.instantiateViewController(identifier: "TransactionAddViewController", creator: { coder in
+            TransactionAddViewController(coder: coder, viewModel: vm) })
+        else {
+            fatalError("TransactionAddViewController 생성 에러")
+        }
+        
+        addVC.modalPresentationStyle = .fullScreen
+        present(addVC, animated: true)
         overlayTapped(UITapGestureRecognizer())
     }
     
     
     @IBAction func monthButtonTapped(_ sender: UIButton) {
-        viewModel.handleMonthButton(storyboard: storyboard, fromVC: self)
+        let vm = viewModel.handleMonthButton()
+        
+        guard let pickerVC = storyboard?
+            .instantiateViewController(identifier: "MonthPickerViewController", creator: { coder in
+                MonthPickerViewController(coder: coder, viewModel: vm) })
+        else {
+            fatalError("MonthPickerViewController 생성 에러")
+        }
+        
+        pickerVC.modalPresentationStyle = .custom
+        pickerVC.transitioningDelegate = self
+        present(pickerVC, animated: true, completion: nil)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -290,12 +316,23 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard let cell = tableView.cellForRow(at: indexPath) as? TransactionDetailTableViewCell else {
+        guard let cell = tableView.cellForRow(at: indexPath) as? TransactionDetailTableViewCell, let vm = cell.viewModel else {
             print("CalendarViewController: 테이블 뷰 셀 불러오기 실패")
             return
         }
-
-        viewModel.handleDidSelectRowAt(viewModel: cell.viewModel, storyboard: storyboard, fromVC: self)
+        
+        vm.bindCalendarUpdate(calendarVM: viewModel, fromVC: self)
+        viewModel.handleDidSelectRowAt(viewModel: vm) { [weak self] in
+            guard let self = self else { return }
+            guard let detailVC = storyboard?.instantiateViewController(identifier: "TransactionDetailViewController", creator: { coder in
+                TransactionDetailViewController(coder: coder, viewModel: vm)
+            }) else {
+                fatalError("TransactionDetailViewController 생성 에러")
+            }
+            
+            navigationController?.pushViewController(detailVC, animated: true)
+        }
+        
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
