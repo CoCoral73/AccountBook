@@ -137,7 +137,7 @@ class ChartViewModel {
             if tx.isIncome == isIncome {
                 let category = tx.category
                 let asset = tx.asset
-                let value = Int(asset.type), type = AssetType(rawValue: value)!
+                guard let type = AssetType(rawValue: Int(asset.type)) else { continue }
                 
                 totalByCategory[category, default: 0] += tx.amount
                 totalByAsset[asset, default: 0] += tx.amount
