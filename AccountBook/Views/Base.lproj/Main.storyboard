@@ -406,7 +406,7 @@
                                                     <action selector="addTransactionButtonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="PG9-zR-x8i"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akM-DX-PUB">
+                                            <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="akM-DX-PUB">
                                                 <rect key="frame" x="0.0" y="120" width="149.66666666666666" height="70"/>
                                                 <color key="backgroundColor" systemColor="systemOrangeColor"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>

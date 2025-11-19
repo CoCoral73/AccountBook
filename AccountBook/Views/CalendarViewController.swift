@@ -136,7 +136,7 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func addTransactionButtonTapped(_ sender: UIButton) {
-        viewModel.handleAddTransactionButton(type: sender.title(for: .normal)!, storyboard: storyboard, fromVC: self)
+        let vm = viewModel.handleAddTransactionButton(tag: sender.tag)
         overlayTapped(UITapGestureRecognizer())
     }
     
