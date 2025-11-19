@@ -14,14 +14,14 @@ class DayPickerViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var collectionView: IntrinsicCollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     
-    var titleString: String = ""
-    var onDidSelectDay: ((String, Int16) -> Void)?
+    var titleTag: Int = 0
+    var onDidSelectDay: ((Int, Int16) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         startObservingTheme()
-        titleLabel.title = titleString
+        titleLabel.title = titleTag == 0 ? "출금일" : "시작일"
         collectionView.delegate = self
         collectionView.dataSource = self
     
@@ -59,7 +59,7 @@ extension DayPickerViewController: UICollectionViewDelegateFlowLayout, UICollect
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let selectedDay = Int16(indexPath.item + 1)
-        onDidSelectDay?(titleString, selectedDay)
+        onDidSelectDay?(titleTag, selectedDay)
         dismiss(animated: true)
     }
     
