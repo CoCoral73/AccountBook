@@ -5,7 +5,7 @@
 //  Created by 김정원 on 8/14/25.
 //
 
-import UIKit
+import Foundation
 
 enum AssetEditMode: Equatable {
     case add
@@ -100,31 +100,6 @@ class AssetItemEditViewModel {
     }
     func setStartDay(with day: Int16) {
         self.startDay = day
-    }
-    
-    func handleDayButton(tag: Int, storyboard: UIStoryboard?, fromVC: AssetItemEditViewController) {
-        let pickerVC = storyboard?.instantiateViewController(withIdentifier: "DayPickerViewController") as! DayPickerViewController
-        pickerVC.titleString = tag == 0 ? "출금일" : "시작일"
-        pickerVC.onDidSelectDay = { [weak self] (title, day) in
-            guard let self = self else { return }
-            
-            if title == "출금일" {
-                setWithdrawalDay(with: day)
-                fromVC.withdrawalDayButton.setTitle(selectWithdrawlDateButtonTitle, for: .normal)
-            } else if title == "시작일" {
-                setStartDay(with: day)
-                fromVC.startDayButton.setTitle(selectStartDateButtonTitle, for: .normal)
-            }
-        }
-        
-        if let sheet = pickerVC.sheetPresentationController {
-            sheet.detents = [.custom { _ in
-                return pickerVC.preferredContentSize.height
-            }]
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = true
-        }
-        
-        fromVC.present(pickerVC, animated: true)
     }
     
     func handleDoneButton() {
