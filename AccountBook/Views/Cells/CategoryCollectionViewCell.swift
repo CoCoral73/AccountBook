@@ -26,7 +26,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
     }
     
     func configure() {
-        imgView.image = viewModel.image
+        imgView.image = viewModel.imageName.toImage()
         nameLabel.text = viewModel.nameString
     }
     
