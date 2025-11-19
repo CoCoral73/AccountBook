@@ -61,6 +61,12 @@ class CalendarViewController: UIViewController, ThemeApplicable {
         totalExpenseLabel.text = viewModel.totalExpenseString
         totalLabel.text = viewModel.totalString
         totalStateLabel.text = viewModel.totalStateString
+        
+        let theme = ThemeManager.shared.currentTheme, color: UIColor
+        if viewModel.totals.total < 0 { color = theme.expenseTextColor }
+        else if viewModel.totals.total == 0 { color = .black }
+        else { color = theme.incomeTextColor }
+        totalStateLabel.textColor = color
     }
     
     func addGesture() {
