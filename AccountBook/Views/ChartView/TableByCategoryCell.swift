@@ -23,9 +23,8 @@ class TableByCategoryCell: UITableViewCell {
     }
     
     func configureUI() {
-        categoryImgView.image = viewModel.image
+        categoryImgView.image = viewModel.imageName.toImage()
         categoryNameLabel.text = viewModel.nameString
-        percenBar.backgroundColor = viewModel.color
         updateBarWidth(ratio: viewModel.ratio)
         percentLabel.text = viewModel.ratioString
         amountLabel.text = viewModel.amountString

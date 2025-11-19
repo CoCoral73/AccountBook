@@ -13,10 +13,10 @@ class AssetSectionHeaderView: UITableViewHeaderFooterView {
     @IBOutlet weak var ratioLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
-    private let color: [UIColor] = [chartColors[0], chartColors[2], chartColors[3], chartColors[4]]
+    private let colors = ThemeManager.shared.currentTheme.sectionColors
     
     func configure(_ section: Int, _ name: String, _ ratio: String, _ amount: String) {
-        pointBar.backgroundColor = color[section]
+        pointBar.backgroundColor = colors[section]
         nameLabel.text = name
         ratioLabel.text = ratio
         amountLabel.text = amount

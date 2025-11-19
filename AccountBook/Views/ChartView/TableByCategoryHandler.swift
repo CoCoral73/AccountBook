@@ -9,6 +9,7 @@ import UIKit
 
 class TableByCategoryHandler: NSObject, UITableViewDelegate, UITableViewDataSource {
     private weak var viewModel: ChartViewModel?
+    var chartColors: [UIColor] = []
     
     init(viewModel: ChartViewModel) {
         self.viewModel = viewModel
@@ -25,6 +26,7 @@ class TableByCategoryHandler: NSObject, UITableViewDelegate, UITableViewDataSour
         }
         
         cell.viewModel = vm
+        cell.percenBar.backgroundColor = chartColors[indexPath.row]
         return cell
     }
     

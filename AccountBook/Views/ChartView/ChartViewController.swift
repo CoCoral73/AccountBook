@@ -152,9 +152,9 @@ class ChartViewController: UIViewController, ThemeApplicable {
         let dataSet = PieChartDataSet(entries: entries)
 
         // 색상 팔레트
-        var colors = chartColors
+        var colors = ThemeManager.shared.currentTheme.chartColors
         if entries.count > colors.count {
-            colors.append(contentsOf: Array(repeating: chartColors.last!, count: entries.count - colors.count))
+            colors.append(contentsOf: Array(repeating: colors.last!, count: entries.count - colors.count))
         }
         dataSet.colors = colors
 
@@ -173,7 +173,8 @@ class ChartViewController: UIViewController, ThemeApplicable {
         chartData.setValueFont(.systemFont(ofSize: 13, weight: .semibold))
         chartData.setValueTextColor(.black)
 
-        viewModel.setViewModelsForTableView(with: zip(sorted, colors).map { TableByCategoryCellViewModel(category: $0.key, amount: Double($0.value), total: chartData.yValueSum, color: $1)})
+        viewModel.setViewModelsForTableView(with: sorted.map { TableByCategoryCellViewModel(category: $0.key, amount: Double($0.value), total: chartData.yValueSum)})
+        tableByCategoryHandler.chartColors = colors
         
         return chartData
         
