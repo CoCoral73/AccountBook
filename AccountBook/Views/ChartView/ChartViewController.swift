@@ -61,6 +61,23 @@ class ChartViewController: UIViewController, ThemeApplicable {
             assetTitleLabel.text = viewModel.assetTitleString
             reloadData(shouldReloadTxs: false)
         }
+        
+        viewModel.onPresentPeriodSelectionVC = { [weak self] vm in
+            guard let periodVC = self?.storyboard?.instantiateViewController(identifier: "PeriodSelectionViewController", creator: { coder in
+                PeriodSelectionViewController(coder: coder, viewModel: vm)
+            }) else {
+                fatalError("PeriodSelectionViewController 생성 에러")
+            }
+
+            if let sheet = periodVC.sheetPresentationController {
+                sheet.detents = [.custom { _ in
+                    return periodVC.preferredContentSize.height
+                }]
+                sheet.prefersGrabberVisible = true
+            }
+
+            self?.present(periodVC, animated: true, completion: nil)
+        }
     }
     
     func configureUI() {
@@ -113,6 +130,65 @@ class ChartViewController: UIViewController, ThemeApplicable {
         barChartView.setExtraOffsets(left: 20, top: 0, right: 20, bottom: 0)
     }
     
+    private func makeChartDataForPieChart() -> PieChartData {
+        let data = viewModel.totalByCategory
+        
+        if data.isEmpty {
+            let entry = PieChartDataEntry(value: 1.0, label: "")
+            let dataSet = PieChartDataSet(entries: [entry])
+            
+            dataSet.colors = [.lightGray.withAlphaComponent(0.3)]
+            dataSet.drawValuesEnabled = false   // 퍼센트 값 숨김
+            
+            let chartData = PieChartData(dataSet: dataSet)
+            viewModel.setViewModelsForTableView(with: [])  // 테이블뷰 데이터도 비움
+            return chartData
+        }
+        
+        let sorted = data.sorted(by: { $0.value > $1.value })   //내림차순 정렬
+        let entries = sorted.map { PieChartDataEntry(value: Double($0.value), label: $0.key.name) }
+        
+        //label: 각 데이터의 레이블 표시
+        let dataSet = PieChartDataSet(entries: entries)
+
+        // 색상 팔레트
+        var colors = chartColors
+        if entries.count > colors.count {
+            colors.append(contentsOf: Array(repeating: chartColors.last!, count: entries.count - colors.count))
+        }
+        dataSet.colors = colors
+
+        // 레이블을 섹션 바깥으로 빼고 선 연결
+        // 값은 섹션 안쪽에 표시, 레이블만 연결선으로 표시
+        dataSet.xValuePosition = .outsideSlice
+        dataSet.yValuePosition = .insideSlice
+        dataSet.valueLinePart1OffsetPercentage = 1.0
+        dataSet.valueLinePart1Length = 0.8
+        dataSet.valueLinePart2Length = 0.1
+        dataSet.valueLineWidth = 1.0
+        dataSet.valueLineColor = .darkGray
+
+        let chartData = PieChartData(dataSet: dataSet)
+        chartData.setValueFormatter(PercentValueFormatter(entries: entries))
+        chartData.setValueFont(.systemFont(ofSize: 13, weight: .semibold))
+        chartData.setValueTextColor(.black)
+
+        viewModel.setViewModelsForTableView(with: zip(sorted, colors).map { TableByCategoryCellViewModel(category: $0.key, amount: Double($0.value), total: chartData.yValueSum, color: $1)})
+        
+        return chartData
+        
+    }
+    
+    private func makeChartDataForBarChart() -> (data: BarChartData, label: [String]) {
+        let data = viewModel.loadTotalsFor6Months()
+        let entries = data.enumerated().map { BarChartDataEntry(x: Double($0.offset), y: Double($0.element.1)) }
+        let dataSet = BarChartDataSet(entries: entries)
+        dataSet.colors = [UIColor.systemPink]
+        
+        let chartData = BarChartData(dataSet: dataSet)
+        return (chartData, data.map { $0.0 })
+    }
+    
     func reloadData(shouldReloadTxs: Bool = true) {
         if shouldReloadTxs {
             viewModel.reloadTxs()
@@ -120,11 +196,11 @@ class ChartViewController: UIViewController, ThemeApplicable {
         
         totalAmountLabel.text = viewModel.totalAmountString
         
-        pieChartView.data = viewModel.chartDataForPieChart
+        pieChartView.data = makeChartDataForPieChart()
         pieChartView.centerText = viewModel.chartCenterText
         pieChartView.notifyDataSetChanged()
         
-        let chartData = viewModel.chartDataForBarChart
+        let chartData = makeChartDataForBarChart()
         barChartView.data = chartData.data
         barChartView.xAxis.valueFormatter = IndexAxisValueFormatter(values: chartData.label)
         barChartView.notifyDataSetChanged()
@@ -134,7 +210,7 @@ class ChartViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func periodButtonTapped(_ sender: UIButton) {
-        viewModel.handlePeriodButton(storyboard: storyboard, fromVC: self)
+        viewModel.handlePeriodButton()
     }
     
     @IBAction func modeButtonTapped(_ sender: UIButton) {
