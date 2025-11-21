@@ -25,10 +25,18 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bindViewModel()
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.allowsSelection = true
         collectionView.keyboardDismissMode = .onDrag
+    }
+    
+    func bindViewModel() {
+        viewModel.onDidAddCategory = { [weak self] in
+            guard let self = self else { return }
+            collectionView.reloadData()
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -43,7 +51,18 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        viewModel.handleDidSelectItemAt(indexPath.item, storyboard: storyboard, fromVC: self)
+        guard let vm = viewModel.handleDidSelectItemAt(indexPath.item) else {
+            return
+        }
+        
+        guard let addVC = storyboard?.instantiateViewController(identifier: "CategoryEditViewController", creator: { coder in
+            CategoryEditViewController(coder: coder, viewModel: vm)
+        }) else {
+            fatalError("CategoryEditViewController 생성 에러")
+        }
+        
+        addVC.modalPresentationStyle = .fullScreen
+        present(addVC, animated: true)
     }
     
     // 위 아래 간격
