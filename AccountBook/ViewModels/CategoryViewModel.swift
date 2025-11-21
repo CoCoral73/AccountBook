@@ -5,13 +5,12 @@
 //  Created by 김정원 on 9/17/25.
 //
 
-import UIKit
-
 class CategoryViewModel {
     var isIncome: Bool
     var categories: [Category] = []
     
     var onDidSelectCategory: ((Category) -> Void)?
+    var onDidAddCategory: (() -> ())?
     
     init(isIncome: Bool) {
         self.isIncome = isIncome
@@ -27,24 +26,20 @@ class CategoryViewModel {
         return CategoryCellViewModel(category: category)
     }
     
-    func handleDidSelectItemAt(_ index: Int, storyboard: UIStoryboard?, fromVC: UIViewController) {
+    func handleDidSelectItemAt(_ index: Int) -> CategoryEditViewModel? {
         if index == numberOfItems - 1 { //추가 뷰
-            guard let addVC = storyboard?.instantiateViewController(identifier: "CategoryEditViewController", creator: { coder in
-                CategoryEditViewController(coder: coder, viewModel: CategoryEditViewModel(isIncome: self.isIncome, mode: .add))
-            }) else {
-                fatalError("CategoryEditViewController 생성 에러")
-            }
-            addVC.viewModel.onDidEditCategory = {
-                self.loadCategories()
-                (fromVC as! CategoryViewController).collectionView.reloadData()
+            let vm = CategoryEditViewModel(isIncome: isIncome, mode: .add)
+            vm.onDidEditCategory = { [weak self] in
+                guard let self = self else { return }
+                loadCategories()
+                onDidAddCategory?()
             }
             
-            let navVC = UINavigationController(rootViewController: addVC)
-            navVC.modalPresentationStyle = .fullScreen
-            fromVC.present(navVC, animated: true)
+            return vm
         } else {
             let selected = categories[index]
             onDidSelectCategory?(selected)
+            return nil
         }
     }
     
