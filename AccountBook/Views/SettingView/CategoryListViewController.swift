@@ -9,6 +9,7 @@ import UIKit
 
 class CategoryListViewController: UIViewController {
 
+    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel: CategoryListViewModel
@@ -25,8 +26,16 @@ class CategoryListViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        title = viewModel.title
+        configureNavigationBar()
         configureTableView()
+    }
+    
+    func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navItem.standardAppearance = appearance
+        
+        navItem.title = viewModel.title
     }
     
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
