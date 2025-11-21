@@ -5,7 +5,7 @@
 //  Created by 김정원 on 7/7/25.
 //
 
-import UIKit
+import Foundation
 
 class MonthPickerViewModel {
     let years = DefaultSetting.years
