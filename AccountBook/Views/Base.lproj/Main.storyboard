@@ -3026,7 +3026,7 @@
             </objects>
             <point key="canvasLocation" x="-234" y="1696"/>
         </scene>
-        <!--카테고리-->
+        <!--Category List View Controller-->
         <scene sceneID="gKO-io-1Kh">
             <objects>
                 <viewController storyboardIdentifier="CategoryListViewController" hidesBottomBarWhenPushed="YES" id="xUd-uB-nxP" customClass="CategoryListViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
@@ -3034,6 +3034,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SjA-CL-UJQ">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="F9s-uV-6xj"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="카테고리" id="XKp-hY-xxg">
+                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Oep-ah-1gV">
+                                            <connections>
+                                                <action selector="addButtonTapped:" destination="xUd-uB-nxP" id="tx8-fF-OXB"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance"/>
+                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="50" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="5k1-gJ-89N">
                                 <rect key="frame" x="0.0" y="103" width="393" height="715"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -3079,21 +3095,17 @@
                         <viewLayoutGuide key="safeArea" id="1lv-eX-Vol"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="SjA-CL-UJQ" firstAttribute="trailing" secondItem="1lv-eX-Vol" secondAttribute="trailing" id="322-p1-S94"/>
                             <constraint firstItem="1lv-eX-Vol" firstAttribute="trailing" secondItem="5k1-gJ-89N" secondAttribute="trailing" id="AoW-5K-PST"/>
                             <constraint firstItem="1lv-eX-Vol" firstAttribute="bottom" secondItem="5k1-gJ-89N" secondAttribute="bottom" id="Gk6-Mo-HBH"/>
-                            <constraint firstItem="5k1-gJ-89N" firstAttribute="top" secondItem="1lv-eX-Vol" secondAttribute="top" id="J0L-1T-Abu"/>
+                            <constraint firstItem="5k1-gJ-89N" firstAttribute="top" secondItem="SjA-CL-UJQ" secondAttribute="bottom" id="J0L-1T-Abu"/>
                             <constraint firstItem="5k1-gJ-89N" firstAttribute="leading" secondItem="1lv-eX-Vol" secondAttribute="leading" id="TxK-ux-cdE"/>
+                            <constraint firstItem="SjA-CL-UJQ" firstAttribute="leading" secondItem="1lv-eX-Vol" secondAttribute="leading" id="fNR-sP-Tei"/>
+                            <constraint firstItem="SjA-CL-UJQ" firstAttribute="top" secondItem="1lv-eX-Vol" secondAttribute="top" id="vna-c2-dL9"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="카테고리" id="XKp-hY-xxg">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="Oep-ah-1gV">
-                            <connections>
-                                <action selector="addButtonTapped:" destination="xUd-uB-nxP" id="tx8-fF-OXB"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
+                        <outlet property="navItem" destination="XKp-hY-xxg" id="YpF-FO-ivx"/>
                         <outlet property="tableView" destination="5k1-gJ-89N" id="4Da-60-lhl"/>
                     </connections>
                 </viewController>
@@ -3216,7 +3228,7 @@
             </objects>
             <point key="canvasLocation" x="2459" y="-1192"/>
         </scene>
-        <!--Title-->
+        <!--Category Edit View Controller-->
         <scene sceneID="x3n-4H-7hd">
             <objects>
                 <viewController storyboardIdentifier="CategoryEditViewController" hidesBottomBarWhenPushed="YES" id="W3J-1n-569" customClass="CategoryEditViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
@@ -3224,6 +3236,29 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KmV-rC-J6v">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="zpd-bn-Zjh"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Title" id="HkG-qD-i13">
+                                        <barButtonItem key="leftBarButtonItem" title="취소" id="OSi-RE-1Ib">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="closeButtonTapped:" destination="W3J-1n-569" id="xtb-nA-uzO"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="완료" id="w4s-vC-4sh">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <connections>
+                                                <action selector="doneButtonTapped:" destination="W3J-1n-569" id="Yyi-Rh-jpX"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance"/>
+                            </navigationBar>
                             <textField hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="7D7-Og-oFU" customClass="UIEmojiTextField" customModule="AccountBook" customModuleProvider="target">
                                 <rect key="frame" x="180.66666666666666" y="156" width="32" height="34"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -3282,38 +3317,27 @@
                         <constraints>
                             <constraint firstItem="0V5-tb-ZUr" firstAttribute="width" secondItem="Mgg-Eg-y3W" secondAttribute="width" id="0Dz-tx-76H"/>
                             <constraint firstItem="Mgg-Eg-y3W" firstAttribute="leading" secondItem="GBB-bk-CFZ" secondAttribute="leading" constant="30" id="0XI-KY-eca"/>
+                            <constraint firstItem="KmV-rC-J6v" firstAttribute="top" secondItem="GBB-bk-CFZ" secondAttribute="top" id="7So-yP-Y5e"/>
                             <constraint firstItem="7D7-Og-oFU" firstAttribute="centerX" secondItem="eVb-2Y-hjb" secondAttribute="centerX" id="7uv-0K-L0l"/>
-                            <constraint firstItem="pyb-X2-jJs" firstAttribute="top" secondItem="GBB-bk-CFZ" secondAttribute="top" constant="30" id="AXg-vK-2Fk"/>
+                            <constraint firstItem="pyb-X2-jJs" firstAttribute="top" secondItem="KmV-rC-J6v" secondAttribute="bottom" constant="30" id="AXg-vK-2Fk"/>
                             <constraint firstItem="HMx-WK-hVs" firstAttribute="width" secondItem="af6-hT-a9o" secondAttribute="width" constant="10" id="Bc8-et-1Ni"/>
                             <constraint firstItem="Mgg-Eg-y3W" firstAttribute="top" secondItem="pyb-X2-jJs" secondAttribute="bottom" constant="40" id="BmT-Vx-9QX"/>
                             <constraint firstItem="GBB-bk-CFZ" firstAttribute="trailing" secondItem="Mgg-Eg-y3W" secondAttribute="trailing" constant="30" id="JAo-Fo-AoR"/>
+                            <constraint firstItem="KmV-rC-J6v" firstAttribute="trailing" secondItem="GBB-bk-CFZ" secondAttribute="trailing" id="O0z-EC-xhv"/>
                             <constraint firstItem="pyb-X2-jJs" firstAttribute="centerX" secondItem="eVb-2Y-hjb" secondAttribute="centerX" id="Zaj-5c-1Es"/>
                             <constraint firstItem="0V5-tb-ZUr" firstAttribute="top" secondItem="HMx-WK-hVs" secondAttribute="bottom" constant="50" id="ZdY-wW-WRr"/>
                             <constraint firstItem="7D7-Og-oFU" firstAttribute="centerY" secondItem="pyb-X2-jJs" secondAttribute="centerY" id="aKH-58-jwe"/>
+                            <constraint firstItem="KmV-rC-J6v" firstAttribute="leading" secondItem="GBB-bk-CFZ" secondAttribute="leading" id="eQG-1J-b27"/>
                             <constraint firstItem="HMx-WK-hVs" firstAttribute="top" secondItem="Mgg-Eg-y3W" secondAttribute="bottom" constant="4" id="o8F-Nc-Hzf"/>
                             <constraint firstItem="HMx-WK-hVs" firstAttribute="centerX" secondItem="af6-hT-a9o" secondAttribute="centerX" id="pNZ-Ek-i6K"/>
                             <constraint firstItem="0V5-tb-ZUr" firstAttribute="centerX" secondItem="eVb-2Y-hjb" secondAttribute="centerX" id="r4T-S9-WlU"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Title" id="HkG-qD-i13">
-                        <barButtonItem key="leftBarButtonItem" title="취소" id="OSi-RE-1Ib">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="closeButtonTapped:" destination="W3J-1n-569" id="xtb-nA-uzO"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="완료" id="w4s-vC-4sh">
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <connections>
-                                <action selector="doneButtonTapped:" destination="W3J-1n-569" id="Yyi-Rh-jpX"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
-                    <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
                     <connections>
                         <outlet property="iconImageView" destination="pyb-X2-jJs" id="f7d-IS-AGE"/>
                         <outlet property="iconTextField" destination="7D7-Og-oFU" id="vJq-Lp-iDG"/>
                         <outlet property="nameTextField" destination="af6-hT-a9o" id="xiC-f3-vXl"/>
+                        <outlet property="navItem" destination="HkG-qD-i13" id="Swu-49-3U0"/>
                         <outlet property="removeButton" destination="0V5-tb-ZUr" id="5IK-zP-yvt"/>
                     </connections>
                 </viewController>
