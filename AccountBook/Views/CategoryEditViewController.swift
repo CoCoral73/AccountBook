@@ -9,6 +9,7 @@ import UIKit
 
 class CategoryEditViewController: UIViewController {
 
+    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var iconTextField: UIEmojiTextField!
     @IBOutlet weak var iconImageView: UIImageView!
     @IBOutlet weak var nameTextField: UITextField!
@@ -30,16 +31,24 @@ class CategoryEditViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
+        configureNavigationBar()
         configureTextField()
         configureTapGesture()
     }
     
     func configureUI() {
-        navigationItem.title = viewModel.title
         iconTextField.text = viewModel.textForIcon
         iconImageView.image = viewModel.textForIcon.toImage()
         nameTextField.text = viewModel.nameString
         removeButton.isHidden = viewModel.isHiddenForRemoveButton
+    }
+    
+    func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navItem.standardAppearance = appearance
+        
+        navItem.title = viewModel.title
     }
    
     func configureTextField() {
