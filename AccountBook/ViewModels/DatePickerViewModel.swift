@@ -5,7 +5,7 @@
 //  Created by 김정원 on 7/15/25.
 //
 
-import UIKit
+import Foundation
 
 class DatePickerViewModel {
     var currentDate: Date
