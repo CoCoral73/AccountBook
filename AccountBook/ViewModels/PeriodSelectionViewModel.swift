@@ -5,7 +5,7 @@
 //  Created by 김정원 on 10/25/25.
 //
 
-import UIKit
+import Foundation
 
 class PeriodSelectionViewModel {
     let years = DefaultSetting.years
