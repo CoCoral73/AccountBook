@@ -15,6 +15,8 @@ struct TransactionModel {
     var category: Category
     var asset: AssetItem
     var installment: Int16?
+    var installmentIndex: Int16?
+    var isCompleted: Bool?
 }
 
 extension TransactionModel {
@@ -27,6 +29,8 @@ extension TransactionModel {
         category = tx.category
         asset = tx.asset
         installment = tx.installment?.numberOfMonths
+        installmentIndex = tx.installmentIndexValue
+        isCompleted = tx.isCompleted
     }
 }
 
