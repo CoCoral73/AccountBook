@@ -30,3 +30,8 @@ struct AlertConfig {
     let title: String
     let message: String
 }
+
+enum EditState {
+    case modified
+    case saved
+}
