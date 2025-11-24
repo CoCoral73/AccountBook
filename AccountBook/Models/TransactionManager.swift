@@ -8,9 +8,9 @@
 import Foundation
 
 //코어데이터 객체 생성용
-struct TransactionInput {
     let amount: Int64
     let date: Date
+struct TransactionModel {
     let isIncome: Bool
     let name, memo: String
     let category: Category
