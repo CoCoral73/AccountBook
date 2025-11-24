@@ -36,7 +36,8 @@ class InstallmentManager {
     
     func deleteInstallment(_ transaction: Transaction) {
         guard let installment = transaction.installment else {
-            fatalError("할부 제거: 할부가 존재하지 않음")
+            print("할부 제거: 할부가 존재하지 않음")
+            return
         }
         
         let txs = installment.transactions.array as? [Transaction] ?? []
