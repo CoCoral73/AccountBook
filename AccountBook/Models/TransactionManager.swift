@@ -7,14 +7,14 @@
 
 import Foundation
 
-//코어데이터 객체 생성용
-    let amount: Int64
-    let date: Date
 struct TransactionModel {
+    var amount: Int64
+    var date: Date
     let isIncome: Bool
-    let name, memo: String
-    let category: Category
-    let asset: AssetItem
+    var name, memo: String
+    var category: Category
+    var asset: AssetItem
+    var installment: Int16?
 }
 
 enum DeleteType {
