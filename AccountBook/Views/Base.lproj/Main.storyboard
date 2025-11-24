@@ -1879,14 +1879,14 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="한 번 확정된 할부 개월 수는 변경할 수 없습니다." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDT-d6-yJN">
-                                <rect key="frame" x="55" y="191" width="283" height="18"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="할부는 적용 즉시 저장되며, 되돌릴 수 없습니다." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KDT-d6-yJN">
+                                <rect key="frame" x="57" y="191" width="279" height="18"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P1I-Ub-xG2" customClass="AutoUpdateColorButton" customModule="AccountBook" customModuleProvider="target">
-                                <rect key="frame" x="16" y="234" width="361" height="40"/>
+                                <rect key="frame" x="16" y="255" width="361" height="40"/>
                                 <color key="backgroundColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="rhh-7N-EFG"/>
@@ -1921,6 +1921,12 @@
                                 </items>
                                 <navigationBarAppearance key="standardAppearance"/>
                             </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개월 수 변경 시, 기존 할부를 제거한 뒤 다시 설정해 주세요." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iAO-U7-7Jn">
+                                <rect key="frame" x="23" y="212" width="347" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <color key="textColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6iM-IM-q78"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -1929,8 +1935,10 @@
                             <constraint firstItem="KDT-d6-yJN" firstAttribute="centerX" secondItem="4AS-p8-0q5" secondAttribute="centerX" id="CCa-e0-9T0"/>
                             <constraint firstItem="Yuc-dZ-pbC" firstAttribute="leading" secondItem="6iM-IM-q78" secondAttribute="leading" id="D5a-Ek-9uZ"/>
                             <constraint firstItem="Yuc-dZ-pbC" firstAttribute="trailing" secondItem="6iM-IM-q78" secondAttribute="trailing" id="F1b-qQ-uvh"/>
-                            <constraint firstItem="P1I-Ub-xG2" firstAttribute="top" secondItem="KDT-d6-yJN" secondAttribute="bottom" constant="25" id="Mch-Fn-heb"/>
+                            <constraint firstItem="iAO-U7-7Jn" firstAttribute="centerX" secondItem="4AS-p8-0q5" secondAttribute="centerX" id="LV0-Ff-0qd"/>
+                            <constraint firstItem="P1I-Ub-xG2" firstAttribute="top" secondItem="iAO-U7-7Jn" secondAttribute="bottom" constant="25" id="Mch-Fn-heb"/>
                             <constraint firstItem="chM-jT-N00" firstAttribute="top" secondItem="Yuc-dZ-pbC" secondAttribute="bottom" constant="20" id="PVf-1q-W1L"/>
+                            <constraint firstItem="iAO-U7-7Jn" firstAttribute="top" secondItem="KDT-d6-yJN" secondAttribute="bottom" constant="3" id="Q90-M2-Sfl"/>
                             <constraint firstItem="Yuc-dZ-pbC" firstAttribute="top" secondItem="6iM-IM-q78" secondAttribute="top" id="bzN-GH-jE5"/>
                             <constraint firstItem="P1I-Ub-xG2" firstAttribute="leading" secondItem="6iM-IM-q78" secondAttribute="leading" constant="16" id="jEy-ui-Lho"/>
                             <constraint firstItem="chM-jT-N00" firstAttribute="leading" secondItem="6iM-IM-q78" secondAttribute="leading" constant="16" id="pBM-MK-b3o"/>
