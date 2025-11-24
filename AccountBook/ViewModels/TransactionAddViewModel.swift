@@ -26,6 +26,9 @@ class TransactionAddViewModel: TransactionUpdatable {
     //Add View에서 내역 추가 동작을 했을 때, Calendar View에서 해야할 일
     var onDidUpdateTransaction: ((Date) -> Void)?
     
+    //자산 선택 완료 -> TransactionAddTableVC
+    var onDidSelectAsset: ((String) -> Void)?
+    
     init(date: Date, isIncome: Bool) {
         self.transactionDate = date
         self.isIncome = isIncome
@@ -68,6 +71,16 @@ class TransactionAddViewModel: TransactionUpdatable {
             }]
         }
         fromVC.present(dateVC, animated: true)
+    }
+    
+    func handlePaymentSelectionButton() -> AssetSelectionViewModel {
+        let vm = AssetSelectionViewModel(isIncome: isIncome)
+        vm.onAssetSelected = { [weak self] asset in
+            guard let self = self else { return }
+            setAssetItemInput(with: asset)
+            onDidSelectAsset?(asset.name)
+        }
+        return vm
     }
     
     func handleCategoryView(storyboard: UIStoryboard?, fromVC: TransactionAddViewController) {
