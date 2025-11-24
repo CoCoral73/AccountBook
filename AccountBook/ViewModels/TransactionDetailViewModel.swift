@@ -5,17 +5,24 @@
 //  Created by 김정원 on 7/8/25.
 //
 
-import UIKit
+import Foundation
 
 class TransactionDetailViewModel: TransactionUpdatable {
     
-    private(set) var transaction: Transaction?
+    private(set) var state: EditState = .saved
+    private(set) var transaction: Transaction
+    private var copy: TransactionModel
     
     //DetailTransactionViewControlelr
     var onDidSetTransactionDate: (() -> Void)?
     var onDidSetCategory: (() -> Void)?
     var onDidSetAssetItem: (() -> Void)?
     var onDidSetInstallment: (() -> Void)?
+    var onRequestDeleteInstallmentAlert: ((AlertConfig) -> Void)?
+    var onRequestDeleteAlert: ((AlertConfig) -> Void)?
+    var onRequestBlockPopAlert: (() -> Void)?
+    var onRequestSaveAlert: ((AlertConfig) -> Void)?
+    var onRequestPop: (() -> Void)?
     
     //CalendarViewModel
     var onDidUpdateOldDateTransaction: ((Date) -> Void)?
@@ -23,223 +30,165 @@ class TransactionDetailViewModel: TransactionUpdatable {
     
     init(transaction: Transaction) {
         self.transaction = transaction
+        self.copy = TransactionModel(with: transaction)
     }
     
-    var image: UIImage? {
+    var imageName: String {
         //이모지로만 돼있음. 추후 변경 필요
-        return transaction?.category.iconName.toImage()
+        return copy.category.iconName
     }
-    var dateString: String? {
-        guard let transaction = transaction else { return nil }
+    var dateString: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
-        return dateFormatter.string(from: transaction.date)
+        return dateFormatter.string(from: copy.date)
     }
-    var isIncomeString: String? {
-        guard let transaction = transaction else { return nil }
-        return transaction.isIncome ? "수입" : "지출"
+    var isIncomeString: String {
+        return copy.isIncome ? "수입" : "지출"
     }
-    var nameString: String? {
-        return transaction?.name
+    var nameString: String {
+        return copy.name
     }
-    var categoryString: String? {
-        return transaction?.category.name
+    var categoryString: String {
+        return copy.category.name
     }
-    var priceString: String? {
-        guard let transaction = transaction else { return nil }
-        return (transaction.isIncome ? "+" : "-") + self.amountString!
+    var priceString: String {
+        return (copy.isIncome ? "+" : "-") + self.amountString
     }
-    var amountString: String? {
-        return transaction?.amount.formattedWithComma
+    var amountString: String {
+        return copy.amount.formattedWithComma
     }
-    var assetItemString: String? {
-        return transaction?.asset.name
+    var assetItemString: String {
+        return copy.asset.name
     }
     var assetType: AssetType? {
-        guard let transaction = transaction else { return nil }
-        return AssetType(rawValue: Int(transaction.asset.type))!
+        guard let type = AssetType(rawValue: Int(copy.asset.type)) else { return nil }
+        return type
     }
     var assetTypeString: String {
         guard let assetType = assetType else { return "" }
-        return transaction!.isIncome ? "**입금**" : "**\(assetType.displayName) 결제**"
+        return copy.isIncome ? "**입금**" : "**\(assetType.displayName) 결제**"
     }
     var canEdit: Bool {
-        return transaction?.installment == nil 
+        return copy.installment == nil
     }
     var installmentString: String {
-        guard let period = transaction?.installment?.numberOfMonths, let index = transaction?.installmentIndexValue else { return "일시불" }
+        guard let period = transaction.installment?.numberOfMonths, let index = transaction.installmentIndexValue else { return "일시불" }
         return "\(period) 개월 (\(index) / \(period))"
     }
-    
     var memoString: String? {
-        return transaction?.memo
+        return copy.memo
     }
     
-    func setTransaction(with transaction: Transaction) {
-        self.transaction = transaction
-    }
-    
-    func handleDateButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
-        guard let transaction = transaction else { return }
-        
+    func handleDateButton() -> DatePickerViewModel {
         let vm = DatePickerViewModel(initialDate: transaction.date)
         vm.onDatePickerChanged = { [weak self] newDate in
             guard let self = self else { return }
-            let oldDate = transaction.date
-            
-            transaction.date = newDate
-            onDidSetTransactionDate?()  //TransactionDetailViewController (Date UI 변경용)
-            
-            //월이 다르면 oldDate에 대해 UI 업데이트 안해줘도 됨. 어차피 변경 후 달력 포커스는 newDate로 감.
-            if Calendar.current.isDate(oldDate, equalTo: newDate, toGranularity: .month) {
-                onDidUpdateOldDateTransaction?(oldDate)
-            }
-            onDidUpdateTransaction?(newDate)
+            copy.date = newDate
+            state = .modified
+            onDidSetTransactionDate?()  //UI 변경
         }
-        
-        guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
-            DatePickerViewController(coder: coder, viewModel: vm)
-        }) else {
-            fatalError("DatePickerViewController 생성 에러")
-        }
-        
-        if let sheet = dateVC.sheetPresentationController {
-            sheet.detents = [.custom { _ in
-                return dateVC.preferredContentSize.height
-            }]
-        }
-        fromVC.present(dateVC, animated: true)
+        return vm
     }
     
-    func handleCategoryButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
-        guard let transaction = transaction else { return }
-        
-        guard let categoryVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
-            CategoryViewController(coder: coder, viewModel: CategoryViewModel(isIncome: transaction.isIncome))
-        }) else {
-            fatalError("CategoryViewController 생성 에러")
-        }
-        
-        categoryVC.viewModel.onDidSelectCategory = { [weak self] category in
+    func handleCategoryButton() -> CategoryViewModel {
+        let vm = CategoryViewModel(isIncome: copy.isIncome)
+        vm.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
-            transaction.category = category
-            onDidSetCategory?()
-            categoryVC.dismiss(animated: true)
+            copy.category = category
+            state = .modified
+            onDidSetCategory?() //UI 변경
         }
-        
-        if let sheet = categoryVC.sheetPresentationController {
-            sheet.detents = [.medium()]
-            sheet.prefersScrollingExpandsWhenScrolledToEdge = true
-        }
-        
-        fromVC.present(categoryVC, animated: true)
+        return vm
     }
     
-    func handleAssetItemButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
-        guard let transaction = transaction else { return }
-        
-        guard let assetSelectionVC = storyboard?.instantiateViewController(identifier: "AssetSelectionViewController", creator: { coder in
-            AssetSelectionViewController(coder: coder, isIncome: transaction.isIncome)
-        })
-        else {
-            fatalError("AssetSelectionViewController 생성 에러")
-        }
-        
-        assetSelectionVC.onAssetSelected = { [weak self] newAsset in
+    func handleAssetItemButton() -> AssetSelectionViewModel {
+        let vm = AssetSelectionViewModel(isIncome: copy.isIncome)
+        vm.onAssetSelected = { [weak self] newAsset in
             guard let self = self else { return }
-            
-            let oldAsset = transaction.asset
-            let amount = transaction.amount * (transaction.isIncome ? 1 : -1)
-            let oldIsCompleted = transaction.isCompleted
-            let newIsCompleted = newAsset.type != AssetType.creditCard.rawValue
-            
-            //롤백
-            TransactionManager.shared.adjustBalance(amount: -amount, asset: oldAsset, isCompleted: oldIsCompleted)
-            
-            //업데이트
-            TransactionManager.shared.adjustBalance(amount: amount, asset: newAsset, isCompleted: newIsCompleted)
-            
-            transaction.asset = newAsset
-            transaction.isCompleted = newIsCompleted
-            
+            copy.asset = newAsset
+            copy.isCompleted = newAsset.type != AssetType.creditCard.rawValue
+            state = .modified
             onDidSetAssetItem?()
         }
-        
-        if let sheet = assetSelectionVC.sheetPresentationController {
-            sheet.detents = [.custom { _ in
-                return assetSelectionVC.preferredContentSize.height
-            }]
-        }
-        fromVC.present(assetSelectionVC, animated: true, completion: nil)
+        return vm
     }
     
-    func handleInstallmentButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
-        guard let transaction = transaction else { return }
-        
-        guard let installmentVC = storyboard?.instantiateViewController(withIdentifier: "InstallmentViewController") as? InstallmentViewController
-        else {
-            fatalError("InstallmentViewController 생성 에러")
-        }
-        
-        installmentVC.onDidEnterInstallment = { [weak self] period in
+    func handleInstallmentButton() -> InstallmentViewModel {
+        let vm = InstallmentViewModel()
+        vm.onDidEnterInstallment = { [weak self] period in
             guard let self = self, period > 1 else { return }
 
             InstallmentManager.shared.addInstallment(transaction, period: period)
+            copy.installment = period
+            copy.installmentIndex = transaction.installmentIndexValue
+            copy.amount = transaction.amount
             
             onDidSetInstallment?()
             onDidUpdateTransaction?(transaction.date)
         }
-        fromVC.navigationController?.pushViewController(installmentVC, animated: true)
+        return vm
     }
     
-    func handleRemoveInstallmentButton(fromVC: UIViewController) {
-        guard let transaction = transaction else { return }
-        
+    func handleRemoveInstallmentButton() {
+        onRequestDeleteInstallmentAlert?(AlertConfig(title: "할부 제거", message: "적용된 할부를 제거하시겠습니까?\n이 동작은 즉시 반영되어 되돌릴 수 없습니다."))
+    }
+    
+    func confirmDeleteInstallment() {
         let isFirst = transaction.installmentIndexValue == 1
-        
-        //얼럿 띄우기
         InstallmentManager.shared.deleteInstallment(transaction)
         onDidUpdateTransaction?(transaction.date)
         
         if isFirst {
+            copy.installment = transaction.installment?.numberOfMonths
+            copy.installmentIndex = transaction.installmentIndexValue
+            copy.amount = transaction.amount
             onDidSetInstallment?()
         } else {
-            self.transaction = nil
-            fromVC.navigationController?.popViewController(animated: true)
+            onRequestPop?()
         }
     }
     
-    func handleRemoveButton(_ fromVC: UIViewController) {
-        guard let transaction = transaction else { return }
-        
+    func handleRemoveButton() {
         let deleteType = transaction.installment != nil ? DeleteType.installment : DeleteType.general
-        let alert = UIAlertController(title: "삭제", message: deleteType.alertMessage, preferredStyle: .actionSheet)
-
-        let success = UIAlertAction(title: "확인", style: .destructive) { [weak self] action in
-            guard let self = self else { return }
-            
-            let date = transaction.date
-            TransactionManager.shared.deleteTransaction(transaction)
-            self.transaction = nil
-            
-            onDidUpdateTransaction?(date)
-            fromVC.navigationController?.popViewController(animated: true)
-        }
-        let cancel = UIAlertAction(title: "취소", style: .cancel)
-
-        alert.addAction(success)
-        alert.addAction(cancel)
-        fromVC.present(alert, animated: true, completion: nil)
-        
+        onRequestDeleteAlert?(AlertConfig(title: "삭제", message: deleteType.alertMessage))
     }
     
-    func saveUpdatedTransaction(name: String, amount: String, memo: String) {
-        guard let transaction = transaction else { return }
+    func confirmDelete() {
+        let date = transaction.date
+        TransactionManager.shared.deleteTransaction(transaction)
+        onDidUpdateTransaction?(date)
+        onRequestPop?()
+    }
+    
+    func handleBackButton() {
+        switch state {
+        case .modified:
+            onRequestBlockPopAlert?()
+        case .saved:
+            onRequestPop?()
+        }
+    }
+    
+    func handleSaveButton() {
+        onRequestSaveAlert?(AlertConfig(title: "저장", message: "변경사항을 저장하시겠습니까?"))
+    }
+    
+    func confirmSave(name: String?, amount: String?, memo: String?) {
+        copy.name = name ?? ""
+        copy.amount = Int64((amount ?? "0").replacingOccurrences(of: ",", with: "")) ?? 0
+        copy.memo = memo ?? ""
         
-        let newAmount = Int64(amount.replacingOccurrences(of: ",", with: "")) ?? 0
-        
-        TransactionManager.shared.updateTransaction(transaction, name: name, amount: newAmount, memo: memo)
-        
-        onDidUpdateTransaction?(transaction.date)
+        let oldDate = transaction.date, newDate = copy.date
+        TransactionManager.shared.updateTransaction(transaction, with: copy)
+        if transaction.date != copy.date, Calendar.current.isDate(oldDate, equalTo: copy.date, toGranularity: .month) {
+            onDidUpdateOldDateTransaction?(oldDate)
+        }
+        onDidUpdateTransaction?(newDate)
+        state = .saved
+    }
+    
+    func doNotSaveAndExit() {
+        copy = TransactionModel(with: transaction)
+        state = .saved
     }
 }
