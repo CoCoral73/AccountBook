@@ -14,7 +14,16 @@ class InstallmentViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var saveButton: AutoUpdateColorButton!
     
-    var onDidEnterInstallment: ((Int16) -> Void)?
+    var viewModel: InstallmentViewModel!
+    
+    required init?(coder: NSCoder, viewModel: InstallmentViewModel) {
+        self.viewModel = viewModel
+        super.init(coder: coder)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -55,8 +64,7 @@ class InstallmentViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func saveButtonTapped(_ sender: UIButton) {
-        let period = Int16(textField.text ?? "0") ?? 0
-        onDidEnterInstallment?(period)
+        viewModel.handleSaveButton(with: textField.text)
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         navigationController?.popViewController(animated: true)
     }
