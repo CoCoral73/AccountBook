@@ -37,7 +37,17 @@ class TransactionAddTableViewController: UITableViewController {
         
         tableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: -20, right: 0)
         
+        bindViewModel()
         configureTextField()
+    }
+    
+    func bindViewModel() {
+        viewModel.onDidSelectAsset = { [weak self] name in
+            guard let self = self else { return }
+            assetSelectionButton.setTitle(name, for: .normal)
+            assetSelectionButton.setTitleColor(.black, for: .normal)
+            nameTextField.becomeFirstResponder()
+        }
     }
     
     private func configureTextField() {
@@ -126,20 +136,12 @@ class TransactionAddTableViewController: UITableViewController {
     }
     
     @IBAction func paymentSelectionButtonTapped(_ sender: UIButton) {
+        let vm = viewModel.handlePaymentSelectionButton()
         guard let assetSelectionVC = storyboard?.instantiateViewController(identifier: "AssetSelectionViewController", creator: { coder in
-            AssetSelectionViewController(coder: coder, isIncome: self.viewModel.isIncome)
+            AssetSelectionViewController(coder: coder, viewModel: vm)
         })
         else {
             fatalError("AssetSelectionViewController 생성 에러")
-        }
-        
-        assetSelectionVC.onAssetSelected = { [weak self] asset in
-            guard let self = self else { return }
-            self.assetSelectionButton.setTitle(asset.name, for: .normal)
-            self.assetSelectionButton.setTitleColor(.black, for: .normal)
-            self.nameTextField.becomeFirstResponder()
-            
-            self.viewModel.setAssetItemInput(with: asset)
         }
         
         if let sheet = assetSelectionVC.sheetPresentationController {
