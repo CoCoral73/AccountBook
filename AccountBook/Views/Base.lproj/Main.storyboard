@@ -1447,7 +1447,7 @@
                                         <barButtonItem key="rightBarButtonItem" systemItem="trash" id="5Yh-EO-FCV">
                                             <color key="tintColor" systemColor="systemRedColor"/>
                                             <connections>
-                                                <action selector="removeButtonTapped:" destination="oU4-9V-oZi" id="ghr-ne-fCf"/>
+                                                <action selector="saveButtonTapped:" destination="oU4-9V-oZi" id="ghr-ne-fCf"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -1778,6 +1778,15 @@
                                         </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="removeInstallmentButtonTapped:" destination="oU4-9V-oZi" eventType="touchUpInside" id="bcy-yD-68c"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W1M-6t-fdg">
+                                        <rect key="frame" x="46" y="644" width="75" height="35"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" title="Button"/>
+                                        <buttonConfiguration key="configuration" style="plain" title="Button"/>
+                                        <connections>
+                                            <action selector="removeButtonTapped:" destination="oU4-9V-oZi" eventType="touchUpInside" id="pC8-XN-saZ"/>
                                         </connections>
                                     </button>
                                 </subviews>
