@@ -17,6 +17,19 @@ struct TransactionModel {
     var installment: Int16?
 }
 
+extension TransactionModel {
+    init(with tx: Transaction) {
+        amount = tx.amount
+        date = tx.date
+        isIncome = tx.isIncome
+        name = tx.name
+        memo = tx.memo
+        category = tx.category
+        asset = tx.asset
+        installment = tx.installment?.numberOfMonths
+    }
+}
+
 enum DeleteType {
     case general
     case installment
