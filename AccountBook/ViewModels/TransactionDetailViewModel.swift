@@ -135,8 +135,9 @@ class TransactionDetailViewModel: TransactionUpdatable {
     
     func confirmDeleteInstallment() {
         let isFirst = transaction.installmentIndexValue == 1
+        let date = transaction.date
         InstallmentManager.shared.deleteInstallment(transaction)
-        onDidUpdateTransaction?(transaction.date)
+        onDidUpdateTransaction?(date)
         
         if isFirst {
             copy.installment = transaction.installment?.numberOfMonths
