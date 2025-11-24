@@ -130,7 +130,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func handleRemoveInstallmentButton() {
-        onRequestDeleteInstallmentAlert?(AlertConfig(title: "할부 제거", message: "적용된 할부를 제거하시겠습니까?\n이 동작은 즉시 반영되어 되돌릴 수 없습니다."))
+        onRequestDeleteInstallmentAlert?(AlertConfig(title: "할부 제거", message: "적용된 할부를 제거하시겠습니까?\n이 동작은 즉시 저장됩니다."))
     }
     
     func confirmDeleteInstallment() {
