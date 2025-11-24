@@ -1444,8 +1444,7 @@
                                                 <action selector="backButtonTapped:" destination="oU4-9V-oZi" id="fik-ek-xy4"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="5Yh-EO-FCV">
-                                            <color key="tintColor" systemColor="systemRedColor"/>
+                                        <barButtonItem key="rightBarButtonItem" title="저장" id="5Yh-EO-FCV">
                                             <connections>
                                                 <action selector="saveButtonTapped:" destination="oU4-9V-oZi" id="ghr-ne-fCf"/>
                                             </connections>
