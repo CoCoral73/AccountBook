@@ -25,3 +25,8 @@ enum PresentationStyle {
     case modal
     case push
 }
+
+struct AlertConfig {
+    let title: String
+    let message: String
+}
