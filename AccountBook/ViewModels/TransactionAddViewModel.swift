@@ -47,7 +47,7 @@ class TransactionAddViewModel: TransactionUpdatable {
     func addTransaction(amount: Int64, asset: AssetItem, category: Category) {
         let name = inputVC?.nameTextField.text ?? ""
         
-        let input = TransactionInput(amount: amount, date: transactionDate, isIncome: isIncome, name: name, memo: "", category: category, asset: asset)
+        let input = TransactionModel(amount: amount, date: transactionDate, isIncome: isIncome, name: name, memo: "", category: category, asset: asset)
         TransactionManager.shared.addTransaction(with: input, shouldSave: true)
         onDidUpdateTransaction?(transactionDate)
     }

@@ -36,7 +36,7 @@ class TransactionManager {
     private init() {}
     
     @discardableResult
-    func addTransaction(with input: TransactionInput, shouldSave: Bool) -> Transaction {
+    func addTransaction(with input: TransactionModel, shouldSave: Bool) -> Transaction {
         
         let transaction = Transaction(context: CoreDataManager.shared.context)
         transaction.amount = input.amount
@@ -64,7 +64,7 @@ class TransactionManager {
     func duplicateTransaction(_ tx: Transaction, count: Int16) -> [Transaction] {
         var txs = [tx]
         for i in 1..<Int(count) {
-            let input = TransactionInput(amount: tx.amount, date: Calendar.current.date(byAdding: .month, value: i, to: tx.date)!, isIncome: tx.isIncome, name: tx.name, memo: tx.memo, category: tx.category, asset: tx.asset)
+            let input = TransactionModel(amount: tx.amount, date: Calendar.current.date(byAdding: .month, value: i, to: tx.date)!, isIncome: tx.isIncome, name: tx.name, memo: tx.memo, category: tx.category, asset: tx.asset)
             txs.append(addTransaction(with: input, shouldSave: false))
         }
         return txs
