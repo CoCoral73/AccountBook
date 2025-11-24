@@ -40,7 +40,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
 
         startObservingTheme()
         configurePopGesture()
-        configureViewModel()
+        bindViewModel()
         configureUIByViewModel()
         configureKeyboardAccessory()
         nameTextField.delegate = self
@@ -57,12 +57,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         removeInstallmentButton.backgroundColor = theme.accentColor
     }
     
-    private func configurePopGesture() {
-        navigationController?.interactivePopGestureRecognizer?.delegate = nil
-        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
-    }
-    
-    private func configureViewModel() {
+    private func bindViewModel() {
         viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -89,6 +84,48 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             DispatchQueue.main.async {
                 self.configureUIByViewModel()
             }
+        }
+        viewModel.onRequestDeleteInstallmentAlert = { [weak self] config in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
+            let success = UIAlertAction(title: "확인", style: .destructive) { _ in
+                self.viewModel.confirmDeleteInstallment()
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(success)
+            alert.addAction(cancel)
+            present(alert, animated: true)
+        }
+        viewModel.onRequestDeleteAlert = { [weak self] config in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
+            let success = UIAlertAction(title: "확인", style: .destructive) { _ in
+                HapticFeedback.notify(.success)
+                self.viewModel.confirmDelete()
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(success)
+            alert.addAction(cancel)
+            present(alert, animated: true)
+        }
+        viewModel.onRequestBlockPopAlert = { [weak self] in
+            guard let self = self else { return }
+            showAlertBlockingPop()
+        }
+        viewModel.onRequestSaveAlert = { [weak self] config in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .alert)
+            let success = UIAlertAction(title: "저장", style: .default) { _ in
+                self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(success)
+            alert.addAction(cancel)
+            present(alert, animated: true)
+        }
+        viewModel.onRequestPop = { [weak self] in
+            guard let self = self else { return }
+            navigationController?.popViewController(animated: true)
         }
     }
     
@@ -132,11 +169,35 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             return
         }
         
-        viewModel.handleDateButton(storyboard: storyboard, fromVC: self)
+        let vm = viewModel.handleDateButton()
+        guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
+            DatePickerViewController(coder: coder, viewModel: vm)
+        }) else {
+            fatalError("DatePickerViewController 생성 에러")
+        }
+        
+        if let sheet = dateVC.sheetPresentationController {
+            sheet.detents = [.custom { _ in
+                return dateVC.preferredContentSize.height
+            }]
+        }
+        present(dateVC, animated: true)
     }
     
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
-        viewModel.handleCategoryButton(storyboard: storyboard, fromVC: self)
+        let vm = viewModel.handleCategoryButton()
+        guard let categoryVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
+            CategoryViewController(coder: coder, viewModel: vm)
+        }) else {
+            fatalError("CategoryViewController 생성 에러")
+        }
+        
+        if let sheet = categoryVC.sheetPresentationController {
+            sheet.detents = [.medium()]
+            sheet.prefersScrollingExpandsWhenScrolledToEdge = true
+        }
+        
+        present(categoryVC, animated: true)
     }
     
     @IBAction func assetItemButtonTapped(_ sender: UIButton) {
@@ -147,7 +208,20 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             return
         }
         
-        viewModel.handleAssetItemButton(storyboard: storyboard, fromVC: self)
+        let vm = viewModel.handleAssetItemButton()
+        guard let assetSelectionVC = storyboard?.instantiateViewController(identifier: "AssetSelectionViewController", creator: { coder in
+            AssetSelectionViewController(coder: coder, viewModel: vm)
+        })
+        else {
+            fatalError("AssetSelectionViewController 생성 에러")
+        }
+        
+        if let sheet = assetSelectionVC.sheetPresentationController {
+            sheet.detents = [.custom { _ in
+                return assetSelectionVC.preferredContentSize.height
+            }]
+        }
+        present(assetSelectionVC, animated: true, completion: nil)
     }
     
     @IBAction func installmentButtonTapped(_ sender: UIButton) {
@@ -158,33 +232,36 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             return
         }
         
-        viewModel.handleInstallmentButton(storyboard: storyboard, fromVC: self)
+        let vm = viewModel.handleInstallmentButton()
+        guard let installmentVC = storyboard?.instantiateViewController(identifier: "InstallmentViewController", creator: { coder in
+            InstallmentViewController(coder: coder, viewModel: vm)
+        })
+        else {
+            fatalError("InstallmentViewController 생성 에러")
+        }
+    
+        navigationController?.pushViewController(installmentVC, animated: true)
     }
     
     @IBAction func removeInstallmentButtonTapped(_ sender: UIButton) {
-        HapticFeedback.notify(.success)
-        viewModel.handleRemoveInstallmentButton(fromVC: self)
+        viewModel.handleRemoveInstallmentButton()
+    }
+    
+    @IBAction func removeButtonTapped(_ sender: UIButton) {
+        viewModel.handleRemoveButton()
     }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
-        //뒤로가기 버튼
-        navigationController?.popViewController(animated: true)
+        viewModel.handleBackButton()
     }
     
-    @IBAction func removeButtonTapped(_ sender: UIBarButtonItem) {
-        //휴지통 버튼
-        viewModel.handleRemoveButton(self)
+    @IBAction func saveButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.handleSaveButton()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         applyInitialTheme()
-    }
-    
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        viewModel.saveUpdatedTransaction(name: nameTextField.text ?? "", amount: amountTextField.text ?? "0", memo: memoTextView.text)
     }
     
     override func viewDidLayoutSubviews() {
