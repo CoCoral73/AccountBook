@@ -87,16 +87,33 @@ class TransactionManager {
         return txs
     }
     
-    func updateTransaction(_ tx: Transaction, name: String, amount: Int64, memo: String) {
-        let isIncome = tx.isIncome
-        let (oldAmount, newAmount) = (tx.amount * (isIncome ? 1 : -1), amount * (isIncome ? 1 : -1))
-        let asset = tx.asset
+    func updateTransaction(_ transaction: Transaction, with copy: TransactionModel) {
+        transaction.date = copy.date
+        transaction.name = copy.name
+        transaction.category = copy.category
+        transaction.memo = copy.memo
         
-        tx.name = name
-        tx.amount = amount
-        tx.memo = memo
+        if transaction.asset != copy.asset {
+            let oldAsset = transaction.asset
+            let amount = transaction.amount * (transaction.isIncome ? 1 : -1)
+            let oldIsCompleted = transaction.isCompleted
+            
+            //롤백
+            adjustBalance(amount: -amount, asset: oldAsset, isCompleted: oldIsCompleted)
+            
+            //업데이트
+            adjustBalance(amount: amount, asset: copy.asset, isCompleted: copy.isCompleted!)
+            
+            transaction.asset = copy.asset
+            transaction.isCompleted = copy.isCompleted!
+        }
         
-        adjustBalance(amount: newAmount - oldAmount, asset: asset, isCompleted: tx.isCompleted)
+        let isIncome = transaction.isIncome
+        let (oldAmount, newAmount) = (transaction.amount * (isIncome ? 1 : -1), copy.amount * (isIncome ? 1 : -1))
+        
+        transaction.amount = copy.amount
+        
+        adjustBalance(amount: newAmount - oldAmount, asset: transaction.asset, isCompleted: transaction.isCompleted)
         
         CoreDataManager.shared.saveContext()
     }
