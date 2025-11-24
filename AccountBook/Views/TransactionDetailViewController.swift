@@ -286,6 +286,39 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
 }
 
+extension TransactionDetailViewController: UIGestureRecognizerDelegate {
+    func configurePopGesture() {
+        navigationController?.interactivePopGestureRecognizer?.delegate = self
+    }
+    
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        if viewModel.state == .modified {
+            showAlertBlockingPop()
+            return false
+        }
+        return true
+    }
+    
+    func showAlertBlockingPop() {
+        let alert = UIAlertController(title: "경고", message: "저장되지 않은 변경사항이 있습니다.\n저장하시겠습니까?",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "아니오", style: .cancel) { [weak self] _ in
+            guard let self = self else { return }
+            viewModel.doNotSaveAndExit()
+            navigationController?.popViewController(animated: true)
+        })
+        alert.addAction(UIAlertAction(title: "저장", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            viewModel.confirmSave(name: nameTextField.text, amount: amountTextField.text, memo: memoTextView.text)
+            navigationController?.popViewController(animated: true)
+        })
+
+        present(alert, animated: true)
+    }
+}
+
 extension TransactionDetailViewController: UITextFieldDelegate {
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
