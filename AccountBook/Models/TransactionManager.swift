@@ -41,9 +41,9 @@ enum DeleteType {
     var alertMessage: String {
         switch self {
         case .general:
-            return "거래내역을 삭제하시겠습니까?"
+            return "거래내역을 삭제하시겠습니까?\n이 동작은 되돌릴 수 없습니다."
         case .installment:
-            return "할부내역 전체가 삭제됩니다. 삭제하시겠습니까?"
+            return "할부내역 전체가 삭제됩니다. 삭제하시겠습니까?\n이 동작은 되돌릴 수 없습니다."
         }
     }
 }
