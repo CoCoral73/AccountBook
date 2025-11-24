@@ -9,8 +9,8 @@ import UIKit
 
 class AssetSelectionViewController: UIViewController {
     
-    required init?(coder: NSCoder, isIncome: Bool) {
-        self.isIncome = isIncome
+    required init?(coder: NSCoder, viewModel: AssetSelectionViewModel) {
+        self.viewModel = viewModel
         super.init(coder: coder)
     }
     
@@ -23,13 +23,11 @@ class AssetSelectionViewController: UIViewController {
     @IBOutlet weak var debitCardButton: AutoUpdateColorButton!
     @IBOutlet weak var creditCardButton: AutoUpdateColorButton!
     
-    var isIncome: Bool
+    var viewModel: AssetSelectionViewModel
     var buttons: [UIButton] = []
     var selectedButton: Int = 5
     
     @IBOutlet weak var tableView: UITableView!
-    
-    var onAssetSelected: ((AssetItem) -> ())?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,7 +40,7 @@ class AssetSelectionViewController: UIViewController {
     
     private func configure() {
         buttons = [cashButton, accountButton, debitCardButton, creditCardButton]
-        if isIncome {
+        if viewModel.isIncome {
             debitCardButton.setInvisible(true)
             creditCardButton.setInvisible(true)
         }
@@ -75,7 +73,7 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
         guard let cell = tableView.cellForRow(at: indexPath) as? AssetItemTableViewCell else { return }
         
         if let model = cell.model {
-            onAssetSelected?(model)
+            viewModel.didSelectRowAt(with: model)
             dismiss(animated: true)
         } else {    //자산 추가 뷰로 이동
             let vm = AssetItemEditViewModel(type: AssetType(rawValue: selectedButton)!)
