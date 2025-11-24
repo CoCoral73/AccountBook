@@ -52,6 +52,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let vm = viewModel.handleDidSelectItemAt(indexPath.item) else {
+            dismiss(animated: true)
             return
         }
         
