@@ -94,7 +94,9 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             let cancel = UIAlertAction(title: "취소", style: .cancel)
             alert.addAction(success)
             alert.addAction(cancel)
-            present(alert, animated: true)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true)
+            }
         }
         viewModel.onRequestDeleteAlert = { [weak self] config in
             guard let self = self else { return }
@@ -106,15 +108,29 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             let cancel = UIAlertAction(title: "취소", style: .cancel)
             alert.addAction(success)
             alert.addAction(cancel)
-            present(alert, animated: true)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true)
+            }
         }
         viewModel.onRequestBlockPopAlert = { [weak self] in
             guard let self = self else { return }
-            showAlertBlockingPop()
+            DispatchQueue.main.async {
+                self.showAlertBlockingPop()
+            }
         }
         viewModel.onRequestSaveAlert = { [weak self] config in
             guard let self = self else { return }
-            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .alert)
+            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
+            let success = UIAlertAction(title: "저장", style: .default) { _ in
+                self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(success)
+            alert.addAction(cancel)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true)
+            }
+        }
         viewModel.onRequestSaveAlertBeforeInstallment = { [weak self] config in
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
@@ -145,7 +161,10 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         }
         viewModel.onRequestPop = { [weak self] in
             guard let self = self else { return }
-            navigationController?.popViewController(animated: true)
+            DispatchQueue.main.async {
+                self.navigationController?.popViewController(animated: true)
+            }
+        }
         viewModel.onShowInstallmentView = { [weak self] vm in
             guard let self = self else { return }
             DispatchQueue.main.async {
