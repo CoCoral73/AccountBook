@@ -23,6 +23,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     var onRequestBlockPopAlert: (() -> Void)?
     var onRequestSaveAlert: ((AlertConfig) -> Void)?
     var onRequestSaveAlertBeforeInstallment: ((AlertConfig) -> Void)?
+    var onRequestSaveAlertBeforeDeleteInstallment: ((AlertConfig) -> Void)?
     var onRequestPop: (() -> Void)?
     var onShowInstallmentView: ((InstallmentViewModel) -> Void)?
     
@@ -152,6 +153,16 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func handleRemoveInstallmentButton() {
+        switch state {
+        case .modified:
+            onRequestSaveAlertBeforeDeleteInstallment?(AlertConfig(title: "저장", message: "할부를 제거하려면 먼저 변경된 내용을 저장해야 합니다.\n저장하시겠습니까?"))
+        case .saved:
+            requestDeleteInstallmentAlertPresentation()
+        }
+        
+    }
+    
+    func requestDeleteInstallmentAlertPresentation() {
         onRequestDeleteInstallmentAlert?(AlertConfig(title: "할부 제거", message: "적용된 할부를 제거하시겠습니까?\n이 동작은 즉시 저장됩니다."))
     }
     
