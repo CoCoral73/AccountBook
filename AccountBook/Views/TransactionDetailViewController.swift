@@ -115,6 +115,20 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         viewModel.onRequestSaveAlert = { [weak self] config in
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .alert)
+        viewModel.onRequestSaveAlertBeforeInstallment = { [weak self] config in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
+            let success = UIAlertAction(title: "저장", style: .default) { _ in
+                self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
+                self.viewModel.requestInstallmentViewPresentation()
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(success)
+            alert.addAction(cancel)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true)
+            }
+        }
             let success = UIAlertAction(title: "저장", style: .default) { _ in
                 self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
             }
@@ -126,6 +140,11 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         viewModel.onRequestPop = { [weak self] in
             guard let self = self else { return }
             navigationController?.popViewController(animated: true)
+        viewModel.onShowInstallmentView = { [weak self] vm in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.showInstallmentView(vm)
+            }
         }
     }
     
@@ -231,18 +250,21 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
             return
         }
-        
-        let vm = viewModel.handleInstallmentButton()
+        checkSaveState()
+        viewModel.handleInstallmentButton()
+    }
+    
     func checkSaveState() {
         viewModel.checkSaveState(name: nameTextField.text, amount: amountTextField.text, memo: memoTextView.text)
     }
+    
+    func showInstallmentView(_ vm: InstallmentViewModel) {
         guard let installmentVC = storyboard?.instantiateViewController(identifier: "InstallmentViewController", creator: { coder in
             InstallmentViewController(coder: coder, viewModel: vm)
-        })
-        else {
-            fatalError("InstallmentViewController 생성 에러")
+        }) else {
+            fatalError("InstallmentVC 생성 에러")
         }
-    
+        
         navigationController?.pushViewController(installmentVC, animated: true)
     }
     
