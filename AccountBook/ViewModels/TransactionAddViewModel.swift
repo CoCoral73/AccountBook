@@ -15,7 +15,6 @@ class TransactionAddViewModel: TransactionUpdatable {
         }
     }
     
-    var inputVC: TransactionAddTableViewController? //텍스트필드 접근 시 사용
     private var assetItemInput: AssetItem?
     
     private(set) var isIncome: Bool
@@ -28,6 +27,11 @@ class TransactionAddViewModel: TransactionUpdatable {
     
     //자산 선택 완료 -> TransactionAddTableVC
     var onDidSelectAsset: ((String) -> Void)?
+    
+    var onRequestTextData: (() -> (amount: String?, name: String?))?
+    var onRequestFeedbackForNoData: ((String) -> Void)?
+    var onRequestFeedbackForInvalidData: ((String) -> Void)?
+    var onRequestDismiss: (() -> Void)?
     
     init(date: Date, isIncome: Bool) {
         self.transactionDate = date
@@ -44,9 +48,7 @@ class TransactionAddViewModel: TransactionUpdatable {
         self.assetItemInput = item
     }
     
-    func addTransaction(amount: Int64, asset: AssetItem, category: Category) {
-        let name = inputVC?.nameTextField.text ?? ""
-        
+    func addTransaction(amount: Int64, asset: AssetItem, name: String, category: Category) {
         let input = TransactionModel(amount: amount, date: transactionDate, isIncome: isIncome, name: name, memo: "", category: category, asset: asset)
         TransactionManager.shared.addTransaction(with: input, shouldSave: true)
         onDidUpdateTransaction?(transactionDate)
@@ -71,38 +73,27 @@ class TransactionAddViewModel: TransactionUpdatable {
         return vm
     }
     
-    func handleCategoryView(storyboard: UIStoryboard?, fromVC: TransactionAddViewController) {
-        guard let childVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
-            CategoryViewController(coder: coder, viewModel: CategoryViewModel(isIncome: self.isIncome))
-        }) else {
-            fatalError("CategoryViewController 생성 에러")
-        }
-        
-        childVC.viewModel.onDidSelectCategory = { [weak self] category in
+    func handleCategoryView() -> CategoryViewModel {
+        let vm = CategoryViewModel(isIncome: isIncome)
+        vm.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
+            let data = onRequestTextData?()
             
-            guard (inputVC?.amountTextField.text ?? "") != "", let asset = assetItemInput else {
-                fromVC.view.endEditing(true)
-                HapticFeedback.notify(.error)
-                ToastManager.shared.show(message: "금액과 자산을 입력해주세요", in: childVC.view)
+            guard (data?.amount ?? "") != "", let asset = assetItemInput else {
+                onRequestFeedbackForNoData?("금액과 자산을 입력해주세요.")
                 return
             }
             
-            guard let amount = Int64((inputVC?.amountTextField.text ?? "").replacingOccurrences(of: ",", with: "")), amount > 0 else {
-                fromVC.view.endEditing(true)
-                HapticFeedback.notify(.error)
-                ToastManager.shared.show(message: "0원 이하의 금액은 입력 불가합니다.", in: fromVC.view)
+            guard let amount = Int64((data?.amount ?? "").replacingOccurrences(of: ",", with: "")), amount > 0 else {
+                onRequestFeedbackForInvalidData?("0원 이하의 금액은 입력 불가합니다.")
                 return
             }
             
-            addTransaction(amount: amount, asset: asset, category: category)
-            fromVC.dismiss(animated: true)
+            let name = (data?.name ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            addTransaction(amount: amount, asset: asset, name: name, category: category)
+            onRequestDismiss?()
         }
-        
-        //embed 세그웨이 역할
-        fromVC.addChild(childVC)
-        childVC.view.frame = fromVC.containerViewForCategory.bounds
-        fromVC.containerViewForCategory.addSubview(childVC.view)
-        childVC.didMove(toParent: fromVC)
+        return vm
     }
 }
