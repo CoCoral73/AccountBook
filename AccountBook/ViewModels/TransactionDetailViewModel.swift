@@ -115,6 +115,15 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func handleInstallmentButton() -> InstallmentViewModel {
+    func checkSaveState(name: String?, amount: String?, memo: String?) {
+        copy.name = name ?? ""
+        copy.amount = Int64((amount ?? "0").replacingOccurrences(of: ",", with: "")) ?? 0
+        copy.memo = memo ?? ""
+        
+        if copy.name != transaction.name || copy.amount != transaction.amount || copy.memo != transaction.memo {
+            state = .modified
+        }
+    }
         let vm = InstallmentViewModel()
         vm.onDidEnterInstallment = { [weak self] period in
             guard let self = self, period > 1 else { return }
