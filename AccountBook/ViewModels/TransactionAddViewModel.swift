@@ -5,7 +5,7 @@
 //  Created by 김정원 on 7/9/25.
 //
 
-import UIKit
+import Foundation
 
 class TransactionAddViewModel: TransactionUpdatable {
     
@@ -52,25 +52,13 @@ class TransactionAddViewModel: TransactionUpdatable {
         onDidUpdateTransaction?(transactionDate)
     }
     
-    func handleDateButton(storyboard: UIStoryboard?, fromVC: UIViewController) {
+    func handleDateButton() -> DatePickerViewModel {
         let vm = DatePickerViewModel(initialDate: transactionDate)
         vm.onDatePickerChanged = { [weak self] date in
             guard let self = self else { return }
             self.transactionDate = date
         }
-        
-        guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
-            DatePickerViewController(coder: coder, viewModel: vm) })
-        else {
-            fatalError("DatePickerViewController 생성 에러")
-        }
-        
-        if let sheet = dateVC.sheetPresentationController {
-            sheet.detents = [.custom { _ in
-                return dateVC.preferredContentSize.height
-            }]
-        }
-        fromVC.present(dateVC, animated: true)
+        return vm
     }
     
     func handlePaymentSelectionButton() -> AssetSelectionViewModel {
