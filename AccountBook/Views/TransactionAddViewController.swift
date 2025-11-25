@@ -10,8 +10,9 @@ import UIKit
 class TransactionAddViewController: UIViewController {
     
     @IBOutlet weak var dateButton: UIBarButtonItem!
-    
     @IBOutlet weak var containerViewForCategory: UIView!
+    
+    var tableVC: TransactionAddTableViewController?
     
     var viewModel: TransactionAddViewModel
     
@@ -35,9 +36,36 @@ class TransactionAddViewController: UIViewController {
     private func bindViewModel() {
         viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
-            self.dateButton.title = self.viewModel.transactionDateString
+            DispatchQueue.main.async {
+                self.dateButton.title = self.viewModel.transactionDateString
+            }
         }
-        
+        viewModel.onRequestTextData = { [weak self] in
+            guard let self = self else { return (nil, nil) }
+            return (tableVC?.amountTextField.text, tableVC?.nameTextField.text)
+        }
+        viewModel.onRequestFeedbackForNoData = { [weak self] msg in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.view.endEditing(true)
+                HapticFeedback.notify(.error)
+                ToastManager.shared.show(message: msg, in: self.view)
+            }
+        }
+        viewModel.onRequestFeedbackForInvalidData = { [weak self] msg in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.view.endEditing(true)
+                HapticFeedback.notify(.error)
+                ToastManager.shared.show(message: msg, in: self.view)
+            }
+        }
+        viewModel.onRequestDismiss = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
+            }
+        }
     }
     
     private func configureUI() {
@@ -45,7 +73,18 @@ class TransactionAddViewController: UIViewController {
     }
     
     private func configureCategoryView() {
-        viewModel.handleCategoryView(storyboard: storyboard, fromVC: self)
+        let vm = viewModel.handleCategoryView()
+        
+        guard let childVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
+            CategoryViewController(coder: coder, viewModel: vm)
+        }) else {
+            fatalError("CategoryViewController 생성 에러")
+        }
+        
+        addChild(childVC)
+        childVC.view.frame = containerViewForCategory.bounds
+        containerViewForCategory.addSubview(childVC.view)
+        childVC.didMove(toParent: self)
     }
     
     @IBAction func closeButtonTapped(_ sender: UIBarButtonItem) {
@@ -72,7 +111,7 @@ class TransactionAddViewController: UIViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let tableVC = segue.destination as? TransactionAddTableViewController {
             tableVC.viewModel = self.viewModel
-            viewModel.inputVC = tableVC
+            self.tableVC = tableVC
         }
     }
 }
