@@ -27,17 +27,21 @@ class TransactionAddViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        configureViewModel()
+        bindViewModel()
+        configureUI()
         configureCategoryView()
     }
     
-    private func configureViewModel() {
+    private func bindViewModel() {
         viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
             self.dateButton.title = self.viewModel.transactionDateString
         }
         
-        dateButton.title = self.viewModel.transactionDateString
+    }
+    
+    private func configureUI() {
+        dateButton.title = viewModel.transactionDateString
     }
     
     private func configureCategoryView() {
