@@ -71,6 +71,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     var canEdit: Bool {
         return copy.installment == nil
     }
+    var isHiddenForInstallment: Bool { assetType != .creditCard }
     var installmentString: String {
         guard let period = transaction.installment?.numberOfMonths, let index = transaction.installmentIndexValue else { return "일시불" }
         return "\(period) 개월 (\(index) / \(period))"
