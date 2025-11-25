@@ -49,7 +49,20 @@ class TransactionAddViewController: UIViewController {
     }
     
     @IBAction func dateButtonTapped(_ sender: UIBarButtonItem) {
-        viewModel.handleDateButton(storyboard: storyboard, fromVC: self)
+        let vm = viewModel.handleDateButton()
+        
+        guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
+            DatePickerViewController(coder: coder, viewModel: vm) })
+        else {
+            fatalError("DatePickerViewController 생성 에러")
+        }
+        
+        if let sheet = dateVC.sheetPresentationController {
+            sheet.detents = [.custom { _ in
+                return dateVC.preferredContentSize.height
+            }]
+        }
+        present(dateVC, animated: true)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
