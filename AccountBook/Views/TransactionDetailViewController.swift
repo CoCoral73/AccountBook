@@ -75,8 +75,8 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             DispatchQueue.main.async {
                 self.assetItemButton.setTitle(self.viewModel.assetItemString, for: .normal)
                 self.assetTypeLabel.text = self.viewModel.assetTypeString
-                self.installmentLabel.isHidden = self.viewModel.assetType != .creditCard
-                self.installmentButton.isHidden = self.viewModel.assetType != .creditCard
+                self.installmentLabel.isHidden = self.viewModel.isHiddenForInstallment
+                self.installmentButton.isHidden = self.viewModel.isHiddenForInstallment
             }
         }
         viewModel.onDidSetInstallment = { [weak self] in
@@ -137,8 +137,8 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         assetTypeLabel.text = viewModel.assetTypeString
         categoryButton.setTitle(viewModel.categoryString, for: .normal)
         assetItemButton.setTitle(viewModel.assetItemString, for: .normal)
-        installmentLabel.isHidden = viewModel.assetType != .creditCard
-        installmentButton.isHidden = viewModel.assetType != .creditCard
+        installmentLabel.isHidden = viewModel.isHiddenForInstallment
+        installmentButton.isHidden = viewModel.isHiddenForInstallment
         installmentButton.setTitle(viewModel.installmentString, for: .normal)
         memoTextView.text = viewModel.memoString
         removeInstallmentButton.isHidden = viewModel.canEdit
