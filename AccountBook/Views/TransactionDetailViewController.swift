@@ -129,13 +129,19 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
                 self.present(alert, animated: true)
             }
         }
+        viewModel.onRequestSaveAlertBeforeDeleteInstallment = { [weak self] config in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
             let success = UIAlertAction(title: "저장", style: .default) { _ in
                 self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
+                self.viewModel.requestDeleteInstallmentAlertPresentation()
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
             alert.addAction(success)
             alert.addAction(cancel)
-            present(alert, animated: true)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true)
+            }
         }
         viewModel.onRequestPop = { [weak self] in
             guard let self = self else { return }
@@ -269,6 +275,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func removeInstallmentButtonTapped(_ sender: UIButton) {
+        checkSaveState()
         viewModel.handleRemoveInstallmentButton()
     }
     
