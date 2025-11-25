@@ -233,6 +233,9 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         }
         
         let vm = viewModel.handleInstallmentButton()
+    func checkSaveState() {
+        viewModel.checkSaveState(name: nameTextField.text, amount: amountTextField.text, memo: memoTextView.text)
+    }
         guard let installmentVC = storyboard?.instantiateViewController(identifier: "InstallmentViewController", creator: { coder in
             InstallmentViewController(coder: coder, viewModel: vm)
         })
