@@ -22,7 +22,9 @@ class TransactionDetailViewModel: TransactionUpdatable {
     var onRequestDeleteAlert: ((AlertConfig) -> Void)?
     var onRequestBlockPopAlert: (() -> Void)?
     var onRequestSaveAlert: ((AlertConfig) -> Void)?
+    var onRequestSaveAlertBeforeInstallment: ((AlertConfig) -> Void)?
     var onRequestPop: (() -> Void)?
+    var onShowInstallmentView: ((InstallmentViewModel) -> Void)?
     
     //CalendarViewModel
     var onDidUpdateOldDateTransaction: ((Date) -> Void)?
@@ -114,7 +116,15 @@ class TransactionDetailViewModel: TransactionUpdatable {
         return vm
     }
     
-    func handleInstallmentButton() -> InstallmentViewModel {
+    func handleInstallmentButton() {
+        switch state {
+        case .modified:
+            onRequestSaveAlertBeforeInstallment?(AlertConfig(title: "저장", message: "할부를 적용하려면 먼저 변경된 내용을 저장해야 합니다.\n저장하시겠습니까?"))
+        case .saved:
+            requestInstallmentViewPresentation()
+        }
+    }
+    
     func checkSaveState(name: String?, amount: String?, memo: String?) {
         copy.name = name ?? ""
         copy.amount = Int64((amount ?? "0").replacingOccurrences(of: ",", with: "")) ?? 0
@@ -124,6 +134,8 @@ class TransactionDetailViewModel: TransactionUpdatable {
             state = .modified
         }
     }
+    
+    func requestInstallmentViewPresentation() {
         let vm = InstallmentViewModel()
         vm.onDidEnterInstallment = { [weak self] period in
             guard let self = self, period > 1 else { return }
@@ -136,7 +148,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
             onDidSetInstallment?()
             onDidUpdateTransaction?(transaction.date)
         }
-        return vm
+        onShowInstallmentView?(vm)
     }
     
     func handleRemoveInstallmentButton() {
