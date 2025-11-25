@@ -303,6 +303,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
+        checkSaveState()
         viewModel.handleBackButton()
     }
     
@@ -343,6 +344,7 @@ extension TransactionDetailViewController: UIGestureRecognizerDelegate {
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        checkSaveState()
         if viewModel.state == .modified {
             showAlertBlockingPop()
             return false
