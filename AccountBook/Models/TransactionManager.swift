@@ -67,6 +67,7 @@ class TransactionManager {
         
         let amount = input.amount * (input.isIncome ? 1 : -1)
         let isCompleted = input.asset.type != AssetType.creditCard.rawValue
+        transaction.isCompleted = isCompleted
         
         adjustBalance(amount: amount, asset: input.asset, isCompleted: isCompleted)
         
