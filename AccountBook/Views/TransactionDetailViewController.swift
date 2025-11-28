@@ -41,7 +41,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         startObservingTheme()
         configurePopGesture()
         bindViewModel()
-        configureUIByViewModel()
+        configureUI()
         configureKeyboardAccessory()
         nameTextField.delegate = self
     }
@@ -82,7 +82,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         viewModel.onDidSetInstallment = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.configureUIByViewModel()
+                self.configureUI()
             }
         }
         viewModel.onRequestDeleteInstallmentAlert = { [weak self] config in
@@ -173,7 +173,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         }
     }
     
-    private func configureUIByViewModel() {
+    private func configureUI() {
         dateButton.setTitle(viewModel.dateString, for: .normal)
         isIncomeLabel.text = viewModel.isIncomeString
         nameTextField.text = viewModel.nameString
