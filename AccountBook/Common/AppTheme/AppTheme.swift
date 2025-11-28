@@ -13,6 +13,7 @@ enum AppThemeKind: String {
     case green
     case blue
     case purple
+    case gray
 }
 
 protocol AppTheme {

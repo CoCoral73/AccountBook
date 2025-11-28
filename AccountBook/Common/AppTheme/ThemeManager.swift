@@ -40,6 +40,8 @@ final class ThemeManager {
             BlueTheme()
         case .purple:
             PurpleTheme()
+        case .gray:
+            GrayTheme()
         }
     }
 

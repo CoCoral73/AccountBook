@@ -83,3 +83,15 @@ struct PurpleTheme: AppTheme {
     var expenseTextColor: UIColor { UIColor(red: 0.76, green: 0.25, blue: 0.42, alpha: 1.00) }
     
 }
+
+struct GrayTheme: AppTheme {
+    //EFEFEF
+    var baseColor: UIColor { UIColor(red: 0.94, green: 0.94, blue: 0.94, alpha: 1.00) }
+    //979797
+    var accentColor: UIColor { UIColor(red: 0.59, green: 0.59, blue: 0.59, alpha: 1.00) }
+    
+    var incomeTextColor: UIColor { UIColor(red: 0.00, green: 0.41, blue: 0.36, alpha: 1.00) }
+    
+    var expenseTextColor: UIColor { UIColor(red: 0.55, green: 0.10, blue: 0.23, alpha: 1.00) }
+    
+}
