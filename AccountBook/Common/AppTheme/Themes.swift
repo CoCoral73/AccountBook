@@ -8,9 +8,9 @@ import UIKit
 
 //MARK: - Pink
 struct PinkTheme: AppTheme {
-    
+    //FFEAEA
     var baseColor: UIColor { UIColor(red: 1.00, green: 0.92, blue: 0.92, alpha: 1.00) }
-    
+    //FFB9B9
     var accentColor: UIColor { UIColor(red: 1.00, green: 0.73, blue: 0.73, alpha: 1.00) }
     
     var incomeTextColor: UIColor { UIColor(red: 0.23, green: 0.65, blue: 0.36, alpha: 1.00) }
@@ -21,9 +21,9 @@ struct PinkTheme: AppTheme {
 
 //MARK: - Orange
 struct OrangeTheme: AppTheme {
-    
-    var baseColor: UIColor { UIColor(red: 1.00, green: 0.91, blue: 0.80, alpha: 1.00) }
-    
+    //FFEEDA
+    var baseColor: UIColor { UIColor(red: 1.00, green: 0.93, blue: 0.85, alpha: 1.00) }
+    //FFCB8E
     var accentColor: UIColor { UIColor(red: 1.00, green: 0.80, blue: 0.56, alpha: 1.00) }
     
     var incomeTextColor: UIColor { UIColor(red: 0.18, green: 0.55, blue: 0.37, alpha: 1.00) }
@@ -34,9 +34,9 @@ struct OrangeTheme: AppTheme {
 
 //MARK: - Yellow
 struct YellowTheme: AppTheme {
-    
-    var baseColor: UIColor { UIColor(red: 1.00, green: 0.96, blue: 0.80, alpha: 1.00) }
-    
+    //FFF8DD
+    var baseColor: UIColor { UIColor(red: 1.00, green: 0.97, blue: 0.87, alpha: 1.00) }
+    //FFE38A
     var accentColor: UIColor { UIColor(red: 1.00, green: 0.89, blue: 0.54, alpha: 1.00) }
     
     var incomeTextColor: UIColor { UIColor(red: 0.17, green: 0.48, blue: 0.28, alpha: 1.00) }
@@ -47,9 +47,9 @@ struct YellowTheme: AppTheme {
 
 //MARK: - Green
 struct GreenTheme: AppTheme {
-    
-    var baseColor: UIColor { UIColor(red: 0.87, green: 0.96, blue: 0.88, alpha: 1.00) }
-    
+    //E9FFEB
+    var baseColor: UIColor { UIColor(red: 0.91, green: 1.00, blue: 0.92, alpha: 1.00) }
+    //AEEBC4
     var accentColor: UIColor { UIColor(red: 0.68, green: 0.92, blue: 0.77, alpha: 1.00) }
     
     var incomeTextColor: UIColor { UIColor(red: 0.12, green: 0.44, blue: 0.47, alpha: 1.00) }
@@ -60,9 +60,9 @@ struct GreenTheme: AppTheme {
 
 //MARK: - Blue
 struct BlueTheme: AppTheme {
-    
-    var baseColor: UIColor { UIColor(red: 0.87, green: 0.92, blue: 0.98, alpha: 1.00) }
-    
+    //EBF4FF
+    var baseColor: UIColor { UIColor(red: 0.92, green: 0.96, blue: 1.00, alpha: 1.00) }
+    //A8CCF2
     var accentColor: UIColor { UIColor(red: 0.66, green: 0.80, blue: 0.95, alpha: 1.00) }
     
     var incomeTextColor: UIColor { UIColor(red: 0.15, green: 0.60, blue: 0.42, alpha: 1.00) }
@@ -73,12 +73,12 @@ struct BlueTheme: AppTheme {
 
 //MARK: - Purple
 struct PurpleTheme: AppTheme {
-    
-    var baseColor: UIColor { UIColor(red: 0.91, green: 0.87, blue: 0.98, alpha: 1.00) }
-    
+    //F4EBFF
+    var baseColor: UIColor { UIColor(red: 0.96, green: 0.92, blue: 1.00, alpha: 1.00) }
+    //C6A8F0
     var accentColor: UIColor { UIColor(red: 0.78, green: 0.66, blue: 0.94, alpha: 1.00) }
     
-    var incomeTextColor: UIColor { UIColor(red: 0.23, green: 0.62, blue: 0.53, alpha: 1.00) }
+    var incomeTextColor: UIColor { UIColor(red: 0.19, green: 0.56, blue: 0.48, alpha: 1.00) }
     
     var expenseTextColor: UIColor { UIColor(red: 0.76, green: 0.25, blue: 0.42, alpha: 1.00) }
     
