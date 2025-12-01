@@ -3238,7 +3238,7 @@
         <!--Lock App View Controller-->
         <scene sceneID="yuV-qZ-z0l">
             <objects>
-                <viewController storyboardIdentifier="LockAppViewController" id="Em9-9x-cQw" customClass="LockAppViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LockAppViewController" hidesBottomBarWhenPushed="YES" id="Em9-9x-cQw" customClass="LockAppViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="cGQ-mH-pqr">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
