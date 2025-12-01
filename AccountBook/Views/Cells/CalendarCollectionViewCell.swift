@@ -70,6 +70,7 @@ class CalendarCollectionViewCell: UICollectionViewCell, ThemeApplicable {
     func applyTheme(_ theme: AppTheme) {
         let (_, weekday) = viewModel.dayStringAndWeekday
         dayLabel.textColor = theme.calendarColors[weekday]
+        viewModel.isSelected = viewModel.isSelected     //셀 배경색 트리거
     }
     
     deinit {
