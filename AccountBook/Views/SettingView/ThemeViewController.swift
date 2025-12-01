@@ -11,6 +11,7 @@ class ThemeViewController: UIViewController {
 
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var tableView: UITableView!
     
     var viewModel: ThemeViewModel!
     
