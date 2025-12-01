@@ -3057,6 +3057,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="카테고리" id="XKp-hY-xxg">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="zFa-Zg-U4X">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="xUd-uB-nxP" id="YTL-Yj-WSc"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Oep-ah-1gV">
                                             <connections>
                                                 <action selector="addButtonTapped:" destination="xUd-uB-nxP" id="tx8-fF-OXB"/>

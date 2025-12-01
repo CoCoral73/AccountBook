@@ -38,6 +38,10 @@ class CategoryListViewController: UIViewController {
         navItem.title = viewModel.title
     }
     
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
         let vm = CategoryEditViewModel(isIncome: viewModel.isIncome, mode: .add)
         vm.onDidEditCategory = {
