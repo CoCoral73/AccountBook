@@ -9,6 +9,8 @@ import UIKit
 
 class ThemeViewController: UIViewController {
 
+    @IBOutlet weak var navItem: UINavigationItem!
+    
     var viewModel: ThemeViewModel!
     
     required init?(coder: NSCoder, viewModel: ThemeViewModel) {
@@ -23,6 +25,13 @@ class ThemeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureNavigationBar()
+    }
+    
+    func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navItem.standardAppearance = appearance
     }
 
 }

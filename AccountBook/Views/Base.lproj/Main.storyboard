@@ -3158,6 +3158,9 @@
                             <constraint firstItem="YlD-9P-T4r" firstAttribute="leading" secondItem="JXd-wJ-bcU" secondAttribute="leading" id="saG-fZ-VSU"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="navItem" destination="roc-C9-zMO" id="DHU-Wx-6fT"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAV-Xs-Xnn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
