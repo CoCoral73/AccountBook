@@ -82,7 +82,12 @@ class SettingTableViewController: UITableViewController {
     }
     
     func showLockAppView() {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "LockAppViewController") as? LockAppViewController else {
+            print("SettingTableViewController: 앱 잠금 VC 생성 오류")
+            return
+        }
         
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func showHelpView() {
