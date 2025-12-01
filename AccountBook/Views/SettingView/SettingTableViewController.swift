@@ -73,7 +73,12 @@ class SettingTableViewController: UITableViewController {
     }
     
     func showThemeView() {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "ThemeViewController") as? ThemeViewController else {
+            print("SettingTableViewController: 테마 VC 생성 오류")
+            return
+        }
         
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func showLockAppView() {
