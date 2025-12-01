@@ -10,6 +10,10 @@ import UIKit
 class LockAppViewController: UIViewController {
 
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var lockSwitch: UISwitch!
+    @IBOutlet weak var detailViewForLockState: UIStackView!
+    @IBOutlet weak var modifyPWView: UIView!
+    @IBOutlet weak var faceIDSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,5 +29,9 @@ class LockAppViewController: UIViewController {
 
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
+    }
+    @IBAction func lockSwitchChanged(_ sender: UISwitch) {
+    }
+    @IBAction func faceIDSwitchChanged(_ sender: UISwitch) {
     }
 }
