@@ -13,16 +13,7 @@ class ThemeViewController: UIViewController {
     @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
-    var viewModel: ThemeViewModel!
-    
-    required init?(coder: NSCoder, viewModel: ThemeViewModel) {
-        self.viewModel = viewModel
-        super.init(coder: coder)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var viewModel = ThemeViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
