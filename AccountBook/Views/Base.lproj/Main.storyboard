@@ -3136,8 +3136,27 @@
                     <view key="view" contentMode="scaleToFill" id="Vii-89-Gc5">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YlD-9P-T4r">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="c8D-Sm-WiR"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="테마 설정" id="roc-C9-zMO">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="KIQ-jV-rgi"/>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance"/>
+                            </navigationBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="JXd-wJ-bcU"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="YlD-9P-T4r" firstAttribute="top" secondItem="JXd-wJ-bcU" secondAttribute="top" id="BxU-6o-Nak"/>
+                            <constraint firstItem="YlD-9P-T4r" firstAttribute="trailing" secondItem="JXd-wJ-bcU" secondAttribute="trailing" id="Feu-KO-Oyo"/>
+                            <constraint firstItem="YlD-9P-T4r" firstAttribute="leading" secondItem="JXd-wJ-bcU" secondAttribute="leading" id="saG-fZ-VSU"/>
+                        </constraints>
                     </view>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hAV-Xs-Xnn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
