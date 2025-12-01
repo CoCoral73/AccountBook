@@ -3144,7 +3144,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="테마 설정" id="roc-C9-zMO">
-                                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="KIQ-jV-rgi"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="KIQ-jV-rgi">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="QId-hG-cmw" id="PXD-2s-d6f"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                                 <navigationBarAppearance key="standardAppearance"/>

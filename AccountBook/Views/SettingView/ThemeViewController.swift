@@ -10,6 +10,7 @@ import UIKit
 class ThemeViewController: UIViewController {
 
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     
     var viewModel: ThemeViewModel!
     
