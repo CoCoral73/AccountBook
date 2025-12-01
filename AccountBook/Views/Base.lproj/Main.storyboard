@@ -3242,9 +3242,35 @@
                     <view key="view" contentMode="scaleToFill" id="cGQ-mH-pqr">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Oz-QL-7UA">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ajF-YB-5bU"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="앱 잠금" id="niZ-nI-WOk">
+                                        <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="ClR-gw-c5l">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="Em9-9x-cQw" id="rt2-Ho-3yK"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance"/>
+                            </navigationBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="1sh-sp-YWA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="4Oz-QL-7UA" firstAttribute="top" secondItem="1sh-sp-YWA" secondAttribute="top" id="PEo-ze-0zY"/>
+                            <constraint firstItem="4Oz-QL-7UA" firstAttribute="trailing" secondItem="1sh-sp-YWA" secondAttribute="trailing" id="nkW-No-co2"/>
+                            <constraint firstItem="4Oz-QL-7UA" firstAttribute="leading" secondItem="1sh-sp-YWA" secondAttribute="leading" id="y22-gv-ElL"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="navItem" destination="niZ-nI-WOk" id="CZR-nG-6yj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o1c-pP-RQG" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
