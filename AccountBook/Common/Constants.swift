@@ -16,4 +16,5 @@ struct Cell {
     static let assetManageForCreditCardCell = "AssetManageForCreditCardCell"
     static let linkedCardsCell = "LinkedCardsCell"
     static let categoryListCell = "CategoryListCell"
+    static let themeCell = "ThemeCell"
 }
