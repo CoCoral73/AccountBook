@@ -6,7 +6,7 @@
 //
 import UIKit
 
-enum AppThemeKind: String {
+enum AppThemeKind: String, CaseIterable {
     case pink
     case orange
     case yellow
@@ -14,6 +14,25 @@ enum AppThemeKind: String {
     case blue
     case purple
     case gray
+    
+    var theme: AppTheme {
+        switch self {
+        case .pink:
+            return PinkTheme()
+        case .orange:
+            return OrangeTheme()
+        case .yellow:
+            return YellowTheme()
+        case .green:
+            return GreenTheme()
+        case .blue:
+            return BlueTheme()
+        case .purple:
+            return PurpleTheme()
+        case .gray:
+            return GrayTheme()
+        }
+    }
 }
 
 protocol AppTheme {
