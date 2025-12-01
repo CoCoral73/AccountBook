@@ -25,6 +25,9 @@ final class ThemeManager {
             NotificationCenter.default.post(name: .themeDidChange, object: nil)
         }
     }
+    
+    var countOfThemes: Int { return AppThemeKind.allCases.count }
+    var listOfThemes: [AppThemeKind] { return AppThemeKind.allCases }
 
     var currentTheme: AppTheme {
         switch currentKind {
