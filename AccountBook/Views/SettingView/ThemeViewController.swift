@@ -27,4 +27,8 @@ class ThemeViewController: UIViewController {
         navItem.standardAppearance = appearance
     }
 
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
