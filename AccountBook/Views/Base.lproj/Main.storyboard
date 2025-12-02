@@ -3407,10 +3407,10 @@
             </objects>
             <point key="canvasLocation" x="701.52671755725191" y="3076.7605633802818"/>
         </scene>
-        <!--Pass Word View Controller-->
+        <!--Password View Controller-->
         <scene sceneID="oEP-ev-3Sx">
             <objects>
-                <viewController storyboardIdentifier="PassWordViewController" id="kzN-Sr-9bH" customClass="PassWordViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PasswordViewController" id="kzN-Sr-9bH" customClass="PasswordViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Jsk-VP-mY3">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

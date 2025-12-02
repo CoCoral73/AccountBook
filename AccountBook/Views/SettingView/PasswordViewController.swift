@@ -1,5 +1,5 @@
 //
-//  PassWordViewController.swift
+//  PasswordViewController.swift
 //  AccountBook
 //
 //  Created by 김정원 on 12/2/25.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PassWordViewController: UIViewController {
+class PasswordViewController: UIViewController {
     
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var pwView: UIStackView!
@@ -22,9 +22,12 @@ class PassWordViewController: UIViewController {
     }
     
     @IBAction func closeButtonTapped(_ sender: UIButton) {
+        dismiss(animated: true)
     }
     
     @IBAction func numberPadTapped(_ sender: UIButton) {
+        let tag = sender.tag
+        
     }
     
 }
