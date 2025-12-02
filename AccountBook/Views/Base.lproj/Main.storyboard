@@ -3407,6 +3407,21 @@
             </objects>
             <point key="canvasLocation" x="701.52671755725191" y="3076.7605633802818"/>
         </scene>
+        <!--Pass Word View Controller-->
+        <scene sceneID="oEP-ev-3Sx">
+            <objects>
+                <viewController storyboardIdentifier="PassWordViewController" id="kzN-Sr-9bH" customClass="PassWordViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Jsk-VP-mY3">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Oex-7m-FHE"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2Lz-JG-Fib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1518" y="3077"/>
+        </scene>
         <!--Month Picker View Controller-->
         <scene sceneID="xl8-jQ-hNU">
             <objects>
