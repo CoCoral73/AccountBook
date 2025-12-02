@@ -3425,6 +3425,9 @@
                                 <state key="normal">
                                     <imageReference key="image" image="xmark" catalog="system" symbolScale="large"/>
                                 </state>
+                                <connections>
+                                    <action selector="closeButtonTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="JOx-7w-sRL"/>
+                                </connections>
                             </button>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="a8f-1h-HA3">
                                 <rect key="frame" x="16" y="528" width="361" height="280"/>
@@ -3439,6 +3442,9 @@
                                                 <state key="normal" title="1">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="xgC-CV-jfK"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PrP-UZ-ckn">
                                                 <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="70"/>
@@ -3447,6 +3453,9 @@
                                                 <state key="normal" title="2">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="k53-dr-EIr"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nuc-A7-fvn">
                                                 <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="70"/>
@@ -3455,6 +3464,9 @@
                                                 <state key="normal" title="3">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="mgu-Tl-fnK"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -3468,6 +3480,9 @@
                                                 <state key="normal" title="4">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="Jzv-E9-WEH"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ncu-iq-erk">
                                                 <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="70"/>
@@ -3476,6 +3491,9 @@
                                                 <state key="normal" title="5">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="d01-TX-o1P"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HmA-LI-M53">
                                                 <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="70"/>
@@ -3484,6 +3502,9 @@
                                                 <state key="normal" title="6">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="5ts-mn-sOI"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -3497,6 +3518,9 @@
                                                 <state key="normal" title="7">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="cFf-84-rms"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="8" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="4BT-ec-bjH">
                                                 <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="70"/>
@@ -3505,6 +3529,9 @@
                                                 <state key="normal" title="8">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="Jtb-6h-ptc"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="9" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7vZ-9z-YTn">
                                                 <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="70"/>
@@ -3513,6 +3540,9 @@
                                                 <state key="normal" title="9">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="EA8-9s-Y6X"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -3531,6 +3561,9 @@
                                                 <state key="normal" title="0">
                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="X1m-by-cQF"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" tag="-1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K4z-JP-ieV">
                                                 <rect key="frame" x="240.66666666666671" y="0.0" width="120.33333333333334" height="70"/>
@@ -3539,6 +3572,9 @@
                                                 <state key="normal">
                                                     <imageReference key="image" image="delete.left" catalog="system" symbolScale="large"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="numberPadTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="HEy-Ed-ssd"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -3597,6 +3633,14 @@
                             <constraint firstItem="a8f-1h-HA3" firstAttribute="top" secondItem="hTd-XY-HiX" secondAttribute="bottom" constant="190" id="z44-5d-aGe"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="messageLabel" destination="gUe-Dr-Ang" id="cfc-pM-fZx"/>
+                        <outlet property="pw1Label" destination="DGP-Vl-amA" id="ViB-SP-jgc"/>
+                        <outlet property="pw2Label" destination="Z23-UW-Ok8" id="0Hw-W1-gwz"/>
+                        <outlet property="pw3Label" destination="VcC-Jv-OpR" id="boY-Vr-bqF"/>
+                        <outlet property="pw4Label" destination="q6a-JW-ly7" id="Skn-5j-gQK"/>
+                        <outlet property="pwView" destination="hTd-XY-HiX" id="BVL-cf-ohk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Lz-JG-Fib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
