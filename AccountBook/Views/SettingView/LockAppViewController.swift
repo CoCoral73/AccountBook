@@ -15,10 +15,13 @@ class LockAppViewController: UIViewController {
     @IBOutlet weak var modifyPWView: UIView!
     @IBOutlet weak var faceIDSwitch: UISwitch!
     
+    var viewModel: LockAppViewModel = LockAppViewModel()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         configureNavigationBar()
+        bindViewModel()
         configureUI()
         configureModifyPW()
     }
@@ -29,9 +32,24 @@ class LockAppViewController: UIViewController {
         navItem.standardAppearance = appearance
     }
     
+    func bindViewModel() {
+        viewModel.onDidUpdateLockState = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.lockSwitch.isOn = self.viewModel.isOnForLockSwitch
+                self.detailViewForLockState.isHidden = self.viewModel.isHiddenForDetailView
+            }
+        }
+        
+        viewModel.onRequestShowPassword = { [weak self] vm in
+            guard let self = self else { return }
+            showPasswordView(vm)
+        }
+    }
+    
     func configureUI() {
-        //lockSwitch.isOn =
-        detailViewForLockState.isHidden = !lockSwitch.isOn
+        lockSwitch.isOn = viewModel.isOnForLockSwitch
+        detailViewForLockState.isHidden = viewModel.isHiddenForDetailView
         //faceIDSwitch.isOn =
     }
     
@@ -42,7 +60,7 @@ class LockAppViewController: UIViewController {
     }
     
     @objc func modifyPWTapped() {
-        //비밀번호 설정 뷰 present
+        viewModel.handleModifyPW()
     }
 
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
@@ -50,8 +68,19 @@ class LockAppViewController: UIViewController {
     }
     
     @IBAction func lockSwitchChanged(_ sender: UISwitch) {
-        //off -> on: 비밀번호 설정 뷰 present
-        detailViewForLockState.isHidden = !lockSwitch.isOn
+        viewModel.handleLockSwitch(sender.isOn)
+    }
+    
+    private func showPasswordView(_ vm: PasswordViewModel) {
+        guard let vc = storyboard?.instantiateViewController(identifier: "PasswordViewController", creator: { coder in
+            PasswordViewController(coder: coder, viewModel: vm)
+        }) else {
+            print("LockAppViewController: PasswordVC 생성 오류")
+            return
+        }
+        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
     
     @IBAction func faceIDSwitchChanged(_ sender: UISwitch) {
