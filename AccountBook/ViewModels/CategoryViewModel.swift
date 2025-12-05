@@ -9,6 +9,7 @@ class CategoryViewModel {
     var isIncome: Bool
     var categories: [Category] = []
     
+    var onRequestShowCategoryEditView: ((CategoryEditViewModel) -> Void)?
     var onDidSelectCategory: ((Category) -> Void)?
     var onDidAddCategory: (() -> ())?
     
@@ -26,7 +27,7 @@ class CategoryViewModel {
         return CategoryCellViewModel(category: category)
     }
     
-    func handleDidSelectItemAt(_ index: Int) -> CategoryEditViewModel? {
+    func handleDidSelectItemAt(_ index: Int) {
         if index == numberOfItems - 1 { //추가 뷰
             let vm = CategoryEditViewModel(isIncome: isIncome, mode: .add)
             vm.onDidEditCategory = { [weak self] in
@@ -34,12 +35,10 @@ class CategoryViewModel {
                 loadCategories()
                 onDidAddCategory?()
             }
-            
-            return vm
+            onRequestShowCategoryEditView?(vm)
         } else {
             let selected = categories[index]
             onDidSelectCategory?(selected)
-            return nil
         }
     }
     

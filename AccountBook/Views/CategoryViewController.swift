@@ -33,6 +33,10 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func bindViewModel() {
+        viewModel.onRequestShowCategoryEditView = { [weak self] vm in
+            guard let self = self else { return }
+            showCategoryEditView(vm)
+        }
         viewModel.onDidAddCategory = { [weak self] in
             guard let self = self else { return }
             collectionView.reloadData()
@@ -51,11 +55,10 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let vm = viewModel.handleDidSelectItemAt(indexPath.item) else {
-            dismiss(animated: true)
-            return
-        }
-        
+        viewModel.handleDidSelectItemAt(indexPath.item)
+    }
+    
+    func showCategoryEditView(_ vm: CategoryEditViewModel) {
         guard let addVC = storyboard?.instantiateViewController(identifier: "CategoryEditViewController", creator: { coder in
             CategoryEditViewController(coder: coder, viewModel: vm)
         }) else {
