@@ -13,6 +13,17 @@ enum LockAppDefaultsKey {
     static let useFaceID = "lockapp.useFaceID"  //UserDefaults
 }
 
+extension UserDefaults {
+    var isLocked: Bool {
+        get { bool(forKey: LockAppDefaultsKey.isLocked) }
+        set { set(newValue, forKey: LockAppDefaultsKey.isLocked) }
+    }
+    var useFaceID: Bool {
+        get { bool(forKey: LockAppDefaultsKey.useFaceID) }
+        set { set(newValue, forKey: LockAppDefaultsKey.useFaceID) }
+    }
+}
+
 class LockAppManager {
     static let shared = LockAppManager()
     private init() { }
