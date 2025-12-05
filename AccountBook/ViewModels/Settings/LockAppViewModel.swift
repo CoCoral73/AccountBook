@@ -40,11 +40,9 @@ class LockAppViewModel {
     func makePasswordVM(mode: PasswordMode) -> PasswordViewModel {
         let vm = PasswordViewModel(mode: mode)
         
-        vm.onDidFinish = { [weak self] state in
+        vm.onDidFinish = { [weak self] in
             guard let self = self else { return }
-            if mode == .register {
-                self.isLocked = state
-            }
+            self.isLocked = LockAppManager.shared.isLocked
         }
         
         return vm
