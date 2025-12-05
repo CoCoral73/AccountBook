@@ -60,33 +60,19 @@ class PasswordViewController: UIViewController {
             }
         }
         
-        viewModel.onFinishRegister = { [weak self] success in
+        viewModel.onFail = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                if success {
-                    self.viewModel.onDidFinish?(true)
-                    self.dismiss(animated: true)
-                } else {
-                    self.messageLabel.text = "비밀번호가 일치하지 않습니다."
-                    self.pwView.shake()
-                    self.resetDigits()
-                }
+                self.messageLabel.text = "비밀번호가 일치하지 않습니다.\n다시 시도해 주세요."
+                self.pwView.shake()
+                self.resetDigits()
             }
         }
         
-        viewModel.onFinishValidate = { [weak self] success in
+        viewModel.onRequestDismiss = { [weak self] in
             guard let self = self else { return }
-            DispatchQueue.main.async {
-                if success {
-                    self.dismiss(animated: true)
-                } else {
-                    self.messageLabel.text = "비밀번호가 일치하지 않습니다.\n다시 시도해 주세요."
-                    self.resetDigits()
-                }
-            }
+            close()
         }
-        
-
     }
     
     func configureUI() {
@@ -106,9 +92,13 @@ class PasswordViewController: UIViewController {
         }
     }
     
-    @IBAction func closeButtonTapped(_ sender: UIButton) {
-        viewModel.onDidFinish?(false)
+    func close() {
+        viewModel.onDidFinish?()
         dismiss(animated: true)
+    }
+    
+    @IBAction func closeButtonTapped(_ sender: UIButton) {
+        close()
     }
     
     @IBAction func numberPadTapped(_ sender: UIButton) {
