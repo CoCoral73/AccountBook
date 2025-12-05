@@ -24,9 +24,9 @@ class PasswordViewModel {
     var onUpdateMessage: ((String) -> Void)?
     var onResetDigits: (() -> Void)?
     
-    var onFinishRegister: ((Bool) -> Void)?
-    var onFinishValidate: ((Bool) -> Void)?
-    var onDidFinish: ((Bool) -> Void)?
+    var onFail: (() -> Void)?
+    var onRequestDismiss: (() -> Void)?
+    var onDidFinish: (() -> Void)?
 
     private var step: PasswordStep = .first
     private var curPos: Int = 0
@@ -91,11 +91,12 @@ class PasswordViewModel {
             onUpdateMessage?("확인을 위해 한 번 더 입력해 주세요.")
         case .confirm:
             let success = (input[0] == input[1])
-            onFinishRegister?(success)
             
             if success {
                 LockAppManager.shared.registerPassword(input[0])
+                onRequestDismiss?()
             } else {
+                onFail?()
                 resetConfirmStep()
             }
         }
@@ -109,6 +110,12 @@ class PasswordViewModel {
     
     private func handleValidateFlow() {
         let success = LockAppManager.shared.validatePassword(input[0])
-        onFinishValidate?(success)
+        
+        if success {
+            onRequestDismiss?()
+        } else {
+            onFail?()
+            resetConfirmStep()
+        }
     }
 }
