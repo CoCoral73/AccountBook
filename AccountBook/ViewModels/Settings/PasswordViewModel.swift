@@ -101,15 +101,14 @@ class PasswordViewModel {
                 onRequestDismiss?()
             } else {
                 onFail?()
-                resetConfirmStep()
+                resetStep()
             }
         }
     }
 
-    private func resetConfirmStep() {
+    private func resetStep() {
         curPos = 0
-        input[1] = []
-        onResetDigits?()
+        input[step.rawValue] = []
     }
     
     private func handleValidateFlow() {
@@ -119,7 +118,7 @@ class PasswordViewModel {
             onRequestDismiss?()
         } else {
             onFail?()
-            resetConfirmStep()
+            resetStep()
         }
     }
 }
