@@ -74,7 +74,7 @@ class TransactionAddViewModel: TransactionUpdatable {
     }
     
     func handleCategoryView() -> CategoryViewModel {
-        let vm = CategoryViewModel(isIncome: isIncome)
+        let vm = CategoryViewModel(isIncome: isIncome, autoDismiss: false)
         vm.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
             let data = onRequestTextData?()

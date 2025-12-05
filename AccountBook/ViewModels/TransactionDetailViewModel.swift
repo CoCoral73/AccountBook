@@ -95,7 +95,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func handleCategoryButton() -> CategoryViewModel {
-        let vm = CategoryViewModel(isIncome: copy.isIncome)
+        let vm = CategoryViewModel(isIncome: copy.isIncome, autoDismiss: true)
         vm.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
             copy.category = category

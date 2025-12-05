@@ -37,6 +37,11 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
             guard let self = self else { return }
             showCategoryEditView(vm)
         }
+        viewModel.onRequestDismiss = { [weak self] in
+            guard let self = self else { return }
+            dismiss(animated: true)
+        }
+        
         viewModel.onDidAddCategory = { [weak self] in
             guard let self = self else { return }
             collectionView.reloadData()

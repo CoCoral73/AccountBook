@@ -7,14 +7,18 @@
 
 class CategoryViewModel {
     var isIncome: Bool
+    var autoDismiss: Bool
     var categories: [Category] = []
     
     var onRequestShowCategoryEditView: ((CategoryEditViewModel) -> Void)?
+    var onRequestDismiss: (() -> Void)?
+    
     var onDidSelectCategory: ((Category) -> Void)?
     var onDidAddCategory: (() -> ())?
     
-    init(isIncome: Bool) {
+    init(isIncome: Bool, autoDismiss: Bool) {
         self.isIncome = isIncome
+        self.autoDismiss = autoDismiss
         loadCategories()
     }
     
@@ -39,6 +43,7 @@ class CategoryViewModel {
         } else {
             let selected = categories[index]
             onDidSelectCategory?(selected)
+            if autoDismiss { onRequestDismiss?() }
         }
     }
     
