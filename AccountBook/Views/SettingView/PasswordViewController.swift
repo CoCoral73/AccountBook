@@ -9,6 +9,7 @@ import UIKit
 
 class PasswordViewController: UIViewController {
     
+    @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var messageLabel: UILabel!
     @IBOutlet weak var pwView: UIStackView!
     @IBOutlet weak var pw1Label: UILabel!
@@ -76,6 +77,7 @@ class PasswordViewController: UIViewController {
     }
     
     func configureUI() {
+        closeButton.isHidden = viewModel.isHiddenForCloseButton
         messageLabel.text = viewModel.initialMessage
         resetDigits()
     }

@@ -3634,6 +3634,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="closeButton" destination="WBz-IR-5Gj" id="6XF-n8-Fqk"/>
                         <outlet property="messageLabel" destination="gUe-Dr-Ang" id="cfc-pM-fZx"/>
                         <outlet property="pw1Label" destination="DGP-Vl-amA" id="ViB-SP-jgc"/>
                         <outlet property="pw2Label" destination="Z23-UW-Ok8" id="0Hw-W1-gwz"/>

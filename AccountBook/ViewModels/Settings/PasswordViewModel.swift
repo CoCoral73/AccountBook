@@ -36,6 +36,10 @@ class PasswordViewModel {
         self.mode = mode
     }
     
+    var isHiddenForCloseButton: Bool {
+        mode == .validate
+    }
+    
     var initialMessage: String {
         switch mode {
         case .register, .modify:
