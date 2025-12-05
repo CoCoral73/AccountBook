@@ -33,15 +33,36 @@ class LockAppManager {
     
     func registerPassword(_ pw: [Int]) {
         let pw = pw.map { String($0) }.joined()
-        password = pw
+        
+        let success: Bool
+        switch isLocked {
+        case true:
+            success = KeychainManager.shared.update(value: pw, forKey: LockAppDefaultsKey.passwordKey)
+        case false:
+            success = KeychainManager.shared.save(value: pw, forKey: LockAppDefaultsKey.passwordKey)
+        }
+        
+        if success {
+            print("Register or Update Password: Success")
+            UserDefaults.standard.isLocked = true
+        } else {
+            print("Register or Update Password: Fail")
+        }
     }
     
     func validatePassword(_ pw: [Int]) -> Bool {
         let pw = pw.map { String($0) }.joined()
-        return pw == password
+        return KeychainManager.shared.match(value: pw, forKey: LockAppDefaultsKey.passwordKey)
     }
     
     func deletePassword() {
-        password = nil
+        let success = KeychainManager.shared.delete(forKey: LockAppDefaultsKey.passwordKey)
+        
+        if success {
+            print("Delete Password: Success")
+            UserDefaults.standard.isLocked = false
+        } else {
+            print("Delete Password: Fail")
+        }
     }
 }
