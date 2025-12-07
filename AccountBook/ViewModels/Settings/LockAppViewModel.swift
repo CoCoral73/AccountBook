@@ -8,10 +8,15 @@
 class LockAppViewModel {
     
     var onUpdateLockState: (() -> Void)?
+    var onUpdateBiometricIDState: (() -> Void)?
     var onRequestShowPassword: ((PasswordViewModel) -> Void)?
+    var onRequestUnavailableAlert: ((BiometricError) -> Void)?
     
     var isOnForLockSwitch: Bool { LockAppManager.shared.isLocked }
     var isHiddenForDetailView: Bool { !LockAppManager.shared.isLocked }
+    var isHiddenForBiometricIDView: Bool { LockAppManager.shared.getBiometricType() == .none }
+    var biometricTypeName: String { LockAppManager.shared.getBiometricType().name }
+    var isOnForBiometricIDSwitch: Bool { LockAppManager.shared.useBiometricID }
     
     func handleModifyPW() {
         let vm = makePasswordVM(mode: .modify)
@@ -36,5 +41,26 @@ class LockAppViewModel {
             onUpdateLockState?()
         }
         return vm
+    }
+    
+    func handleBiometricIDSwitch(_ isOn: Bool) {
+        if isOn {
+            handleBiometricIDFlow()
+        } else {
+            LockAppManager.shared.deleteBiometricID()
+        }
+    }
+    
+    func handleBiometricIDFlow() {
+        switch LockAppManager.shared.permissionState {
+        case .denied:
+            let error = LockAppManager.shared.isBiometricPermissionDenied()
+            onRequestUnavailableAlert?(error)
+        case .neverAsked, .allowed:
+            LockAppManager.shared.authenticateWithBiometrics(reason: "등록") { [weak self] success in
+                guard let self = self else { return }
+                onUpdateBiometricIDState?()
+            }
+        }
     }
 }
