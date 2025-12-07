@@ -7,7 +7,7 @@
 
 class LockAppViewModel {
     
-    var onDidUpdateLockState: (() -> Void)?
+    var onUpdateLockState: (() -> Void)?
     var onRequestShowPassword: ((PasswordViewModel) -> Void)?
     
     var isOnForLockSwitch: Bool { LockAppManager.shared.isLocked }
@@ -24,6 +24,7 @@ class LockAppViewModel {
             onRequestShowPassword?(vm)
         } else {
             LockAppManager.shared.deletePassword()
+            onUpdateLockState?()
         }
     }
     
@@ -32,8 +33,8 @@ class LockAppViewModel {
         
         vm.onDidFinish = { [weak self] in
             guard let self = self else { return }
+            onUpdateLockState?()
         }
-        
         return vm
     }
 }
