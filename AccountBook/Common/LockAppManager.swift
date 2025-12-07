@@ -8,9 +8,10 @@
 import Foundation
 
 enum LockAppDefaultsKey {
-    static let isLocked = "lockapp.isLocked"    //UserDefaults
-    static let passwordKey = "lockapp.password" //Keychain
-    static let useFaceID = "lockapp.useFaceID"  //UserDefaults
+    static let isLocked = "lockapp.isLocked"                //UserDefaults
+    static let passwordKey = "lockapp.password"             //Keychain
+    static let permissionState = "lockapp.biometric.permission.state" //UserDefaults
+    static let useBiometricID = "lockapp.useBiometricID"    //UserDefaults
 }
 
 extension UserDefaults {
