@@ -6,21 +6,12 @@
 //
 
 class LockAppViewModel {
-    var isLocked: Bool {
-        didSet {
-            onDidUpdateLockState?()
-        }
-    }
     
     var onDidUpdateLockState: (() -> Void)?
     var onRequestShowPassword: ((PasswordViewModel) -> Void)?
     
-    init() {
-        isLocked = LockAppManager.shared.isLocked
-    }
-    
-    var isOnForLockSwitch: Bool { isLocked }
-    var isHiddenForDetailView: Bool { !isLocked }
+    var isOnForLockSwitch: Bool { LockAppManager.shared.isLocked }
+    var isHiddenForDetailView: Bool { !LockAppManager.shared.isLocked }
     
     func handleModifyPW() {
         let vm = makePasswordVM(mode: .modify)
@@ -33,7 +24,6 @@ class LockAppViewModel {
             onRequestShowPassword?(vm)
         } else {
             LockAppManager.shared.deletePassword()
-            isLocked = false
         }
     }
     
@@ -42,7 +32,6 @@ class LockAppViewModel {
         
         vm.onDidFinish = { [weak self] in
             guard let self = self else { return }
-            self.isLocked = LockAppManager.shared.isLocked
         }
         
         return vm
