@@ -19,9 +19,9 @@ extension UserDefaults {
         get { bool(forKey: LockAppDefaultsKey.isLocked) }
         set { set(newValue, forKey: LockAppDefaultsKey.isLocked) }
     }
-    var useFaceID: Bool {
-        get { bool(forKey: LockAppDefaultsKey.useFaceID) }
-        set { set(newValue, forKey: LockAppDefaultsKey.useFaceID) }
+    var useBiometricID: Bool {
+        get { bool(forKey: LockAppDefaultsKey.useBiometricID) }
+        set { set(newValue, forKey: LockAppDefaultsKey.useBiometricID) }
     }
 }
 
@@ -30,7 +30,7 @@ class LockAppManager {
     private init() { }
     
     var isLocked: Bool { UserDefaults.standard.isLocked }
-    var useFaceID: Bool { UserDefaults.standard.useFaceID }
+    var useBiometricID: Bool { UserDefaults.standard.useBiometricID }
     
     func registerPassword(_ pw: [Int]) {
         let pw = pw.map { String($0) }.joined()
