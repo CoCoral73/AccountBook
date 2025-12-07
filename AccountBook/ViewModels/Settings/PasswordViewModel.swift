@@ -57,6 +57,16 @@ class PasswordViewModel {
         }
     }
     
+    func requestValidateBiometricID() {
+        guard LockAppManager.shared.useBiometricID else { return }
+        LockAppManager.shared.authenticateWithBiometrics(reason: "잠금 해제") { [weak self] success in
+            guard let self = self else { return }
+            if success {
+                onRequestDismiss?()
+            }
+        }
+    }
+    
     private func insertDigit(_ number: Int) {
         guard curPos < length else { return }
         
