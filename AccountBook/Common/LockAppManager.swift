@@ -67,6 +67,7 @@ class LockAppManager {
         if success {
             print("Delete Password: Success")
             UserDefaults.standard.isLocked = false
+            UserDefaults.standard.useBiometricID = false
         } else {
             print("Delete Password: Fail")
         }
