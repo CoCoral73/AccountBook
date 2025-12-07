@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSFaceIDUsageDescription</key>
+	<string>잠금 설정을 위해 Face ID를 사용합니다.</string>
 	<key>CFBundleDisplayName</key>
 	<string>가계부</string>
 	<key>UIApplicationSceneManifest</key>
