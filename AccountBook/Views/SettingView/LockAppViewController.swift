@@ -43,6 +43,13 @@ class LockAppViewController: UIViewController {
             }
         }
         
+        viewModel.onUpdateBiometricIDState = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.biometricIDSwitch.isOn = self.viewModel.isOnForBiometricIDSwitch
+            }
+        }
+        
         viewModel.onRequestShowPassword = { [weak self] vm in
             guard let self = self else { return }
             DispatchQueue.main.async {
@@ -50,13 +57,21 @@ class LockAppViewController: UIViewController {
             }
         }
         
+        viewModel.onRequestUnavailableAlert = { [weak self] error in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.biometricIDSwitch.isOn = false
+                self.showUnavailableAlert(error)
+            }
         }
     }
     
     func configureUI() {
         lockSwitch.isOn = viewModel.isOnForLockSwitch
         detailViewForLockState.isHidden = viewModel.isHiddenForDetailView
-        //faceIDSwitch.isOn =
+        biometricIDView.isHidden = viewModel.isHiddenForBiometricIDView
+        biometricTypeNameLabel.text = viewModel.biometricTypeName
+        biometricIDSwitch.isOn = viewModel.isOnForBiometricIDSwitch
     }
     
     func configureModifyPW() {
@@ -89,6 +104,23 @@ class LockAppViewController: UIViewController {
         present(vc, animated: true)
     }
     
+    private func showUnavailableAlert(_ error: BiometricError) {
+        let alert = UIAlertController(title: "사용 불가", message: error.message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default))
+        if error == .notAvailable {
+            let move = UIAlertAction(title: "설정으로 이동", style: .default) { action in
+                if let url = URL(string: UIApplication.openSettingsURLString),
+                   UIApplication.shared.canOpenURL(url) {
+                    UIApplication.shared.open(url)
+                }
+            }
+            alert.addAction(move)
+        }
+        
+        present(alert, animated: true)
+    }
+    
     @IBAction func biometricIDSwitchChanged(_ sender: UISwitch) {
+        viewModel.handleBiometricIDSwitch(sender.isOn)
     }
 }
