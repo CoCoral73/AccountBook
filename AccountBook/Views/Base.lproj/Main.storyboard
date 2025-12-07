@@ -3316,39 +3316,44 @@
                                                     <constraint firstItem="LKM-hr-Yeh" firstAttribute="leading" secondItem="jrD-nk-Tr5" secondAttribute="leading" constant="25" id="zs3-mc-xrj"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIb-Kj-x1O" userLabel="separator">
-                                                <rect key="frame" x="0.0" y="60.333333333333343" width="393" height="0.3333333333333357"/>
-                                                <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="0.29999999999999999" id="rms-R2-tqc"/>
-                                                </constraints>
-                                            </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zt1-jT-Cy2" userLabel="set faceid">
-                                                <rect key="frame" x="0.0" y="60.666666666666657" width="393" height="60"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="YcM-yo-B8y">
+                                                <rect key="frame" x="0.0" y="60.333333333333343" width="393" height="60.333333333333343"/>
                                                 <subviews>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Face ID " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjC-OJ-oob">
-                                                        <rect key="frame" x="25" y="18" width="70" height="24"/>
-                                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                                        <nil key="textColor"/>
-                                                        <nil key="highlightedColor"/>
-                                                    </label>
-                                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qGO-Vn-Hf5">
-                                                        <rect key="frame" x="319" y="14.333333333333343" width="51" height="31"/>
-                                                        <connections>
-                                                            <action selector="faceIDSwitchChanged:" destination="Em9-9x-cQw" eventType="valueChanged" id="TDe-WC-9fB"/>
-                                                        </connections>
-                                                    </switch>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIb-Kj-x1O" userLabel="separator">
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="0.33333333333333215"/>
+                                                        <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="0.29999999999999999" id="rms-R2-tqc"/>
+                                                        </constraints>
+                                                    </view>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zt1-jT-Cy2" userLabel="set faceid">
+                                                        <rect key="frame" x="0.0" y="0.33333333333331439" width="393" height="60"/>
+                                                        <subviews>
+                                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Face ID " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gjC-OJ-oob">
+                                                                <rect key="frame" x="25" y="18" width="70" height="24"/>
+                                                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
+                                                            <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="qGO-Vn-Hf5">
+                                                                <rect key="frame" x="319" y="14.333333333333343" width="51" height="31"/>
+                                                                <connections>
+                                                                    <action selector="biometricIDSwitchChanged:" destination="Em9-9x-cQw" eventType="valueChanged" id="TDe-WC-9fB"/>
+                                                                </connections>
+                                                            </switch>
+                                                        </subviews>
+                                                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                        <constraints>
+                                                            <constraint firstItem="gjC-OJ-oob" firstAttribute="leading" secondItem="zt1-jT-Cy2" secondAttribute="leading" constant="25" id="2z3-eA-WUF"/>
+                                                            <constraint firstAttribute="trailing" secondItem="qGO-Vn-Hf5" secondAttribute="trailing" constant="25" id="P1V-VM-7Cy"/>
+                                                            <constraint firstAttribute="height" constant="60" id="TsE-Ld-Liz"/>
+                                                            <constraint firstItem="qGO-Vn-Hf5" firstAttribute="centerY" secondItem="zt1-jT-Cy2" secondAttribute="centerY" id="Vc7-EE-gBi"/>
+                                                            <constraint firstItem="qGO-Vn-Hf5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gjC-OJ-oob" secondAttribute="trailing" constant="8" symbolic="YES" id="Zht-7W-M5s"/>
+                                                            <constraint firstItem="gjC-OJ-oob" firstAttribute="centerY" secondItem="zt1-jT-Cy2" secondAttribute="centerY" id="cYk-2e-mWH"/>
+                                                        </constraints>
+                                                    </view>
                                                 </subviews>
-                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <constraints>
-                                                    <constraint firstItem="gjC-OJ-oob" firstAttribute="leading" secondItem="zt1-jT-Cy2" secondAttribute="leading" constant="25" id="2z3-eA-WUF"/>
-                                                    <constraint firstAttribute="trailing" secondItem="qGO-Vn-Hf5" secondAttribute="trailing" constant="25" id="P1V-VM-7Cy"/>
-                                                    <constraint firstAttribute="height" constant="60" id="TsE-Ld-Liz"/>
-                                                    <constraint firstItem="qGO-Vn-Hf5" firstAttribute="centerY" secondItem="zt1-jT-Cy2" secondAttribute="centerY" id="Vc7-EE-gBi"/>
-                                                    <constraint firstItem="qGO-Vn-Hf5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="gjC-OJ-oob" secondAttribute="trailing" constant="8" symbolic="YES" id="Zht-7W-M5s"/>
-                                                    <constraint firstItem="gjC-OJ-oob" firstAttribute="centerY" secondItem="zt1-jT-Cy2" secondAttribute="centerY" id="cYk-2e-mWH"/>
-                                                </constraints>
-                                            </view>
+                                            </stackView>
                                         </subviews>
                                     </stackView>
                                 </subviews>
@@ -3396,8 +3401,10 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="biometricIDSwitch" destination="qGO-Vn-Hf5" id="gXh-fh-mwZ"/>
+                        <outlet property="biometricIDView" destination="YcM-yo-B8y" id="LmS-O6-MLR"/>
+                        <outlet property="biometricTypeNameLabel" destination="gjC-OJ-oob" id="Z4x-9a-Ogb"/>
                         <outlet property="detailViewForLockState" destination="Rpq-AD-472" id="QT3-tt-qKr"/>
-                        <outlet property="faceIDSwitch" destination="qGO-Vn-Hf5" id="gXh-fh-mwZ"/>
                         <outlet property="lockSwitch" destination="Mgq-rO-ych" id="HjX-PA-rE8"/>
                         <outlet property="modifyPWView" destination="jrD-nk-Tr5" id="Ueu-gS-gbo"/>
                         <outlet property="navItem" destination="niZ-nI-WOk" id="CZR-nG-6yj"/>

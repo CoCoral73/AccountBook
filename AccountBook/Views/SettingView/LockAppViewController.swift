@@ -13,7 +13,9 @@ class LockAppViewController: UIViewController {
     @IBOutlet weak var lockSwitch: UISwitch!
     @IBOutlet weak var detailViewForLockState: UIStackView!
     @IBOutlet weak var modifyPWView: UIView!
-    @IBOutlet weak var faceIDSwitch: UISwitch!
+    @IBOutlet weak var biometricIDView: UIStackView!
+    @IBOutlet weak var biometricTypeNameLabel: UILabel!
+    @IBOutlet weak var biometricIDSwitch: UISwitch!
     
     var viewModel: LockAppViewModel = LockAppViewModel()
     
@@ -83,6 +85,6 @@ class LockAppViewController: UIViewController {
         present(vc, animated: true)
     }
     
-    @IBAction func faceIDSwitchChanged(_ sender: UISwitch) {
+    @IBAction func biometricIDSwitchChanged(_ sender: UISwitch) {
     }
 }
