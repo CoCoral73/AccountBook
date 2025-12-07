@@ -35,7 +35,7 @@ class LockAppViewController: UIViewController {
     }
     
     func bindViewModel() {
-        viewModel.onDidUpdateLockState = { [weak self] in
+        viewModel.onUpdateLockState = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
                 self.lockSwitch.isOn = self.viewModel.isOnForLockSwitch
@@ -45,7 +45,11 @@ class LockAppViewController: UIViewController {
         
         viewModel.onRequestShowPassword = { [weak self] vm in
             guard let self = self else { return }
-            showPasswordView(vm)
+            DispatchQueue.main.async {
+                self.showPasswordView(vm)
+            }
+        }
+        
         }
     }
     
