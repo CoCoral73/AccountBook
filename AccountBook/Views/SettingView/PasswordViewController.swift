@@ -107,4 +107,9 @@ class PasswordViewController: UIViewController {
         viewModel.handleNumberPad(tag: sender.tag)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        viewModel.requestValidateBiometricID()
+    }
 }
