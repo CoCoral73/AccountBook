@@ -46,14 +46,6 @@ extension LockAppManager {
         UserDefaults.standard.useBiometricID = false
     }
     
-    func deviceSupportsBiometrics() -> Bool {
-        let context = LAContext()
-        var error: NSError?
-
-        let canEvaluate = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
-        return canEvaluate && (context.biometryType == .faceID || context.biometryType == .touchID)
-    }
-    
     func getBiometricType() -> BiometricType {
         let context = LAContext()
         _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
