@@ -19,6 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CategoryManager.shared.loadCategories()
         AssetItemManager.shared.loadAssetItems()
         
+        LockAppManager.shared.clearKeychainDataIfFirstLaunch()
+        
         return true
     }
 
