@@ -41,12 +41,6 @@ enum BiometricError {
     }
 }
 
-enum BiometricPermissionState: String {
-    case neverAsked      // 아직 앱이 한번도 요청 안함
-    case denied          // 요청했지만 사용자가 허용 안함
-    case allowed         // 정상적으로 허용됨
-}
-
 extension LockAppManager {
     func deleteBiometricID() {
         UserDefaults.standard.useBiometricID = false

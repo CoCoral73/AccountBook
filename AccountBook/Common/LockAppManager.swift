@@ -11,7 +11,6 @@ enum LockAppKey {
     static let hasLaunchedBefore = "lockapp.hasLaunchedBefore"
     static let isLocked = "lockapp.isLocked"                //UserDefaults
     static let passwordKey = "lockapp.password"             //Keychain
-    static let permissionState = "lockapp.biometric.permission.state" //UserDefaults
     static let useBiometricID = "lockapp.useBiometricID"    //UserDefaults
 }
 
@@ -19,10 +18,6 @@ extension UserDefaults {
     var isLocked: Bool {
         get { bool(forKey: LockAppKey.isLocked) }
         set { set(newValue, forKey: LockAppKey.isLocked) }
-    }
-    var permissionState: BiometricPermissionState {
-        get { BiometricPermissionState(rawValue: string(forKey: LockAppKey.permissionState) ?? "") ?? .neverAsked }
-        set { set(newValue.rawValue, forKey: LockAppKey.permissionState) }
     }
     var useBiometricID: Bool {
         get { bool(forKey: LockAppKey.useBiometricID) }
@@ -35,7 +30,6 @@ class LockAppManager {
     private init() { }
     
     var isLocked: Bool { UserDefaults.standard.isLocked }
-    var permissionState: BiometricPermissionState { UserDefaults.standard.permissionState }
     var useBiometricID: Bool { UserDefaults.standard.useBiometricID }
     
     func clearKeychainDataIfFirstLaunch() {
