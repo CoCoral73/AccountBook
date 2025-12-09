@@ -42,6 +42,17 @@ enum BiometricError {
 }
 
 extension LockAppManager {
+    func checkAvailableStateOfBiometricID() {
+        let error = isBiometricPermissionDenied()
+        
+        switch error {
+        case .notEnrolled, .notAvailable:
+            UserDefaults.standard.useBiometricID = false
+        default:
+            break
+        }
+    }
+    
     func deleteBiometricID() {
         UserDefaults.standard.useBiometricID = false
     }
