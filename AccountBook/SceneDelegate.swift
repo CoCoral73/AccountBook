@@ -42,6 +42,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         guard let windowScene = scene as? UIWindowScene else { return }
         guard let root = windowScene.windows.first?.rootViewController else { return }
 
+        LockAppManager.shared.checkAvailableStateOfBiometricID()
         showLockIfNeeded(on: root)
     }
     
