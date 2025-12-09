@@ -55,7 +55,7 @@ class LockAppViewModel {
         let error = LockAppManager.shared.isBiometricPermissionDenied()
         switch error {
         case .none:
-            LockAppManager.shared.authenticateWithBiometrics(reason: "등록") { [weak self] success in
+            LockAppManager.shared.authenticateWithBiometrics(reason: "생체 인증 등록") { [weak self] success in
                 guard let self = self else { return }
                 onUpdateBiometricIDState?()
             }
