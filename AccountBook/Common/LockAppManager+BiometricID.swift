@@ -34,7 +34,7 @@ enum BiometricError {
         case .notEnrolled:
             return "등록된 생체 정보가 없습니다."
         case .notAvailable:
-            return "생체 인증을 사용할 수 없습니다.\n설정에서 생체 인증을 허용해야 합니다."
+            return "설정에서 생체 인증을 허용해야 합니다."
         case .lockout:
             return "생체 인증이 잠겼습니다."
         }
