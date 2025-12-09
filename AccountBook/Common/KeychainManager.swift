@@ -78,6 +78,6 @@ class KeychainManager {
         ]
         
         let status = SecItemDelete(query as CFDictionary)
-        return status == errSecSuccess
+        return status == errSecSuccess || status == errSecItemNotFound
     }
 }
