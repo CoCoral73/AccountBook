@@ -52,15 +52,15 @@ class LockAppViewModel {
     }
     
     func handleBiometricIDFlow() {
-        switch LockAppManager.shared.permissionState {
-        case .denied:
-            let error = LockAppManager.shared.isBiometricPermissionDenied()
-            onRequestUnavailableAlert?(error)
-        case .neverAsked, .allowed:
+        let error = LockAppManager.shared.isBiometricPermissionDenied()
+        switch error {
+        case .none:
             LockAppManager.shared.authenticateWithBiometrics(reason: "등록") { [weak self] success in
                 guard let self = self else { return }
                 onUpdateBiometricIDState?()
             }
+        default:
+            onRequestUnavailableAlert?(error)
         }
     }
 }
