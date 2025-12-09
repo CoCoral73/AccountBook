@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum LockAppDefaultsKey {
+enum LockAppKey {
     static let isLocked = "lockapp.isLocked"                //UserDefaults
     static let passwordKey = "lockapp.password"             //Keychain
     static let permissionState = "lockapp.biometric.permission.state" //UserDefaults
@@ -16,16 +16,16 @@ enum LockAppDefaultsKey {
 
 extension UserDefaults {
     var isLocked: Bool {
-        get { bool(forKey: LockAppDefaultsKey.isLocked) }
-        set { set(newValue, forKey: LockAppDefaultsKey.isLocked) }
+        get { bool(forKey: LockAppKey.isLocked) }
+        set { set(newValue, forKey: LockAppKey.isLocked) }
     }
     var permissionState: BiometricPermissionState {
-        get { BiometricPermissionState(rawValue: string(forKey: LockAppDefaultsKey.permissionState) ?? "") ?? .neverAsked }
-        set { set(newValue.rawValue, forKey: LockAppDefaultsKey.permissionState) }
+        get { BiometricPermissionState(rawValue: string(forKey: LockAppKey.permissionState) ?? "") ?? .neverAsked }
+        set { set(newValue.rawValue, forKey: LockAppKey.permissionState) }
     }
     var useBiometricID: Bool {
-        get { bool(forKey: LockAppDefaultsKey.useBiometricID) }
-        set { set(newValue, forKey: LockAppDefaultsKey.useBiometricID) }
+        get { bool(forKey: LockAppKey.useBiometricID) }
+        set { set(newValue, forKey: LockAppKey.useBiometricID) }
     }
 }
 
@@ -43,9 +43,9 @@ class LockAppManager {
         let success: Bool
         switch isLocked {
         case true:
-            success = KeychainManager.shared.update(value: pw, forKey: LockAppDefaultsKey.passwordKey)
+            success = KeychainManager.shared.update(value: pw, forKey: LockAppKey.passwordKey)
         case false:
-            success = KeychainManager.shared.save(value: pw, forKey: LockAppDefaultsKey.passwordKey)
+            success = KeychainManager.shared.save(value: pw, forKey: LockAppKey.passwordKey)
         }
         
         if success {
@@ -58,11 +58,11 @@ class LockAppManager {
     
     func validatePassword(_ pw: [Int]) -> Bool {
         let pw = pw.map { String($0) }.joined()
-        return KeychainManager.shared.match(value: pw, forKey: LockAppDefaultsKey.passwordKey)
+        return KeychainManager.shared.match(value: pw, forKey: LockAppKey.passwordKey)
     }
     
     func deletePassword() {
-        let success = KeychainManager.shared.delete(forKey: LockAppDefaultsKey.passwordKey)
+        let success = KeychainManager.shared.delete(forKey: LockAppKey.passwordKey)
         
         if success {
             print("Delete Password: Success")
