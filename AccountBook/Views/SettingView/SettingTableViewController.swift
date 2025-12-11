@@ -91,7 +91,12 @@ class SettingTableViewController: UITableViewController {
     }
     
     func showHelpView() {
+        guard let vc = storyboard?.instantiateViewController(withIdentifier: "HelpViewController") as? HelpViewController else {
+            print("SettingTableViewController: 도움말 VC 생성 오류")
+            return
+        }
         
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     func showContactView() {
