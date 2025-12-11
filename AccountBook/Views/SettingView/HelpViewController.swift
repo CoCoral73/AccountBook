@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import WebKit
 
 class HelpViewController: UIViewController {
 
@@ -14,5 +15,12 @@ class HelpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configure()
+    }
+
+    private func configure() {
+        let url = URL(string: "https://instinctive-pixie-038.notion.site/2c6a5a562f278087bb76cc207547cbde?pvs=74")!
+        let request = URLRequest(url: url)
+        webView.load(request)
     }
 }
