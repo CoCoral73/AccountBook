@@ -40,6 +40,7 @@ class LockAppViewController: UIViewController {
             DispatchQueue.main.async {
                 self.lockSwitch.isOn = self.viewModel.isOnForLockSwitch
                 self.detailViewForLockState.isHidden = self.viewModel.isHiddenForDetailView
+                self.biometricIDSwitch.isOn = self.viewModel.isOnForBiometricIDSwitch
             }
         }
         
