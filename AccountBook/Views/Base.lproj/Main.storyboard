@@ -3417,7 +3417,7 @@
         <!--Help View Controller-->
         <scene sceneID="wgf-fS-4gD">
             <objects>
-                <viewController storyboardIdentifier="HelpViewController" id="gxy-ca-xPq" customClass="HelpViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HelpViewController" hidesBottomBarWhenPushed="YES" id="gxy-ca-xPq" customClass="HelpViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="BoQ-Gl-pCT">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
