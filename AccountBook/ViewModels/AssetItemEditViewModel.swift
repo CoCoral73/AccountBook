@@ -19,7 +19,7 @@ class AssetItemEditViewModel {
     private var name: String = ""
     private var balance: Int64 = 0
     private var linkedAccount: BankAccountItem?
-    private var withdrawalDay: Int16 = 1
+    private var withdrawalDay: Int16 = 13
     private var startDay: Int16 = 1
     
     //거래 추가 안에서 자산 추가했을 때
