@@ -3429,7 +3429,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="도움말" id="Udr-dR-HMM">
-                                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="i6e-dc-y95"/>
+                                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="i6e-dc-y95">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="gxy-ca-xPq" id="Rav-VI-d0A"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                                 <navigationBarAppearance key="standardAppearance"/>

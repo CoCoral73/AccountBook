@@ -30,4 +30,9 @@ class HelpViewController: UIViewController {
         let request = URLRequest(url: url)
         webView.load(request)
     }
+    
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
+    
 }
