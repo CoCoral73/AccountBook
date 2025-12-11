@@ -5,6 +5,8 @@
 //  Created by 김정원 on 12/2/25.
 //
 
+import Foundation
+
 enum PasswordMode {
     case register
     case modify
@@ -46,6 +48,23 @@ class PasswordViewModel {
             return "새로운 비밀번호를 입력해주세요."
         case .validate:
             return "비밀번호를 입력해주세요."
+        }
+    }
+    
+    var isEnabledForBiometricID: Bool {
+        return LockAppManager.shared.useBiometricID
+    }
+    
+    var alphaForBiometricID: CGFloat {
+        isEnabledForBiometricID ? 1 : 0
+    }
+    
+    var imageNameForBiometricID: String {
+        let type = LockAppManager.shared.getBiometricType()
+        switch type {
+        case .faceID: return "faceid"
+        case .touchID: return "touchid"
+        default: return ""
         }
     }
     
