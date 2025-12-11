@@ -23,6 +23,8 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var cardStackView: UIStackView!
     @IBOutlet weak var creditCardStackView: UIStackView!
     @IBOutlet weak var boxViewForCreditCard: UIView!
+    @IBOutlet weak var periodLabel: UILabel!
+    @IBOutlet weak var withdrawalDayLabel: UILabel!
     
     @IBOutlet weak var linkedCardsTableView: IntrinsicTableView!
     @IBOutlet weak var removeButton: UIButton!

@@ -2665,11 +2665,13 @@
                         <outlet property="linkedCardsTableView" destination="M6O-Fk-2x0" id="hWH-oS-sx8"/>
                         <outlet property="nameTextField" destination="sUb-my-ELU" id="B7X-mL-Sk2"/>
                         <outlet property="navItem" destination="o9B-xE-U4N" id="CmB-h4-A0v"/>
+                        <outlet property="periodLabel" destination="wX9-d4-cae" id="319-Hr-JMx"/>
                         <outlet property="removeButton" destination="ZP5-RM-Chc" id="G6v-0Q-y0I"/>
                         <outlet property="segControl" destination="RI9-ks-QfJ" id="dpW-Jr-ePn"/>
                         <outlet property="startDayButton" destination="8By-Pj-mQL" id="GgJ-d0-QtI"/>
                         <outlet property="topConstraint" destination="V8s-Ze-wNv" id="3d2-ny-YHv"/>
                         <outlet property="withdrawalDayButton" destination="T5E-WP-J54" id="Voh-7X-wte"/>
+                        <outlet property="withdrawalDayLabel" destination="aEj-eS-6xZ" id="YHI-4D-a96"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0K-3i-4wP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
