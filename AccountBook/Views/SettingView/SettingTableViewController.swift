@@ -58,6 +58,8 @@ class SettingTableViewController: UITableViewController {
         case .rating:
             showRatingView()
         }
+        
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func showCategoryListView(_ isIncome: Bool) {
@@ -100,7 +102,7 @@ class SettingTableViewController: UITableViewController {
     }
     
     func showContactView() {
-        
+        showMailComposer()
     }
     
     func showRatingView() {
