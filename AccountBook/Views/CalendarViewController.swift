@@ -317,6 +317,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         detailTableView.dataSource = self
         
         detailTableView.rowHeight = 50
+        detailTableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: detailTableView.bounds.width, height: 70))
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
