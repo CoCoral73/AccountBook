@@ -104,6 +104,8 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
         accountButton.setTitle(viewModel.accountButtonTitleString, for: .normal)
         withdrawalDayButton.setTitle(viewModel.selectWithdrawlDateButtonTitle, for: .normal)
         startDayButton.setTitle(viewModel.selectStartDateButtonTitle, for: .normal)
+        periodLabel.text = viewModel.periodString
+        withdrawalDayLabel.text = viewModel.withdrawalDayString
         removeButton.isHidden = viewModel.isHiddenForRemoveButton
     }
     
@@ -126,9 +128,13 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
             if tag == 0 {
                 viewModel.setWithdrawalDay(with: day)
                 withdrawalDayButton.setTitle(viewModel.selectWithdrawlDateButtonTitle, for: .normal)
+                periodLabel.text = viewModel.periodString
+                withdrawalDayLabel.text = viewModel.withdrawalDayString
             } else {
                 viewModel.setStartDay(with: day)
                 startDayButton.setTitle(viewModel.selectStartDateButtonTitle, for: .normal)
+                periodLabel.text = viewModel.periodString
+                withdrawalDayLabel.text = viewModel.withdrawalDayString
             }
         }
         
