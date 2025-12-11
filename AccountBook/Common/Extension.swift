@@ -7,6 +7,18 @@
 
 import UIKit
 
+extension UIWindow {
+    func topMostViewController() -> UIViewController? {
+        var top = rootViewController
+
+        while let presented = top?.presentedViewController {
+            top = presented
+        }
+
+        return top
+    }
+}
+
 extension Calendar {
     func date(year: Int, month: Int) -> Date? {
         let comps = DateComponents(year: year, month: month, day: 1)

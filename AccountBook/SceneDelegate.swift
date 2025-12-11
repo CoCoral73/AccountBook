@@ -40,10 +40,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
         guard let windowScene = scene as? UIWindowScene else { return }
-        guard let root = windowScene.windows.first?.rootViewController else { return }
+        guard let window = windowScene.windows.first else { return }
 
         LockAppManager.shared.checkAvailableStateOfBiometricID()
-        showLockIfNeeded(on: root)
+        if let topVC = window.topMostViewController() {
+            showLockIfNeeded(on: topVC)
+        }
     }
     
     private func showLockIfNeeded(on root: UIViewController) {
