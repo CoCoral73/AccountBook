@@ -16,6 +16,7 @@ class PasswordViewController: UIViewController {
     @IBOutlet weak var pw2Label: UILabel!
     @IBOutlet weak var pw3Label: UILabel!
     @IBOutlet weak var pw4Label: UILabel!
+    @IBOutlet weak var biometricIDButton: UIButton!
     
     var viewModel: PasswordViewModel!
     
@@ -79,6 +80,9 @@ class PasswordViewController: UIViewController {
     func configureUI() {
         closeButton.isHidden = viewModel.isHiddenForCloseButton
         messageLabel.text = viewModel.initialMessage
+        biometricIDButton.isEnabled = viewModel.isEnabledForBiometricID
+        biometricIDButton.alpha = viewModel.alphaForBiometricID
+        biometricIDButton.setImage(UIImage(systemName: viewModel.imageNameForBiometricID), for: .normal)
         resetDigits()
     }
     
@@ -105,6 +109,10 @@ class PasswordViewController: UIViewController {
     
     @IBAction func numberPadTapped(_ sender: UIButton) {
         viewModel.handleNumberPad(tag: sender.tag)
+    }
+    
+    @IBAction func biometricIDTapped(_ sender: UIButton) {
+        viewModel.requestValidateBiometricID()
     }
     
     override func viewDidAppear(_ animated: Bool) {
