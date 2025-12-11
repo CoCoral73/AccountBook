@@ -166,8 +166,12 @@ class CalendarViewController: UIViewController, ThemeApplicable {
             fatalError("MonthPickerViewController 생성 에러")
         }
         
-        pickerVC.modalPresentationStyle = .custom
-        pickerVC.transitioningDelegate = self
+        if let sheet = pickerVC.sheetPresentationController {
+            sheet.detents = [.custom { _ in
+                return 260    //44 + 216
+            }]
+        }
+
         present(pickerVC, animated: true, completion: nil)
     }
     
@@ -348,18 +352,4 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-}
-
-//MARK: Month Picker View, Custom Height
-extension CalendarViewController: UIViewControllerTransitioningDelegate {
-    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-        return MonthPickerPresentationController(presentedViewController: presented, presenting: presentingViewController)
-    }
-}
-class MonthPickerPresentationController: UIPresentationController {
-    override var frameOfPresentedViewInContainerView: CGRect {
-        guard let bounds = containerView?.bounds else { return .zero }
-        let height = 260 + containerView!.safeAreaInsets.bottom
-        return CGRect(x: 0, y: bounds.height - height, width: bounds.width, height: height)
-    }
 }
