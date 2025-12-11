@@ -3320,7 +3320,7 @@
                                                 <rect key="frame" x="0.0" y="60.333333333333343" width="393" height="60.333333333333343"/>
                                                 <subviews>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZIb-Kj-x1O" userLabel="separator">
-                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="0.33333333333333215"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="393" height="0.33333333333333331"/>
                                                         <color key="backgroundColor" systemColor="opaqueSeparatorColor"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="0.29999999999999999" id="rms-R2-tqc"/>
@@ -3559,7 +3559,12 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="spi-cH-zLh">
                                                 <rect key="frame" x="0.0" y="0.0" width="120.33333333333333" height="70"/>
                                                 <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                <state key="normal" title="Button"/>
+                                                <state key="normal">
+                                                    <imageReference key="image" image="faceid" catalog="system" symbolScale="large"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="biometricIDTapped:" destination="kzN-Sr-9bH" eventType="touchUpInside" id="1An-h1-q5I"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HjX-dq-539">
                                                 <rect key="frame" x="120.33333333333334" y="0.0" width="120.33333333333334" height="70"/>
@@ -3641,6 +3646,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="biometricIDButton" destination="spi-cH-zLh" id="UCW-S7-w0O"/>
                         <outlet property="closeButton" destination="WBz-IR-5Gj" id="6XF-n8-Fqk"/>
                         <outlet property="messageLabel" destination="gUe-Dr-Ang" id="cfc-pM-fZx"/>
                         <outlet property="pw1Label" destination="DGP-Vl-amA" id="ViB-SP-jgc"/>
@@ -3975,6 +3981,7 @@
         <image name="creditcard" catalog="system" width="128" height="88"/>
         <image name="delete.left" catalog="system" width="128" height="102"/>
         <image name="equal" catalog="system" width="128" height="73"/>
+        <image name="faceid" catalog="system" width="128" height="115"/>
         <image name="info.circle" catalog="system" width="128" height="123"/>
         <image name="minus" catalog="system" width="128" height="26"/>
         <image name="pencil.and.list.clipboard" catalog="system" width="114" height="128"/>
