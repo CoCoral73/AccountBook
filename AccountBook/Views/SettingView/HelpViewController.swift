@@ -8,6 +8,9 @@
 import UIKit
 
 class HelpViewController: UIViewController {
+
+    @IBOutlet weak var webView: WKWebView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
