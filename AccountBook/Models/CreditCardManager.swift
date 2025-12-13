@@ -9,7 +9,7 @@ class CreditCardManager {
     static let shared = CreditCardManager()
     private init() { }
     
-    func calculatePeriod(withdrawalDay: Int16, startDay: Int16) -> String {
+    func getPeriodString(withdrawalDay: Int16, startDay: Int16) -> String {
         let periodString: String
         
         if startDay == 1 {
