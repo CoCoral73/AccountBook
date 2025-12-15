@@ -122,4 +122,20 @@ class CreditCardManager {
         
         return (total, outstanding)
     }
+    
+    func completeSpecificCycle(for card: CreditCardItem, cycle: (startDate: Date, endDate: Date)) {
+        guard let txs = card.transactions as? Set<Transaction> else { return }
+        
+        var total: Int64 = 0
+        for tx in txs where tx.date >= cycle.startDate && tx.date < cycle.endDate && !tx.isCompleted {
+            tx.isCompleted = true
+            total += tx.amount
+        }
+        
+        if let account = card.linkedAccount {
+            account.balance -= total
+        } else {
+            AssetItemManager.shared.cash[0].balance -= total
+        }
+    }
 }
