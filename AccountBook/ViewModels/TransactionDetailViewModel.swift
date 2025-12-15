@@ -26,6 +26,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     var onRequestSaveAlert: ((AlertConfig) -> Void)?
     var onRequestSaveAlertBeforeInstallment: ((AlertConfig) -> Void)?
     var onRequestSaveAlertBeforeDeleteInstallment: ((AlertConfig) -> Void)?
+    var onRequestSaveAlertBeforeIsCompleted: ((AlertConfig) -> Void)?
     var onRequestIsCompletedAlert: ((AlertConfig) -> Void)?
     var onRequestPop: (() -> Void)?
     var onShowInstallmentView: ((InstallmentViewModel) -> Void)?
@@ -136,6 +137,18 @@ class TransactionDetailViewModel: TransactionUpdatable {
     
     func handleIsCompletedButton() {
         guard let isCompleted = copy.isCompleted else { return }
+        let action = isCompleted ? "취소" : "완료"
+        switch state {
+        case .modified:
+            onRequestSaveAlertBeforeIsCompleted?(AlertConfig(title: "저장", message: "결제 \(action) 처리를 하려면 먼저 변경된 내용을 저장해야 합니다.\n저장하시겠습니까?"))
+        case .saved:
+            requestIsCompletedAlert()
+        }
+
+    }
+    
+    func requestIsCompletedAlert() {
+        guard let isCompleted = copy.isCompleted else { return }
         switch isCompleted {
         case true:
             onRequestIsCompletedAlert?(AlertConfig(title: "결제 취소", message: "이미 결제 완료된 거래입니다.\n결제를 취소하시겠습니까?"))
@@ -145,9 +158,14 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func confirmIsCompleted() {
-        guard let _ = copy.isCompleted else { return }
-        copy.isCompleted?.toggle()
-        state = .modified
+        guard let isCompleted = copy.isCompleted else { return }
+        switch isCompleted {
+        case true:
+            TransactionManager.shared.cancelTransaction(transaction)
+        case false:
+            TransactionManager.shared.completeTransaction(transaction)
+        }
+        copy.isCompleted = transaction.isCompleted
         onDidSetIsCompleted?()
     }
     
