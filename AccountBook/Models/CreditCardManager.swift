@@ -29,7 +29,8 @@ class CreditCardManager {
         return periodString
     }
     
-    func calculateCurrentMonthCycle(startDay: Int, now: Date = Date()) -> (startDate: Date, endDate: Date)? {
+    func calculateCurrentMonthCycle(for card: CreditCardItem, now: Date = Date()) -> (startDate: Date, endDate: Date)? {
+        let startDay = Int(card.startDate)
         if startDay == 1 {
             return (now.startOfMonth, now.endOfMonth)
         }
