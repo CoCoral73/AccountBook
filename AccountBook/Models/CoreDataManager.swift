@@ -175,11 +175,8 @@ final class CoreDataManager {
     
     //MARK: - 사용자 설정 기간 거래 내역 조회
     func fetchTransactions(startDate: Date, endDate: Date) -> [Transaction] {
-        let start = calendar.startOfDay(for: startDate)
-        let end = calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: endDate)!)
-        
         let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
-        request.predicate = NSPredicate(format: "date >= %@ AND date < %@", start as NSDate, end as NSDate)
+        request.predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
         request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
         
         do {
