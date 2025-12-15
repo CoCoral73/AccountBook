@@ -40,14 +40,9 @@ extension Date {
         return fmt.string(from: self)
     }
     
-    var endOfDay: Date {
+    var nextDay: Date {
         let calendar = Calendar.current
-        guard let nextDay = calendar.date(byAdding: .day, value: 1, to: self),
-              let endOfDay = calendar.date(byAdding: .second, value: -1, to: nextDay) else {
-            print("extension+Date: endOfDay 생성 오류")
-            return Date()
-        }
-        return endOfDay
+        return calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: self)!)
     }
     
     var startOfMonth: Date {
