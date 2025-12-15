@@ -1804,12 +1804,12 @@
                                                 <rect key="frame" x="20" y="161" width="313" height="22"/>
                                                 <subviews>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="토마토바질베이글" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Da1-Jo-gAY">
-                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="22"/>
+                                                        <rect key="frame" x="0.0" y="-0.66666666666668561" width="178" height="23.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits"/>
                                                     </textField>
                                                     <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="333,000,000" textAlignment="right" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="iJj-eu-E1v" customClass="FormattedTextField" customModule="AccountBook" customModuleProvider="target">
-                                                        <rect key="frame" x="208" y="0.0" width="105" height="22"/>
+                                                        <rect key="frame" x="178" y="-0.66666666666668561" width="135" height="23.333333333333332"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                                     </textField>
@@ -1835,6 +1835,7 @@
                                             <constraint firstAttribute="trailing" secondItem="pgr-zu-MpC" secondAttribute="trailing" constant="12" id="BwQ-qr-lZt"/>
                                             <constraint firstItem="ITT-dc-c8H" firstAttribute="top" secondItem="pgr-zu-MpC" secondAttribute="bottom" constant="12" id="EDl-P7-Zj3"/>
                                             <constraint firstItem="ITT-dc-c8H" firstAttribute="leading" secondItem="ZrH-Yn-V1x" secondAttribute="leading" constant="20" symbolic="YES" id="FLf-za-Ipn"/>
+                                            <constraint firstItem="Da1-Jo-gAY" firstAttribute="trailing" secondItem="jZv-Ih-0H5" secondAttribute="trailing" id="IhS-cg-u2f"/>
                                             <constraint firstAttribute="trailing" secondItem="ir7-qu-VZn" secondAttribute="trailing" constant="12" id="Ixw-vW-5OC"/>
                                             <constraint firstAttribute="trailing" secondItem="0rJ-tO-lY7" secondAttribute="trailing" constant="15" id="KJQ-gb-vrO"/>
                                             <constraint firstAttribute="trailing" secondItem="ITT-dc-c8H" secondAttribute="trailing" constant="20" symbolic="YES" id="Ksr-rI-5NT"/>
@@ -1847,6 +1848,7 @@
                                             <constraint firstItem="HCA-LK-V0m" firstAttribute="top" secondItem="wvD-ns-PsR" secondAttribute="bottom" constant="12" id="YwQ-Zv-jwP"/>
                                             <constraint firstAttribute="bottom" secondItem="ITT-dc-c8H" secondAttribute="bottom" constant="20" id="auS-0H-lCD"/>
                                             <constraint firstItem="Yqr-si-hI6" firstAttribute="top" secondItem="HCA-LK-V0m" secondAttribute="bottom" constant="12" id="dBW-oc-fEF"/>
+                                            <constraint firstItem="iJj-eu-E1v" firstAttribute="leading" secondItem="BGe-i5-Iq9" secondAttribute="leading" id="dv3-Y5-0D5"/>
                                             <constraint firstItem="wvD-ns-PsR" firstAttribute="leading" secondItem="ZrH-Yn-V1x" secondAttribute="leading" constant="20" id="hQO-gN-Zlh"/>
                                             <constraint firstItem="qcq-2D-RLI" firstAttribute="top" secondItem="tTF-JH-dtn" secondAttribute="bottom" constant="25" id="i2V-w8-5CJ"/>
                                             <constraint firstItem="7iy-5P-UEb" firstAttribute="top" secondItem="Yqr-si-hI6" secondAttribute="bottom" constant="20" id="koD-8N-I1L"/>
