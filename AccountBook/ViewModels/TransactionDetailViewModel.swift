@@ -69,7 +69,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     var assetTypeString: String {
         guard let assetType = assetType else { return "" }
-        return copy.isIncome ? "**입금**" : "**\(assetType.displayName) 결제**"
+        return copy.isIncome ? "**입금**" : "**\(assetType.displayName) 거래**"
     }
     var canEdit: Bool {
         return copy.installment == nil
