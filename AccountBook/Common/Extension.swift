@@ -59,8 +59,10 @@ extension Date {
     
     var startOfYear: Date {
         let calendar = Calendar.current
-        let component = calendar.dateComponents([.year], from: self)
-        return calendar.date(from: component)!
+        var component = calendar.dateComponents([.year], from: self)
+        component.month = 1
+        component.day = 1
+        return calendar.startOfDay(for: calendar.date(from: component)!)
     }
     
     var endOfYear: Date {
