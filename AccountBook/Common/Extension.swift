@@ -24,6 +24,13 @@ extension Calendar {
         let comps = DateComponents(year: year, month: month, day: 1)
         return self.date(from: comps)
     }
+    
+    func date(year: Int, month: Int, day: Int) -> Date? {
+        guard let tmp = self.date(year: year, month: month) else { return nil }
+        guard let range = self.range(of: .day, in: .month, for: tmp) else { return nil }
+        let safeDay = min(range.count, day)
+        return self.date(from: DateComponents(year: year, month: month, day: safeDay))
+    }
 }
 
 extension Date {
