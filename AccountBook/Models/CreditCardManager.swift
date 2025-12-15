@@ -79,11 +79,11 @@ class CreditCardManager {
         guard let txs = card.transactions as? Set<Transaction> else { return (0, 0) }
         
         var total: Int64 = 0, outstanding: Int64 = 0
-        for tx in txs {
-            if tx.date >= cycle.startDate && tx.date < cycle.endDate {
-                //전제: amount > 0
-                total += tx.amount
-                outstanding += tx.isCompleted ? 0 : tx.amount
+        for tx in txs where tx.date >= cycle.startDate && tx.date < cycle.endDate {
+            //전제: amount > 0
+            total += tx.amount
+            if !tx.isCompleted {
+                outstanding += tx.amount
             }
         }
         
