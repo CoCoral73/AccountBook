@@ -84,7 +84,8 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     var isHiddenForIsCompleted: Bool { assetType != .creditCard }
     var titleForIsCompleted: String {
-        return transaction.isCompleted ? "완료" : "미완료"
+        guard let isCompleted = copy.isCompleted else { return "알수없음" }
+        return isCompleted ? "완료" : "미완료"
     }
     var memoString: String? {
         return copy.memo
