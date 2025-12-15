@@ -1907,6 +1907,9 @@
                         <outlet property="dateButton" destination="qcq-2D-RLI" id="1nB-Cz-fhM"/>
                         <outlet property="installmentButton" destination="5V6-cj-gp5" id="vWN-FT-gig"/>
                         <outlet property="installmentLabel" destination="R6M-dB-RBy" id="mic-SK-m4e"/>
+                        <outlet property="installmentView" destination="mq4-1g-Dmm" id="FQw-9u-kO7"/>
+                        <outlet property="isCompletedButton" destination="2wl-u1-F4Y" id="d21-OM-abq"/>
+                        <outlet property="isCompletedView" destination="Bpq-mS-C98" id="jXi-YC-leH"/>
                         <outlet property="isIncomeLabel" destination="0rJ-tO-lY7" id="6QI-aW-g48"/>
                         <outlet property="memoTextView" destination="ITT-dc-c8H" id="ZWT-U8-PIv"/>
                         <outlet property="nameTextField" destination="Da1-Jo-gAY" id="fok-HX-zvm"/>

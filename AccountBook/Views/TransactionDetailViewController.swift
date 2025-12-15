@@ -19,10 +19,12 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var assetTypeLabel: UILabel!
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var assetItemButton: UIButton!
+    @IBOutlet weak var installmentView: UIView!
     @IBOutlet weak var installmentLabel: UILabel!
     @IBOutlet weak var installmentButton: UIButton!
+    @IBOutlet weak var isCompletedView: UIView!
+    @IBOutlet weak var isCompletedButton: UIButton!
     @IBOutlet weak var memoTextView: UITextView!
-    @IBOutlet weak var removeInstallmentButton: UIButton!
     
     var viewModel: TransactionDetailViewModel
     
@@ -53,8 +55,6 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         navigationBar.standardAppearance = appearance
-        
-        removeInstallmentButton.backgroundColor = theme.accentColor
     }
     
     private func bindViewModel() {
@@ -185,7 +185,6 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         installmentButton.isHidden = viewModel.isHiddenForInstallment
         installmentButton.setTitle(viewModel.installmentString, for: .normal)
         memoTextView.text = viewModel.memoString
-        removeInstallmentButton.isHidden = viewModel.canEdit
     }
     
     private func configureKeyboardAccessory() {
@@ -293,11 +292,6 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         navigationController?.pushViewController(installmentVC, animated: true)
     }
     
-    @IBAction func removeInstallmentButtonTapped(_ sender: UIButton) {
-        checkSaveState()
-        viewModel.handleRemoveInstallmentButton()
-    }
-    
     @IBAction func removeButtonTapped(_ sender: UIButton) {
         viewModel.handleRemoveButton()
     }
@@ -324,13 +318,6 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         paperView.layer.shadowOpacity = 0.2
         paperView.layer.shadowOffset  = CGSize(width: 0, height: 1)
         paperView.layer.shadowRadius  = 6
-        
-        let path = UIBezierPath(roundedRect: removeInstallmentButton.bounds, cornerRadius: removeInstallmentButton.bounds.width / 2)
-        removeInstallmentButton.layer.shadowPath = path.cgPath
-        removeInstallmentButton.layer.shadowColor   = UIColor.black.cgColor
-        removeInstallmentButton.layer.shadowOpacity = 0.2
-        removeInstallmentButton.layer.shadowOffset  = CGSize(width: 0, height: 2)
-        removeInstallmentButton.layer.shadowRadius  = 6
     }
     
     deinit {
