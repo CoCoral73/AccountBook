@@ -127,15 +127,19 @@ class CreditCardManager {
         guard let txs = card.transactions as? Set<Transaction> else { return }
         
         for tx in txs where tx.date >= cycle.startDate && tx.date < cycle.endDate {
-            TransactionManager.shared.completeTransaction(tx)
+            TransactionManager.shared.completeTransaction(tx, shouldSave: false)
         }
+        
+        CoreDataManager.shared.saveContext()
     }
     
     func cancelSpecificCycle(for card: CreditCardItem, cycle: (startDate: Date, endDate: Date)) {
         guard let txs = card.transactions as? Set<Transaction> else { return }
         
         for tx in txs where tx.date >= cycle.startDate && tx.date < cycle.endDate {
-            TransactionManager.shared.cancelTransaction(tx)
+            TransactionManager.shared.cancelTransaction(tx, shouldSave: false)
         }
+        
+        CoreDataManager.shared.saveContext()
     }
 }

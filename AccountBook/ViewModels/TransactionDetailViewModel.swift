@@ -161,9 +161,9 @@ class TransactionDetailViewModel: TransactionUpdatable {
         guard let isCompleted = copy.isCompleted else { return }
         switch isCompleted {
         case true:
-            TransactionManager.shared.cancelTransaction(transaction)
+            TransactionManager.shared.cancelTransaction(transaction, shouldSave: true)
         case false:
-            TransactionManager.shared.completeTransaction(transaction)
+            TransactionManager.shared.completeTransaction(transaction, shouldSave: true)
         }
         copy.isCompleted = transaction.isCompleted
         onDidSetIsCompleted?()
