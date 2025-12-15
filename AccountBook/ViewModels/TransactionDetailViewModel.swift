@@ -18,12 +18,15 @@ class TransactionDetailViewModel: TransactionUpdatable {
     var onDidSetCategory: (() -> Void)?
     var onDidSetAssetItem: (() -> Void)?
     var onDidSetInstallment: (() -> Void)?
+    var onDidSetIsCompleted: (() -> Void)?
+    
     var onRequestDeleteInstallmentAlert: ((AlertConfig) -> Void)?
     var onRequestDeleteAlert: ((AlertConfig) -> Void)?
     var onRequestBlockPopAlert: (() -> Void)?
     var onRequestSaveAlert: ((AlertConfig) -> Void)?
     var onRequestSaveAlertBeforeInstallment: ((AlertConfig) -> Void)?
     var onRequestSaveAlertBeforeDeleteInstallment: ((AlertConfig) -> Void)?
+    var onRequestIsCompletedAlert: ((AlertConfig) -> Void)?
     var onRequestPop: (() -> Void)?
     var onShowInstallmentView: ((InstallmentViewModel) -> Void)?
     
@@ -128,6 +131,23 @@ class TransactionDetailViewModel: TransactionUpdatable {
         case .saved:
             requestInstallmentViewPresentation()
         }
+    }
+    
+    func handleIsCompletedButton() {
+        guard let isCompleted = copy.isCompleted else { return }
+        switch isCompleted {
+        case true:
+            onRequestIsCompletedAlert?(AlertConfig(title: "결제 취소", message: "이미 결제 완료된 거래입니다.\n결제를 취소하시겠습니까?"))
+        case false:
+            onRequestIsCompletedAlert?(AlertConfig(title: "결제 완료", message: "결제 완료 처리하시겠습니까?\n거래 금액은 연결된 계좌에서 차감됩니다."))
+        }
+    }
+    
+    func confirmIsCompleted() {
+        guard let isCompleted = copy.isCompleted else { return }
+        copy.isCompleted?.toggle()
+        state = .modified
+        onDidSetIsCompleted?()
     }
     
     func checkSaveState(name: String?, amount: String?, memo: String?) {
