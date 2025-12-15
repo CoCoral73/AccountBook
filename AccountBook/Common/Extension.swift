@@ -33,6 +33,16 @@ extension Date {
         return fmt.string(from: self)
     }
     
+    var endOfDay: Date {
+        let calendar = Calendar.current
+        guard let nextDay = calendar.date(byAdding: .day, value: 1, to: self),
+              let endOfDay = calendar.date(byAdding: .second, value: -1, to: nextDay) else {
+            print("extension+Date: endOfDay 생성 오류")
+            return Date()
+        }
+        return endOfDay
+    }
+    
     var startOfMonth: Date {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.year, .month], from: self)
