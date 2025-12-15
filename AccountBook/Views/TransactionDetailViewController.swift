@@ -75,8 +75,9 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             DispatchQueue.main.async {
                 self.assetItemButton.setTitle(self.viewModel.assetItemString, for: .normal)
                 self.assetTypeLabel.text = self.viewModel.assetTypeString
-                self.installmentLabel.isHidden = self.viewModel.isHiddenForInstallment
-                self.installmentButton.isHidden = self.viewModel.isHiddenForInstallment
+                self.installmentView.isHidden = self.viewModel.isHiddenForInstallment
+                self.isCompletedView.isHidden = self.viewModel.isHiddenForIsCompleted
+                self.isCompletedButton.setTitle(self.viewModel.titleForIsCompleted, for: .normal)
             }
         }
         viewModel.onDidSetInstallment = { [weak self] in
@@ -181,9 +182,10 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         assetTypeLabel.text = viewModel.assetTypeString
         categoryButton.setTitle(viewModel.categoryString, for: .normal)
         assetItemButton.setTitle(viewModel.assetItemString, for: .normal)
-        installmentLabel.isHidden = viewModel.isHiddenForInstallment
-        installmentButton.isHidden = viewModel.isHiddenForInstallment
+        installmentView.isHidden = viewModel.isHiddenForInstallment
         installmentButton.setTitle(viewModel.installmentString, for: .normal)
+        isCompletedView.isHidden = viewModel.isHiddenForIsCompleted
+        isCompletedButton.setTitle(viewModel.titleForIsCompleted, for: .normal)
         memoTextView.text = viewModel.memoString
     }
     
