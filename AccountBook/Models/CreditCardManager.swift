@@ -73,4 +73,20 @@ class CreditCardManager {
         
         return (startDate, endDate)
     }
+    
+    //(총 금액, 미결제 금액) 반환
+    func calculateCycleSpending(for card: CreditCardItem, cycle: (startDate: Date, endDate: Date)) -> (Int64, Int64) {
+        guard let txs = card.transactions as? Set<Transaction> else { return (0, 0) }
+        
+        var total: Int64 = 0, outstanding: Int64 = 0
+        for tx in txs {
+            if tx.date >= cycle.startDate && tx.date <= cycle.endDate {
+                //전제: amount > 0
+                total += tx.amount
+                outstanding += tx.isCompleted ? 0 : tx.amount
+            }
+        }
+        
+        return (total, outstanding)
+    }
 }
