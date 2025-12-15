@@ -166,6 +166,20 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
                 self.present(alert, animated: true)
             }
         }
+        viewModel.onRequestSaveAlertBeforeIsCompleted = { [weak self] config in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
+            let success = UIAlertAction(title: "저장", style: .default) { _ in
+                self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
+                self.viewModel.requestIsCompletedAlert()
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(success)
+            alert.addAction(cancel)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true)
+            }
+        }
         viewModel.onRequestIsCompletedAlert = { [weak self] config in
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
