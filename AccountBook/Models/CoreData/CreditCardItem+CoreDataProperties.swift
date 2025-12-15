@@ -16,8 +16,8 @@ extension CreditCardItem {
         return NSFetchRequest<CreditCardItem>(entityName: "CreditCardItem")
     }
 
-    @NSManaged public var withdrawalDate: Int16
-    @NSManaged public var startDate: Int16
+    @NSManaged public var withdrawalDay: Int16
+    @NSManaged public var startDay: Int16
     @NSManaged public var linkedAccount: BankAccountItem?
 
 }

@@ -44,8 +44,8 @@ class AssetItemEditViewModel {
             self.linkedAccount = debit.linkedAccount
         case let credit as CreditCardItem:
             self.linkedAccount = credit.linkedAccount
-            self.withdrawalDay = credit.withdrawalDate
-            self.startDay = credit.startDate
+            self.withdrawalDay = credit.withdrawalDay
+            self.startDay = credit.startDay
         default: break
         }
     }

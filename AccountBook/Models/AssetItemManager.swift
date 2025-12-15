@@ -106,8 +106,8 @@ class AssetItemManager {
         let newItem: CreditCardItem = createItem(CreditCardItem.self) { item in
             item.name = name
             item.linkedAccount = account
-            item.withdrawalDate = withdrawalDate
-            item.startDate = startDate
+            item.withdrawalDay = withdrawalDate
+            item.startDay = startDate
             item.type = 3
         }
         creditCard.append(newItem)
@@ -124,8 +124,8 @@ class AssetItemManager {
             debit.linkedAccount = account
         case let credit as CreditCardItem:
             credit.linkedAccount = account
-            credit.startDate = startDate
-            credit.withdrawalDate = withdrawalDate
+            credit.startDay = startDate
+            credit.withdrawalDay = withdrawalDate
         default: break
         }
         CoreDataManager.shared.saveContext()
