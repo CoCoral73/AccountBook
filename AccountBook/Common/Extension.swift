@@ -65,12 +65,9 @@ extension Date {
         return calendar.startOfDay(for: calendar.date(from: component)!)
     }
     
-    var endOfYear: Date {
+    var startOfNextYear: Date {
         let calendar = Calendar.current
-        guard let startOfNextYear = calendar.date(byAdding: .year, value: 1, to: startOfYear),
-              let endOfYear = calendar.date(byAdding: .second, value: -1, to: startOfNextYear)
-        else { fatalError("endOfYear 계산 실패") }
-        return endOfYear
+        return calendar.startOfDay(for: calendar.date(byAdding: .year, value: 1, to: startOfYear)!)
     }
     
     var kstString: String {

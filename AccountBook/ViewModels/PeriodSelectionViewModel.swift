@@ -34,7 +34,7 @@ class PeriodSelectionViewModel {
             self.endDate = startDate.startOfNextMonth
         case .yearly:
             self.startDate = startDate.startOfYear
-            self.endDate = startDate.endOfYear
+            self.endDate = startDate.startOfNextYear
         case .custom:
             self.startDate = startDate
             self.endDate = endDate
@@ -110,7 +110,7 @@ class PeriodSelectionViewModel {
         case .monthly:
             endDate = startDate.startOfNextMonth
         case .yearly:
-            endDate = startDate.endOfYear
+            endDate = startDate.startOfNextYear
         case .custom:
             return
         }
