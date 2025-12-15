@@ -4,10 +4,13 @@
 //
 //  Created by 김정원 on 12/11/25.
 //
+import Foundation
 
 class CreditCardManager {
     static let shared = CreditCardManager()
     private init() { }
+    
+    private var calendar = Calendar.current
     
     func getPeriodString(withdrawalDay: Int16, startDay: Int16) -> String {
         let periodString: String
@@ -24,5 +27,50 @@ class CreditCardManager {
         }
         
         return periodString
+    }
+    
+    func calculateCurrentMonthCycle(startDay: Int, now: Date = Date()) -> (startDate: Date, endDate: Date)? {
+        if startDay == 1 {
+            return (now.startOfMonth, now.endOfMonth)
+        }
+        
+        let endDay = startDay - 1
+        let components = calendar.dateComponents([.year, .month, .day], from: now)
+        guard let year = components.year, let month = components.month, let day = components.day else { return nil }
+        
+        let startYear: Int, startMonth: Int, endYear: Int, endMonth: Int
+        let startDate: Date, endDate: Date
+        if day >= startDay {
+            startYear = year
+            startMonth = month
+            startDate = calendar.date(year: startYear, month: startMonth, day: startDay)!
+            
+            if month == 12 {
+                endYear = year + 1
+                endMonth = 1
+            } else {
+                endYear = year
+                endMonth = month + 1
+            }
+            
+            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.endOfDay
+        } else {
+            if month == 1 {
+                startYear = year - 1
+                startMonth = 12
+            } else {
+                startYear = year
+                startMonth = month - 1
+            }
+            
+            startDate = calendar.date(year: startYear, month: startMonth, day: startDay)!
+            
+            endYear = year
+            endMonth = month
+            
+            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.endOfDay
+        }
+        
+        return (startDate, endDate)
     }
 }
