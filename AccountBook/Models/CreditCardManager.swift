@@ -53,7 +53,7 @@ class CreditCardManager {
                 endMonth = month + 1
             }
             
-            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.endOfDay
+            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.nextDay
         } else {
             if month == 1 {
                 startYear = year - 1
@@ -68,7 +68,7 @@ class CreditCardManager {
             endYear = year
             endMonth = month
             
-            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.endOfDay
+            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.nextDay
         }
         
         return (startDate, endDate)
@@ -80,7 +80,7 @@ class CreditCardManager {
         
         var total: Int64 = 0, outstanding: Int64 = 0
         for tx in txs {
-            if tx.date >= cycle.startDate && tx.date <= cycle.endDate {
+            if tx.date >= cycle.startDate && tx.date < cycle.endDate {
                 //전제: amount > 0
                 total += tx.amount
                 outstanding += tx.isCompleted ? 0 : tx.amount
