@@ -129,20 +129,28 @@ class TransactionManager {
         CoreDataManager.shared.saveContext()
     }
     
-    func completeTransaction(_ transaction: Transaction) {
+    func completeTransaction(_ transaction: Transaction, shouldSave: Bool) {
         guard !transaction.isCompleted else { return }
         guard transaction.asset is CreditCardItem else { return }
         
         transaction.isCompleted = true
         adjustBalance(amount: -transaction.amount, asset: transaction.asset, isCompleted: true)
+        
+        if shouldSave {
+            CoreDataManager.shared.saveContext()
+        }
     }
     
-    func cancelTransaction(_ transaction: Transaction) {
+    func cancelTransaction(_ transaction: Transaction, shouldSave: Bool) {
         guard transaction.isCompleted else { return }
         guard transaction.asset is CreditCardItem else { return }
         
         adjustBalance(amount: transaction.amount, asset: transaction.asset, isCompleted: true)
         transaction.isCompleted = false
+        
+        if shouldSave {
+            CoreDataManager.shared.saveContext()
+        }
     }
     
     func adjustBalance(amount: Int64, asset: AssetItem, isCompleted: Bool) {
