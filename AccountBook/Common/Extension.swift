@@ -52,13 +52,9 @@ extension Date {
         return calendar.startOfDay(for: calendar.date(from: components)!)
     }
     
-    var endOfMonth: Date {
+    var startOfNextMonth: Date {
         let calendar = Calendar.current
-        // 다음 달의 1일을 구한 다음 하루 전으로 이동
-        guard let startOfNextMonth = calendar.date(byAdding: .month, value: 1, to: startOfMonth),
-              let endOfMonth = calendar.date(byAdding: .second, value: -1, to: startOfNextMonth)
-        else { fatalError("endOfMonth 계산 실패") }
-        return endOfMonth
+        return calendar.startOfDay(for: calendar.date(byAdding: .month, value: 1, to: startOfMonth)!)
     }
     
     var startOfYear: Date {

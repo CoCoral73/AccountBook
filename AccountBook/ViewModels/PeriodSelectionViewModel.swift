@@ -31,7 +31,7 @@ class PeriodSelectionViewModel {
         switch periodType {
         case .monthly:
             self.startDate = startDate.startOfMonth
-            self.endDate = startDate.endOfMonth
+            self.endDate = startDate.startOfNextMonth
         case .yearly:
             self.startDate = startDate.startOfYear
             self.endDate = startDate.endOfYear
@@ -108,7 +108,7 @@ class PeriodSelectionViewModel {
         let endDate: Date
         switch periodType {
         case .monthly:
-            endDate = startDate.endOfMonth
+            endDate = startDate.startOfNextMonth
         case .yearly:
             endDate = startDate.endOfYear
         case .custom:
