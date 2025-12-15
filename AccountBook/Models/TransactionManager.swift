@@ -131,8 +131,11 @@ class TransactionManager {
     
     func completeTransaction(_ transaction: Transaction) {
         guard !transaction.isCompleted else { return }
+        guard transaction.asset is CreditCardItem else { return }
+        
         transaction.isCompleted = true
-        adjustBalance(amount: -transaction.amount, asset: transaction.asset, isCompleted: transaction.isCompleted)
+        adjustBalance(amount: transaction.amount, asset: transaction.asset, isCompleted: true)
+    }
     }
     
     func adjustBalance(amount: Int64, asset: AssetItem, isCompleted: Bool) {
