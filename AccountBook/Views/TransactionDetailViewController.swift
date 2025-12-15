@@ -280,6 +280,9 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         viewModel.handleInstallmentButton()
     }
     
+    @IBAction func isCompletedButtonTapped(_ sender: UIButton) {
+    }
+    
     func checkSaveState() {
         viewModel.checkSaveState(name: nameTextField.text, amount: amountTextField.text, memo: memoTextView.text)
     }

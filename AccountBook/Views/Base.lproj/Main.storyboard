@@ -1713,6 +1713,9 @@
                                                                 <state key="normal" title="미완료">
                                                                     <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </state>
+                                                                <connections>
+                                                                    <action selector="isCompletedButtonTapped:" destination="oU4-9V-oZi" eventType="touchUpInside" id="9aI-fl-RQn"/>
+                                                                </connections>
                                                             </button>
                                                         </subviews>
                                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
