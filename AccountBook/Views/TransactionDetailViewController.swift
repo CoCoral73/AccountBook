@@ -300,6 +300,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func isCompletedButtonTapped(_ sender: UIButton) {
+        viewModel.handleIsCompletedButton()
     }
     
     func checkSaveState() {
