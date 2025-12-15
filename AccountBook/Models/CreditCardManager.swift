@@ -54,7 +54,7 @@ class CreditCardManager {
                 endMonth = month + 1
             }
             
-            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.nextDay
+            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.startOfNextDay
         } else {
             if month == 1 {
                 startYear = year - 1
@@ -69,7 +69,7 @@ class CreditCardManager {
             endYear = year
             endMonth = month
             
-            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.nextDay
+            endDate = calendar.date(year: endYear, month: endMonth, day: endDay)!.startOfNextDay
         }
         
         return (startDate, endDate)
