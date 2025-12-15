@@ -86,6 +86,12 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
                 self.configureUI()
             }
         }
+        viewModel.onDidSetIsCompleted = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.isCompletedButton.setTitle(self.viewModel.titleForIsCompleted, for: .normal)
+            }
+        }
         viewModel.onRequestDeleteInstallmentAlert = { [weak self] config in
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
@@ -152,6 +158,19 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             let success = UIAlertAction(title: "저장", style: .default) { _ in
                 self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
                 self.viewModel.requestDeleteInstallmentAlertPresentation()
+            }
+            let cancel = UIAlertAction(title: "취소", style: .cancel)
+            alert.addAction(success)
+            alert.addAction(cancel)
+            DispatchQueue.main.async {
+                self.present(alert, animated: true)
+            }
+        }
+        viewModel.onRequestIsCompletedAlert = { [weak self] config in
+            guard let self = self else { return }
+            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
+            let success = UIAlertAction(title: "확인", style: .default) { _ in
+                self.viewModel.confirmIsCompleted()
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
             alert.addAction(success)
