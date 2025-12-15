@@ -145,7 +145,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func confirmIsCompleted() {
-        guard let isCompleted = copy.isCompleted else { return }
+        guard let _ = copy.isCompleted else { return }
         copy.isCompleted?.toggle()
         state = .modified
         onDidSetIsCompleted?()
