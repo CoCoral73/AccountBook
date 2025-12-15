@@ -75,6 +75,38 @@ class CreditCardManager {
         return (startDate, endDate)
     }
     
+    func calculateSpecificMonthCycle(for card: CreditCardItem, withdrawalDate: Date) -> (startDate: Date, endDate: Date)? {
+        let (startDay, withdrawalDay) = (Int(card.startDay), Int(card.withdrawalDay))
+        let lastMonth = calendar.date(byAdding: .month, value: -1, to: withdrawalDate)!
+        
+        if startDay == 1 {
+            return (lastMonth.startOfMonth, lastMonth.startOfNextMonth)
+        }
+        
+        let endDay = startDay - 1
+        let startDate: Date, endDate: Date
+        if withdrawalDay <= endDay {
+            let theMonthBeforeLast = calendar.date(byAdding: .month, value: -2, to: withdrawalDate)!
+            let comps = calendar.dateComponents([.year, .month], from: theMonthBeforeLast)
+            guard let year = comps.year, let month = comps.month else { return nil }
+            startDate = calendar.startOfDay(for: calendar.safeDate(year: year, month: month, day: startDay)!)
+            
+            let comps2 = calendar.dateComponents([.year, .month], from: lastMonth)
+            guard let year2 = comps2.year, let month2 = comps2.month else { return nil }
+            endDate = calendar.safeDate(year: year2, month: month2, day: endDay)!.startOfNextDay
+        } else {
+            let comp = calendar.dateComponents([.year, .month], from: lastMonth)
+            guard let year = comp.year, let month = comp.month else { return nil }
+            startDate = calendar.startOfDay(for: calendar.safeDate(year: year, month: month, day: startDay)!)
+            
+            let comp2 = calendar.dateComponents([.year, .month], from: withdrawalDate)
+            guard let year2 = comp2.year, let month2 = comp2.month else { return nil }
+            endDate = calendar.safeDate(year: year2, month: month2, day: endDay)!.startOfNextDay
+        }
+        
+        return (startDate, endDate)
+    }
+    
     //(총 금액, 미결제 금액) 반환
     func calculateCycleSpending(for card: CreditCardItem, cycle: (startDate: Date, endDate: Date)) -> (Int64, Int64) {
         guard let txs = card.transactions as? Set<Transaction> else { return (0, 0) }
