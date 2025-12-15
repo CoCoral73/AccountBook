@@ -129,6 +129,12 @@ class TransactionManager {
         CoreDataManager.shared.saveContext()
     }
     
+    func completeTransaction(_ transaction: Transaction) {
+        guard !transaction.isCompleted else { return }
+        transaction.isCompleted = true
+        adjustBalance(amount: -transaction.amount, asset: transaction.asset, isCompleted: transaction.isCompleted)
+    }
+    
     func adjustBalance(amount: Int64, asset: AssetItem, isCompleted: Bool) {
         guard isCompleted else { return }
         switch asset {
