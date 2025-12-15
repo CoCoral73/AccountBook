@@ -25,7 +25,7 @@ extension Calendar {
         return self.date(from: comps)
     }
     
-    func date(year: Int, month: Int, day: Int) -> Date? {
+    func safeDate(year: Int, month: Int, day: Int) -> Date? {
         guard let tmp = self.date(year: year, month: month) else { return nil }
         guard let range = self.range(of: .day, in: .month, for: tmp) else { return nil }
         let safeDay = min(range.count, day)
