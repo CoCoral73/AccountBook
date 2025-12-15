@@ -79,6 +79,10 @@ class TransactionDetailViewModel: TransactionUpdatable {
         guard let period = transaction.installment?.numberOfMonths, let index = transaction.installmentIndexValue else { return "일시불" }
         return "\(period) 개월 (\(index) / \(period))"
     }
+    var isHiddenForIsCompleted: Bool { assetType != .creditCard }
+    var titleForIsCompleted: String {
+        return transaction.isCompleted ? "완료" : "미완료"
+    }
     var memoString: String? {
         return copy.memo
     }
