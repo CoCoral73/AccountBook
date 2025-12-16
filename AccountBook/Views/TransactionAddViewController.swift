@@ -36,6 +36,7 @@ class TransactionAddViewController: UIViewController {
 
         bindViewModel()
         configureUI()
+        configureTapGesture()
         configureCategoryView()
     }
     
@@ -85,6 +86,24 @@ class TransactionAddViewController: UIViewController {
     
     private func configureUI() {
         dateButton.title = viewModel.transactionDateString
+    private func configureTapGesture() {
+        let tapAmount = UITapGestureRecognizer(target: self, action: #selector(didTapAmountView))
+        let tapAsset = UITapGestureRecognizer(target: self, action: #selector(didTapAssetView))
+        let tapName = UITapGestureRecognizer(target: self, action: #selector(didTapNameView))
+        
+        amountView.addGestureRecognizer(tapAmount)
+        assetView.addGestureRecognizer(tapAsset)
+        nameView.addGestureRecognizer(tapName)
+    }
+    
+    @objc func didTapAmountView(_ sender: UITapGestureRecognizer) {
+        //커스텀 키보드 띄우기
+    }
+    @objc func didTapAssetView(_ sender: UITapGestureRecognizer) {
+        viewModel.handleAssetView()
+    }
+    @objc func didTapNameView(_ sender: UITapGestureRecognizer) {
+        nameTextField.becomeFirstResponder()
     }
     
     private func configureCategoryView() {
