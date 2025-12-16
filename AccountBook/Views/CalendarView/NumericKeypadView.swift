@@ -15,6 +15,14 @@ protocol NumericKeypadDelegate: AnyObject {
     func keypadDidHide()
 }
 
+enum Operator: Int {
+    case plus
+    case minus
+    case multiply
+    case divide
+    case equal
+}
+
 class NumericKeypadView: UIView {
     static func loadFromNib() -> NumericKeypadView {
         return UINib(nibName: "NumericKeypadView", bundle: nil).instantiate(withOwner: nil).first as! NumericKeypadView
