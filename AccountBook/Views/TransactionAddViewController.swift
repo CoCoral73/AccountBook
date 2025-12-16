@@ -10,6 +10,12 @@ import UIKit
 class TransactionAddViewController: UIViewController {
     
     @IBOutlet weak var dateButton: UIBarButtonItem!
+    @IBOutlet weak var amountView: UIView!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var assetView: UIView!
+    @IBOutlet weak var assetLabel: UILabel!
+    @IBOutlet weak var nameView: UIView!
+    @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var containerViewForCategory: UIView!
     
     var tableVC: TransactionAddTableViewController?
