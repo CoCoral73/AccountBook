@@ -79,21 +79,19 @@ class TransactionAddViewModel: TransactionUpdatable {
         let vm = CategoryViewModel(isIncome: isIncome, autoDismiss: false)
         vm.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
-            let data = onRequestNameText?()
+            let name = (onRequestNameText?() ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
             
-            guard (data?.amount ?? "") != "", let asset = assetItemInput else {
+            guard let asset = assetItemInput else {
                 onRequestFeedbackForNoData?("금액과 자산을 입력해주세요.")
                 return
             }
             
-            guard let amount = Int64((data?.amount ?? "").replacingOccurrences(of: ",", with: "")), amount > 0 else {
-                onRequestFeedbackForInvalidData?("0원 이하의 금액은 입력 불가합니다.")
-                return
-            }
+//            guard let amount = Int64((data?.amount ?? "").replacingOccurrences(of: ",", with: "")), amount > 0 else {
+//                onRequestFeedbackForInvalidData?("0원 이하의 금액은 입력 불가합니다.")
+//                return
+//            }
             
-            let name = (data?.name ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
-            
-            addTransaction(amount: amount, asset: asset, name: name, category: category)
+            addTransaction(amount: 10000, asset: asset, name: name, category: category)
             onRequestDismiss?()
         }
         return vm
