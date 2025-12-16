@@ -79,7 +79,7 @@ class TransactionAddViewModel: TransactionUpdatable {
         let vm = CategoryViewModel(isIncome: isIncome, autoDismiss: false)
         vm.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
-            let data = onRequestTextData?()
+            let data = onRequestNameText?()
             
             guard (data?.amount ?? "") != "", let asset = assetItemInput else {
                 onRequestFeedbackForNoData?("금액과 자산을 입력해주세요.")
