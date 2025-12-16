@@ -30,7 +30,7 @@ class TransactionAddViewModel: TransactionUpdatable {
     
     var onRequestDatePickerViewPresentation: ((DatePickerViewModel) -> Void)?
     var onRequestAssetSelectionViewPresentation: ((AssetSelectionViewModel) -> Void)?
-    var onRequestTextData: (() -> (amount: String?, name: String?))?
+    var onRequestNameText: (() -> String)?
     var onRequestFeedbackForNoData: ((String) -> Void)?
     var onRequestFeedbackForInvalidData: ((String) -> Void)?
     var onRequestDismiss: (() -> Void)?
