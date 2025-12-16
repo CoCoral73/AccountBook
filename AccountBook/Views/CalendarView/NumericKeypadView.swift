@@ -35,19 +35,19 @@ class NumericKeypadView: UIView {
     weak var delegate: NumericKeypadDelegate?
     
     @IBAction func numberTapped(_ sender: UIButton) {
-        delegate?.keypadDidInput(number: sender.tag)
+        delegate?.keypadDidInput(.number(sender.tag))
     }
     
     @IBAction func operatorTapped(_ sender: UIButton) {
-        delegate?.keypadDidOperator(op: Operator(rawValue: sender.tag)!)
+        delegate?.keypadDidInput(.operatorType(Operator(rawValue: sender.tag)!))
     }
     
     @IBAction func deleteTapped(_ sender: UIButton) {
-        delegate?.keypadDidDelete()
+        delegate?.keypadDidInput(.delete)
     }
     
     @IBAction func allClearTapped(_ sender: UIButton) {
-        delegate?.keypadDidAllClear()
+        delegate?.keypadDidInput(.allClear)
     }
     
     @IBAction func hideTapped(_ sender: UIButton) {
