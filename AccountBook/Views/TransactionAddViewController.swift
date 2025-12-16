@@ -62,9 +62,9 @@ class TransactionAddViewController: UIViewController {
             guard let self = self else { return }
             showAssetSelectionView(vm)
         }
-        viewModel.onRequestTextData = { [weak self] in
-            guard let self = self else { return (nil, nil) }
-            return (tableVC?.amountTextField.text, tableVC?.nameTextField.text)
+        viewModel.onRequestNameText = { [weak self] in
+            guard let self = self else { return "" }
+            return (nameTextField.text ?? "")
         }
         viewModel.onRequestFeedbackForNoData = { [weak self] msg in
             guard let self = self else { return }
