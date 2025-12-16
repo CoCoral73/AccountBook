@@ -46,6 +46,15 @@ class TransactionAddViewController: UIViewController {
                 self.dateButton.title = self.viewModel.transactionDateString
             }
         }
+
+        viewModel.onRequestDatePickerViewPresentation = { [weak self ] vm in
+            guard let self = self else { return }
+            showDatePickerView(vm)
+        }
+        viewModel.onRequestAssetSelectionViewPresentation = { [weak self] vm in
+            guard let self = self else { return }
+            showAssetSelectionView(vm)
+        }
         viewModel.onRequestTextData = { [weak self] in
             guard let self = self else { return (nil, nil) }
             return (tableVC?.amountTextField.text, tableVC?.nameTextField.text)
@@ -98,8 +107,10 @@ class TransactionAddViewController: UIViewController {
     }
     
     @IBAction func dateButtonTapped(_ sender: UIBarButtonItem) {
-        let vm = viewModel.handleDateButton()
-        
+        viewModel.handleDateButton()
+    }
+    
+    private func showDatePickerView(_ vm: DatePickerViewModel) {
         guard let dateVC = storyboard?.instantiateViewController(identifier: "DatePickerViewController", creator: { coder in
             DatePickerViewController(coder: coder, viewModel: vm) })
         else {
@@ -118,6 +129,22 @@ class TransactionAddViewController: UIViewController {
         if let tableVC = segue.destination as? TransactionAddTableViewController {
             tableVC.viewModel = self.viewModel
             self.tableVC = tableVC
+    private func showAssetSelectionView(_ vm: AssetSelectionViewModel) {
+        guard let assetSelectionVC = storyboard?.instantiateViewController(identifier: "AssetSelectionViewController", creator: { coder in
+            AssetSelectionViewController(coder: coder, viewModel: vm)
+        })
+        else {
+            fatalError("AssetSelectionViewController 생성 에러")
         }
+        
+        if let sheet = assetSelectionVC.sheetPresentationController {
+            sheet.detents = [.custom { _ in
+                return assetSelectionVC.preferredContentSize.height
+            }]
+        }
+        present(assetSelectionVC, animated: true, completion: nil)
+    }
+    
+}
     }
 }
