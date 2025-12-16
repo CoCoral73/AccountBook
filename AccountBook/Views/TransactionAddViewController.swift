@@ -37,6 +37,7 @@ class TransactionAddViewController: UIViewController {
         bindViewModel()
         configureUI()
         configureTapGesture()
+        configureTextField()
         configureCategoryView()
     }
     
@@ -165,5 +166,13 @@ class TransactionAddViewController: UIViewController {
     }
     
 }
+
+extension TransactionAddViewController: UITextFieldDelegate {
+    func configureTextField() {
+        nameTextField.delegate = self
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        view.endEditing(true)
     }
 }
