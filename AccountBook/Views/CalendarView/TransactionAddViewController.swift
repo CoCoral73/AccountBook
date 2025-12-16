@@ -68,14 +68,6 @@ class TransactionAddViewController: UIViewController {
             guard let self = self else { return "" }
             return (nameTextField.text ?? "")
         }
-        viewModel.onRequestFeedbackForNoData = { [weak self] msg in
-            guard let self = self else { return }
-            DispatchQueue.main.async {
-                self.view.endEditing(true)
-                HapticFeedback.notify(.error)
-                ToastManager.shared.show(message: msg, in: self.view)
-            }
-        }
         viewModel.onRequestFeedbackForInvalidData = { [weak self] msg in
             guard let self = self else { return }
             DispatchQueue.main.async {
