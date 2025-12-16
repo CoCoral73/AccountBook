@@ -15,6 +15,7 @@ class TransactionAddViewModel: TransactionUpdatable {
         }
     }
     
+    private var amountInput: Decimal = 0
     private var assetItemInput: AssetItem?
     
     private(set) var isIncome: Bool
@@ -31,7 +32,6 @@ class TransactionAddViewModel: TransactionUpdatable {
     var onRequestDatePickerViewPresentation: ((DatePickerViewModel) -> Void)?
     var onRequestAssetSelectionViewPresentation: ((AssetSelectionViewModel) -> Void)?
     var onRequestNameText: (() -> String)?
-    var onRequestFeedbackForNoData: ((String) -> Void)?
     var onRequestFeedbackForInvalidData: ((String) -> Void)?
     var onRequestDismiss: (() -> Void)?
     
@@ -79,21 +79,27 @@ class TransactionAddViewModel: TransactionUpdatable {
         let vm = CategoryViewModel(isIncome: isIncome, autoDismiss: false)
         vm.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
-            let name = (onRequestNameText?() ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
             
-            guard let asset = assetItemInput else {
-                onRequestFeedbackForNoData?("금액과 자산을 입력해주세요.")
+            let amount = NSDecimalNumber(decimal: amountInput).int64Value
+            guard amount > 0 else {
+                onRequestFeedbackForInvalidData?("0원 이하의 금액은 입력할 수 없습니다.")
                 return
             }
             
-//            guard let amount = Int64((data?.amount ?? "").replacingOccurrences(of: ",", with: "")), amount > 0 else {
-//                onRequestFeedbackForInvalidData?("0원 이하의 금액은 입력 불가합니다.")
-//                return
-//            }
+            guard let asset = assetItemInput else {
+                onRequestFeedbackForInvalidData?("자산을 선택해주세요.")
+                return
+            }
             
-            addTransaction(amount: 10000, asset: asset, name: name, category: category)
+            let name = (onRequestNameText?() ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
+            
+            addTransaction(amount: amount, asset: asset, name: name, category: category)
             onRequestDismiss?()
         }
         return vm
+    }
+    
+    func handleNumericKeypad(_ value: Decimal) {
+        amountInput = value
     }
 }
