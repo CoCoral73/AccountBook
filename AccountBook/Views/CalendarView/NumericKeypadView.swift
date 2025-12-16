@@ -15,6 +15,13 @@ protocol NumericKeypadDelegate: AnyObject {
     func keypadDidHide()
 }
 
+enum NumericKeypadInput {
+    case number(Int)
+    case operatorType(Operator)
+    case delete
+    case allClear
+}
+
 enum Operator: Int {
     case add
     case subtract
