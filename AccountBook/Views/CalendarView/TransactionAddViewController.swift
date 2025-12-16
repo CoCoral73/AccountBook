@@ -18,6 +18,9 @@ class TransactionAddViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var containerViewForCategory: UIView!
     
+    private let keypad = NumericKeypadView.loadFromNib()
+    private var bottomConstraint: NSLayoutConstraint!
+    
     var viewModel: TransactionAddViewModel
     
     required init?(coder: NSCoder, viewModel: TransactionAddViewModel) {
@@ -37,6 +40,7 @@ class TransactionAddViewController: UIViewController {
         configureTapGesture()
         configureTextField()
         configureCategoryView()
+        configureKeypadLayout()
     }
     
     private func bindViewModel() {
@@ -106,7 +110,7 @@ class TransactionAddViewController: UIViewController {
     }
     
     @objc func didTapAmountView(_ sender: UITapGestureRecognizer) {
-        //커스텀 키보드 띄우기
+        showNumericKeypad()
     }
     @objc func didTapAssetView(_ sender: UITapGestureRecognizer) {
         viewModel.handleAssetView()
@@ -178,5 +182,35 @@ extension TransactionAddViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
+    }
+}
+
+extension TransactionAddViewController {
+    func configureKeypadLayout() {
+        view.addSubview(keypad)
+        keypad.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            keypad.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            keypad.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            keypad.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        
+        bottomConstraint = keypad.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 400)
+        bottomConstraint.isActive = true
+    }
+    
+    func showNumericKeypad() {
+        bottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func hideNumericKeypad() {
+        bottomConstraint.constant = 400
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
     }
 }
