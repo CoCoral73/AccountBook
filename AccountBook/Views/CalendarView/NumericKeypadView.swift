@@ -16,8 +16,8 @@ protocol NumericKeypadDelegate: AnyObject {
 }
 
 enum Operator: Int {
-    case plus
-    case minus
+    case add
+    case subtract
     case multiply
     case divide
     case equal
