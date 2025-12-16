@@ -143,21 +143,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
             let success = UIAlertAction(title: "저장", style: .default) { _ in
                 self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
-                self.viewModel.requestInstallmentViewPresentation()
-            }
-            let cancel = UIAlertAction(title: "취소", style: .cancel)
-            alert.addAction(success)
-            alert.addAction(cancel)
-            DispatchQueue.main.async {
-                self.present(alert, animated: true)
-            }
-        }
-        viewModel.onRequestSaveAlertBeforeDeleteInstallment = { [weak self] config in
-            guard let self = self else { return }
-            let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
-            let success = UIAlertAction(title: "저장", style: .default) { _ in
-                self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
-                self.viewModel.requestDeleteInstallmentAlertPresentation()
+                self.viewModel.handleInstallmentFlow()
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
             alert.addAction(success)
@@ -303,12 +289,6 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func installmentButtonTapped(_ sender: UIButton) {
-        if !viewModel.canEdit {
-            HapticFeedback.notify(.error)
-            sender.shake()
-            ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
-            return
-        }
         checkSaveState()
         viewModel.handleInstallmentButton()
     }

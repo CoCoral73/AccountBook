@@ -129,9 +129,18 @@ class TransactionDetailViewModel: TransactionUpdatable {
     func handleInstallmentButton() {
         switch state {
         case .modified:
-            onRequestSaveAlertBeforeInstallment?(AlertConfig(title: "저장", message: "할부를 적용하려면 먼저 변경된 내용을 저장해야 합니다.\n저장하시겠습니까?"))
+            let action = canEdit ? "적용" : "제거"
+            onRequestSaveAlertBeforeInstallment?(AlertConfig(title: "저장", message: "할부를 \(action)하려면 먼저 변경된 내용을 저장해야 합니다.\n저장하시겠습니까?"))
         case .saved:
+            handleInstallmentFlow()
+        }
+    }
+    
+    func handleInstallmentFlow() {
+        if canEdit {
             requestInstallmentViewPresentation()
+        } else {
+            requestDeleteInstallmentAlertPresentation()
         }
     }
     
@@ -193,16 +202,6 @@ class TransactionDetailViewModel: TransactionUpdatable {
             onDidUpdateTransaction?(transaction.date)
         }
         onShowInstallmentView?(vm)
-    }
-    
-    func handleRemoveInstallmentButton() {
-        switch state {
-        case .modified:
-            onRequestSaveAlertBeforeDeleteInstallment?(AlertConfig(title: "저장", message: "할부를 제거하려면 먼저 변경된 내용을 저장해야 합니다.\n저장하시겠습니까?"))
-        case .saved:
-            requestDeleteInstallmentAlertPresentation()
-        }
-        
     }
     
     func requestDeleteInstallmentAlertPresentation() {
