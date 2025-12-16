@@ -92,6 +92,11 @@ class TransactionAddViewController: UIViewController {
     
     private func configureUI() {
         dateButton.title = viewModel.transactionDateString
+        amountLabel.text = ""
+        assetLabel.text = ""
+        nameTextField.text = ""
+    }
+    
     private func configureTapGesture() {
         let tapAmount = UITapGestureRecognizer(target: self, action: #selector(didTapAmountView))
         let tapAsset = UITapGestureRecognizer(target: self, action: #selector(didTapAssetView))
