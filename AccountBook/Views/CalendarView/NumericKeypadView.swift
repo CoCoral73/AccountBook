@@ -28,4 +28,26 @@ class NumericKeypadView: UIView {
         return UINib(nibName: "NumericKeypadView", bundle: nil).instantiate(withOwner: nil).first as! NumericKeypadView
     }
 
+    weak var delegate: NumericKeypadDelegate?
+    
+    @IBAction func numberTapped(_ sender: UIButton) {
+        delegate?.keypadDidInput(number: sender.tag)
+    }
+    
+    @IBAction func operatorTapped(_ sender: UIButton) {
+        delegate?.keypadDidOperator(op: Operator(rawValue: sender.tag)!)
+    }
+    
+    @IBAction func deleteTapped(_ sender: UIButton) {
+        delegate?.keypadDidDelete()
+    }
+    
+    @IBAction func allClearTapped(_ sender: UIButton) {
+        delegate?.keypadDidAllClear()
+    }
+    
+    @IBAction func hideTapped(_ sender: UIButton) {
+        delegate?.keypadDidHide()
+    }
+    
 }
