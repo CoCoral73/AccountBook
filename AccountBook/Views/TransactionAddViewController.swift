@@ -48,6 +48,11 @@ class TransactionAddViewController: UIViewController {
                 self.dateButton.title = self.viewModel.transactionDateString
             }
         }
+        viewModel.onDidSelectAsset = { [weak self] name in
+            guard let self = self else { return }
+            assetLabel.text = name
+            nameTextField.becomeFirstResponder()
+        }
 
         viewModel.onRequestDatePickerViewPresentation = { [weak self ] vm in
             guard let self = self else { return }
