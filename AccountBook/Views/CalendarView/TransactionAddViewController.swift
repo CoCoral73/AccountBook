@@ -18,8 +18,6 @@ class TransactionAddViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var containerViewForCategory: UIView!
     
-    var tableVC: TransactionAddTableViewController?
-    
     var viewModel: TransactionAddViewModel
     
     required init?(coder: NSCoder, viewModel: TransactionAddViewModel) {
@@ -155,10 +153,6 @@ class TransactionAddViewController: UIViewController {
         present(dateVC, animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let tableVC = segue.destination as? TransactionAddTableViewController {
-            tableVC.viewModel = self.viewModel
-            self.tableVC = tableVC
     private func showAssetSelectionView(_ vm: AssetSelectionViewModel) {
         guard let assetSelectionVC = storyboard?.instantiateViewController(identifier: "AssetSelectionViewController", creator: { coder in
             AssetSelectionViewController(coder: coder, viewModel: vm)
