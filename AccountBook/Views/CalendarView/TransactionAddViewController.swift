@@ -18,6 +18,7 @@ class TransactionAddViewController: UIViewController {
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var containerViewForCategory: UIView!
     
+    private let engine = CalculatorEngine()
     private let keypad = NumericKeypadView.loadFromNib()
     private var bottomConstraint: NSLayoutConstraint!
     
@@ -177,8 +178,10 @@ extension TransactionAddViewController: UITextFieldDelegate {
     }
 }
 
-extension TransactionAddViewController {
+extension TransactionAddViewController: NumericKeypadDelegate {
     func configureKeypadLayout() {
+        keypad.delegate = self
+        
         view.addSubview(keypad)
         keypad.translatesAutoresizingMaskIntoConstraints = false
 
@@ -199,7 +202,13 @@ extension TransactionAddViewController {
         }
     }
     
-    func hideNumericKeypad() {
+    func keypadDidInput(_ input: NumericKeypadInput) {
+        let value = engine.input(input)
+        viewModel.handleNumericKeypad(value)
+        amountLabel.text = "\(value)"
+    }
+    
+    func keypadDidHide() {
         bottomConstraint.constant = 400
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
