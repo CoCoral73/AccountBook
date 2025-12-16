@@ -8,10 +8,7 @@
 import UIKit
 
 protocol NumericKeypadDelegate: AnyObject {
-    func keypadDidInput(number: Int)
-    func keypadDidOperator(op: Operator)
-    func keypadDidDelete()
-    func keypadDidAllClear()
+    func keypadDidInput(_ input: NumericKeypadInput)
     func keypadDidHide()
 }
 
