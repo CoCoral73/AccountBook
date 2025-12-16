@@ -28,6 +28,8 @@ class TransactionAddViewModel: TransactionUpdatable {
     //자산 선택 완료 -> TransactionAddTableVC
     var onDidSelectAsset: ((String) -> Void)?
     
+    var onRequestDatePickerViewPresentation: ((DatePickerViewModel) -> Void)?
+    var onRequestAssetSelectionViewPresentation: ((AssetSelectionViewModel) -> Void)?
     var onRequestTextData: (() -> (amount: String?, name: String?))?
     var onRequestFeedbackForNoData: ((String) -> Void)?
     var onRequestFeedbackForInvalidData: ((String) -> Void)?
@@ -54,23 +56,23 @@ class TransactionAddViewModel: TransactionUpdatable {
         onDidUpdateTransaction?(transactionDate)
     }
     
-    func handleDateButton() -> DatePickerViewModel {
+    func handleDateButton() {
         let vm = DatePickerViewModel(initialDate: transactionDate)
         vm.onDatePickerChanged = { [weak self] date in
             guard let self = self else { return }
             self.transactionDate = date
         }
-        return vm
+        onRequestDatePickerViewPresentation?(vm)
     }
     
-    func handlePaymentSelectionButton() -> AssetSelectionViewModel {
+    func handleAssetView() {
         let vm = AssetSelectionViewModel(isIncome: isIncome)
         vm.onAssetSelected = { [weak self] asset in
             guard let self = self else { return }
             setAssetItemInput(with: asset)
             onDidSelectAsset?(asset.name)
         }
-        return vm
+        onRequestAssetSelectionViewPresentation?(vm)
     }
     
     func handleCategoryView() -> CategoryViewModel {
