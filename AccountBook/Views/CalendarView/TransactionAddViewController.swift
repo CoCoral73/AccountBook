@@ -104,6 +104,7 @@ class TransactionAddViewController: UIViewController {
     }
     
     @objc func didTapAmountView(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
         showNumericKeypad()
     }
     @objc func didTapAssetView(_ sender: UITapGestureRecognizer) {
