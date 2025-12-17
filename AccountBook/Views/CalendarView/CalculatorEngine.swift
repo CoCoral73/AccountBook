@@ -60,6 +60,11 @@ final class CalculatorEngine {
         default:
             break
         }
+        
+        var rounded = Decimal()
+        NSDecimalRound(&rounded, &currentValue, 0, .down)
+        currentValue = rounded
+        
         buffer = 0
     }
 
