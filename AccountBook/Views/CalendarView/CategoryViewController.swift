@@ -60,6 +60,7 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        viewModel.onRequestHideNumericKeypad?()
         viewModel.handleDidSelectItemAt(indexPath.item)
     }
     
@@ -95,3 +96,8 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     }
 }
 
+extension CategoryViewController: UICollectionViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        viewModel.onRequestHideNumericKeypad?()
+    }
+}

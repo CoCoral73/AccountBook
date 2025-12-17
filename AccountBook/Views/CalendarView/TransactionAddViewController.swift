@@ -116,6 +116,10 @@ class TransactionAddViewController: UIViewController {
     
     private func configureCategoryView() {
         let vm = viewModel.handleCategoryView()
+        vm.onRequestHideNumericKeypad = { [weak self] in
+            guard let self = self else { return }
+            keypadDidHide()
+        }
         
         guard let childVC = storyboard?.instantiateViewController(identifier: "CategoryViewController", creator: { coder in
             CategoryViewController(coder: coder, viewModel: vm)

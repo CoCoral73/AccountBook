@@ -10,6 +10,7 @@ class CategoryViewModel {
     var autoDismiss: Bool
     var categories: [Category] = []
     
+    var onRequestHideNumericKeypad: (() -> Void)?
     var onRequestShowCategoryEditView: ((CategoryEditViewModel) -> Void)?
     var onRequestDismiss: (() -> Void)?
     
