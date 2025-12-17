@@ -166,6 +166,11 @@ class TransactionAddViewController: UIViewController {
         present(assetSelectionVC, animated: true, completion: nil)
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        showNumericKeypad()
+    }
+    
 }
 
 extension TransactionAddViewController: UITextFieldDelegate {
