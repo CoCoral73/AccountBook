@@ -205,7 +205,9 @@ extension TransactionAddViewController: NumericKeypadDelegate {
     func keypadDidInput(_ input: NumericKeypadInput) {
         let value = engine.input(input)
         viewModel.handleNumericKeypad(value)
-        amountLabel.text = "\(value)"
+        
+        let formatted = NSDecimalNumber(decimal: value).int64Value.formattedWithComma
+        amountLabel.text = "\(formatted)"
     }
     
     func keypadDidHide() {
