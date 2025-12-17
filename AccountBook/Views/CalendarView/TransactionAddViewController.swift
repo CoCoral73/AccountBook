@@ -21,6 +21,7 @@ class TransactionAddViewController: UIViewController {
     private let engine = CalculatorEngine()
     private let keypad = NumericKeypadView.loadFromNib()
     private var bottomConstraint: NSLayoutConstraint!
+    private var didShowKeypadOnce = false
     
     var viewModel: TransactionAddViewModel
     
@@ -168,7 +169,11 @@ class TransactionAddViewController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        
+        guard !didShowKeypadOnce else { return }
+        
         showNumericKeypad()
+        didShowKeypadOnce = true
     }
     
 }
