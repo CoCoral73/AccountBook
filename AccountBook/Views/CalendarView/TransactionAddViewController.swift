@@ -107,6 +107,7 @@ class TransactionAddViewController: UIViewController {
         showNumericKeypad()
     }
     @objc func didTapAssetView(_ sender: UITapGestureRecognizer) {
+        keypadDidHide()
         viewModel.handleAssetView()
     }
     @objc func didTapNameView(_ sender: UITapGestureRecognizer) {
@@ -185,6 +186,10 @@ extension TransactionAddViewController: UITextFieldDelegate {
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         view.endEditing(true)
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        keypadDidHide()
     }
 }
 
