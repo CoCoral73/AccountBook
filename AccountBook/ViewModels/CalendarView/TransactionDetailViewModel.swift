@@ -103,6 +103,15 @@ class TransactionDetailViewModel: TransactionUpdatable {
         return vm
     }
     
+    func handleNumericKeypad(_ value: Decimal) {
+        let amount = NSDecimalNumber(decimal: value).int64Value
+        copy.amount = amount
+        
+        if transaction.amount != copy.amount {
+            state = .modified
+        }
+    }
+    
     func handleCategoryButton() -> CategoryViewModel {
         let vm = CategoryViewModel(isIncome: copy.isIncome, autoDismiss: true)
         vm.onDidSelectCategory = { [weak self] category in
