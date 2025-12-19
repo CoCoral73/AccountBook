@@ -50,8 +50,8 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         configureUI()
         configureTapGesture()
         configureKeypadLayout()
+        configureTextField()
         configureKeyboardAccessory()
-        nameTextField.delegate = self
     }
     
     //ThemeApplicable
@@ -452,6 +452,10 @@ extension TransactionDetailViewController: NumericKeypadDelegate {
 }
 
 extension TransactionDetailViewController: UITextFieldDelegate {
+    func configureTextField() {
+        nameTextField.delegate = self
+    }
+    
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
