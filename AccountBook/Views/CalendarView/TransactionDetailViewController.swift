@@ -129,7 +129,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
             let success = UIAlertAction(title: "저장", style: .default) { _ in
-                self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
+                self.viewModel.confirmSave(name: self.nameTextField.text, memo: self.memoTextView.text)
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
             alert.addAction(success)
@@ -142,7 +142,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
             let success = UIAlertAction(title: "저장", style: .default) { _ in
-                self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
+                self.viewModel.confirmSave(name: self.nameTextField.text, memo: self.memoTextView.text)
                 self.viewModel.handleInstallmentFlow()
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -156,7 +156,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
             let success = UIAlertAction(title: "저장", style: .default) { _ in
-                self.viewModel.confirmSave(name: self.nameTextField.text, amount: self.amountTextField.text, memo: self.memoTextView.text)
+                self.viewModel.confirmSave(name: self.nameTextField.text, memo: self.memoTextView.text)
                 self.viewModel.requestIsCompletedAlert()
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -298,7 +298,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     func checkSaveState() {
-        viewModel.checkSaveState(name: nameTextField.text, amount: amountTextField.text, memo: memoTextView.text)
+        viewModel.checkSaveState(name: nameTextField.text, memo: memoTextView.text)
     }
     
     func showInstallmentView(_ vm: InstallmentViewModel) {
@@ -370,7 +370,7 @@ extension TransactionDetailViewController: UIGestureRecognizerDelegate {
         })
         alert.addAction(UIAlertAction(title: "저장", style: .default) { [weak self] _ in
             guard let self = self else { return }
-            viewModel.confirmSave(name: nameTextField.text, amount: amountTextField.text, memo: memoTextView.text)
+            viewModel.confirmSave(name: nameTextField.text, memo: memoTextView.text)
             navigationController?.popViewController(animated: true)
         })
 
