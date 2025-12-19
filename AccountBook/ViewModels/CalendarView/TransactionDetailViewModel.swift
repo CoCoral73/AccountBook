@@ -178,12 +178,11 @@ class TransactionDetailViewModel: TransactionUpdatable {
         onDidSetIsCompleted?()
     }
     
-    func checkSaveState(name: String?, amount: String?, memo: String?) {
+    func checkSaveState(name: String?, memo: String?) {
         copy.name = name ?? ""
-        copy.amount = Int64((amount ?? "0").replacingOccurrences(of: ",", with: "")) ?? 0
         copy.memo = memo ?? ""
         
-        if copy.name != transaction.name || copy.amount != transaction.amount || copy.memo != transaction.memo {
+        if copy.name != transaction.name || copy.memo != transaction.memo {
             state = .modified
         }
     }
@@ -249,9 +248,8 @@ class TransactionDetailViewModel: TransactionUpdatable {
         onRequestSaveAlert?(AlertConfig(title: "저장", message: "변경사항을 저장하시겠습니까?"))
     }
     
-    func confirmSave(name: String?, amount: String?, memo: String?) {
+    func confirmSave(name: String?, memo: String?) {
         copy.name = name ?? ""
-        copy.amount = Int64((amount ?? "0").replacingOccurrences(of: ",", with: "")) ?? 0
         copy.memo = memo ?? ""
         
         let oldDate = transaction.date, newDate = copy.date
