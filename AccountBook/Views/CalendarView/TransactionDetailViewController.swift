@@ -217,7 +217,18 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     private func configureTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapAmountLabel))
         amountLabel.addGestureRecognizer(tap)
+
+        let viewTap = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+        viewTap.cancelsTouchesInView = false
+        viewTap.delegate = self
+        view.addGestureRecognizer(viewTap)
     }
+    
+    @objc func didTapView(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+        keypadDidHide()
+    }
+    
     @objc func didTapAmountLabel(_ sender: UITapGestureRecognizer) {
         view.endEditing(true)
         showNumericKeypad()
@@ -431,6 +442,13 @@ extension TransactionDetailViewController: NumericKeypadDelegate {
             self.view.layoutIfNeeded()
         }
     }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view?.isDescendant(of: keypad) == true {
+            return false
+        }
+        return true
+    }
 }
 
 extension TransactionDetailViewController: UITextFieldDelegate {
@@ -439,8 +457,7 @@ extension TransactionDetailViewController: UITextFieldDelegate {
         return true
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        view.endEditing(true)
-        super.touchesBegan(touches, with: event)
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        keypadDidHide()
     }
 }
