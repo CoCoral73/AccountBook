@@ -227,7 +227,7 @@ extension TransactionAddViewController: NumericKeypadDelegate {
         viewModel.handleNumericKeypad(value)
         
         let formatted = NSDecimalNumber(decimal: value).int64Value.formattedWithComma
-        amountLabel.text = "\(formatted)"
+        amountLabel.text = "\(formatted)원"
     }
     
     func keypadDidHide() {
