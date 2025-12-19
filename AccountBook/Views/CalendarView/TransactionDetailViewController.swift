@@ -48,6 +48,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         configurePopGesture()
         bindViewModel()
         configureUI()
+        configureTapGesture()
         configureKeypadLayout()
         configureKeyboardAccessory()
         nameTextField.delegate = self
@@ -211,6 +212,15 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         isCompletedView.isHidden = viewModel.isHiddenForIsCompleted
         isCompletedButton.setTitle(viewModel.titleForIsCompleted, for: .normal)
         memoTextView.text = viewModel.memoString
+    }
+    
+    private func configureTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapAmountLabel))
+        amountLabel.addGestureRecognizer(tap)
+    }
+    @objc func didTapAmountLabel(_ sender: UITapGestureRecognizer) {
+        view.endEditing(true)
+        showNumericKeypad()
     }
     
     private func configureKeyboardAccessory() {
