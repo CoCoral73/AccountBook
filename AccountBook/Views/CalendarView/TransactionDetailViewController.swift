@@ -15,7 +15,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var dateButton: UIButton!
     @IBOutlet weak var isIncomeLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var amountTextField: FormattedTextField!
+    @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var assetTypeLabel: UILabel!
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var assetItemButton: UIButton!
@@ -197,7 +197,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         dateButton.setTitle(viewModel.dateString, for: .normal)
         isIncomeLabel.text = viewModel.isIncomeString
         nameTextField.text = viewModel.nameString
-        amountTextField.text = viewModel.amountString
+        amountLabel.text = viewModel.amountString
         assetTypeLabel.text = viewModel.assetTypeString
         categoryButton.setTitle(viewModel.categoryString, for: .normal)
         assetItemButton.setTitle(viewModel.assetItemString, for: .normal)
@@ -217,7 +217,6 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         
         toolbar.items = [flexible, complete]
         
-        amountTextField.inputAccessoryView = toolbar
         memoTextView.inputAccessoryView = toolbar
     }
     
