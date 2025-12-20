@@ -33,6 +33,7 @@ final class CalculatorEngine {
             }
         case .delete:
             buffer = buffer / 10
+            buffer = Decimal(Int(truncating: NSDecimalNumber(decimal: buffer)))
         case .allClear:
             reset()
         }
