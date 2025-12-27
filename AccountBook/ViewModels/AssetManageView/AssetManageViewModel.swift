@@ -9,7 +9,7 @@ import Foundation
 
 class AssetManageViewModel {
     
-    var onPushAssetItemEditor: ((AssetItemEditViewModel) -> Void)?
+    var onPushAssetItemDetail: ((AssetItemDetailViewModel) -> Void)?
     
     var assetTotalAmountString: String {
         return totalBalance.formattedWithComma + "원"
@@ -64,7 +64,7 @@ class AssetManageViewModel {
         }
         
         let asset = AssetItemManager.shared.getAssetItems(with: type)[indexPath.row]
-        let vm = AssetItemEditViewModel(asset: asset)
-        onPushAssetItemEditor?(vm)
+        let vm = AssetItemDetailViewModel(asset: asset)
+        onPushAssetItemDetail?(vm)
     }
 }
