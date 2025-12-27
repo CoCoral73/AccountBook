@@ -95,6 +95,15 @@ extension Int64 {
     }
 }
 
+extension UIScrollView {
+    func scrollToBottom(animated: Bool) {
+        let bottomOffset = CGPoint(x: 0, y: contentSize.height - bounds.size.height + contentInset.bottom)
+        if bottomOffset.y > 0 {
+            setContentOffset(bottomOffset, animated: animated)
+        }
+    }
+}
+
 extension UIView {
     @IBInspectable var cornerRadius: CGFloat {
         set {
