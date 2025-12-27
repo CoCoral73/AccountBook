@@ -10,6 +10,7 @@ import UIKit
 class TransactionDetailViewController: UIViewController, ThemeApplicable {
     
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var paperView: UIView!
     @IBOutlet weak var dateButton: UIButton!
@@ -25,6 +26,8 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var isCompletedView: UIView!
     @IBOutlet weak var isCompletedButton: UIButton!
     @IBOutlet weak var memoTextView: UITextView!
+    
+    private var currentEditingView: UIView?
     
     private let engine = CalculatorEngine()
     private let keypad = NumericKeypadView.loadFromNib()
@@ -451,9 +454,23 @@ extension TransactionDetailViewController: NumericKeypadDelegate {
     }
 }
 
-extension TransactionDetailViewController: UITextFieldDelegate {
+extension TransactionDetailViewController: UITextFieldDelegate, UITextViewDelegate {
     func configureTextField() {
         nameTextField.delegate = self
+        memoTextView.delegate = self
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    @objc func keyboardWillShow(_ noti: Notification) {
+        guard let _ = currentEditingView as? UITextView else {
+            return
+        }
+        
+        let frame = noti.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as! CGRect
+        scrollView.contentInset.bottom = frame.height - 94 - view.safeAreaInsets.bottom
+        scrollView.verticalScrollIndicatorInsets.bottom = frame.height - view.safeAreaInsets.bottom
+        scrollView.scrollToBottom(animated: true)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -462,6 +479,20 @@ extension TransactionDetailViewController: UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        currentEditingView = textField
         keypadDidHide()
+    }
+    
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        currentEditingView = textView
+    }
+    
+    func textViewDidEndEditing(_ textView: UITextView) {
+        DispatchQueue.main.async {
+            UIView.animate(withDuration: 0.3) {
+                self.scrollView.contentInset.bottom = 0
+                self.scrollView.verticalScrollIndicatorInsets.bottom = 0
+            }
+        }
     }
 }
