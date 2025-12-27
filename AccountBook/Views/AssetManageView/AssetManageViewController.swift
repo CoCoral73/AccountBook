@@ -24,16 +24,11 @@ class AssetManageViewController: UIViewController {
     }
     
     func bindViewModel() {
-        viewModel.onPushAssetItemEditor = { vm in 
-            guard let vc = self.storyboard?.instantiateViewController(identifier: "AssetItemEditViewController", creator: { coder in
-                AssetItemEditViewController(coder: coder, viewModel: vm)
-            }) else {
-                print("AssetManageViewController: VC 생성 오류")
-                return
+        viewModel.onPushAssetItemDetail = { [weak self] vm in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.showAssetItemDetailView(vm)
             }
-            vc.presentationStyle = .push
-            
-            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
     
@@ -50,6 +45,17 @@ class AssetManageViewController: UIViewController {
     func reloadData() {
         assetTotalAmountLabel.text = viewModel.assetTotalAmountString
         tableView.reloadData()
+    }
+    
+    func showAssetItemDetailView(_ vm: AssetItemDetailViewModel) {
+        guard let vc = storyboard?.instantiateViewController(identifier: "AssetItemDetailViewController", creator: { coder in
+            AssetItemDetailViewController(coder: coder, viewModel: vm)
+        }) else {
+            print("AssetManageViewController: AssetItem Detail VC 생성 오류")
+            return
+        }
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
 
     @IBAction func addButtonTapped(_ sender: UIBarButtonItem) {
