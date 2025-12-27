@@ -39,4 +39,7 @@ class AssetItemDetailViewController: UIViewController {
         navItem.title = viewModel.title
     }
 
+    @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
+        navigationController?.popViewController(animated: true)
+    }
 }
