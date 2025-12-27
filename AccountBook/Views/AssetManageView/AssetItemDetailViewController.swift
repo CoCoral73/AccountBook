@@ -26,12 +26,17 @@ class AssetItemDetailViewController: UIViewController {
         super.viewDidLoad()
 
         configureNavigationBar()
+        configureUI()
+    }
+    
     private func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         navItem.standardAppearance = appearance
     }
     
+    private func configureUI() {
+        navItem.title = viewModel.title
     }
 
 }
