@@ -1386,6 +1386,21 @@
             </objects>
             <point key="canvasLocation" x="-230" y="935"/>
         </scene>
+        <!--Asset Item Detail View Controller-->
+        <scene sceneID="6YE-8O-Vsv">
+            <objects>
+                <viewController storyboardIdentifier="AssetItemDetailViewController" hidesBottomBarWhenPushed="YES" id="2Hy-8X-TJV" customClass="AssetItemDetailViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KcW-e9-kw8">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="Wfl-Gv-lmA"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RDp-Fs-IwW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="705" y="901"/>
+        </scene>
         <!--Period Selection View Controller-->
         <scene sceneID="iv7-7L-qjo">
             <objects>
@@ -2479,7 +2494,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0wW-tn-8ly" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1636" y="901"/>
+            <point key="canvasLocation" x="2494" y="901"/>
         </scene>
         <!--Asset Item Edit View Controller-->
         <scene sceneID="WF8-Jt-dAI">
@@ -2885,7 +2900,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="l0K-3i-4wP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="704.58015267175574" y="900.70422535211276"/>
+            <point key="canvasLocation" x="1637" y="900"/>
         </scene>
         <!--설정-->
         <scene sceneID="1g0-fw-znT">
