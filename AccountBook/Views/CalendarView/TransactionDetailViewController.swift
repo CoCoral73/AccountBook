@@ -356,6 +356,9 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         applyInitialTheme()
+        
+        scrollView.contentInset.bottom = 0
+        scrollView.verticalScrollIndicatorInsets.bottom = 0
     }
     
     override func viewDidLayoutSubviews() {
