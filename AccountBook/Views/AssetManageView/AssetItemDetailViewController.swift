@@ -63,4 +63,8 @@ class AssetItemDetailViewController: UIViewController {
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
     }
+    
+    @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
+        viewModel.handleEditButton()
+    }
 }
