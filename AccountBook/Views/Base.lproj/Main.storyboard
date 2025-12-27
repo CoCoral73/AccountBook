@@ -1393,9 +1393,40 @@
                     <view key="view" contentMode="scaleToFill" id="KcW-e9-kw8">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="27q-OB-0Aw">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="ZkP-fk-nEc"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="자산 관리" id="TmB-uh-zs0">
+                                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="Uj2-EL-gHK">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="2Hy-8X-TJV" id="RnD-mb-iI3"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="편집" id="OwJ-8Q-6oq">
+                                            <connections>
+                                                <action selector="editButtonTapped:" destination="2Hy-8X-TJV" id="hG9-nB-EjD"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance"/>
+                            </navigationBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="Wfl-Gv-lmA"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="27q-OB-0Aw" firstAttribute="leading" secondItem="Wfl-Gv-lmA" secondAttribute="leading" id="7hv-mD-RSe"/>
+                            <constraint firstItem="27q-OB-0Aw" firstAttribute="top" secondItem="Wfl-Gv-lmA" secondAttribute="top" id="bMs-Bl-FJD"/>
+                            <constraint firstItem="27q-OB-0Aw" firstAttribute="trailing" secondItem="Wfl-Gv-lmA" secondAttribute="trailing" id="dCO-6Z-fmt"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="navItem" destination="TmB-uh-zs0" id="H91-YD-Dy8"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDp-Fs-IwW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
