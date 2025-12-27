@@ -9,9 +9,16 @@ import UIKit
 
 class AssetItemDetailViewController: UIViewController {
 
+    @IBOutlet weak var navItem: UINavigationItem!
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        configureNavigationBar()
+    private func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navItem.standardAppearance = appearance
+    }
     
     }
 
