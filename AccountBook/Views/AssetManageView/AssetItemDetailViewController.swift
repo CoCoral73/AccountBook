@@ -27,6 +27,7 @@ class AssetItemDetailViewController: UIViewController {
 
         configureNavigationBar()
         configureUI()
+        bindViewModel()
     }
     
     private func configureNavigationBar() {
@@ -37,6 +38,26 @@ class AssetItemDetailViewController: UIViewController {
     
     private func configureUI() {
         navItem.title = viewModel.title
+    }
+    
+    private func bindViewModel() {
+        viewModel.onShowAssetItemEditView = { [weak self] vm in
+            DispatchQueue.main.async {
+                self?.showAssetItemEditView(vm)
+            }
+        }
+    }
+    
+    private func showAssetItemEditView(_ vm: AssetItemEditViewModel) {
+        guard let vc = storyboard?.instantiateViewController(identifier: "AssetItemEditViewController", creator: { coder in
+            AssetItemEditViewController(coder: coder, viewModel: vm)
+        }) else {
+            print("AssetItemDetailViewController: AssetItem Edit VC 생성 오류")
+            return
+        }
+        
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
     }
 
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
