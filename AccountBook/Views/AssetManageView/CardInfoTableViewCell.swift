@@ -14,7 +14,7 @@ class CardInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var currentCycleAmountLabel: UILabel!
     @IBOutlet weak var estimatedPaymentAmountView: UIView!
     @IBOutlet weak var upcomingPaymentDateLabel: UILabel!
-    @IBOutlet weak var upcomingPaymentAmountLabel: UILabel!
+    @IBOutlet weak var estimatedPaymentAmountLabel: UILabel!
     
     var viewModel: CardInfoTableViewCellViewModel! {
         didSet {
