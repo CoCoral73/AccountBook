@@ -53,7 +53,7 @@ class AssetItemDetailViewModel {
         
         return "연결 계좌: \(account)"
     }
-    var currentMonthAmountText: String {
+    var currentCycleAmountText: String {
         switch asset {
         case let debit as DebitCardItem:
             return CardManager.shared.calculateCurrentMonthAmountForDebitCard(for: debit).formattedWithComma + "원"
@@ -64,7 +64,7 @@ class AssetItemDetailViewModel {
             return ""
         }
     }
-    var outstandingCycleText: String {
+    var upcomingPaymentDateText: String {
         guard let credit = asset as? CreditCardItem else { return "" }
         let date = CardManager.shared.getWithdrawalDate(withdrawalDay: credit.withdrawalDay)
         let formatter = DateFormatter()

@@ -1609,14 +1609,14 @@
                     </view>
                     <connections>
                         <outlet property="balanceLabel" destination="siC-xN-IbI" id="tvS-96-ZKU"/>
-                        <outlet property="currentMonthAmountLabel" destination="VD6-SG-b9Z" id="NHt-JH-3FM"/>
+                        <outlet property="balanceView" destination="aNo-2k-XEN" id="5Xs-da-EHP"/>
+                        <outlet property="cardView" destination="Spw-od-Rw6" id="Z6a-cn-8BO"/>
+                        <outlet property="currentCycleAmountLabel" destination="VD6-SG-b9Z" id="NHt-JH-3FM"/>
                         <outlet property="estimatedPaymentAmountLabel" destination="rjX-yd-eLa" id="8iq-k7-edp"/>
+                        <outlet property="estimatedPaymentAmountView" destination="Mtk-Td-1Pd" id="Kjj-9x-N8J"/>
                         <outlet property="linkedAccountLabel" destination="dFv-63-3RE" id="UMi-m0-tpA"/>
                         <outlet property="navItem" destination="TmB-uh-zs0" id="H91-YD-Dy8"/>
-                        <outlet property="outstandingCycleLabel" destination="qPe-75-OOu" id="2IJ-Q9-qJP"/>
-                        <outlet property="viewForCard" destination="Spw-od-Rw6" id="Z6a-cn-8BO"/>
-                        <outlet property="viewForCashOrBankAccount" destination="aNo-2k-XEN" id="5Xs-da-EHP"/>
-                        <outlet property="viewForEstimatedPaymentAmount" destination="Mtk-Td-1Pd" id="Kjj-9x-N8J"/>
+                        <outlet property="upcomingPaymentDateLabel" destination="qPe-75-OOu" id="2IJ-Q9-qJP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RDp-Fs-IwW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

@@ -10,13 +10,13 @@ import UIKit
 class AssetItemDetailViewController: UIViewController {
 
     @IBOutlet weak var navItem: UINavigationItem!
-    @IBOutlet weak var viewForCashOrBankAccount: UIView!
+    @IBOutlet weak var balanceView: UIView!
     @IBOutlet weak var balanceLabel: UILabel!
-    @IBOutlet weak var viewForCard: UIView!
+    @IBOutlet weak var cardView: UIView!
     @IBOutlet weak var linkedAccountLabel: UILabel!
-    @IBOutlet weak var currentMonthAmountLabel: UILabel!
-    @IBOutlet weak var viewForEstimatedPaymentAmount: UIView!
-    @IBOutlet weak var outstandingCycleLabel: UILabel!
+    @IBOutlet weak var currentCycleAmountLabel: UILabel!
+    @IBOutlet weak var estimatedPaymentAmountView: UIView!
+    @IBOutlet weak var upcomingPaymentDateLabel: UILabel!
     @IBOutlet weak var estimatedPaymentAmountLabel: UILabel!
     
     var viewModel: AssetItemDetailViewModel
@@ -46,13 +46,13 @@ class AssetItemDetailViewController: UIViewController {
     
     private func configureUI() {
         navItem.title = viewModel.nameText
-        viewForCashOrBankAccount.isHidden = viewModel.isHiddenForCashOrBankAccountView
+        balanceView.isHidden = viewModel.isHiddenForCashOrBankAccountView
         balanceLabel.text = viewModel.balanceText
-        viewForCard.isHidden = !viewModel.isHiddenForCashOrBankAccountView
+        cardView.isHidden = !viewModel.isHiddenForCashOrBankAccountView
         linkedAccountLabel.text = viewModel.linkedAccountText
-        currentMonthAmountLabel.text = viewModel.currentMonthAmountText
-        viewForEstimatedPaymentAmount.isHidden = viewModel.isHiddenForEstimatedPaymentAmountView
-        outstandingCycleLabel.text = viewModel.outstandingCycleText
+        currentCycleAmountLabel.text = viewModel.currentCycleAmountText
+        estimatedPaymentAmountView.isHidden = viewModel.isHiddenForEstimatedPaymentAmountView
+        upcomingPaymentDateLabel.text = viewModel.upcomingPaymentDateText
         estimatedPaymentAmountLabel.text = viewModel.estimatedPaymentAmountText
     }
     
