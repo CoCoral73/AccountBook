@@ -1274,51 +1274,76 @@
                                                                     <rect key="frame" x="16" y="7" width="361" height="116"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="삼성카드" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="P2N-Fj-IXe">
-                                                                            <rect key="frame" x="25.000000000000004" y="17.333333333333329" width="62.333333333333343" height="21.666666666666671"/>
+                                                                            <rect key="frame" x="25.000000000000004" y="17" width="62.333333333333343" height="23"/>
                                                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이번 달 사용 금액" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwA-bs-hk4">
-                                                                            <rect key="frame" x="25.000000000000007" y="54" width="109.66666666666669" height="19.333333333333329"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="888,888,888원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEl-kq-aBe">
-                                                                            <rect key="frame" x="226" y="54" width="110" height="19.333333333333329"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="결제 예정 금액 (00/00)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRo-7b-pWG">
-                                                                            <rect key="frame" x="25" y="80.333333333333329" width="133.33333333333334" height="17"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="888,888,888원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4a-4M-n7S">
-                                                                            <rect key="frame" x="238.66666666666666" y="80.333333333333329" width="97.333333333333343" height="17"/>
-                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                                            <nil key="textColor"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="5Ha-Je-d1F">
+                                                                            <rect key="frame" x="25" y="55" width="311" height="44"/>
+                                                                            <subviews>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Hbm-17-LmD">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="311" height="20"/>
+                                                                                    <subviews>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="888,888,888원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tEl-kq-aBe">
+                                                                                            <rect key="frame" x="201" y="0.3333333333333357" width="110" height="19.333333333333332"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                                            <nil key="textColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이번 달 사용 금액" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KwA-bs-hk4">
+                                                                                            <rect key="frame" x="0.0" y="0.3333333333333357" width="109.66666666666667" height="19.333333333333332"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                                                                            <nil key="textColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                    </subviews>
+                                                                                    <constraints>
+                                                                                        <constraint firstItem="tEl-kq-aBe" firstAttribute="centerY" secondItem="Hbm-17-LmD" secondAttribute="centerY" id="2r7-9P-Ta3"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="tEl-kq-aBe" secondAttribute="trailing" id="JEE-bu-CX0"/>
+                                                                                        <constraint firstItem="KwA-bs-hk4" firstAttribute="leading" secondItem="Hbm-17-LmD" secondAttribute="leading" id="PM7-iC-2qV"/>
+                                                                                        <constraint firstAttribute="height" constant="20" id="YYc-Tg-wKs"/>
+                                                                                        <constraint firstItem="KwA-bs-hk4" firstAttribute="centerY" secondItem="Hbm-17-LmD" secondAttribute="centerY" id="a6Q-If-GY3"/>
+                                                                                        <constraint firstItem="tEl-kq-aBe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KwA-bs-hk4" secondAttribute="trailing" constant="8" symbolic="YES" id="qXt-NW-jBR"/>
+                                                                                    </constraints>
+                                                                                </view>
+                                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="87A-GD-R4m">
+                                                                                    <rect key="frame" x="0.0" y="27" width="311" height="17"/>
+                                                                                    <subviews>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="결제 예정 금액 (00/00)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fRo-7b-pWG">
+                                                                                            <rect key="frame" x="0.0" y="0.0" width="133.33333333333334" height="17"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                            <nil key="textColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="888,888,888원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4a-4M-n7S">
+                                                                                            <rect key="frame" x="213.66666666666666" y="0.0" width="97.333333333333343" height="17"/>
+                                                                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                                            <nil key="textColor"/>
+                                                                                            <nil key="highlightedColor"/>
+                                                                                        </label>
+                                                                                    </subviews>
+                                                                                    <constraints>
+                                                                                        <constraint firstItem="k4a-4M-n7S" firstAttribute="centerY" secondItem="87A-GD-R4m" secondAttribute="centerY" id="9Dy-cG-JwH"/>
+                                                                                        <constraint firstAttribute="trailing" secondItem="k4a-4M-n7S" secondAttribute="trailing" id="9Rb-Vk-yzp"/>
+                                                                                        <constraint firstAttribute="height" constant="17" id="C3b-bY-fzd"/>
+                                                                                        <constraint firstItem="k4a-4M-n7S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fRo-7b-pWG" secondAttribute="trailing" constant="8" symbolic="YES" id="O4t-SP-yo4"/>
+                                                                                        <constraint firstItem="fRo-7b-pWG" firstAttribute="leading" secondItem="87A-GD-R4m" secondAttribute="leading" id="hZj-yO-TA2"/>
+                                                                                        <constraint firstItem="fRo-7b-pWG" firstAttribute="centerY" secondItem="87A-GD-R4m" secondAttribute="centerY" id="j9q-Ox-2Iv"/>
+                                                                                    </constraints>
+                                                                                </view>
+                                                                            </subviews>
+                                                                        </stackView>
                                                                     </subviews>
                                                                     <color key="backgroundColor" red="0.99607843159999998" green="0.99607843159999998" blue="0.72941178080000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                                     <constraints>
-                                                                        <constraint firstItem="fRo-7b-pWG" firstAttribute="leading" secondItem="P2N-Fj-IXe" secondAttribute="leading" id="0FR-Pt-Y0p"/>
-                                                                        <constraint firstItem="tEl-kq-aBe" firstAttribute="centerY" secondItem="KwA-bs-hk4" secondAttribute="centerY" id="1YT-o3-Cjx"/>
-                                                                        <constraint firstItem="fRo-7b-pWG" firstAttribute="top" secondItem="KwA-bs-hk4" secondAttribute="bottom" constant="7" id="1uY-Ba-h7v"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="k4a-4M-n7S" secondAttribute="trailing" constant="25" id="3pR-A4-mHg"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="5Ha-Je-d1F" secondAttribute="bottom" constant="17" id="1kb-Oc-3n3"/>
+                                                                        <constraint firstItem="P2N-Fj-IXe" firstAttribute="top" secondItem="zLB-me-GuV" secondAttribute="top" constant="17" id="2Zc-CI-Z2y"/>
                                                                         <constraint firstItem="P2N-Fj-IXe" firstAttribute="leading" secondItem="zLB-me-GuV" secondAttribute="leading" constant="25" id="3vh-pj-n2S"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="tEl-kq-aBe" secondAttribute="trailing" constant="25" id="CNd-M5-gXo"/>
                                                                         <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="P2N-Fj-IXe" secondAttribute="trailing" constant="20" symbolic="YES" id="HHl-70-MQe"/>
-                                                                        <constraint firstItem="k4a-4M-n7S" firstAttribute="centerY" secondItem="fRo-7b-pWG" secondAttribute="centerY" id="LZ2-16-N9X"/>
-                                                                        <constraint firstItem="KwA-bs-hk4" firstAttribute="leading" secondItem="P2N-Fj-IXe" secondAttribute="leading" id="V6T-je-UZr"/>
-                                                                        <constraint firstItem="tEl-kq-aBe" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="KwA-bs-hk4" secondAttribute="trailing" constant="8" symbolic="YES" id="csM-fy-cqt"/>
-                                                                        <constraint firstItem="KwA-bs-hk4" firstAttribute="top" secondItem="P2N-Fj-IXe" secondAttribute="bottom" constant="15" id="jl5-Mq-A9r"/>
-                                                                        <constraint firstItem="k4a-4M-n7S" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="fRo-7b-pWG" secondAttribute="trailing" constant="8" symbolic="YES" id="kT2-PA-WsE"/>
-                                                                        <constraint firstItem="P2N-Fj-IXe" firstAttribute="top" secondItem="zLB-me-GuV" secondAttribute="top" constant="17.329999999999998" id="nMC-tl-78A"/>
+                                                                        <constraint firstItem="5Ha-Je-d1F" firstAttribute="leading" secondItem="zLB-me-GuV" secondAttribute="leading" constant="25" id="RqH-Ud-eCa"/>
+                                                                        <constraint firstItem="5Ha-Je-d1F" firstAttribute="top" secondItem="P2N-Fj-IXe" secondAttribute="bottom" constant="15" id="W1u-s1-hY6"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="5Ha-Je-d1F" secondAttribute="trailing" constant="25" id="iHV-9x-ys0"/>
                                                                     </constraints>
                                                                     <userDefinedRuntimeAttributes>
                                                                         <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
@@ -1340,7 +1365,9 @@
                                                             <outlet property="backView" destination="zLB-me-GuV" id="YXh-YE-6AY"/>
                                                             <outlet property="currentMonthSpendingLabel" destination="tEl-kq-aBe" id="rPC-Zv-Qf2"/>
                                                             <outlet property="nameLabel" destination="P2N-Fj-IXe" id="w8I-sE-S6A"/>
+                                                            <outlet property="outstandingCycleLabel" destination="fRo-7b-pWG" id="8F7-y9-aue"/>
                                                             <outlet property="upcomingPaymentAmountLabel" destination="k4a-4M-n7S" id="trn-NU-ll7"/>
+                                                            <outlet property="viewForEstimatedPaymentAmount" destination="87A-GD-R4m" id="1dA-dD-FNS"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>
@@ -1384,7 +1411,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wfd-CR-34v" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-230" y="935"/>
+            <point key="canvasLocation" x="-231.29770992366412" y="934.85915492957747"/>
         </scene>
         <!--Asset Item Detail View Controller-->
         <scene sceneID="6YE-8O-Vsv">
