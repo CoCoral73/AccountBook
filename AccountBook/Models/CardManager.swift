@@ -1,13 +1,13 @@
 //
-//  CreditCardManager.swift
+//  CardManager.swift
 //  AccountBook
 //
 //  Created by 김정원 on 12/11/25.
 //
 import Foundation
 
-class CreditCardManager {
-    static let shared = CreditCardManager()
+class CardManager {
+    static let shared = CardManager()
     private init() { }
     
     private var calendar = Calendar.current

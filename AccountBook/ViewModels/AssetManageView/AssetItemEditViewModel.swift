@@ -81,7 +81,7 @@ class AssetItemEditViewModel {
     var accountButtonTitleString: String { linkedAccount?.name ?? "선택 안함" }
     var selectWithdrawlDateButtonTitle: String { "\(withdrawalDay)일" }
     var selectStartDateButtonTitle: String { "\(startDay)일" }
-    var periodString: String { CreditCardManager.shared.getPeriodString(withdrawalDay: withdrawalDay, startDay: startDay) }
+    var periodString: String { CardManager.shared.getPeriodString(withdrawalDay: withdrawalDay, startDay: startDay) }
     var withdrawalDayString: String { "당월 \(withdrawalDay)일 출금" }
     
     func setType(with index: Int) { //0: 계좌, 1: 체크카드, 2: 신용카드
