@@ -18,10 +18,10 @@ class CardInfoTableViewCellViewModel {
     
     var nameString: String { asset.name }    
     //로직 필요
-    var currentMonthSpendingString: String {
+    var currentCycleAmountText: String {
         return "이번달 사용금액 원"
     }
-    var upcomingPaymentAmountString: String {
+    var upcomingPaymentAmountText: String {
         return "결제 예정금액 원"
     }
 }

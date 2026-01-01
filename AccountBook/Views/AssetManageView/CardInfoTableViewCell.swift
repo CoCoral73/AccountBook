@@ -24,8 +24,8 @@ class CardInfoTableViewCell: UITableViewCell {
     
     func configure() {
         nameLabel.text = viewModel.nameString
-        currentCycleAmountLabel.text = viewModel.currentMonthSpendingString
-        upcomingPaymentAmountLabel.text = viewModel.upcomingPaymentAmountString
+        currentCycleAmountLabel.text = viewModel.currentCycleAmountText
+        upcomingPaymentAmountLabel.text = viewModel.upcomingPaymentAmountText
     }
     
     override func layoutSubviews() {
