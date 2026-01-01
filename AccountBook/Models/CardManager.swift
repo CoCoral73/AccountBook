@@ -12,6 +12,18 @@ class CardManager {
     
     private var calendar = Calendar.current
     
+    func calculateCurrentMonthAmountForDebitCard(for card: DebitCardItem, now: Date = Date()) -> Int64 {
+        let startDate = now.startOfMonth, endDate = now.startOfNextMonth
+        guard let txs = card.transactions as? Set<Transaction> else { return 0 }
+        
+        var total: Int64 = 0
+        for tx in txs where tx.date >= startDate && tx.date < endDate {
+            total += tx.amount
+        }
+        
+        return total
+    }
+    
     func getPeriodString(withdrawalDay: Int16, startDay: Int16) -> String {
         let periodString: String
         
