@@ -41,6 +41,17 @@ class CardManager {
         return periodString
     }
     
+    func getWithdrawalDate(withdrawalDay: Int16, baseDate: Date = Date()) -> Date {
+        let comps = calendar.dateComponents([.year, .month, .day], from: baseDate)
+        var withdrawalDate = calendar.safeDate(year: comps.year!, month: comps.month!, day: Int(withdrawalDay))!
+        
+        if comps.day! <= Int(withdrawalDay) {
+            return withdrawalDate
+        }
+        
+        return calendar.date(byAdding: .month, value: 1, to: withdrawalDate)!
+    }
+    
     func calculateCurrentMonthCycle(for card: CreditCardItem, now: Date = Date()) -> (startDate: Date, endDate: Date)? {
         let startDay = Int(card.startDay)
         if startDay == 1 {
