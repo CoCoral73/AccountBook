@@ -1363,11 +1363,11 @@
                                                         </tableViewCellContentView>
                                                         <connections>
                                                             <outlet property="backView" destination="zLB-me-GuV" id="YXh-YE-6AY"/>
-                                                            <outlet property="currentMonthSpendingLabel" destination="tEl-kq-aBe" id="rPC-Zv-Qf2"/>
+                                                            <outlet property="currentCycleAmountLabel" destination="tEl-kq-aBe" id="rPC-Zv-Qf2"/>
+                                                            <outlet property="estimatedPaymentAmountView" destination="87A-GD-R4m" id="1dA-dD-FNS"/>
                                                             <outlet property="nameLabel" destination="P2N-Fj-IXe" id="w8I-sE-S6A"/>
-                                                            <outlet property="outstandingCycleLabel" destination="fRo-7b-pWG" id="8F7-y9-aue"/>
                                                             <outlet property="upcomingPaymentAmountLabel" destination="k4a-4M-n7S" id="trn-NU-ll7"/>
-                                                            <outlet property="viewForEstimatedPaymentAmount" destination="87A-GD-R4m" id="1dA-dD-FNS"/>
+                                                            <outlet property="upcomingPaymentDateLabel" destination="fRo-7b-pWG" id="8F7-y9-aue"/>
                                                         </connections>
                                                     </tableViewCell>
                                                 </prototypes>

@@ -11,7 +11,9 @@ class AssetManageTableViewForCreditCardCell: UITableViewCell {
 
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var currentMonthSpendingLabel: UILabel!
+    @IBOutlet weak var currentCycleAmountLabel: UILabel!
+    @IBOutlet weak var estimatedPaymentAmountView: UIView!
+    @IBOutlet weak var upcomingPaymentDateLabel: UILabel!
     @IBOutlet weak var upcomingPaymentAmountLabel: UILabel!
     
     var viewModel: AssetManageForCreditCardCellViewModel! {
@@ -22,7 +24,7 @@ class AssetManageTableViewForCreditCardCell: UITableViewCell {
     
     func configure() {
         nameLabel.text = viewModel.nameString
-        currentMonthSpendingLabel.text = viewModel.currentMonthSpendingString
+        currentCycleAmountLabel.text = viewModel.currentMonthSpendingString
         upcomingPaymentAmountLabel.text = viewModel.upcomingPaymentAmountString
     }
     
