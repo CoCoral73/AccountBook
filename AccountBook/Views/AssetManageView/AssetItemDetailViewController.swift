@@ -10,6 +10,14 @@ import UIKit
 class AssetItemDetailViewController: UIViewController {
 
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var viewForCashOrBankAccount: UIView!
+    @IBOutlet weak var balanceLabel: UILabel!
+    @IBOutlet weak var viewForCard: UIView!
+    @IBOutlet weak var linkedAccountLabel: UILabel!
+    @IBOutlet weak var currentMonthAmountLabel: UILabel!
+    @IBOutlet weak var viewForEstimatedPaymentAmount: UIView!
+    @IBOutlet weak var outstandingCycleLabel: UILabel!
+    @IBOutlet weak var estimatedPaymentAmountLabel: UILabel!
     
     var viewModel: AssetItemDetailViewModel
     
@@ -38,6 +46,14 @@ class AssetItemDetailViewController: UIViewController {
     
     private func configureUI() {
         navItem.title = viewModel.title
+        viewForCashOrBankAccount.isHidden = viewModel.isHiddenForCashOrBankAccountView
+        balanceLabel.text = viewModel.balanceText
+        viewForCard.isHidden = !viewModel.isHiddenForCashOrBankAccountView
+        linkedAccountLabel.text = viewModel.linkedAccountText
+        currentMonthAmountLabel.text = viewModel.currentMonthAmountText
+        viewForEstimatedPaymentAmount.isHidden = viewModel.isHiddenForEstimatedPaymentAmountView
+        outstandingCycleLabel.text = viewModel.outstandingCycleText
+        estimatedPaymentAmountLabel.text = viewModel.estimatedPaymentAmountText
     }
     
     private func bindViewModel() {
