@@ -17,7 +17,7 @@ class AssetItemDetailViewModel {
         self.asset = asset
     }
     
-    var title: String {
+    var nameText: String {
         return asset.name
     }
     var isHiddenForCashOrBankAccountView: Bool {

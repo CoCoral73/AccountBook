@@ -45,7 +45,7 @@ class AssetItemDetailViewController: UIViewController {
     }
     
     private func configureUI() {
-        navItem.title = viewModel.title
+        navItem.title = viewModel.nameText
         viewForCashOrBankAccount.isHidden = viewModel.isHiddenForCashOrBankAccountView
         balanceLabel.text = viewModel.balanceText
         viewForCard.isHidden = !viewModel.isHiddenForCashOrBankAccountView
