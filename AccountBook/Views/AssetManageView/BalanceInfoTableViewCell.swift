@@ -7,13 +7,13 @@
 
 import UIKit
 
-class AssetManageTableViewForNotCreditCardCell: UITableViewCell {
+class BalanceInfoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var amountLabel: UILabel!
     
-    var viewModel: AssetManageForNotCreditCardCellViewModel! {
+    var viewModel: BalanceInfoTableViewCellViewModel! {
         didSet {
             configure()
         }

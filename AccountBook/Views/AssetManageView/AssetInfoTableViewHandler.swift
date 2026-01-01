@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AssetManageTableViewHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
+class AssetInfoTableViewHandler: NSObject, UITableViewDataSource, UITableViewDelegate {
     private weak var viewModel: AssetManageViewModel?
     
     init(viewModel: AssetManageViewModel) {
@@ -40,25 +40,25 @@ class AssetManageTableViewHandler: NSObject, UITableViewDataSource, UITableViewD
         
         if indexPath.section != 3 {    //현금, 계좌, 체크카드
             
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as? AssetManageTableViewForNotCreditCardCell,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as? BalanceInfoTableViewCell,
                   let asset = viewModel?.cellForRowAt(indexPath: indexPath) else {
                 print("AssetManageTableViewHandler: cell, asset 생성 오류")
                 return UITableViewCell()
             }
             
-            let vm = AssetManageForNotCreditCardCellViewModel(asset: asset)
+            let vm = BalanceInfoTableViewCellViewModel(asset: asset)
             cell.viewModel = vm
             return cell
             
         } else {    //신용카드
             
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as? AssetManageTableViewForCreditCardCell,
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as? CardInfoTableViewCell,
                   let asset = viewModel?.cellForRowAt(indexPath: indexPath) else {
                 print("AssetManageTableViewHandler: cell, asset 생성 오류")
                 return UITableViewCell()
             }
             
-            let vm = AssetManageForCreditCardCellViewModel(asset: asset)
+            let vm = CardInfoTableViewCellViewModel(asset: asset)
             cell.viewModel = vm
             return cell
             
@@ -68,7 +68,7 @@ class AssetManageTableViewHandler: NSObject, UITableViewDataSource, UITableViewD
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 { return nil }
         
-        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "AssetManageTableHeaderView") as? AssetManageTableHeaderView, let data = viewModel?.viewForHeaderInSection(section: section) else {
+        guard let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: "AssetInfoTableViewHeaderView") as? AssetInfoTableViewHeaderView, let data = viewModel?.viewForHeaderInSection(section: section) else {
             return nil
         }
 

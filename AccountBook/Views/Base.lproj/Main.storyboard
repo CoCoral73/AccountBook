@@ -1210,7 +1210,7 @@
                                                     <constraint firstAttribute="height" constant="500" placeholder="YES" id="Wve-Qi-K4N"/>
                                                 </constraints>
                                                 <prototypes>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AssetManageForNotCreditCardCell" rowHeight="70" id="VJZ-fH-PKY" customClass="AssetManageTableViewForNotCreditCardCell" customModule="AccountBook" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AssetManageForNotCreditCardCell" rowHeight="70" id="VJZ-fH-PKY" customClass="BalanceInfoTableViewCell" customModule="AccountBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="50" width="393" height="70"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="VJZ-fH-PKY" id="kNf-vZ-XSl">
@@ -1263,7 +1263,7 @@
                                                             <outlet property="nameLabel" destination="2dw-OE-wCq" id="QrM-Z3-vBq"/>
                                                         </connections>
                                                     </tableViewCell>
-                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AssetManageForCreditCardCell" rowHeight="130" id="H56-KI-YpC" customClass="AssetManageTableViewForCreditCardCell" customModule="AccountBook" customModuleProvider="target">
+                                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AssetManageForCreditCardCell" rowHeight="130" id="H56-KI-YpC" customClass="CardInfoTableViewCell" customModule="AccountBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="120" width="393" height="130"/>
                                                         <autoresizingMask key="autoresizingMask"/>
                                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="H56-KI-YpC" id="odH-Sn-H0R">

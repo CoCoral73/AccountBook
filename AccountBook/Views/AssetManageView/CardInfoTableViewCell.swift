@@ -7,7 +7,7 @@
 
 import UIKit
 
-class AssetManageTableViewForCreditCardCell: UITableViewCell {
+class CardInfoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -16,7 +16,7 @@ class AssetManageTableViewForCreditCardCell: UITableViewCell {
     @IBOutlet weak var upcomingPaymentDateLabel: UILabel!
     @IBOutlet weak var upcomingPaymentAmountLabel: UILabel!
     
-    var viewModel: AssetManageForCreditCardCellViewModel! {
+    var viewModel: CardInfoTableViewCellViewModel! {
         didSet {
             configure()
         }

@@ -14,7 +14,7 @@ class AssetManageViewController: UIViewController {
     @IBOutlet weak var tableView: IntrinsicTableView!
     
     var viewModel: AssetManageViewModel!
-    var tableViewHandler: AssetManageTableViewHandler!
+    var tableViewHandler: AssetInfoTableViewHandler!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +33,13 @@ class AssetManageViewController: UIViewController {
     }
     
     func configureTableView() {
-        tableViewHandler = AssetManageTableViewHandler(viewModel: viewModel)
+        tableViewHandler = AssetInfoTableViewHandler(viewModel: viewModel)
         tableView.dataSource = tableViewHandler
         tableView.delegate = tableViewHandler
         tableView.sectionHeaderTopPadding = 15
         
-        let headerNib = UINib(nibName: "AssetManageTableHeaderView", bundle: nil)
-        tableView.register(headerNib, forHeaderFooterViewReuseIdentifier: "AssetManageTableHeaderView")
+        let headerNib = UINib(nibName: "AssetInfoTableViewHeaderView", bundle: nil)
+        tableView.register(headerNib, forHeaderFooterViewReuseIdentifier: "AssetInfoTableViewHeaderView")
     }
     
     func reloadData() {

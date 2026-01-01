@@ -5,7 +5,7 @@
 //  Created by 김정원 on 11/5/25.
 //
 
-class AssetManageForNotCreditCardCellViewModel {
+class BalanceInfoTableViewCellViewModel {
     
     var asset: AssetItem!
     
