@@ -103,8 +103,8 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
         segControl.isHidden = viewModel.isHiddenForSegControl
         topConstraint.constant = viewModel.topConstraintConstant
         nameTextField.isEnabled = viewModel.isEnabledForNameTextField
-        nameTextField.text = viewModel.nameTextFieldString
-        balanceTextField.text = viewModel.balanceTextFieldString
+        nameTextField.text = viewModel.nameTextFieldText
+        balanceLabel.text = viewModel.balanceLabelText
         accountStackViewForModifyMode.isHidden = viewModel.isHiddenForTableView
         accountButton.setTitle(viewModel.accountButtonTitleString, for: .normal)
         withdrawalDayButton.setTitle(viewModel.selectWithdrawlDateButtonTitle, for: .normal)

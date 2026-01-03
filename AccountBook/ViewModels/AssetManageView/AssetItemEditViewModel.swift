@@ -69,8 +69,8 @@ class AssetItemEditViewModel {
     var isHiddenForCard: Bool { type == .cash || type == .bankAccount }
     var isHiddenForCredit: Bool { type != .creditCard }
     var isHiddenForRemoveButton: Bool { mode == .add }
-    var nameTextFieldString: String { name }
-    var balanceTextFieldString: String { String(balance) }
+    var nameTextFieldText: String { name }
+    var balanceLabelText: String { balance.formattedWithComma + "원" }
     var numberOfRowsInSection: Int { cellForRowAt.count }
     var cellForRowAt: [AssetItem] {
         guard case let .edit(asset) = mode, let bank = asset as? BankAccountItem else { return [] }
