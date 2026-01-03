@@ -17,7 +17,11 @@ class AssetInfoTableViewHandler: NSObject, UITableViewDataSource, UITableViewDel
     //MARK: DataSource
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return indexPath.section == 3 ? 130 : 70
+        switch indexPath.section {
+        case 0, 1: return 70
+        case 2: return 106
+        default: return 130
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -38,7 +42,7 @@ class AssetInfoTableViewHandler: NSObject, UITableViewDataSource, UITableViewDel
             return UITableViewCell()
         }
         
-        if indexPath.section != 3 {    //현금, 계좌, 체크카드
+        if indexPath.section <= 1 {    //현금, 계좌
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as? BalanceInfoTableViewCell,
                   let asset = viewModel?.cellForRowAt(indexPath: indexPath) else {
@@ -50,7 +54,7 @@ class AssetInfoTableViewHandler: NSObject, UITableViewDataSource, UITableViewDel
             cell.viewModel = vm
             return cell
             
-        } else {    //신용카드
+        } else {    //체크카드, 신용카드
             
             guard let cell = tableView.dequeueReusableCell(withIdentifier: id, for: indexPath) as? CardInfoTableViewCell,
                   let asset = viewModel?.cellForRowAt(indexPath: indexPath) else {
