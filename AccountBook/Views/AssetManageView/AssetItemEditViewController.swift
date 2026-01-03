@@ -31,6 +31,10 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
     
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     
+    private let engine = CalculatorEngine()
+    private let keypad = NumericKeypadView.loadFromNib()
+    private var bottomConstraint: NSLayoutConstraint!
+    
     var viewModel: AssetItemEditViewModel
     var presentationStyle: PresentationStyle = .modal
     
@@ -51,6 +55,7 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
         configureAccountButton()
         configureUI()
         configureTextField()
+        configureKeypadLayout()
         configureTableView()
         configureTapGesture()
     }
@@ -110,13 +115,23 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
     }
     
     func configureTapGesture() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapView))
         tap.cancelsTouchesInView = false
+        tap.delegate = self
         view.addGestureRecognizer(tap)
+        
+        let tap2 = UITapGestureRecognizer(target: self, action: #selector(didTapBalanceLabel))
+        balanceLabel.addGestureRecognizer(tap2)
     }
     
-    @objc func dismissKeyboard() {
+    @objc func didTapView() {
         view.endEditing(true)
+        keypadDidHide()
+    }
+    
+    @objc func didTapBalanceLabel() {
+        view.endEditing(true)
+        showNumericKeypad()
     }
     
     @IBAction func dayButtonTapped(_ sender: UIButton) {
@@ -228,14 +243,67 @@ extension AssetItemEditViewController: UITextFieldDelegate {
     
     func configureTextField() {
         nameTextField.delegate = self
-        balanceTextField.delegate = self
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if segControl.selectedSegmentIndex == 0 && textField == nameTextField {
-            balanceTextField.becomeFirstResponder()
+            textField.resignFirstResponder()
+            showNumericKeypad()
         } else {
             view.endEditing(true)
         }
+        
+        return true
+    }
+    
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        keypadDidHide()
+    }
+}
+
+extension AssetItemEditViewController: NumericKeypadDelegate, UIGestureRecognizerDelegate {
+    func configureKeypadLayout() {
+        keypad.delegate = self
+        
+        view.addSubview(keypad)
+        keypad.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            keypad.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            keypad.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            keypad.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        
+        bottomConstraint = keypad.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 400)
+        bottomConstraint.isActive = true
+    }
+    
+    func showNumericKeypad() {
+        bottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func keypadDidInput(_ input: NumericKeypadInput) {
+        let value = engine.input(input)
+        viewModel.handleNumericKeypad(value)
+        
+        let formatted = NSDecimalNumber(decimal: value).int64Value.formattedWithComma
+        balanceLabel.text = "\(formatted)원"
+    }
+    
+    func keypadDidHide() {
+        bottomConstraint.constant = 400
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view?.isDescendant(of: keypad) == true {
+            return false
+        }
+        return true
     }
 }
