@@ -46,7 +46,7 @@ class AssetInfoTableViewHandler: NSObject, UITableViewDataSource, UITableViewDel
                 return UITableViewCell()
             }
             
-            let vm = BalanceInfoTableViewCellViewModel(asset: asset)
+            let vm = AssetItemDetailViewModel(asset: asset)
             cell.viewModel = vm
             return cell
             
@@ -58,7 +58,7 @@ class AssetInfoTableViewHandler: NSObject, UITableViewDataSource, UITableViewDel
                 return UITableViewCell()
             }
             
-            let vm = CardInfoTableViewCellViewModel(asset: asset)
+            let vm = AssetItemDetailViewModel(asset: asset)
             cell.viewModel = vm
             return cell
             
