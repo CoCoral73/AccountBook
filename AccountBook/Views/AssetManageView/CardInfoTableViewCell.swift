@@ -31,6 +31,8 @@ class CardInfoTableViewCell: UITableViewCell {
     }
     
     override func layoutSubviews() {
+        super.layoutSubviews()
+        
         // 그림자 설정
         backView.layer.cornerRadius = 12
         backView.layer.shadowColor = UIColor.black.cgColor
