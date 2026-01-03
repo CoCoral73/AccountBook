@@ -13,7 +13,7 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var segControl: UISegmentedControl!
     
     @IBOutlet weak var nameTextField: UITextField!
-    @IBOutlet weak var balanceTextField: UITextField!
+    @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var accountButton: AutoDismissKeyboardButton!
     @IBOutlet weak var withdrawalDayButton: AutoDismissKeyboardButton!
     @IBOutlet weak var startDayButton: AutoDismissKeyboardButton!

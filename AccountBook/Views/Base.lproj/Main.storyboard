@@ -2819,11 +2819,15 @@
                                                                 <color key="textColor" systemColor="systemGrayColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
-                                                            <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="UNO-ZD-ZtM">
+                                                            <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EbQ-lT-ret">
                                                                 <rect key="frame" x="5" y="24.333333333333314" width="339" height="30"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="30" id="kJm-ia-CCH"/>
+                                                                </constraints>
                                                                 <fontDescription key="fontDescription" type="system" pointSize="23"/>
-                                                                <textInputTraits key="textInputTraits" keyboardType="numberPad"/>
-                                                            </textField>
+                                                                <nil key="textColor"/>
+                                                                <nil key="highlightedColor"/>
+                                                            </label>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GA5-Uo-2qd" userLabel="텍스트필드 밑선">
                                                                 <rect key="frame" x="0.0" y="58.333333333333314" width="349" height="0.3333333333333357"/>
                                                                 <color key="backgroundColor" systemColor="systemGray3Color"/>
@@ -2833,10 +2837,10 @@
                                                             </view>
                                                         </subviews>
                                                         <constraints>
-                                                            <constraint firstAttribute="trailing" secondItem="UNO-ZD-ZtM" secondAttribute="trailing" constant="5" id="A5R-OE-cBS"/>
+                                                            <constraint firstItem="EbQ-lT-ret" firstAttribute="leading" secondItem="tRj-o0-WGz" secondAttribute="leading" constant="5" id="Pge-Nt-dDg"/>
+                                                            <constraint firstAttribute="trailing" secondItem="EbQ-lT-ret" secondAttribute="trailing" constant="5" id="PrK-RV-S8o"/>
                                                             <constraint firstAttribute="trailing" secondItem="GA5-Uo-2qd" secondAttribute="trailing" id="Z3A-kj-X5I"/>
                                                             <constraint firstAttribute="trailing" secondItem="6Vt-S8-8jo" secondAttribute="trailing" id="aaW-Nd-KDc"/>
-                                                            <constraint firstItem="UNO-ZD-ZtM" firstAttribute="leading" secondItem="tRj-o0-WGz" secondAttribute="leading" constant="5" id="cd9-Zb-N6p"/>
                                                             <constraint firstItem="6Vt-S8-8jo" firstAttribute="leading" secondItem="tRj-o0-WGz" secondAttribute="leading" id="eas-be-scr"/>
                                                             <constraint firstItem="GA5-Uo-2qd" firstAttribute="leading" secondItem="tRj-o0-WGz" secondAttribute="leading" id="ff6-6F-jlq"/>
                                                         </constraints>
@@ -3057,7 +3061,6 @@
                                                     </button>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="UNO-ZD-ZtM" firstAttribute="height" secondItem="sUb-my-ELU" secondAttribute="height" id="Hc8-l9-9Ys"/>
                                                     <constraint firstItem="T5E-WP-J54" firstAttribute="height" secondItem="sUb-my-ELU" secondAttribute="height" id="RUh-1B-Ae5"/>
                                                     <constraint firstItem="eBh-zZ-ReI" firstAttribute="height" secondItem="sUb-my-ELU" secondAttribute="height" id="kJT-tE-BXu"/>
                                                     <constraint firstItem="8By-Pj-mQL" firstAttribute="height" secondItem="sUb-my-ELU" secondAttribute="height" id="v4h-yX-0mE"/>
@@ -3104,7 +3107,7 @@
                         <outlet property="accountButton" destination="eBh-zZ-ReI" id="aoc-wY-v2D"/>
                         <outlet property="accountStackView" destination="tRj-o0-WGz" id="I8I-Bx-nj2"/>
                         <outlet property="accountStackViewForModifyMode" destination="PRD-nX-mHt" id="74M-iU-5LM"/>
-                        <outlet property="balanceTextField" destination="UNO-ZD-ZtM" id="Vu1-hh-uc7"/>
+                        <outlet property="balanceLabel" destination="EbQ-lT-ret" id="UrM-ud-2se"/>
                         <outlet property="boxViewForCreditCard" destination="s4D-4d-QCr" id="sdw-ES-dMh"/>
                         <outlet property="cardStackView" destination="QUs-Zd-ohr" id="inE-uy-ywx"/>
                         <outlet property="creditCardStackView" destination="0SQ-iG-u5E" id="KaT-Rf-sz7"/>
