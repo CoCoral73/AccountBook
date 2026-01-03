@@ -32,7 +32,7 @@ class AssetManageViewModel {
     }
     
     func withIdentifier(section: Int) -> String {
-        return section == 3 ? Cell.assetManageForCreditCardCell : Cell.assetManageForNotCreditCardCell
+        return section >= 2 ? Cell.cardInfoTableViewCell : Cell.balanceInfoTableViewCell
     }
     
     func cellForRowAt(indexPath: IndexPath) -> AssetItem {
