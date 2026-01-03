@@ -11,7 +11,7 @@ class BalanceInfoTableViewCell: UITableViewCell {
 
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var balanceLabel: UILabel!
     
     var viewModel: BalanceInfoTableViewCellViewModel! {
         didSet {
@@ -20,8 +20,8 @@ class BalanceInfoTableViewCell: UITableViewCell {
     }
     
     func configure() {
-        nameLabel.text = viewModel.nameString
-        amountLabel.text = viewModel.amountString
+        nameLabel.text = viewModel.nameText
+        balanceLabel.text = viewModel.balanceText
     }
     
     override func layoutSubviews() {

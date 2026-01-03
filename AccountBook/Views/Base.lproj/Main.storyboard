@@ -1258,8 +1258,8 @@
                                                             </constraints>
                                                         </tableViewCellContentView>
                                                         <connections>
-                                                            <outlet property="amountLabel" destination="oSx-HD-cCv" id="gLQ-VX-nFV"/>
                                                             <outlet property="backView" destination="R0L-SS-EkX" id="xfL-xG-ou1"/>
+                                                            <outlet property="balanceLabel" destination="oSx-HD-cCv" id="gLQ-VX-nFV"/>
                                                             <outlet property="nameLabel" destination="2dw-OE-wCq" id="QrM-Z3-vBq"/>
                                                         </connections>
                                                     </tableViewCell>
