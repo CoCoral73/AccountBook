@@ -16,16 +16,18 @@ class CardInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var upcomingPaymentDateLabel: UILabel!
     @IBOutlet weak var estimatedPaymentAmountLabel: UILabel!
     
-    var viewModel: CardInfoTableViewCellViewModel! {
+    var viewModel: AssetItemDetailViewModel! {
         didSet {
             configure()
         }
     }
     
     func configure() {
-        nameLabel.text = viewModel.nameString
+        nameLabel.text = viewModel.nameText
         currentCycleAmountLabel.text = viewModel.currentCycleAmountText
-        upcomingPaymentAmountLabel.text = viewModel.upcomingPaymentAmountText
+        estimatedPaymentAmountView.isHidden = viewModel.isHiddenForEstimatedPaymentAmountView
+        upcomingPaymentDateLabel.text = viewModel.upcomingPaymentDateText
+        estimatedPaymentAmountLabel.text = viewModel.estimatedPaymentAmountText
     }
     
     override func layoutSubviews() {
