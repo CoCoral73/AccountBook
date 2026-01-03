@@ -88,12 +88,6 @@ class AssetItemEditViewModel {
         let type = AssetType(rawValue: index + 1)!
         self.type = type
     }
-    func setName(with name: String) {
-        self.name = name
-    }
-    func setBalance(with balance: Int64) {
-        self.balance = balance
-    }
     func setLinkedAccount(with account: BankAccountItem?) {
         self.linkedAccount = account
     }
@@ -104,7 +98,13 @@ class AssetItemEditViewModel {
         self.startDay = day
     }
     
-    func handleDoneButton() {
+    func handleNumericKeypad(_ value: Decimal) {
+        balance = NSDecimalNumber(decimal: value).int64Value
+    }
+    
+    func handleDoneButton(name: String) {
+        self.name = name
+        
         switch mode {
         case .add:
             addAssetItem()

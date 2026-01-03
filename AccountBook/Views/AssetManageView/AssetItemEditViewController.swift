@@ -175,12 +175,7 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
             return
         }
         
-        viewModel.setName(with: name)
-        
-        let balance = Int64(balanceTextField.text ?? "") ?? 0
-        viewModel.setBalance(with: balance)
-        
-        viewModel.handleDoneButton()
+        viewModel.handleDoneButton(name: name)
         close()
     }
     
