@@ -32,7 +32,7 @@ class AssetItemEditViewModel {
     
     init(asset: AssetItem) {
         self.mode = .edit(asset)
-        self.type = AssetType(rawValue: Int(asset.type))!
+        self.type = asset.type
         
         self.name = asset.name
         switch asset {
@@ -85,7 +85,7 @@ class AssetItemEditViewModel {
     var withdrawalDayString: String { "당월 \(withdrawalDay)일 출금" }
     
     func setType(with index: Int) { //0: 계좌, 1: 체크카드, 2: 신용카드
-        let type = AssetType(rawValue: index + 1)!
+        let type = AssetType(rawValue: Int16(index) + 1)!
         self.type = type
     }
     func setLinkedAccount(with account: BankAccountItem?) {
