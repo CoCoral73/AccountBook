@@ -25,7 +25,7 @@ class AssetSelectionViewController: UIViewController {
     
     var viewModel: AssetSelectionViewModel
     var buttons: [UIButton] = []
-    var selectedButton: Int = 5
+    var selectedButtonTag: Int = 5
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -40,20 +40,20 @@ class AssetSelectionViewController: UIViewController {
     
     private func configure() {
         buttons = [cashButton, accountButton, debitCardButton, creditCardButton]
-        if viewModel.isIncome {
+        if viewModel.type == .income {
             debitCardButton.setInvisible(true)
             creditCardButton.setInvisible(true)
         }
     }
     
     @IBAction func AssetTypeButtonTapped(_ sender: UIButton) {
-        if selectedButton <= 3 {
-            buttons[selectedButton].backgroundColor = .systemBackground
+        if selectedButtonTag <= 3 {
+            buttons[selectedButtonTag].backgroundColor = .systemBackground
         }
         
         sender.backgroundColor = #colorLiteral(red: 1, green: 0.5680983663, blue: 0.6200271249, alpha: 0.2426014073)
         
-        selectedButton = sender.tag
+        selectedButtonTag = sender.tag
         tableView.reloadData()
     }
     
@@ -76,7 +76,7 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
             viewModel.didSelectRowAt(with: model)
             dismiss(animated: true)
         } else {    //자산 추가 뷰로 이동
-            let vm = AssetItemEditViewModel(type: AssetType(rawValue: selectedButton)!)
+            let vm = AssetItemEditViewModel(type: AssetType(rawValue: Int16(selectedButtonTag))!)
             vm.onDidAddAssetItem = { [weak self] in
                 guard let self = self else { return }
                 
@@ -94,17 +94,17 @@ extension AssetSelectionViewController: UITableViewDelegate, UITableViewDataSour
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let type = AssetType(rawValue: selectedButton) else { return 0 }
-        return AssetItemManager.shared.getAssetItems(with: type).count + (selectedButton != 0 ? 1 : 0)
+        guard let type = AssetType(rawValue: Int16(selectedButtonTag)) else { return 0 }
+        return AssetItemManager.shared.getAssetItems(with: type).count + (selectedButtonTag != 0 ? 1 : 0)
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: Cell.assetCell, for: indexPath) as! AssetItemTableViewCell
         
-        if selectedButton != 0 && indexPath.row == tableView.numberOfRows(inSection: 0) - 1 { //자산 추가 셀
+        if selectedButtonTag != 0 && indexPath.row == tableView.numberOfRows(inSection: 0) - 1 { //자산 추가 셀
             cell.model = nil
         } else {
-            let item = AssetItemManager.shared.getAssetItems(with: AssetType(rawValue: selectedButton)!)[indexPath.row]
+            let item = AssetItemManager.shared.getAssetItems(with: AssetType(rawValue: Int16(selectedButtonTag))!)[indexPath.row]
             cell.model = item
         }
         

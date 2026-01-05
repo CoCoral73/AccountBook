@@ -6,10 +6,10 @@
 //
 
 class AssetSelectionViewModel {
-    var isIncome: Bool
+    var type: TransactionType
     
-    init(isIncome: Bool) {
-        self.isIncome = isIncome
+    init(type: TransactionType) {
+        self.type = type
     }
     
     var onAssetSelected: ((AssetItem) -> ())?
