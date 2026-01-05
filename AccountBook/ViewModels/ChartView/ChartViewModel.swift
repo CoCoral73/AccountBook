@@ -25,7 +25,7 @@ class ChartViewModel {
     
     private var periodType: StatisticPeriod = .monthly
     private var startDate: Date, endDate: Date
-    private var isIncome: Bool = false
+    private var type: TransactionType = .expense
     
     private var txs: [Transaction] = [] { didSet { calculateTotals() } }
     private(set) var totalByCategory: [Category: Int64] = [:]
@@ -42,7 +42,7 @@ class ChartViewModel {
         loadTransactions()
     }
     
-    var periodButtonTitleString: String {
+    var periodDisplay: String {
         let fmt = DateFormatter()
         
         switch periodType {
@@ -57,13 +57,13 @@ class ChartViewModel {
         
         return fmt.string(from: startDate)
     }
-    var modeButtonString: String { isIncome ? "수입" : "지출" }
-    var totalTitleString: String { isIncome ? "총 수입" : "총 지출" }
+    var modeTitle: String { type.name }
+    var totalTitle: String { "총 \(type.name)" }
     var totalAmount: Int64 = 0
-    var totalAmountString: String = ""
-    var categoryTitleString: String { isIncome ? "카테고리별 수입" : "카테고리별 지출" }
-    var assetTitleString: String { isIncome ? "자산별 수입" : "자산별 지출" }
-    var isHiddenForBarChart: Bool { periodType == .monthly ? false : true }
+    var totalAmountDisplay: String = ""
+    var categoryTitle: String { "카테고리별 \(type.name)" }
+    var assetTitle: String { "자산별 \(type.name)" }
+    var isBarChartHidden: Bool { periodType == .monthly ? false : true }
     
     var chartCenterText: String { byCategoryViewModels.isEmpty ? "데이터 없음" : "" }
     var byCategoryViewModels: [TableByCategoryCellViewModel] = []
@@ -118,7 +118,12 @@ class ChartViewModel {
     }
     
     func handleModeButton() {
-        self.isIncome.toggle()
+        if type == .income {
+            type = .expense
+        } else if type == .expense {
+            type = .income
+        }
+        
         calculateTotals()
         onDidSetIsIncome?()
     }
@@ -134,10 +139,10 @@ class ChartViewModel {
         var totalAmount: Int64 = 0
         
         for tx in txs {
-            if tx.isIncome == isIncome {
+            if tx.type == type {
                 let category = tx.category
-                let asset = tx.asset
-                guard let type = AssetType(rawValue: Int(asset.type)) else { continue }
+                let asset = tx.asset!
+                let type = asset.type
                 
                 totalByCategory[category, default: 0] += tx.amount
                 totalByAsset[asset, default: 0] += tx.amount
@@ -152,7 +157,7 @@ class ChartViewModel {
             guard let totalAmount = totalByAssetType[type] else { continue }
 
             // 해당 타입에 속한 자산 필터링
-            let filtered = totalByAsset.filter { $0.key.type == type.rawValue }
+            let filtered = totalByAsset.filter { $0.key.type == type }
             let sorted = filtered.sorted(by: { $0.value > $1.value }) // 자산끼리는 금액순 유지
 
             let rows = type == .cash ? [] : sorted.map { AssetRow(asset: $0.key, amount: $0.value) }
@@ -160,19 +165,23 @@ class ChartViewModel {
         }
         
         self.totalAmount = totalAmount
-        totalAmountString = totalAmount.formattedWithComma + "원"
+        totalAmountDisplay = totalAmount.formattedWithComma + "원"
         sectionsByAsset = sections
     }
     
     private func loadTransactions() {
+        let notFiltered: [Transaction]
+        
         switch periodType {
         case .monthly:
-            txs = CoreDataManager.shared.fetchTransactions(forMonth: startDate)
+            notFiltered = CoreDataManager.shared.fetchTransactions(forMonth: startDate)
         case .yearly:
-            txs = CoreDataManager.shared.fetchTransactions(forYear: startDate)
+            notFiltered = CoreDataManager.shared.fetchTransactions(forYear: startDate)
         case .custom:
-            txs = CoreDataManager.shared.fetchTransactions(startDate: startDate, endDate: endDate)
+            notFiltered = CoreDataManager.shared.fetchTransactions(startDate: startDate, endDate: endDate)
         }
+        
+        txs = notFiltered.filter { $0.type != .transfer }
     }
 
     func loadTotalsFor6Months() -> [(String, Int64)] {
@@ -181,7 +190,7 @@ class ChartViewModel {
         for i in -5...0 {
             let month = calendar.date(byAdding: .month, value: i, to: startDate)!
             let txs = CoreDataManager.shared.fetchTransactions(forMonth: month)
-            let total = txs.filter { $0.isIncome == self.isIncome }.reduce(0) { $0 + $1.amount }
+            let total = txs.filter { $0.type == self.type }.reduce(0) { $0 + $1.amount }
             
             data.append((month.monthString, total))
         }

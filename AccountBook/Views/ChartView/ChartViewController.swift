@@ -47,18 +47,18 @@ class ChartViewController: UIViewController, ThemeApplicable {
     func bindViewModel() {
         viewModel.onDidSetPeriod = { [weak self] in
             guard let self = self else { return }
-            periodButton.setTitle(viewModel.periodButtonTitleString, for: .normal)
-            barChartStackView.isHidden = viewModel.isHiddenForBarChart
-            barChartView.isHidden = viewModel.isHiddenForBarChart
+            periodButton.setTitle(viewModel.periodDisplay, for: .normal)
+            barChartStackView.isHidden = viewModel.isBarChartHidden
+            barChartView.isHidden = viewModel.isBarChartHidden
             reloadData()
         }
         
         viewModel.onDidSetIsIncome = { [weak self] in
             guard let self = self else { return }
-            modeButton.setTitle(viewModel.modeButtonString, for: .normal)
-            totalTitleLabel.text = viewModel.totalTitleString
-            categoryTitleLabel.text = viewModel.categoryTitleString
-            assetTitleLabel.text = viewModel.assetTitleString
+            modeButton.setTitle(viewModel.modeTitle, for: .normal)
+            totalTitleLabel.text = viewModel.totalTitle
+            categoryTitleLabel.text = viewModel.categoryTitle
+            assetTitleLabel.text = viewModel.assetTitle
             reloadData(shouldReloadTxs: false)
         }
         
@@ -81,14 +81,14 @@ class ChartViewController: UIViewController, ThemeApplicable {
     }
     
     func configureUI() {
-        periodButton.setTitle(viewModel.periodButtonTitleString, for: .normal)
-        modeButton.setTitle(viewModel.modeButtonString, for: .normal)
-        totalTitleLabel.text = viewModel.totalTitleString
-        totalAmountLabel.text = viewModel.totalAmountString
-        categoryTitleLabel.text = viewModel.categoryTitleString
-        assetTitleLabel.text = viewModel.assetTitleString
-        barChartStackView.isHidden = viewModel.isHiddenForBarChart
-        barChartView.isHidden = viewModel.isHiddenForBarChart
+        periodButton.setTitle(viewModel.periodDisplay, for: .normal)
+        modeButton.setTitle(viewModel.modeTitle, for: .normal)
+        totalTitleLabel.text = viewModel.totalTitle
+        totalAmountLabel.text = viewModel.totalAmountDisplay
+        categoryTitleLabel.text = viewModel.categoryTitle
+        assetTitleLabel.text = viewModel.assetTitle
+        barChartStackView.isHidden = viewModel.isBarChartHidden
+        barChartView.isHidden = viewModel.isBarChartHidden
     }
     
     func configurePieChartView() {
@@ -195,7 +195,7 @@ class ChartViewController: UIViewController, ThemeApplicable {
             viewModel.reloadTxs()
         }
         
-        totalAmountLabel.text = viewModel.totalAmountString
+        totalAmountLabel.text = viewModel.totalAmountDisplay
         
         pieChartView.data = makeChartDataForPieChart()
         pieChartView.centerText = viewModel.chartCenterText
