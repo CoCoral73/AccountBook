@@ -6,7 +6,7 @@
 //
 
 class CategoryViewModel {
-    var isIncome: Bool
+    var type: TransactionType
     var autoDismiss: Bool
     var categories: [Category] = []
     
@@ -17,8 +17,8 @@ class CategoryViewModel {
     var onDidSelectCategory: ((Category) -> Void)?
     var onDidAddCategory: (() -> ())?
     
-    init(isIncome: Bool, autoDismiss: Bool) {
-        self.isIncome = isIncome
+    init(type: TransactionType, autoDismiss: Bool) {
+        self.type = type
         self.autoDismiss = autoDismiss
         loadCategories()
     }
@@ -34,7 +34,7 @@ class CategoryViewModel {
     
     func handleDidSelectItemAt(_ index: Int) {
         if index == numberOfItems - 1 { //추가 뷰
-            let vm = CategoryEditViewModel(isIncome: isIncome, mode: .add)
+            let vm = CategoryEditViewModel(type: type, mode: .add)
             vm.onDidEditCategory = { [weak self] in
                 guard let self = self else { return }
                 loadCategories()
@@ -49,6 +49,13 @@ class CategoryViewModel {
     }
     
     func loadCategories() {
-        categories = isIncome ? CategoryManager.shared.incomeCategories : CategoryManager.shared.expenseCategories
+        switch type {
+        case .income:
+            categories = CategoryManager.shared.incomeCategories
+        case .expense:
+            categories = CategoryManager.shared.expenseCategories
+        case .transfer:
+            categories = CategoryManager.shared.transferCategories
+        }
     }
 }
