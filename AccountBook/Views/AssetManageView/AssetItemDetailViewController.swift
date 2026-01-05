@@ -45,15 +45,15 @@ class AssetItemDetailViewController: UIViewController {
     }
     
     private func configureUI() {
-        navItem.title = viewModel.nameText
-        balanceView.isHidden = viewModel.isHiddenForCashOrBankAccountView
-        balanceLabel.text = viewModel.balanceText
-        cardView.isHidden = !viewModel.isHiddenForCashOrBankAccountView
-        linkedAccountLabel.text = viewModel.linkedAccountText
-        currentCycleAmountLabel.text = viewModel.currentCycleAmountText
-        estimatedPaymentAmountView.isHidden = viewModel.isHiddenForEstimatedPaymentAmountView
-        upcomingPaymentDateLabel.text = viewModel.upcomingPaymentDateText
-        estimatedPaymentAmountLabel.text = viewModel.estimatedPaymentAmountText
+        navItem.title = viewModel.assetName
+        balanceView.isHidden = viewModel.isBalanceViewHidden
+        balanceLabel.text = viewModel.balanceDisplay
+        cardView.isHidden = !viewModel.isBalanceViewHidden
+        linkedAccountLabel.text = viewModel.linkedAccountDisplay
+        currentCycleAmountLabel.text = viewModel.currentCycleAmountDisplay
+        estimatedPaymentAmountView.isHidden = viewModel.isEstimatedPaymentAmountViewHidden
+        upcomingPaymentDateLabel.text = viewModel.upcomingPaymentDateDisplay
+        estimatedPaymentAmountLabel.text = viewModel.estimatedPaymentAmountDisplay
     }
     
     private func bindViewModel() {

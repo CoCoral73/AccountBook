@@ -20,8 +20,8 @@ class BalanceInfoTableViewCell: UITableViewCell {
     }
     
     func configure() {
-        nameLabel.text = viewModel.nameText
-        balanceLabel.text = viewModel.balanceText
+        nameLabel.text = viewModel.assetName
+        balanceLabel.text = viewModel.balanceDisplay
     }
     
     override func layoutSubviews() {

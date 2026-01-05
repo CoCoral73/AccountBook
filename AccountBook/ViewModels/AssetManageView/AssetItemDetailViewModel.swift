@@ -17,18 +17,18 @@ class AssetItemDetailViewModel {
         self.asset = asset
     }
     
-    var nameText: String {
+    var assetName: String {
         return asset.name
     }
-    var isHiddenForCashOrBankAccountView: Bool {
-        let type = AssetType(rawValue: Int(asset.type))!
+    var isBalanceViewHidden: Bool {
+        let type = asset.type
         return !(type == .cash || type == .bankAccount)
     }
-    var isHiddenForEstimatedPaymentAmountView: Bool {
-        let type = AssetType(rawValue: Int(asset.type))!
+    var isEstimatedPaymentAmountViewHidden: Bool {
+        let type = asset.type
         return type != .creditCard
     }
-    var balanceText: String {
+    var balanceDisplay: String {
         var balance: Int64 = 0
         switch asset {
         case let cash as CashItem:
@@ -40,7 +40,7 @@ class AssetItemDetailViewModel {
         }
         return balance.formattedWithComma + "원"
     }
-    var linkedAccountText: String {
+    var linkedAccountDisplay: String {
         let account: String
         switch asset {
         case let debit as DebitCardItem:
@@ -53,7 +53,7 @@ class AssetItemDetailViewModel {
         
         return "연결 계좌: \(account)"
     }
-    var currentCycleAmountText: String {
+    var currentCycleAmountDisplay: String {
         switch asset {
         case let debit as DebitCardItem:
             return CardManager.shared.calculateCurrentMonthAmountForDebitCard(for: debit).formattedWithComma + "원"
@@ -64,14 +64,14 @@ class AssetItemDetailViewModel {
             return ""
         }
     }
-    var upcomingPaymentDateText: String {
+    var upcomingPaymentDateDisplay: String {
         guard let credit = asset as? CreditCardItem else { return "" }
         let date = CardManager.shared.getWithdrawalDate(withdrawalDay: credit.withdrawalDay)
         let formatter = DateFormatter()
         formatter.dateFormat = "결제 예정 금액 (MM / dd)"
         return formatter.string(from: date)
     }
-    var estimatedPaymentAmountText: String {
+    var estimatedPaymentAmountDisplay: String {
         guard let credit = asset as? CreditCardItem else { return "" }
         let withdrawalDate = CardManager.shared.getWithdrawalDate(withdrawalDay: credit.withdrawalDay)
         guard let cycle = CardManager.shared.calculateSpecificMonthCycle(for: credit, withdrawalDate: withdrawalDate) else { return "" }

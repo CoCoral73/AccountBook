@@ -23,11 +23,11 @@ class CardInfoTableViewCell: UITableViewCell {
     }
     
     func configure() {
-        nameLabel.text = viewModel.nameText
-        currentCycleAmountLabel.text = viewModel.currentCycleAmountText
-        estimatedPaymentAmountView.isHidden = viewModel.isHiddenForEstimatedPaymentAmountView
-        upcomingPaymentDateLabel.text = viewModel.upcomingPaymentDateText
-        estimatedPaymentAmountLabel.text = viewModel.estimatedPaymentAmountText
+        nameLabel.text = viewModel.assetName
+        currentCycleAmountLabel.text = viewModel.currentCycleAmountDisplay
+        estimatedPaymentAmountView.isHidden = viewModel.isEstimatedPaymentAmountViewHidden
+        upcomingPaymentDateLabel.text = viewModel.upcomingPaymentDateDisplay
+        estimatedPaymentAmountLabel.text = viewModel.estimatedPaymentAmountDisplay
     }
     
     override func layoutSubviews() {
