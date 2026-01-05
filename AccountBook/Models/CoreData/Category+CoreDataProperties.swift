@@ -18,10 +18,14 @@ extension Category {
 
     @NSManaged public var iconName: String
     @NSManaged public var id: UUID
-    @NSManaged public var isIncome: Bool
+    @NSManaged public var typeValue: Int16
     @NSManaged public var name: String
     @NSManaged public var orderIndex: Int16
     @NSManaged public var transactions: NSSet?
+    
+    var type: TransactionType {
+        get { TransactionType(rawValue: typeValue) ?? .expense }
+    }
 
 }
 

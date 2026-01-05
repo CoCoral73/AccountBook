@@ -19,14 +19,20 @@ extension Transaction {
     @NSManaged public var amount: Int64
     @NSManaged public var date: Date
     @NSManaged public var id: UUID
-    @NSManaged public var isIncome: Bool
+    @NSManaged public var typeValue: Int16
     @NSManaged public var memo: String
     @NSManaged public var name: String
-    @NSManaged public var asset: AssetItem
+    @NSManaged public var asset: AssetItem?
     @NSManaged public var category: Category
     @NSManaged public var isCompleted: Bool
     @NSManaged public var installment: Installment?
     @NSManaged public var installmentIndex: NSNumber?
+    @NSManaged public var fromAccount: BankAccountItem?
+    @NSManaged public var toAccount: BankAccountItem?
+    
+    var type: TransactionType {
+        get { TransactionType(rawValue: typeValue) ?? .expense }
+    }
     
     var installmentIndexValue: Int16?
     {
