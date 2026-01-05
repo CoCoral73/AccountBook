@@ -37,10 +37,10 @@ class CategoryEditViewController: UIViewController {
     }
     
     func configureUI() {
-        iconTextField.text = viewModel.textForIcon
-        iconImageView.image = viewModel.textForIcon.toImage()
-        nameTextField.text = viewModel.nameString
-        removeButton.isHidden = viewModel.isHiddenForRemoveButton
+        iconTextField.text = viewModel.iconName
+        iconImageView.image = viewModel.iconName.toImage()
+        nameTextField.text = viewModel.categoryName
+        removeButton.isHidden = viewModel.isRemoveButtonHidden
     }
     
     func configureNavigationBar() {

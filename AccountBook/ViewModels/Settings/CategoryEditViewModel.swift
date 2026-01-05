@@ -35,21 +35,19 @@ enum CategoryInputError {
 
 class CategoryEditViewModel {
     var mode: CategoryEditMode
-    var isIncome: Bool
+    var type: TransactionType
     var onDidEditCategory: (() -> ())?
     
-    init(isIncome: Bool, mode: CategoryEditMode) {
-        self.isIncome = isIncome
+    init(type: TransactionType, mode: CategoryEditMode) {
+        self.type = type
         self.mode = mode
     }
     
     var title: String {
-        let income = isIncome ? "수입" : "지출"
-        let mode = (mode == .add) ? "추가" : "수정"
-        return "\(income) 카테고리 \(mode)"
+        return "\(type.name) 카테고리 \(mode.name)"
     }
     
-    var textForIcon: String {
+    var iconName: String {
         switch mode {
         case .add:
             "☺️"
@@ -58,7 +56,7 @@ class CategoryEditViewModel {
         }
     }
     
-    var nameString: String {
+    var categoryName: String {
         switch mode {
         case .add:
             ""
@@ -67,7 +65,7 @@ class CategoryEditViewModel {
         }
     }
     
-    var isHiddenForRemoveButton: Bool { mode == .add }
+    var isRemoveButtonHidden: Bool { mode == .add }
     
     func validateInput(icon: String?, name: String?) -> CategoryInputError? {
         guard let icon = icon, !icon.isEmpty else { return .emptyIcon }
@@ -78,7 +76,7 @@ class CategoryEditViewModel {
     func handleDoneButton(icon: String, name: String) {
         switch mode {
         case .add:
-            CategoryManager.shared.addCategory(icon: icon, name: name, isIncome: isIncome)
+            CategoryManager.shared.addCategory(icon: icon, name: name, type: type)
         case .edit(let category):
             CategoryManager.shared.updateCategory(with: category, icon: icon, name: name)
         }
