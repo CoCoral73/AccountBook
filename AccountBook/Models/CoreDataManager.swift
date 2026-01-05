@@ -85,7 +85,7 @@ final class CoreDataManager {
                 let newCategory = Category(context: context)
                 newCategory.id = UUID()
                 newCategory.name = category.name
-                newCategory.isIncome = category.isIncome
+                newCategory.typeValue = category.typeValue
                 newCategory.iconName = category.iconName
                 newCategory.orderIndex = category.orderIndex
                 newCategory.transactions = nil
@@ -198,7 +198,7 @@ final class CoreDataManager {
                 cashAsset.id = UUID()
                 cashAsset.name = "현금"
                 cashAsset.transactions = nil
-                cashAsset.type = 0
+                cashAsset.typeValue = 0
                 
                 saveContext()
                 print("기본 현금 자산 로드 완료!")
