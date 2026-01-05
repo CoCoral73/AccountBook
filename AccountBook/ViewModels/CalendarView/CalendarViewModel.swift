@@ -116,8 +116,8 @@ class CalendarViewModel {
         
         var income: Int64 = 0, expense: Int64 = 0
         transaction.forEach { tx in
-            income += tx.isIncome ? tx.amount : 0
-            expense += !tx.isIncome ? tx.amount : 0
+            income += tx.type == .income ? tx.amount : 0
+            expense += tx.type == .expense ? tx.amount : 0
         }
         
         item.income = income
@@ -152,7 +152,7 @@ class CalendarViewModel {
     }
     
     func handleAddTransactionButton(tag: Int) -> TransactionAddViewModel {
-        return TransactionAddViewModel(date: selectedDate, isIncome: tag == 0)
+        return TransactionAddViewModel(date: selectedDate, type: TransactionType(rawValue: Int16(tag))!)
     }
     
     private func generateDayItems() {
@@ -170,10 +170,10 @@ class CalendarViewModel {
                 let date = calendar.date(byAdding: .day, value: day-1, to: firstOfMonth)!
                 
                 let income = transactions[day]?.reduce(0, { result, ta in
-                    return result + (ta.isIncome ? ta.amount : 0)
+                    return result + (ta.type == .income ? ta.amount : 0)
                 }) ?? 0
                 let expense = transactions[day]?.reduce(0, { result, ta in
-                    return result + (!ta.isIncome ? ta.amount : 0)
+                    return result + (ta.type == .expense ? ta.amount : 0)
                 }) ?? 0
                 
                 items.append(DayItem(id: UUID(), date: date, income: income, expense: expense))
@@ -217,8 +217,8 @@ class CalendarViewModel {
     
     private func calculateTotals() {
         let (income, expense) = transactions.values.flatMap { $0 }.reduce(into: (Int64(0), Int64(0))) { acc, tx in
-            if tx.isIncome { acc.0 += tx.amount }
-            else { acc.1 += tx.amount }
+            if tx.type == .income { acc.0 += tx.amount }
+            else if tx.type == .expense { acc.1 += tx.amount }
         }
         
         totals = (income, expense, income - expense)
