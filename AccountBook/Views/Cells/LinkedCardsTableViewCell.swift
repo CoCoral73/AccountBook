@@ -20,7 +20,7 @@ class LinkedCardsTableViewCell: UITableViewCell {
 
     func configure() {
         nameLabel.text = model.name
-        cardTypeLabel.text = AssetType(rawValue: Int(model.type))!.displayName
+        cardTypeLabel.text = model.type.displayName
     }
 
 }
