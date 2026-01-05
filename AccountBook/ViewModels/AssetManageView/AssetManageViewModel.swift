@@ -24,7 +24,7 @@ class AssetManageViewModel {
     }
     
     func numberOfRowsInSection(section: Int) -> Int {
-        guard let type = AssetType(rawValue: section) else {
+        guard let type = AssetType(rawValue: Int16(section)) else {
             print("AssetManageViewModel: AssetType 생성 오류")
             return 0
         }
@@ -36,7 +36,7 @@ class AssetManageViewModel {
     }
     
     func cellForRowAt(indexPath: IndexPath) -> AssetItem {
-        guard let type = AssetType(rawValue: indexPath.section) else {
+        guard let type = AssetType(rawValue: Int16(indexPath.section)) else {
             fatalError("AssetManageViewModel: AssetType 생성 오류")
         }
         
@@ -44,7 +44,7 @@ class AssetManageViewModel {
     }
     
     func viewForHeaderInSection(section: Int) -> (name: String, amount: String) {
-        guard let type = AssetType(rawValue: section) else {
+        guard let type = AssetType(rawValue: Int16(section)) else {
             fatalError("AssetManageViewModel: AssetType 생성 오류")
         }
         
@@ -58,7 +58,7 @@ class AssetManageViewModel {
     }
     
     func didSelectRowAt(indexPath: IndexPath) {
-        guard let type = AssetType(rawValue: indexPath.section) else {
+        guard let type = AssetType(rawValue: Int16(indexPath.section)) else {
             print("AssetManageViewModel: AssetType 생성 오류")
             return
         }
