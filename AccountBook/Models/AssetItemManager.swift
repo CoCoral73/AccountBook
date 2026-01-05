@@ -79,8 +79,8 @@ class AssetItemManager {
         newItem.id = UUID()
         newItem.transactions = nil
         configure(newItem)
+        
         CoreDataManager.shared.saveContext()
-        print(newItem)
         return newItem
     }
     
@@ -88,7 +88,7 @@ class AssetItemManager {
         let newItem: BankAccountItem = createItem(BankAccountItem.self) { item in
             item.name = name
             item.balance = balance
-            item.type = 1
+            item.typeValue = 1
         }
         bankAccount.append(newItem)
     }
@@ -97,7 +97,7 @@ class AssetItemManager {
         let newItem: DebitCardItem = createItem(DebitCardItem.self) { item in
             item.name = name
             item.linkedAccount = account
-            item.type = 2
+            item.typeValue = 2
         }
         debitCard.append(newItem)
     }
@@ -108,7 +108,7 @@ class AssetItemManager {
             item.linkedAccount = account
             item.withdrawalDay = withdrawalDate
             item.startDay = startDate
-            item.type = 3
+            item.typeValue = 3
         }
         creditCard.append(newItem)
     }
