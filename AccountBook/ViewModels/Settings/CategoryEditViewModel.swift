@@ -8,6 +8,15 @@
 enum CategoryEditMode: Equatable {
     case add
     case edit(Category)
+    
+    var name: String {
+        switch self {
+        case .add:
+            return "추가"
+        case .edit:
+            return "수정"
+        }
+    }
 }
 
 enum CategoryInputError {
