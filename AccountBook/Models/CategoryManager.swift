@@ -17,24 +17,26 @@ class CategoryManager {
 
     func loadCategories() {
         categories = CoreDataManager.shared.fetchCategories()
-        incomeCategories = categories.filter { $0.isIncome }
-        expenseCategories = categories.filter { !$0.isIncome }
+        incomeCategories = categories.filter { $0.type == .income }
+        expenseCategories = categories.filter { $0.type == .expense }
     }
 
-    func addCategory(icon: String, name: String, isIncome: Bool) {
+    func addCategory(icon: String, name: String, type: TransactionType) {
         let category = Category(context: CoreDataManager.shared.context)
         category.id = UUID()
         category.iconName = icon
         category.name = name
-        category.isIncome = isIncome
+        category.typeValue = type.rawValue
     
-        if isIncome {
+        switch type {
+        case .income:
             category.orderIndex = Int16(incomeCategories.count)
             incomeCategories.append(category)
-        } else {
+        case .expense:
             category.orderIndex = Int16(expenseCategories.count)
             expenseCategories.append(category)
         }
+        
         CoreDataManager.shared.saveContext()
     }
     
@@ -46,18 +48,23 @@ class CategoryManager {
     }
 
     func deleteCategory(_ category: Category) {
-        if category.isIncome, let index = incomeCategories.firstIndex(of: category) {
-            incomeCategories.remove(at: index)
-            
-            for (i, item) in incomeCategories.enumerated() {
-                item.orderIndex = Int16(i)
+        switch category.type {
+        case .income:
+            if let index = incomeCategories.firstIndex(of: category) {
+                incomeCategories.remove(at: index)
+                
+                for (i, item) in incomeCategories.enumerated() {
+                    item.orderIndex = Int16(i)
+                }
             }
-            
-        } else if !category.isIncome, let index = expenseCategories.firstIndex(of: category) {
-            expenseCategories.remove(at: index)
-            
-            for (i, item) in expenseCategories.enumerated() {
-                item.orderIndex = Int16(i)
+        case .expense:
+            if let index = expenseCategories.firstIndex(of: category) {
+                expenseCategories.remove(at: index)
+                
+                for (i, item) in expenseCategories.enumerated() {
+                    item.orderIndex = Int16(i)
+                }
+            }
             }
         }
         
@@ -65,16 +72,16 @@ class CategoryManager {
         CoreDataManager.shared.saveContext()
     }
     
-    func reorderCategory(isIncome: Bool, source: Int, destination: Int) {
-        if isIncome {
+    func reorderCategory(type: TransactionType, source: Int, destination: Int) {
+        switch type {
+        case .income:
             let item = incomeCategories.remove(at: source)
             incomeCategories.insert(item, at: destination)
 
             for i in 0..<incomeCategories.count {
                 incomeCategories[i].orderIndex = Int16(i)
             }
-
-        } else {
+        case .expense:
             let item = expenseCategories.remove(at: source)
             expenseCategories.insert(item, at: destination)
 
