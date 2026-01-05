@@ -44,51 +44,61 @@ class TransactionDetailViewModel: TransactionUpdatable {
         //이모지로만 돼있음. 추후 변경 필요
         return copy.category.iconName
     }
-    var dateString: String {
+    var dateDisplay: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
         return dateFormatter.string(from: copy.date)
     }
-    var isIncomeString: String {
-        return copy.isIncome ? "수입" : "지출"
+    var transactionTypeName: String {
+        return copy.type.name
     }
-    var nameString: String {
+    var transactionName: String {
         return copy.name
     }
-    var categoryString: String {
+    var categoryName: String {
         return copy.category.name
     }
-    var priceString: String {
-        return (copy.isIncome ? "+" : "-") + self.amountString
+    var signedAmountDisplay: String {
+        let prefix: String
+        switch copy.type {
+        case .income:
+            prefix = "+"
+        case .expense:
+            prefix = "-"
+        case .transfer:
+            prefix = ""
+        }
+        return prefix + self.amountDisplay
     }
-    var amountString: String {
+    var amountDisplay: String {
         return copy.amount.formattedWithComma
     }
-    var assetItemString: String {
-        return copy.asset.name
+    var assetName: String {
+        guard copy.type != .transfer else { return "" }
+        return copy.asset!.name
     }
     var assetType: AssetType? {
-        guard let type = AssetType(rawValue: Int(copy.asset.type)) else { return nil }
-        return type
+        guard copy.type != .transfer else { return nil }
+        return copy.asset!.type
     }
-    var assetTypeString: String {
+    var assetTypeDisplay: String {
         guard let assetType = assetType else { return "" }
-        return copy.isIncome ? "**입금**" : "**\(assetType.displayName) 거래**"
+        return copy.type == .income ? "**입금**" : "**\(assetType.displayName) 거래**"
     }
-    var canEdit: Bool {
+    var shouldEdit: Bool {
         return copy.installment == nil
     }
-    var isHiddenForInstallment: Bool { assetType != .creditCard }
-    var installmentString: String {
+    var isInstallmentViewHidden: Bool { assetType != .creditCard }
+    var installmentDisplay: String {
         guard let period = transaction.installment?.numberOfMonths, let index = transaction.installmentIndexValue else { return "일시불" }
         return "\(period) 개월 (\(index) / \(period))"
     }
-    var isHiddenForIsCompleted: Bool { assetType != .creditCard }
-    var titleForIsCompleted: String {
+    var isIsCompletedViewHidden: Bool { assetType != .creditCard }
+    var isCompletedDisplay: String {
         guard let isCompleted = copy.isCompleted else { return "알수없음" }
         return isCompleted ? "완료" : "미완료"
     }
-    var memoString: String? {
+    var memo: String? {
         return copy.memo
     }
     
@@ -113,7 +123,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func handleCategoryButton() -> CategoryViewModel {
-        let vm = CategoryViewModel(isIncome: copy.isIncome, autoDismiss: true)
+        let vm = CategoryViewModel(type: copy.type, autoDismiss: true)
         vm.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
             copy.category = category
@@ -124,11 +134,11 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func handleAssetItemButton() -> AssetSelectionViewModel {
-        let vm = AssetSelectionViewModel(isIncome: copy.isIncome)
+        let vm = AssetSelectionViewModel(type: copy.type)
         vm.onAssetSelected = { [weak self] newAsset in
             guard let self = self else { return }
             copy.asset = newAsset
-            copy.isCompleted = newAsset.type != AssetType.creditCard.rawValue
+            copy.isCompleted = newAsset.type != AssetType.creditCard
             state = .modified
             onDidSetAssetItem?()
         }
@@ -138,7 +148,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     func handleInstallmentButton() {
         switch state {
         case .modified:
-            let action = canEdit ? "적용" : "제거"
+            let action = shouldEdit ? "적용" : "제거"
             onRequestSaveAlertBeforeInstallment?(AlertConfig(title: "저장", message: "할부를 \(action)하려면 먼저 변경된 내용을 저장해야 합니다.\n저장하시겠습니까?"))
         case .saved:
             handleInstallmentFlow()
@@ -146,7 +156,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func handleInstallmentFlow() {
-        if canEdit {
+        if shouldEdit {
             requestInstallmentViewPresentation()
         } else {
             requestDeleteInstallmentAlertPresentation()

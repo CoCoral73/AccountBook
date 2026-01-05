@@ -2267,12 +2267,12 @@
                         <outlet property="installmentView" destination="mq4-1g-Dmm" id="FQw-9u-kO7"/>
                         <outlet property="isCompletedButton" destination="2wl-u1-F4Y" id="d21-OM-abq"/>
                         <outlet property="isCompletedView" destination="Bpq-mS-C98" id="jXi-YC-leH"/>
-                        <outlet property="isIncomeLabel" destination="0rJ-tO-lY7" id="6QI-aW-g48"/>
                         <outlet property="memoTextView" destination="ITT-dc-c8H" id="ZWT-U8-PIv"/>
                         <outlet property="nameTextField" destination="Da1-Jo-gAY" id="fok-HX-zvm"/>
                         <outlet property="navigationBar" destination="mJ4-Vm-wgX" id="fUN-nl-vir"/>
                         <outlet property="paperView" destination="ZrH-Yn-V1x" id="Vr9-oO-thY"/>
                         <outlet property="scrollView" destination="k7s-l0-oQt" id="2d3-yR-7yK"/>
+                        <outlet property="transactionTypeLabel" destination="0rJ-tO-lY7" id="6QI-aW-g48"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2y-S9-7pS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

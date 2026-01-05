@@ -23,10 +23,10 @@ class TransactionDetailTableViewCell: UITableViewCell {
     
     func configure() {
         imgView.image = viewModel.imageName.toImage()
-        nameLabel.text = viewModel.nameString
-        categoryLabel.text = viewModel.categoryString
-        priceLabel.text = viewModel.priceString
-        assetItemLabel.text = viewModel.assetItemString
+        nameLabel.text = viewModel.transactionName
+        categoryLabel.text = viewModel.categoryName
+        priceLabel.text = viewModel.signedAmountDisplay
+        assetItemLabel.text = viewModel.assetName
     }
 
 }

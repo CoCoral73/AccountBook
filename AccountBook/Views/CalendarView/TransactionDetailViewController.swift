@@ -14,7 +14,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var paperView: UIView!
     @IBOutlet weak var dateButton: UIButton!
-    @IBOutlet weak var isIncomeLabel: UILabel!
+    @IBOutlet weak var transactionTypeLabel: UILabel!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var assetTypeLabel: UILabel!
@@ -70,23 +70,23 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.dateButton.setTitle(self.viewModel.dateString, for: .normal)
+                self.dateButton.setTitle(self.viewModel.dateDisplay, for: .normal)
             }
         }
         viewModel.onDidSetCategory = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.categoryButton.setTitle(self.viewModel.categoryString, for: .normal)
+                self.categoryButton.setTitle(self.viewModel.categoryName, for: .normal)
             }
         }
         viewModel.onDidSetAssetItem = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.assetItemButton.setTitle(self.viewModel.assetItemString, for: .normal)
-                self.assetTypeLabel.text = self.viewModel.assetTypeString
-                self.installmentView.isHidden = self.viewModel.isHiddenForInstallment
-                self.isCompletedView.isHidden = self.viewModel.isHiddenForIsCompleted
-                self.isCompletedButton.setTitle(self.viewModel.titleForIsCompleted, for: .normal)
+                self.assetItemButton.setTitle(self.viewModel.assetName, for: .normal)
+                self.assetTypeLabel.text = self.viewModel.assetTypeDisplay
+                self.installmentView.isHidden = self.viewModel.isInstallmentViewHidden
+                self.isCompletedView.isHidden = self.viewModel.isIsCompletedViewHidden
+                self.isCompletedButton.setTitle(self.viewModel.isCompletedDisplay, for: .normal)
             }
         }
         viewModel.onDidSetInstallment = { [weak self] in
@@ -98,7 +98,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         viewModel.onDidSetIsCompleted = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.isCompletedButton.setTitle(self.viewModel.titleForIsCompleted, for: .normal)
+                self.isCompletedButton.setTitle(self.viewModel.isCompletedDisplay, for: .normal)
             }
         }
         viewModel.onRequestDeleteInstallmentAlert = { [weak self] config in
@@ -203,18 +203,18 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     private func configureUI() {
-        dateButton.setTitle(viewModel.dateString, for: .normal)
-        isIncomeLabel.text = viewModel.isIncomeString
-        nameTextField.text = viewModel.nameString
-        amountLabel.text = viewModel.amountString
-        assetTypeLabel.text = viewModel.assetTypeString
-        categoryButton.setTitle(viewModel.categoryString, for: .normal)
-        assetItemButton.setTitle(viewModel.assetItemString, for: .normal)
-        installmentView.isHidden = viewModel.isHiddenForInstallment
-        installmentButton.setTitle(viewModel.installmentString, for: .normal)
-        isCompletedView.isHidden = viewModel.isHiddenForIsCompleted
-        isCompletedButton.setTitle(viewModel.titleForIsCompleted, for: .normal)
-        memoTextView.text = viewModel.memoString
+        dateButton.setTitle(viewModel.dateDisplay, for: .normal)
+        transactionTypeLabel.text = viewModel.transactionTypeName
+        nameTextField.text = viewModel.transactionName
+        amountLabel.text = viewModel.amountDisplay
+        assetTypeLabel.text = viewModel.assetTypeDisplay
+        categoryButton.setTitle(viewModel.categoryName, for: .normal)
+        assetItemButton.setTitle(viewModel.assetName, for: .normal)
+        installmentView.isHidden = viewModel.isInstallmentViewHidden
+        installmentButton.setTitle(viewModel.installmentDisplay, for: .normal)
+        isCompletedView.isHidden = viewModel.isIsCompletedViewHidden
+        isCompletedButton.setTitle(viewModel.isCompletedDisplay, for: .normal)
+        memoTextView.text = viewModel.memo
     }
     
     private func configureTapGesture() {
@@ -254,7 +254,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func dateButtonTapped(_ sender: UIButton) {
-        if !viewModel.canEdit {
+        if !viewModel.shouldEdit {
             HapticFeedback.notify(.error)
             sender.shake()
             ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
@@ -293,7 +293,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func assetItemButtonTapped(_ sender: UIButton) {
-        if !viewModel.canEdit {
+        if !viewModel.shouldEdit {
             HapticFeedback.notify(.error)
             sender.shake()
             ToastManager.shared.show(message: "할부가 적용되어 수정할 수 없습니다.", in: view)
