@@ -16,9 +16,11 @@ class TransactionAddViewModel: TransactionUpdatable {
     }
     
     private var amountInput: Decimal = 0
-    private var assetItemInput: AssetItem?
+    private var assetInput: AssetItem?
+    private var fromAccountInput: BankAccountItem?
+    private var toAccountInput: BankAccountItem?
     
-    private(set) var isIncome: Bool
+    private(set) var type: TransactionType
     
     //Add View에서 currentDate가 바뀌면  바 버튼 아이템의 날짜 타이틀이 바뀌도록
     var onDidSetTransactionDate: (() -> Void)?
@@ -27,7 +29,8 @@ class TransactionAddViewModel: TransactionUpdatable {
     var onDidUpdateTransaction: ((Date) -> Void)?
     
     //자산 선택 완료 -> TransactionAddTableVC
-    var onDidSelectAsset: ((String) -> Void)?
+    var onDidSelectAsset: ((String) -> Void)?   //수입, 지출
+    var onDidSelectAccount: ((Bool, String) -> Void)?   //이체
     
     var onRequestDatePickerViewPresentation: ((DatePickerViewModel) -> Void)?
     var onRequestAssetSelectionViewPresentation: ((AssetSelectionViewModel) -> Void)?
@@ -35,23 +38,34 @@ class TransactionAddViewModel: TransactionUpdatable {
     var onRequestFeedbackForInvalidData: ((String) -> Void)?
     var onRequestDismiss: (() -> Void)?
     
-    init(date: Date, isIncome: Bool) {
+    init(date: Date, type: TransactionType) {
         self.transactionDate = date
-        self.isIncome = isIncome
+        self.type = type
     }
     
-    var transactionDateString: String {
+    var transactionDateDisplay: String {
         let df = DateFormatter()
         df.dateFormat = "yyyy년 M월 d일"
         return df.string(from: transactionDate)
     }
+    var isAccountViewHidden: Bool {
+        return type != .transfer
+    }
     
-    func setAssetItemInput(with item: AssetItem) {
-        self.assetItemInput = item
+    func setAssetInput(with item: AssetItem) {
+        self.assetInput = item
+    }
+    
+    func setAccountInput(isFrom: Bool, with item: BankAccountItem) {
+        if isFrom {
+            fromAccountInput = item
+        } else {
+            toAccountInput = item
+        }
     }
     
     func addTransaction(amount: Int64, asset: AssetItem, name: String, category: Category) {
-        let input = TransactionModel(amount: amount, date: transactionDate, isIncome: isIncome, name: name, memo: "", category: category, asset: asset)
+        let input = TransactionModel(amount: amount, date: transactionDate, type: type, name: name, memo: "", category: category, asset: asset)
         TransactionManager.shared.addTransaction(with: input, shouldSave: true)
         onDidUpdateTransaction?(transactionDate)
     }
@@ -66,17 +80,27 @@ class TransactionAddViewModel: TransactionUpdatable {
     }
     
     func handleAssetView() {
-        let vm = AssetSelectionViewModel(isIncome: isIncome)
+        let vm = AssetSelectionViewModel(type: type)
         vm.onAssetSelected = { [weak self] asset in
             guard let self = self else { return }
-            setAssetItemInput(with: asset)
+            setAssetInput(with: asset)
             onDidSelectAsset?(asset.name)
         }
         onRequestAssetSelectionViewPresentation?(vm)
     }
     
+    func handleAccountView(_ isFrom: Bool) {
+        let vm = AssetSelectionViewModel(type: type)
+        vm.onAssetSelected = { [weak self] account in
+            guard let self = self else { return }
+            setAccountInput(isFrom: isFrom, with: account as! BankAccountItem)
+            onDidSelectAccount?(isFrom, account.name)
+        }
+        onRequestAssetSelectionViewPresentation?(vm)
+    }
+    
     func handleCategoryView() -> CategoryViewModel {
-        let vm = CategoryViewModel(isIncome: isIncome, autoDismiss: false)
+        let vm = CategoryViewModel(type: type, autoDismiss: false)
         vm.onDidSelectCategory = { [weak self] category in
             guard let self = self else { return }
             
@@ -86,7 +110,7 @@ class TransactionAddViewModel: TransactionUpdatable {
                 return
             }
             
-            guard let asset = assetItemInput else {
+            guard let asset = assetInput else {
                 onRequestFeedbackForInvalidData?("자산을 선택해주세요.")
                 return
             }
