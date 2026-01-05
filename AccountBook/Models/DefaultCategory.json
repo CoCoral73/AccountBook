@@ -2,146 +2,159 @@
   {
     "name": "월급",
     "iconName": "💰",
-    "isIncome": true,
+    "typeValue": 0,
     "orderIndex": 0
   },
   {
     "name": "용돈",
     "iconName": "💵",
-    "isIncome": true,
+    "typeValue": 0,
     "orderIndex": 3
   },
   {
     "name": "이자",
     "iconName": "🏦",
-    "isIncome": true,
+    "typeValue": 0,
     "orderIndex": 2
   },
   {
     "name": "자산 수정",
     "iconName": "✍️",
-    "isIncome": true,
+    "typeValue": 0,
     "orderIndex": 1
   },
   {
     "name": "기타",
     "iconName": "❓",
-    "isIncome": true,
+    "typeValue": 0,
     "orderIndex": 4
   },
 
   {
     "name": "식비",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 0
   },
   {
     "name": "간식",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 1
   },
   {
     "name": "교통",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 2
   },
   {
     "name": "통신",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 3
   },
   {
     "name": "생필품",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 4
   },
   {
     "name": "구독",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 5
   },
   {
     "name": "주거",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 6
   },
   {
     "name": "공과금",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 7
   },
   {
     "name": "대출이자",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 8
   },
   {
     "name": "건강",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 9
   },
   {
     "name": "쇼핑",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 10
   },
   {
     "name": "미용",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 11
   },
   {
     "name": "데이트",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 12
   },
   {
     "name": "취미",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 13
   },
   {
     "name": "교육",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 14
   },
   {
     "name": "경조사",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 15
   },
   {
     "name": "회비",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 16
   },
   {
     "name": "복권",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 17
   },
   {
     "name": "기타",
     "iconName": "🍚",
-    "isIncome": false,
+    "typeValue": 1,
     "orderIndex": 18
-  }
+  },
+  
+  {
+    "name": "단순 이체",
+    "iconName": "↔️"
+    "typeValue": 2,
+    "orderIndex": 0
+  },
+  {
+    "name": "저축",
+    "iconName": "🏦"
+    "typeValue": 2,
+    "orderIndex": 1
+  },
 ]
