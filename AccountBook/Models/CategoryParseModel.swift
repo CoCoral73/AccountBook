@@ -9,7 +9,7 @@ import Foundation
 
 struct CategoryParseModel: Codable {
     let name: String
-    let isIncome: Bool
+    let typeValue: Int16
     let iconName: String
     let orderIndex: Int16
 }
