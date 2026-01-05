@@ -27,20 +27,22 @@ enum TransactionType: Int16, Equatable {
 struct TransactionModel {
     var amount: Int64
     var date: Date
-    let isIncome: Bool
+    let type: TransactionType
     var name, memo: String
     var category: Category
-    var asset: AssetItem
+    var asset: AssetItem?
     var installment: Int16?
     var installmentIndex: Int16?
     var isCompleted: Bool?
+    var fromAccount: BankAccountItem?
+    var toAccount: BankAccountItem?
 }
 
 extension TransactionModel {
     init(with tx: Transaction) {
         amount = tx.amount
         date = tx.date
-        isIncome = tx.isIncome
+        type = tx.type
         name = tx.name
         memo = tx.memo
         category = tx.category
@@ -48,6 +50,8 @@ extension TransactionModel {
         installment = tx.installment?.numberOfMonths
         installmentIndex = tx.installmentIndexValue
         isCompleted = tx.isCompleted
+        fromAccount = tx.fromAccount
+        toAccount = tx.toAccount
     }
 }
 
