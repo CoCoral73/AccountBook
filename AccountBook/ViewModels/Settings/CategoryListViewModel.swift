@@ -6,29 +6,45 @@
 //
 
 class CategoryListViewModel {
-    private(set) var isIncome: Bool
+    private(set) var type: TransactionType
     private var categories: [Category] = []
     
-    init(isIncome: Bool) {
-        self.isIncome = isIncome
+    init(type: TransactionType) {
+        self.type = type
         loadCategories()
     }
     
-    var title: String { isIncome ? "수입 카테고리" : "지출 카테고리" }
+    var title: String {
+        switch type {
+        case .income:
+            return "수입 카테고리"
+        case .expense:
+            return "지출 카테고리"
+        case .transfer:
+            return "이체 카테고리"
+        }
+    }
     var numberOfRowsInSection: Int { categories.count }
     func cellForRowAt(row: Int) -> Category { categories[row] }
     
     func moveRowAt(source: Int, destination: Int) {
-        CategoryManager.shared.reorderCategory(isIncome: isIncome, source: source, destination: destination)
+        CategoryManager.shared.reorderCategory(type: type, source: source, destination: destination)
         loadCategories()
     }
     
     func didSelectRowAt(row: Int) -> CategoryEditViewModel {
         let category = categories[row]
-        return CategoryEditViewModel(isIncome: isIncome, mode: CategoryEditMode.edit(category))
+        return CategoryEditViewModel(type: type, mode: .edit(category))
     }
     
     func loadCategories() {
-        categories = isIncome ? CategoryManager.shared.incomeCategories : CategoryManager.shared.expenseCategories
+        switch type {
+        case .income:
+            categories = CategoryManager.shared.incomeCategories
+        case .expense:
+            categories = CategoryManager.shared.expenseCategories
+        case .transfer:
+            categories = CategoryManager.shared.transferCategories
+        }
     }
 }
