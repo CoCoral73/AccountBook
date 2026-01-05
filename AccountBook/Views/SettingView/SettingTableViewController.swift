@@ -44,9 +44,9 @@ class SettingTableViewController: UITableViewController {
         
         switch option {
         case .incomeCategory:
-            showCategoryListView(true)
+            showCategoryListView(.income)
         case .expenseCategory:
-            showCategoryListView(false)
+            showCategoryListView(.expense)
         case .theme:
             showThemeView()
         case .lockApp:
@@ -62,8 +62,8 @@ class SettingTableViewController: UITableViewController {
         tableView.deselectRow(at: indexPath, animated: false)
     }
     
-    func showCategoryListView(_ isIncome: Bool) {
-        let vm = CategoryListViewModel(isIncome: isIncome)
+    func showCategoryListView(_ type: TransactionType) {
+        let vm = CategoryListViewModel(type: type)
         guard let vc = storyboard?.instantiateViewController(identifier: "CategoryListViewController", creator: { coder in
             CategoryListViewController(coder: coder, viewModel: vm)
         }) else {
