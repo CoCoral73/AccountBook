@@ -14,6 +14,10 @@ class TransactionAddViewController: UIViewController {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var assetView: UIView!
     @IBOutlet weak var assetLabel: UILabel!
+    @IBOutlet weak var fromAccountView: UIView!
+    @IBOutlet weak var fromAccountLabel: UILabel!
+    @IBOutlet weak var toAccountView: UIView!
+    @IBOutlet weak var toAccountLabel: UILabel!
     @IBOutlet weak var nameView: UIView!
     @IBOutlet weak var nameTextField: UITextField!
     @IBOutlet weak var containerViewForCategory: UIView!
@@ -49,22 +53,38 @@ class TransactionAddViewController: UIViewController {
         viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.dateButton.title = self.viewModel.transactionDateString
+                self.dateButton.title = self.viewModel.transactionDateDisplay
             }
         }
         viewModel.onDidSelectAsset = { [weak self] name in
             guard let self = self else { return }
-            assetLabel.text = name
-            nameTextField.becomeFirstResponder()
+            DispatchQueue.main.async {
+                self.assetLabel.text = name
+                self.nameTextField.becomeFirstResponder()
+            }
+        }
+        viewModel.onDidSelectAccount = { [weak self] isFrom, name in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if isFrom {
+                    self.fromAccountLabel.text = name
+                } else {
+                    self.toAccountLabel.text = name
+                }
+            }
         }
 
-        viewModel.onRequestDatePickerViewPresentation = { [weak self ] vm in
+        viewModel.onRequestDatePickerViewPresentation = { [weak self] vm in
             guard let self = self else { return }
-            showDatePickerView(vm)
+            DispatchQueue.main.async {
+                self.showDatePickerView(vm)
+            }
         }
         viewModel.onRequestAssetSelectionViewPresentation = { [weak self] vm in
             guard let self = self else { return }
-            showAssetSelectionView(vm)
+            DispatchQueue.main.async {
+                self.showAssetSelectionView(vm)
+            }
         }
         viewModel.onRequestNameText = { [weak self] in
             guard let self = self else { return "" }
@@ -87,19 +107,23 @@ class TransactionAddViewController: UIViewController {
     }
     
     private func configureUI() {
-        dateButton.title = viewModel.transactionDateString
-        amountLabel.text = ""
-        assetLabel.text = ""
+        dateButton.title = viewModel.transactionDateDisplay
+        assetView.isHidden = !viewModel.isAccountViewHidden
+        fromAccountView.isHidden = viewModel.isAccountViewHidden
+        toAccountView.isHidden = viewModel.isAccountViewHidden
         nameTextField.text = ""
     }
     
     private func configureTapGesture() {
         let tapAmount = UITapGestureRecognizer(target: self, action: #selector(didTapAmountView))
         let tapAsset = UITapGestureRecognizer(target: self, action: #selector(didTapAssetView))
+        let tapFromAccount = UITapGestureRecognizer(target: self, action: #selector(didTapFromAccountView))
+        let tapToAccount = UITapGestureRecognizer(target: self, action: #selector(didTapToAccountView))
         let tapName = UITapGestureRecognizer(target: self, action: #selector(didTapNameView))
         
         amountView.addGestureRecognizer(tapAmount)
         assetView.addGestureRecognizer(tapAsset)
+        toAccountView.addGestureRecognizer(tapFromAccount)
         nameView.addGestureRecognizer(tapName)
     }
     
@@ -110,6 +134,14 @@ class TransactionAddViewController: UIViewController {
     @objc func didTapAssetView(_ sender: UITapGestureRecognizer) {
         keypadDidHide()
         viewModel.handleAssetView()
+    }
+    @objc func didTapFromAccountView(_ sender: UITapGestureRecognizer) {
+        keypadDidHide()
+        viewModel.handleAccountView(true)
+    }
+    @objc func didTapToAccountView(_ sender: UITapGestureRecognizer) {
+        keypadDidHide()
+        viewModel.handleAccountView(false)
     }
     @objc func didTapNameView(_ sender: UITapGestureRecognizer) {
         nameTextField.becomeFirstResponder()
