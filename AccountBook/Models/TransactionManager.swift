@@ -99,6 +99,23 @@ class TransactionManager {
         return transaction
     }
     
+    func addTransfer(with input: TransactionModel) {
+        let transaction = Transaction(context: CoreDataManager.shared.context)
+        transaction.amount = input.amount
+        transaction.date = input.date
+        transaction.id = UUID()
+        transaction.typeValue = input.type.rawValue
+        transaction.name = input.name
+        transaction.memo = input.memo
+        transaction.category = input.category
+        transaction.isCompleted = true
+        transaction.fromAccount = input.fromAccount
+        transaction.toAccount = input.toAccount
+        
+        adjustBalance(amount: -input.amount, asset: transaction.fromAccount!, isCompleted: true)
+        adjustBalance(amount: input.amount, asset: transaction.toAccount!, isCompleted: true)
+    }
+    
     //할부 거래 생성용
     func duplicateTransaction(_ tx: Transaction, count: Int16) -> [Transaction] {
         var txs = [tx]
