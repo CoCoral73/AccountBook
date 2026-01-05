@@ -7,6 +7,23 @@
 
 import Foundation
 
+enum TransactionType: Int16, Equatable {
+    case income
+    case expense
+    case transfer
+    
+    var name: String {
+        switch self {
+        case .income:
+            return "수입"
+        case .expense:
+            return "지출"
+        case .transfer:
+            return "이체"
+        }
+    }
+}
+
 struct TransactionModel {
     var amount: Int64
     var date: Date
