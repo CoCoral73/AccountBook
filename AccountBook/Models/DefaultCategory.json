@@ -147,13 +147,13 @@
   
   {
     "name": "단순 이체",
-    "iconName": "↔️"
+    "iconName": "↔️",
     "typeValue": 2,
     "orderIndex": 0
   },
   {
     "name": "저축",
-    "iconName": "🏦"
+    "iconName": "🏦",
     "typeValue": 2,
     "orderIndex": 1
   },
