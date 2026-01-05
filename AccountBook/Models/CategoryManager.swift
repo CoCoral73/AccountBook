@@ -14,11 +14,13 @@ class CategoryManager {
     private var categories: [Category] = []
     private(set) var incomeCategories: [Category] = []
     private(set) var expenseCategories: [Category] = []
+    private(set) var transferCategories: [Category] = []
 
     func loadCategories() {
         categories = CoreDataManager.shared.fetchCategories()
         incomeCategories = categories.filter { $0.type == .income }
         expenseCategories = categories.filter { $0.type == .expense }
+        transferCategories = categories.filter { $0.type == .transfer }
     }
 
     func addCategory(icon: String, name: String, type: TransactionType) {
@@ -35,6 +37,9 @@ class CategoryManager {
         case .expense:
             category.orderIndex = Int16(expenseCategories.count)
             expenseCategories.append(category)
+        case .transfer:
+            category.orderIndex = Int16(transferCategories.count)
+            transferCategories.append(category)
         }
         
         CoreDataManager.shared.saveContext()
@@ -65,6 +70,13 @@ class CategoryManager {
                     item.orderIndex = Int16(i)
                 }
             }
+        case .transfer:
+            if let index = transferCategories.firstIndex(of: category) {
+                transferCategories.remove(at: index)
+                
+                for (i, item) in transferCategories.enumerated() {
+                    item.orderIndex = Int16(i)
+                }
             }
         }
         
@@ -87,6 +99,13 @@ class CategoryManager {
 
             for i in 0..<expenseCategories.count {
                 expenseCategories[i].orderIndex = Int16(i)
+            }
+        case .transfer:
+            let item = transferCategories.remove(at: source)
+            transferCategories.insert(item, at: destination)
+
+            for i in 0..<transferCategories.count {
+                transferCategories[i].orderIndex = Int16(i)
             }
         }
 
