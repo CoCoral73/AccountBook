@@ -74,8 +74,11 @@ class TransactionDetailViewModel: TransactionUpdatable {
         return copy.amount.formattedWithComma
     }
     var assetName: String {
-        guard copy.type != .transfer else { return "" }
-        return copy.asset!.name
+        if copy.type != .transfer {
+            return copy.asset!.name
+        } else {
+            return "\(copy.fromAccount!.name) > \(copy.toAccount!.name)"
+        }
     }
     var assetType: AssetType? {
         guard copy.type != .transfer else { return nil }
