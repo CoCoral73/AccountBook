@@ -12,8 +12,8 @@ class TransactionDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var imgView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var categoryLabel: UILabel!
-    @IBOutlet weak var priceLabel: UILabel!
-    @IBOutlet weak var assetItemLabel: UILabel!
+    @IBOutlet weak var signedAmountLabel: UILabel!
+    @IBOutlet weak var assetLabel: UILabel!
     
     var viewModel: TransactionDetailViewModel! {
         didSet {
@@ -25,8 +25,8 @@ class TransactionDetailTableViewCell: UITableViewCell {
         imgView.image = viewModel.imageName.toImage()
         nameLabel.text = viewModel.transactionName
         categoryLabel.text = viewModel.categoryName
-        priceLabel.text = viewModel.signedAmountDisplay
-        assetItemLabel.text = viewModel.assetName
+        signedAmountLabel.text = viewModel.signedAmountDisplay
+        assetLabel.text = viewModel.assetName
     }
 
 }
