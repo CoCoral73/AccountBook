@@ -116,14 +116,28 @@ class TransactionAddViewModel: TransactionUpdatable {
                 return
             }
             
-            guard let asset = assetInput else {
-                onRequestFeedbackForInvalidData?("자산을 선택해주세요.")
-                return
-            }
-            
             let name = (onRequestNameText?() ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
             
-            addTransaction(amount: amount, asset: asset, name: name, category: category)
+            if type != .transfer {    //수입, 지출
+                guard let asset = assetInput else {
+                    onRequestFeedbackForInvalidData?("자산을 선택해주세요.")
+                    return
+                }
+                
+                addTransaction(amount: amount, asset: asset, name: name, category: category)
+            } else {    //이체
+                guard let fromAccount = fromAccountInput, let toAccount = toAccountInput else {
+                    onRequestFeedbackForInvalidData?("출금 계좌와 입금 계좌를 모두 선택해주세요.")
+                    return
+                }
+                
+                guard fromAccount != toAccount else {
+                    onRequestFeedbackForInvalidData?("동일한 계좌로는 이체할 수 없습니다.")
+                    return
+                }
+                
+                addTransfer(amount: amount, fromAccount: fromAccount, toAccount: toAccount, name: name, category: category)
+            }
             onRequestDismiss?()
         }
         return vm
