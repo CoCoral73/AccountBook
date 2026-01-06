@@ -70,6 +70,12 @@ class TransactionAddViewModel: TransactionUpdatable {
         onDidUpdateTransaction?(transactionDate)
     }
     
+    func addTransfer(amount: Int64, fromAccount: BankAccountItem, toAccount: BankAccountItem, name: String, category: Category) {
+        let input = TransactionModel(amount: amount, date: transactionDate, type: type, name: name, memo: "", category: category, fromAccount: fromAccount, toAccount: toAccount)
+        TransactionManager.shared.addTransfer(with: input)
+        onDidUpdateTransaction?(transactionDate)
+    }
+    
     func handleDateButton() {
         let vm = DatePickerViewModel(initialDate: transactionDate)
         vm.onDatePickerChanged = { [weak self] date in
