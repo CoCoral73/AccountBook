@@ -123,7 +123,8 @@ class TransactionAddViewController: UIViewController {
         
         amountView.addGestureRecognizer(tapAmount)
         assetView.addGestureRecognizer(tapAsset)
-        toAccountView.addGestureRecognizer(tapFromAccount)
+        fromAccountView.addGestureRecognizer(tapFromAccount)
+        toAccountView.addGestureRecognizer(tapToAccount)
         nameView.addGestureRecognizer(tapName)
     }
     
