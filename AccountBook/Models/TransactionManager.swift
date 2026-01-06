@@ -114,6 +114,8 @@ class TransactionManager {
         
         adjustBalance(amount: -input.amount, asset: transaction.fromAccount!, isCompleted: true)
         adjustBalance(amount: input.amount, asset: transaction.toAccount!, isCompleted: true)
+        
+        CoreDataManager.shared.saveContext()
     }
     
     //할부 거래 생성용
