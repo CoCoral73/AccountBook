@@ -18,6 +18,7 @@ class AssetItemDetailViewController: UIViewController {
     @IBOutlet weak var estimatedPaymentAmountView: UIView!
     @IBOutlet weak var upcomingPaymentDateLabel: UILabel!
     @IBOutlet weak var estimatedPaymentAmountLabel: UILabel!
+    @IBOutlet weak var tableView: IntrinsicTableView!
     
     var viewModel: AssetItemDetailViewModel
     
@@ -35,6 +36,7 @@ class AssetItemDetailViewController: UIViewController {
 
         configureNavigationBar()
         configureUI()
+        configureTableView()
         bindViewModel()
     }
     
@@ -83,4 +85,18 @@ class AssetItemDetailViewController: UIViewController {
     @IBAction func editButtonTapped(_ sender: UIBarButtonItem) {
         viewModel.handleEditButton()
     }
+}
+
+extension AssetItemDetailViewController: UITableViewDataSource {
+    func configureTableView() {
+        tableView.dataSource = self
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRowsInSection
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    }
+    
 }
