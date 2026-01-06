@@ -8,7 +8,7 @@
 import UIKit
 
 enum SettingOption {
-    case incomeCategory, expenseCategory
+    case incomeCategory, expenseCategory, transferCategory
     case theme, lockApp
     case help, contact, rating
     
@@ -18,6 +18,8 @@ enum SettingOption {
             self = .incomeCategory
         case (0, 1):
             self = .expenseCategory
+        case (0, 2):
+            self = .transferCategory
         case (1, 0):
             self = .theme
         case (1, 1):
@@ -47,6 +49,8 @@ class SettingTableViewController: UITableViewController {
             showCategoryListView(.income)
         case .expenseCategory:
             showCategoryListView(.expense)
+        case .transferCategory:
+            showCategoryListView(.transfer)
         case .theme:
             showThemeView()
         case .lockApp:
