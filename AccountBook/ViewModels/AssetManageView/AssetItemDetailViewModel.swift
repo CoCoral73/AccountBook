@@ -10,11 +10,20 @@ import Foundation
 class AssetItemDetailViewModel {
     
     private var asset: AssetItem
+    private var txs: [Transaction]
     
     var onShowAssetItemEditView: ((AssetItemEditViewModel) -> Void)?
     
     init(asset: AssetItem) {
         self.asset = asset
+        
+        var txs = Array(asset.transactions as? Set<Transaction> ?? [])
+        if let account = asset as? BankAccountItem {
+            txs.append(contentsOf: Array(account.withdrawals as? Set<Transaction> ?? []))
+            txs.append(contentsOf: Array(account.deposits as? Set<Transaction> ?? []))
+        }
+        
+        self.txs = txs.sorted { $0.date > $1.date }
     }
     
     var assetName: String {
@@ -76,6 +85,13 @@ class AssetItemDetailViewModel {
         let withdrawalDate = CardManager.shared.getWithdrawalDate(withdrawalDay: credit.withdrawalDay)
         guard let cycle = CardManager.shared.calculateSpecificMonthCycle(for: credit, withdrawalDate: withdrawalDate) else { return "" }
         return CardManager.shared.calculateCycleSpending(for: credit, cycle: cycle).formattedWithComma + "원"
+    }
+    var numberOfRowsInSection: Int {
+        return txs.count
+    }
+    
+    func cellForRowAt(_ index: Int) -> Transaction {
+        return txs[index]
     }
     
     func handleEditButton() {
