@@ -50,7 +50,7 @@ class HistoryCellViewModel {
     }
     var dateDisplay: String {
         let fmt = DateFormatter()
-        fmt.dateFormat = "yyyy.MM.dd HH:mm:ss"
+        fmt.dateFormat = "yyyy.MM.dd"
         return fmt.string(from: transaction.date)
     }
 }
