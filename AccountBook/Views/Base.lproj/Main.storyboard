@@ -1670,7 +1670,7 @@
                                                     </view>
                                                 </subviews>
                                             </stackView>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lQz-8o-DdU" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="lQz-8o-DdU" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="182.66666666666669" width="393" height="500.00000000000006"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
@@ -1743,16 +1743,24 @@
                                                                 <constraint firstAttribute="bottom" secondItem="A37-wh-5pU" secondAttribute="bottom" constant="10" id="CJd-XS-6lS"/>
                                                                 <constraint firstItem="tep-wJ-Bxx" firstAttribute="trailing" secondItem="oPz-eh-LHM" secondAttribute="trailingMargin" id="GGI-pZ-eH2"/>
                                                                 <constraint firstItem="MEe-Hn-lnm" firstAttribute="leading" secondItem="A37-wh-5pU" secondAttribute="trailing" constant="16" id="JBO-qH-b77"/>
-                                                                <constraint firstItem="tep-wJ-Bxx" firstAttribute="centerY" secondItem="HTt-ux-mrU" secondAttribute="centerY" id="V0o-yd-enN"/>
+                                                                <constraint firstItem="m7L-cu-xVz" firstAttribute="top" secondItem="oPz-eh-LHM" secondAttribute="top" constant="11" id="RXr-wr-vlf"/>
                                                                 <constraint firstAttribute="bottom" secondItem="HTt-ux-mrU" secondAttribute="bottom" constant="11" id="VaJ-CO-su5"/>
+                                                                <constraint firstItem="tep-wJ-Bxx" firstAttribute="bottom" secondItem="oPz-eh-LHM" secondAttribute="bottom" constant="-11" id="aO2-3C-8v1"/>
                                                                 <constraint firstItem="MEe-Hn-lnm" firstAttribute="top" secondItem="oPz-eh-LHM" secondAttribute="top" constant="11" id="bPY-If-8fn"/>
                                                                 <constraint firstItem="m7L-cu-xVz" firstAttribute="trailing" secondItem="oPz-eh-LHM" secondAttribute="trailingMargin" id="bqB-Sf-0rg"/>
                                                                 <constraint firstItem="HTt-ux-mrU" firstAttribute="leading" secondItem="A37-wh-5pU" secondAttribute="trailing" constant="16" id="caf-1s-J3x"/>
                                                                 <constraint firstItem="A37-wh-5pU" firstAttribute="top" secondItem="oPz-eh-LHM" secondAttribute="top" constant="10" id="eRd-UL-Yzl"/>
                                                                 <constraint firstItem="A37-wh-5pU" firstAttribute="leading" secondItem="oPz-eh-LHM" secondAttribute="leading" constant="20" id="r2C-2h-EkO"/>
-                                                                <constraint firstItem="m7L-cu-xVz" firstAttribute="centerY" secondItem="MEe-Hn-lnm" secondAttribute="centerY" id="vQ9-x6-31a"/>
                                                             </constraints>
                                                         </tableViewCellContentView>
+                                                        <connections>
+                                                            <outlet property="amountLabel" destination="m7L-cu-xVz" id="njh-GB-3Ij"/>
+                                                            <outlet property="categoryLabel" destination="HTt-ux-mrU" id="rUu-M4-a6U"/>
+                                                            <outlet property="dateLabel" destination="tep-wJ-Bxx" id="upR-Ew-Y0c"/>
+                                                            <outlet property="nameLabel" destination="MEe-Hn-lnm" id="McD-0C-Lfn"/>
+                                                            <outlet property="typeLabel" destination="CqV-DK-6em" id="Eyp-TJ-vbV"/>
+                                                            <outlet property="typeView" destination="A37-wh-5pU" id="lqT-yH-6XR"/>
+                                                        </connections>
                                                     </tableViewCell>
                                                 </prototypes>
                                             </tableView>
@@ -1801,6 +1809,7 @@
                         <outlet property="estimatedPaymentAmountView" destination="Mtk-Td-1Pd" id="Kjj-9x-N8J"/>
                         <outlet property="linkedAccountLabel" destination="dFv-63-3RE" id="UMi-m0-tpA"/>
                         <outlet property="navItem" destination="TmB-uh-zs0" id="H91-YD-Dy8"/>
+                        <outlet property="tableView" destination="lQz-8o-DdU" id="0P6-8a-1I3"/>
                         <outlet property="upcomingPaymentDateLabel" destination="qPe-75-OOu" id="2IJ-Q9-qJP"/>
                     </connections>
                 </viewController>
