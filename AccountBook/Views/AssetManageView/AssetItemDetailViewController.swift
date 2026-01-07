@@ -90,6 +90,7 @@ class AssetItemDetailViewController: UIViewController {
 extension AssetItemDetailViewController: UITableViewDataSource {
     func configureTableView() {
         tableView.dataSource = self
+        tableView.rowHeight = 70
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -97,6 +98,12 @@ extension AssetItemDetailViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.historyCell, for: indexPath) as! TransactionHistoryTableViewCell
+        
+        let vm = viewModel.cellForRowAt(indexPath.row)
+        cell.viewModel = vm
+        
+        return cell
     }
     
 }
