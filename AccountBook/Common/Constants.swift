@@ -8,6 +8,7 @@
 struct Cell {
     static let calendarCell = "CalendarCell"
     static let detailCell = "DetailCell"
+    static let historyCell = "HistoryCell"
     static let assetCell = "AssetCell"
     static let dayCell = "DayCell"
     static let tableByCategoryCellInChart = "TableByCategoryInChart"
