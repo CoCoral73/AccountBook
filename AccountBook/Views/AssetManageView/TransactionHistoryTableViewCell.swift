@@ -16,4 +16,18 @@ class TransactionHistoryTableViewCell: UITableViewCell {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
     
+    var viewModel: HistoryCellViewModel! {
+        didSet {
+            configure()
+        }
+    }
+    
+    func configure() {
+        typeLabel.text = viewModel.typeName
+        nameLabel.text = viewModel.name
+        categoryLabel.text = viewModel.categoryName
+        amountLabel.text = viewModel.amountDisplay
+        dateLabel.text = viewModel.dateDisplay
+    }
+
 }
