@@ -90,8 +90,9 @@ class AssetItemDetailViewModel {
         return txs.count
     }
     
-    func cellForRowAt(_ index: Int) -> Transaction {
-        return txs[index]
+    func cellForRowAt(_ index: Int) -> HistoryCellViewModel {
+        let vm = HistoryCellViewModel(transaction: txs[index], asset: asset)
+        return vm
     }
     
     func handleEditButton() {
