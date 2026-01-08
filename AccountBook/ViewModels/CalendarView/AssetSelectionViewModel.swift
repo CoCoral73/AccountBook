@@ -14,6 +14,17 @@ class AssetSelectionViewModel {
     
     var onAssetSelected: ((AssetItem) -> ())?
     
+    var assetTypes: [AssetType] {
+        switch type {
+        case .income:
+            return [.cash, .bankAccount]
+        case .expense:
+            return AssetType.allCases
+        case .transfer:
+            return [.bankAccount]
+        }
+    }
+    
     func didSelectRowAt(with item: AssetItem) {
         onAssetSelected?(item)
     }
