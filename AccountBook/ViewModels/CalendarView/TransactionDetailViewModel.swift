@@ -21,6 +21,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     var onDidSetInstallment: (() -> Void)?
     var onDidSetIsCompleted: (() -> Void)?
     
+    var onRequestInvalidDataFeedback: ((String) -> Void)?
     var onRequestDeleteInstallmentAlert: ((AlertConfig) -> Void)?
     var onRequestDeleteAlert: ((AlertConfig) -> Void)?
     var onRequestBlockPopAlert: (() -> Void)?
@@ -299,17 +300,26 @@ class TransactionDetailViewModel: TransactionUpdatable {
         onRequestSaveAlert?(AlertConfig(title: "저장", message: "변경사항을 저장하시겠습니까?"))
     }
     
-    func confirmSave(name: String?, memo: String?) {
+    @discardableResult
+    func confirmSave(name: String?, memo: String?) -> Bool {
         copy.name = name ?? ""
         copy.memo = memo ?? ""
         
         let oldDate = transaction.date, newDate = copy.date
-        TransactionManager.shared.updateTransaction(transaction, with: copy)
+        
+        let result = TransactionManager.shared.updateTransaction(transaction, with: copy)
+        if !result {
+            onRequestInvalidDataFeedback?("동일한 계좌로는 이체할 수 없습니다.")
+            return false
+        }
+        
         if transaction.date != copy.date, Calendar.current.isDate(oldDate, equalTo: copy.date, toGranularity: .month) {
             onDidUpdateOldDateTransaction?(oldDate)
         }
         onDidUpdateTransaction?(newDate)
         state = .saved
+        
+        return true
     }
     
     func doNotSaveAndExit() {
