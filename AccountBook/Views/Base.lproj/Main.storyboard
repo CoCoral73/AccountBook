@@ -2680,81 +2680,37 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="511"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="oql-2Z-37e">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="QiW-Yy-ZuR">
                                 <rect key="frame" x="0.0" y="59" width="196.33333333333334" height="452"/>
-                                <subviews>
-                                    <button opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VBT-Hg-1Bw">
-                                        <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="112.66666666666667"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="현금">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="AssetTypeCell" rowHeight="86" id="4YG-GK-F4P" customClass="AssetTypeTableViewCell" customModule="AccountBook" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="50" width="196.33333333333334" height="86"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4YG-GK-F4P" id="Jfl-SA-0yM">
+                                            <rect key="frame" x="0.0" y="0.0" width="196.33333333333334" height="86"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gkV-Hg-Cmd">
+                                                    <rect key="frame" x="74.333333333333329" y="31" width="48" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gkV-Hg-Cmd" firstAttribute="centerY" secondItem="Jfl-SA-0yM" secondAttribute="centerY" id="I2b-dW-CDE"/>
+                                                <constraint firstItem="gkV-Hg-Cmd" firstAttribute="centerX" secondItem="Jfl-SA-0yM" secondAttribute="centerX" id="pVU-wz-XHn"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
                                         <connections>
-                                            <action selector="AssetTypeButtonTapped:" destination="zZj-xw-xdj" eventType="touchUpInside" id="YDu-80-mTl"/>
+                                            <outlet property="nameLabel" destination="gkV-Hg-Cmd" id="Yyl-kd-Ruy"/>
                                         </connections>
-                                    </button>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="oA7-r2-QsC">
-                                        <rect key="frame" x="0.0" y="112.66666666666666" width="196.33333333333334" height="0.3333333333333286"/>
-                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="0.33000000000000002" id="5Qh-HQ-KTb"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" clipsSubviews="YES" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ApX-MT-fIt">
-                                        <rect key="frame" x="0.0" y="113" width="196.33333333333334" height="113"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="계좌">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="AssetTypeButtonTapped:" destination="zZj-xw-xdj" eventType="touchUpInside" id="MdP-5a-d89"/>
-                                        </connections>
-                                    </button>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="xwA-qE-KZT">
-                                        <rect key="frame" x="0.0" y="226" width="196.33333333333334" height="0.33333333333334281"/>
-                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="0.33000000000000002" id="fub-xb-eYd"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" clipsSubviews="YES" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1O4-EQ-5xF" customClass="AutoUpdateColorButton" customModule="AccountBook" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="226" width="196.33333333333334" height="113"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="체크카드">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="AssetTypeButtonTapped:" destination="zZj-xw-xdj" eventType="touchUpInside" id="qO3-E0-rkY"/>
-                                        </connections>
-                                    </button>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="ezZ-sa-Bxe">
-                                        <rect key="frame" x="0.0" y="339" width="196.33333333333334" height="0.33333333333331439"/>
-                                        <color key="backgroundColor" systemColor="systemGray4Color"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="0.33000000000000002" id="hdP-h8-mgr"/>
-                                        </constraints>
-                                    </view>
-                                    <button opaque="NO" clipsSubviews="YES" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aHV-r6-WFS" customClass="AutoUpdateColorButton" customModule="AccountBook" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="339.33333333333331" width="196.33333333333334" height="112.66666666666669"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
-                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                        <state key="normal" title="신용카드">
-                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="AssetTypeButtonTapped:" destination="zZj-xw-xdj" eventType="touchUpInside" id="2ow-dj-Bj6"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="aHV-r6-WFS" firstAttribute="height" secondItem="VBT-Hg-1Bw" secondAttribute="height" id="8LV-Ba-cbP"/>
-                                    <constraint firstItem="1O4-EQ-5xF" firstAttribute="height" secondItem="VBT-Hg-1Bw" secondAttribute="height" id="LjF-0V-89n"/>
-                                    <constraint firstItem="ApX-MT-fIt" firstAttribute="height" secondItem="VBT-Hg-1Bw" secondAttribute="height" id="QHy-rq-bEZ"/>
-                                </constraints>
-                            </stackView>
+                                    </tableViewCell>
+                                </prototypes>
+                                <sections/>
+                            </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5n-zy-2ws" userLabel="세로경계선">
                                 <rect key="frame" x="196.33333333333334" y="59" width="0.33333333333334281" height="452"/>
                                 <color key="backgroundColor" systemColor="systemGray4Color"/>
@@ -2767,7 +2723,7 @@
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AssetCell" rowHeight="136" id="JvP-HC-8Cn" customClass="AssetItemTableViewCell" customModule="AccountBook" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="AssetItemCell" rowHeight="136" id="JvP-HC-8Cn" customClass="AssetItemTableViewCell" customModule="AccountBook" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="50" width="196.33333333333337" height="136"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="JvP-HC-8Cn" id="wNf-5u-bxV">
@@ -2797,14 +2753,14 @@
                         <viewLayoutGuide key="safeArea" id="Sgw-ht-xoc"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="oql-2Z-37e" firstAttribute="leading" secondItem="Sgw-ht-xoc" secondAttribute="leading" id="0Bv-kB-qcA"/>
                             <constraint firstItem="v5n-zy-2ws" firstAttribute="centerX" secondItem="LQr-KX-SCL" secondAttribute="centerX" id="42t-6p-fev"/>
-                            <constraint firstItem="oql-2Z-37e" firstAttribute="top" secondItem="Sgw-ht-xoc" secondAttribute="top" id="EkH-UL-nG1"/>
+                            <constraint firstAttribute="bottom" secondItem="QiW-Yy-ZuR" secondAttribute="bottom" id="70b-o3-1OC"/>
                             <constraint firstItem="sbB-49-779" firstAttribute="leading" secondItem="v5n-zy-2ws" secondAttribute="trailing" id="F33-BQ-ZMW"/>
+                            <constraint firstItem="v5n-zy-2ws" firstAttribute="leading" secondItem="QiW-Yy-ZuR" secondAttribute="trailing" id="J7o-Fk-bZr"/>
                             <constraint firstAttribute="bottom" secondItem="v5n-zy-2ws" secondAttribute="bottom" id="NGj-eQ-hlE"/>
                             <constraint firstItem="v5n-zy-2ws" firstAttribute="top" secondItem="Sgw-ht-xoc" secondAttribute="top" id="Ta9-en-Jic"/>
-                            <constraint firstItem="v5n-zy-2ws" firstAttribute="leading" secondItem="oql-2Z-37e" secondAttribute="trailing" id="bCM-Bn-SoJ"/>
-                            <constraint firstAttribute="bottom" secondItem="oql-2Z-37e" secondAttribute="bottom" id="jq4-UA-FJs"/>
+                            <constraint firstItem="QiW-Yy-ZuR" firstAttribute="leading" secondItem="LQr-KX-SCL" secondAttribute="leading" id="eC8-Sw-Kgn"/>
+                            <constraint firstItem="QiW-Yy-ZuR" firstAttribute="top" secondItem="Sgw-ht-xoc" secondAttribute="top" id="j4G-6H-Z1j"/>
                             <constraint firstItem="sbB-49-779" firstAttribute="top" secondItem="Sgw-ht-xoc" secondAttribute="top" id="mH0-3Q-xIp"/>
                             <constraint firstAttribute="bottom" secondItem="sbB-49-779" secondAttribute="bottom" id="sVh-fe-6cQ"/>
                             <constraint firstAttribute="trailing" secondItem="sbB-49-779" secondAttribute="trailing" id="xRA-rX-0CT"/>
@@ -2812,16 +2768,13 @@
                     </view>
                     <size key="freeformSize" width="393" height="511"/>
                     <connections>
-                        <outlet property="accountButton" destination="ApX-MT-fIt" id="LRS-D8-6JC"/>
-                        <outlet property="cashButton" destination="VBT-Hg-1Bw" id="D6b-ci-5J0"/>
-                        <outlet property="creditCardButton" destination="aHV-r6-WFS" id="hFG-eY-hCi"/>
-                        <outlet property="debitCardButton" destination="1O4-EQ-5xF" id="krR-zL-Zen"/>
-                        <outlet property="tableView" destination="sbB-49-779" id="ZL2-WR-JNY"/>
+                        <outlet property="itemTableView" destination="sbB-49-779" id="ZL2-WR-JNY"/>
+                        <outlet property="typeTableView" destination="QiW-Yy-ZuR" id="rfl-FY-ZBq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kx5-X4-AHk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3294" y="-1192"/>
+            <point key="canvasLocation" x="3293.8931297709923" y="-1192.605633802817"/>
         </scene>
         <!--Day Picker View Controller-->
         <scene sceneID="Yzo-lp-HVQ">
