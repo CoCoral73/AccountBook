@@ -441,8 +441,10 @@ extension TransactionDetailViewController: UIGestureRecognizerDelegate {
         })
         alert.addAction(UIAlertAction(title: "저장", style: .default) { [weak self] _ in
             guard let self = self else { return }
-            viewModel.confirmSave(name: nameTextField.text, memo: memoTextView.text)
-            navigationController?.popViewController(animated: true)
+            let result = viewModel.confirmSave(name: nameTextField.text, memo: memoTextView.text)
+            if result {
+                navigationController?.popViewController(animated: true)
+            }
         })
 
         present(alert, animated: true)
