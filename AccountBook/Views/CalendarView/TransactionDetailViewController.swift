@@ -19,7 +19,12 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var assetTypeLabel: UILabel!
     @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var assetView: UIView!
     @IBOutlet weak var assetItemButton: UIButton!
+    @IBOutlet weak var fromAccountView: UIView!
+    @IBOutlet weak var fromAccountButton: UIButton!
+    @IBOutlet weak var toAccountView: UIView!
+    @IBOutlet weak var toAccountButton: UIButton!
     @IBOutlet weak var installmentView: UIView!
     @IBOutlet weak var installmentLabel: UILabel!
     @IBOutlet weak var installmentButton: UIButton!
@@ -87,6 +92,16 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
                 self.installmentView.isHidden = self.viewModel.isInstallmentViewHidden
                 self.isCompletedView.isHidden = self.viewModel.isIsCompletedViewHidden
                 self.isCompletedButton.setTitle(self.viewModel.isCompletedDisplay, for: .normal)
+            }
+        }
+        viewModel.onDidSetAccount = { [weak self] tag in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                if tag == 0 {
+                    self.fromAccountButton.setTitle(self.viewModel.fromAccountName, for: .normal)
+                } else {
+                    self.toAccountButton.setTitle(self.viewModel.toAccountName, for: .normal)
+                }
             }
         }
         viewModel.onDidSetInstallment = { [weak self] in
@@ -209,7 +224,12 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         amountLabel.text = viewModel.amountDisplay
         assetTypeLabel.text = viewModel.assetTypeDisplay
         categoryButton.setTitle(viewModel.categoryName, for: .normal)
+        assetView.isHidden = viewModel.isAssetViewHidden
         assetItemButton.setTitle(viewModel.assetName, for: .normal)
+        fromAccountView.isHidden = viewModel.isAccountViewHidden
+        fromAccountButton.setTitle(viewModel.fromAccountName, for: .normal)
+        toAccountView.isHidden = viewModel.isAccountViewHidden
+        toAccountButton.setTitle(viewModel.toAccountName, for: .normal)
         installmentView.isHidden = viewModel.isInstallmentViewHidden
         installmentButton.setTitle(viewModel.installmentDisplay, for: .normal)
         isCompletedView.isHidden = viewModel.isIsCompletedViewHidden
@@ -301,6 +321,16 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         }
         
         let vm = viewModel.handleAssetItemButton()
+        showAssetSelectionView(vm)
+    }
+    
+    @IBAction func accountButtonTapped(_ sender: UIButton) {
+        let tag = sender.tag
+        let vm = viewModel.handleAccountButton(tag: tag)
+        showAssetSelectionView(vm)
+    }
+    
+    func showAssetSelectionView(_ vm: AssetSelectionViewModel) {
         guard let assetSelectionVC = storyboard?.instantiateViewController(identifier: "AssetSelectionViewController", creator: { coder in
             AssetSelectionViewController(coder: coder, viewModel: vm)
         })
