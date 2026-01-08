@@ -17,6 +17,14 @@ class AssetTypeTableViewCell: UITableViewCell {
         }
     }
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        let backView = UIView()
+        backView.backgroundColor = ThemeManager.shared.currentTheme.baseColor
+        self.selectedBackgroundView = backView
+    }
+    
     func configure() {
         nameLabel.text = model.displayName
     }
