@@ -17,6 +17,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     var onDidSetTransactionDate: (() -> Void)?
     var onDidSetCategory: (() -> Void)?
     var onDidSetAssetItem: (() -> Void)?
+    var onDidSetAccount: ((Int) -> Void)?
     var onDidSetInstallment: (() -> Void)?
     var onDidSetIsCompleted: (() -> Void)?
     
@@ -73,6 +74,9 @@ class TransactionDetailViewModel: TransactionUpdatable {
     var amountDisplay: String {
         return copy.amount.formattedWithComma
     }
+    var isAssetViewHidden: Bool {
+        return copy.type == .transfer
+    }
     var assetName: String {
         if copy.type != .transfer {
             return copy.asset!.name
@@ -85,8 +89,19 @@ class TransactionDetailViewModel: TransactionUpdatable {
         return copy.asset!.type
     }
     var assetTypeDisplay: String {
-        guard let assetType = assetType else { return "" }
-        return copy.type == .income ? "**입금**" : "**\(assetType.displayName) 거래**"
+        guard let assetType = assetType else { return "**계좌 이체**" }
+        return copy.type == .income ? "**입금**" : "**\(assetType.displayName) 결제**"
+    }
+    var isAccountViewHidden: Bool {
+        return copy.type != .transfer
+    }
+    var fromAccountName: String {
+        guard copy.type == .transfer else { return "" }
+        return copy.fromAccount!.name
+    }
+    var toAccountName: String {
+        guard copy.type == .transfer else { return "" }
+        return copy.toAccount!.name
     }
     var shouldEdit: Bool {
         return copy.installment == nil
@@ -144,6 +159,20 @@ class TransactionDetailViewModel: TransactionUpdatable {
             copy.isCompleted = newAsset.type != AssetType.creditCard
             state = .modified
             onDidSetAssetItem?()
+        }
+        return vm
+    }
+    
+    func handleAccountButton(tag: Int) -> AssetSelectionViewModel {
+        let vm = AssetSelectionViewModel(type: copy.type)
+        vm.onAssetSelected = { [weak self] newAsset in
+            guard let self = self else { return }
+            guard let account = newAsset as? BankAccountItem else { return }
+            
+            if tag == 0 { copy.fromAccount = account }
+            else { copy.toAccount = account }
+            state = .modified
+            onDidSetAccount?(tag)
         }
         return vm
     }
