@@ -128,7 +128,16 @@ class TransactionManager {
         return txs
     }
     
-    func updateTransaction(_ transaction: Transaction, with copy: TransactionModel) {
+    func updateTransaction(_ transaction: Transaction, with copy: TransactionModel) -> Bool {
+        if transaction.type != .transfer {
+            updateRecord(transaction, with: copy)
+            return true
+        } else {
+            return updateTransfer(transaction, with: copy)
+        }
+    }
+    
+    private func updateRecord(_ transaction: Transaction, with copy: TransactionModel) {
         transaction.date = copy.date
         transaction.name = copy.name
         transaction.category = copy.category
@@ -158,14 +167,73 @@ class TransactionManager {
         
         CoreDataManager.shared.saveContext()
     }
+    
+    private func updateTransfer(_ transaction: Transaction, with copy: TransactionModel) -> Bool {
+        if copy.fromAccount == copy.toAccount {
+            return false
+        }
+        
+        transaction.date = copy.date
+        transaction.name = copy.name
+        transaction.category = copy.category
+        transaction.memo = copy.memo
+        
+        if transaction.fromAccount != copy.fromAccount {
+            let oldAccount = transaction.fromAccount!, newAccount = copy.fromAccount!
+            let amount = transaction.amount
+            
+            adjustBalance(amount: amount, asset: oldAccount, isCompleted: true)
+            adjustBalance(amount: -amount, asset: newAccount, isCompleted: true)
+            
+            transaction.fromAccount = copy.fromAccount
+        }
+        
+        if transaction.toAccount != copy.toAccount {
+            let oldAccount = transaction.toAccount!, newAccount = copy.toAccount!
+            let amount = transaction.amount
+            
+            adjustBalance(amount: -amount, asset: oldAccount, isCompleted: true)
+            adjustBalance(amount: amount, asset: newAccount, isCompleted: true)
+            
+            transaction.toAccount = copy.toAccount
+        }
+        
+        let delta = copy.amount - transaction.amount
+        adjustBalance(amount: -delta, asset: transaction.fromAccount!, isCompleted: true)
+        adjustBalance(amount: delta, asset: transaction.toAccount!, isCompleted: true)
+        
+        transaction.amount = copy.amount
+        
+        CoreDataManager.shared.saveContext()
+        return true
+    }
 
     func deleteTransaction(_ transaction: Transaction) {
+        if transaction.type != .transfer {
+            deleteRecord(transaction)
+        } else {
+            deleteTransfer(transaction)
+        }
+    }
+    
+    private func deleteRecord(_ transaction: Transaction) {
         // 할부 거래 중 일부를 삭제하려고 하면 → 전체 할부 삭제
         for tx in transaction.installment?.transactions.array as? [Transaction] ?? [transaction] {
             let (amount, asset) = (tx.amount * (tx.type == .income ? 1 : -1), tx.asset!)
             adjustBalance(amount: -amount, asset: asset, isCompleted: tx.isCompleted)
             CoreDataManager.shared.context.delete(tx)
         }
+        CoreDataManager.shared.saveContext()
+    }
+    
+    private func deleteTransfer(_ transaction: Transaction) {
+        let fromAccount = transaction.fromAccount!, toAccount = transaction.toAccount!
+        let amount = transaction.amount
+        
+        adjustBalance(amount: amount, asset: fromAccount, isCompleted: true)
+        adjustBalance(amount: -amount, asset: toAccount, isCompleted: true)
+        
+        CoreDataManager.shared.context.delete(transaction)
         CoreDataManager.shared.saveContext()
     }
     
