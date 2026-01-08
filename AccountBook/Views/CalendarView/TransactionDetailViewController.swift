@@ -413,6 +413,8 @@ extension TransactionDetailViewController: UIGestureRecognizerDelegate {
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         checkSaveState()
+        if gestureRecognizer != navigationController?.interactivePopGestureRecognizer { return true }
+        
         if viewModel.state == .modified {
             showAlertBlockingPop()
             return false
