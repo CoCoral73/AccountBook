@@ -7,7 +7,7 @@
 
 import UIKit
 
-class TransactionHistoryTableViewCell: UITableViewCell, ThemeApplicable {
+class TransactionHistoryTableViewCell: UITableViewCell {
 
     @IBOutlet weak var typeView: UIView!
     @IBOutlet weak var typeLabel: UILabel!
@@ -19,28 +19,14 @@ class TransactionHistoryTableViewCell: UITableViewCell, ThemeApplicable {
     var viewModel: HistoryCellViewModel! {
         didSet {
             configure()
-            applyTheme(ThemeManager.shared.currentTheme)
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        NotificationCenter.default.addObserver(
-            self,
-            selector: #selector(handleThemeChange),
-            name: .themeDidChange,
-            object: nil
-        )
-    }
-    
-    @objc private func handleThemeChange() {
-        applyTheme(ThemeManager.shared.currentTheme)
-    }
-    
-    func applyTheme(_ theme: any AppTheme) {
-        typeView.borderColor = theme.accentColor
-        typeView.backgroundColor = theme.baseColor
+        typeView.borderColor = ThemeManager.shared.currentTheme.accentColor
+        typeView.backgroundColor = ThemeManager.shared.currentTheme.baseColor
     }
     
     func configure() {
@@ -49,9 +35,5 @@ class TransactionHistoryTableViewCell: UITableViewCell, ThemeApplicable {
         categoryLabel.text = viewModel.categoryName
         amountLabel.text = viewModel.amountDisplay
         dateLabel.text = viewModel.dateDisplay
-    }
-
-    deinit {
-        NotificationCenter.default.removeObserver(self)
     }
 }
