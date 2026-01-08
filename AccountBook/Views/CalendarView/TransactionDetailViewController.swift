@@ -116,6 +116,13 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
                 self.isCompletedButton.setTitle(self.viewModel.isCompletedDisplay, for: .normal)
             }
         }
+        
+        viewModel.onRequestInvalidDataFeedback = { [weak self] msg in
+            guard let self = self else { return }
+            HapticFeedback.notify(.error)
+            ToastManager.shared.show(message: msg, in: view)
+            return
+        }
         viewModel.onRequestDeleteInstallmentAlert = { [weak self] config in
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
