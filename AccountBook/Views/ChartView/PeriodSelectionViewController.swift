@@ -44,6 +44,8 @@ class PeriodSelectionViewController: UIViewController, ThemeApplicable {
     func applyTheme(_ theme: any AppTheme) {
         startDateButton.backgroundColor = theme.baseColor
         endDateButton.backgroundColor = theme.baseColor
+        startDateButton.setTitleColor(theme.pointTextColor, for: .selected)
+        endDateButton.setTitleColor(theme.pointTextColor, for: .selected)
         datePicker.tintColor = theme.accentColor
         applyButton.backgroundColor = theme.accentColor
     }
