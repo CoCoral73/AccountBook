@@ -37,10 +37,10 @@ enum AppThemeKind: String, CaseIterable {
 
 protocol AppTheme {
     var baseColor: UIColor { get }
-    var primaryTextColor: UIColor { get }
-    var secondaryTextColor: UIColor { get }
     var accentColor: UIColor { get }
 
+    var primaryTextColor: UIColor { get }
+    var secondaryTextColor: UIColor { get }
     var pointTextColor: UIColor { get }
     var incomeTextColor: UIColor { get }
     var expenseTextColor: UIColor { get }
