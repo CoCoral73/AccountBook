@@ -40,6 +40,11 @@ extension Date {
         return fmt.string(from: self)
     }
     
+    var yesterday: Date {
+        let calendar = Calendar.current
+        return calendar.date(byAdding: .day, value: -1, to: self)!
+    }
+    
     var startOfNextDay: Date {
         let calendar = Calendar.current
         return calendar.startOfDay(for: calendar.date(byAdding: .day, value: 1, to: self)!)
