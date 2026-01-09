@@ -48,7 +48,7 @@ class PeriodSelectionViewModel {
         dateFormatter.string(from: startDate)
     }
     var endDateButtonString: String {
-        dateFormatter.string(from: endDate)
+        dateFormatter.string(from: endDate.yesterday)
     }
     var dateButtonEnabled: Bool {
         periodType == .custom
@@ -82,7 +82,7 @@ class PeriodSelectionViewModel {
     
     func handleDateButton(_ tag: Int) -> Date {
         selectedDateButtonTag = tag
-        return selectedDateButtonTag == 0 ? startDate : endDate
+        return selectedDateButtonTag == 0 ? startDate : endDate.yesterday
     }
     
     func handleSelectRow(component: Int, row: Int) {
