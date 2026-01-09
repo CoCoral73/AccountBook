@@ -125,7 +125,7 @@ class PeriodSelectionViewModel {
         if selectedDateButtonTag == 0 {
             startDate = calendar.startOfDay(for: date)
         } else {
-            endDate = calendar.startOfDay(for: date)
+            endDate = calendar.startOfDay(for: date.startOfNextDay)
         }
         
         onDidChangeDate?()
