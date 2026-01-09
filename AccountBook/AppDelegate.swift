@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AssetItemManager.shared.loadAssetItems()
         
         LockAppManager.shared.clearKeychainDataIfFirstLaunch()
-        
+        CardManager.shared.checkAndCompleteCycle()
         return true
     }
 

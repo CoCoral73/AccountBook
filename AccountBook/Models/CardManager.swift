@@ -12,6 +12,36 @@ class CardManager {
     
     private var calendar = Calendar.current
     
+    func checkAndCompleteCycle() {
+        let lastCheck = UserDefaults.standard.object(forKey: "LastCheckDate") as? Date ?? calendar.date(year: 2020, month: 1)!
+        let today = calendar.startOfDay(for: Date())
+        
+        if calendar.isDate(lastCheck, inSameDayAs: today) {
+            return
+        }
+        
+        let cards = AssetItemManager.shared.creditCard
+        for card in cards {
+            var withdrawalDate = getWithdrawalDate(withdrawalDay: card.withdrawalDay, baseDate: lastCheck)
+            
+            if withdrawalDate <= lastCheck {
+                let nextMonth = lastCheck.startOfNextMonth
+                withdrawalDate = getWithdrawalDate(withdrawalDay: card.withdrawalDay, baseDate: nextMonth)
+            }
+            
+            while withdrawalDate <= today {
+                if let cycle = calculateSpecificMonthCycle(for: card, withdrawalDate: withdrawalDate) {
+                    completeSpecificCycle(for: card, cycle: cycle)
+                }
+                
+                let nextMonth = withdrawalDate.startOfNextMonth
+                withdrawalDate = getWithdrawalDate(withdrawalDay: card.withdrawalDay, baseDate: nextMonth)
+            }
+        }
+        
+        UserDefaults.standard.set(today, forKey: "LastCheckDate")
+    }
+    
     func calculateCurrentMonthAmountForDebitCard(for card: DebitCardItem, now: Date = Date()) -> Int64 {
         let startDate = now.startOfMonth, endDate = now.startOfNextMonth
         guard let txs = card.transactions as? Set<Transaction> else { return 0 }
