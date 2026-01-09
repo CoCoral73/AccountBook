@@ -52,7 +52,7 @@ class ChartViewModel {
             fmt.dateFormat = "yyyy년"
         case .custom:
             fmt.dateFormat = "yy.MM.dd"
-            return "\(fmt.string(from: startDate)) ~ \(fmt.string(from: endDate))"
+            return "\(fmt.string(from: startDate)) ~ \(fmt.string(from: endDate.yesterday))"
         }
         
         return fmt.string(from: startDate)
