@@ -49,7 +49,8 @@ class CardManager {
             return withdrawalDate
         }
         
-        return calendar.date(byAdding: .month, value: 1, to: withdrawalDate)!
+        withdrawalDate = calendar.date(byAdding: .month, value: 1, to: withdrawalDate)!
+        return withdrawalDate
     }
     
     func calculateCurrentMonthCycle(for card: CreditCardItem, now: Date = Date()) -> (startDate: Date, endDate: Date)? {
