@@ -41,6 +41,7 @@ protocol AppTheme {
     var secondaryTextColor: UIColor { get }
     var accentColor: UIColor { get }
 
+    var pointTextColor: UIColor { get }
     var incomeTextColor: UIColor { get }
     var expenseTextColor: UIColor { get }
     
@@ -52,6 +53,7 @@ protocol AppTheme {
 extension AppTheme {
     var primaryTextColor: UIColor { .label }
     var secondaryTextColor: UIColor { .secondaryLabel }
+    var pointTextColor: UIColor { UIColor(red: 0.85, green: 0.11, blue: 0.38, alpha: 1.0) }
     var chartColors: [UIColor] {
         [
             //빨 주 노 초 하 파 보 쿨핑 핑 회
