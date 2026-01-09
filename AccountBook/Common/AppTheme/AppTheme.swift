@@ -54,6 +54,9 @@ extension AppTheme {
     var primaryTextColor: UIColor { .label }
     var secondaryTextColor: UIColor { .secondaryLabel }
     var pointTextColor: UIColor { UIColor(red: 0.85, green: 0.11, blue: 0.38, alpha: 1.0) }
+    var incomeTextColor: UIColor { UIColor(red: 0.18, green: 0.55, blue: 0.37, alpha: 1.00) }
+    var expenseTextColor: UIColor { UIColor(red: 0.76, green: 0.24, blue: 0.27, alpha: 1.00) }
+    
     var chartColors: [UIColor] {
         [
             //빨 주 노 초 하 파 보 쿨핑 핑 회
