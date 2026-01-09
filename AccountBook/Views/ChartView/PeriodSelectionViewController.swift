@@ -92,7 +92,7 @@ class PeriodSelectionViewController: UIViewController, ThemeApplicable {
                 pickerView.selectRow(viewModel.selectedRowForYear, inComponent: 0, animated: false)
             }
             else {
-                datePicker.setDate(viewModel.handleDateButton(0), animated: false)
+                datePicker.setDate(viewModel.handleDateButton(viewModel.selectedDateButtonTag), animated: false)
             }
         }
     }

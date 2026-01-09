@@ -20,7 +20,7 @@ class PeriodSelectionViewModel {
     private var periodType: StatisticPeriod
     private var startDate: Date
     private var endDate: Date
-    private var selectedDateButtonTag: Int = 0
+    private(set) var selectedDateButtonTag: Int = 0
     
     var onDidChangeDate: (() -> ())?
     var onDidApplyPeriod: ((StatisticPeriod, Date, Date) -> ())?
