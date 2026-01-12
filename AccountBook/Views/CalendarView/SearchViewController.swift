@@ -11,6 +11,9 @@ class SearchViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var searchBar: UIView!
+    @IBOutlet weak var searchImageButton: UIButton!
+    @IBOutlet weak var searchTextField: UITextField!
     
     var viewModel: SearchViewModel
     
@@ -28,10 +31,14 @@ class SearchViewController: UIViewController, ThemeApplicable {
 
         startObservingTheme()
         configureNavigationBar()
+        configureTextField()
     }
 
     func applyTheme(_ theme: any AppTheme) {
         backButton.tintColor = theme.accentColor
+        searchBar.borderColor = theme.accentColor
+        searchBar.backgroundColor = theme.baseColor
+        searchImageButton.tintColor = theme.accentColor
     }
     
     func configureNavigationBar() {
@@ -40,8 +47,20 @@ class SearchViewController: UIViewController, ThemeApplicable {
         navItem.standardAppearance = appearance
     }
     
+    func configureTextField() {
+        searchTextField.addTarget(self, action: #selector(didChangedTextField), for: .editingChanged)
+    }
+    
+    @objc func didChangedTextField() {
+        
+    }
+    
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
         navigationController?.popViewController(animated: true)
+    }
+    
+    @IBAction func searchImageButtonTapped(_ sender: UIButton) {
+        searchTextField.becomeFirstResponder()
     }
     
     override func viewWillAppear(_ animated: Bool) {
