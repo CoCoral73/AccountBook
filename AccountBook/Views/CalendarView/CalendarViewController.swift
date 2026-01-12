@@ -101,6 +101,8 @@ class CalendarViewController: UIViewController, ThemeApplicable {
         addButton.transform = addButton.transform.rotated(by: .pi / 4)
     }
     
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
+    }
     @IBAction func addButtonTapped(_ sender: UIButton) {
         if !isExpanded {
             toggleAddButton(true)
