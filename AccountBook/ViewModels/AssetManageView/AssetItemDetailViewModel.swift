@@ -84,7 +84,7 @@ class AssetItemDetailViewModel {
         guard let credit = asset as? CreditCardItem else { return "" }
         let withdrawalDate = CardManager.shared.getWithdrawalDate(withdrawalDay: credit.withdrawalDay)
         guard let cycle = CardManager.shared.calculateSpecificMonthCycle(for: credit, withdrawalDate: withdrawalDate) else { return "" }
-        return CardManager.shared.calculateCycleSpending(for: credit, cycle: cycle).formattedWithComma + "원"
+        return CardManager.shared.calculateOutstandingCycleSpending(for: credit, cycle: cycle).formattedWithComma + "원"
     }
     var numberOfRowsInSection: Int {
         return txs.count
