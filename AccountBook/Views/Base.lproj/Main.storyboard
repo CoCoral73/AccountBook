@@ -808,7 +808,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Es4-EV-4rV" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="704.58015267175574" y="-893.66197183098598"/>
+            <point key="canvasLocation" x="996" y="-1201"/>
         </scene>
         <!--통계-->
         <scene sceneID="pY2-yM-nNx">
@@ -1985,6 +1985,21 @@
             </objects>
             <point key="canvasLocation" x="-231" y="-27"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="U1j-kE-TR0">
+            <objects>
+                <viewController id="d6C-4o-Of8" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="QyZ-0l-S8K">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="8s2-xE-3ED"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="afH-WV-p6h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="996" y="-520"/>
+        </scene>
         <!--Transaction Detail View Controller-->
         <scene sceneID="dur-26-N6X">
             <objects>
@@ -2545,7 +2560,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o2y-S9-7pS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="704.58015267175574" y="-1556.3380281690143"/>
+            <point key="canvasLocation" x="996" y="-1865"/>
         </scene>
         <!--Installment View Controller-->
         <scene sceneID="MTk-8x-ahd">
@@ -2669,7 +2684,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gtq-j6-DQn" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1637" y="-1556"/>
+            <point key="canvasLocation" x="1929" y="-1865"/>
         </scene>
         <!--Category View Controller-->
         <scene sceneID="6Cg-It-xgc">
@@ -2744,7 +2759,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ctz-XI-mcA" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4124" y="-1192"/>
+            <point key="canvasLocation" x="4413" y="-1501"/>
         </scene>
         <!--Asset Selection View Controller-->
         <scene sceneID="T3L-cB-FhF">
@@ -2848,7 +2863,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kx5-X4-AHk" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3293.8931297709923" y="-1192.605633802817"/>
+            <point key="canvasLocation" x="3587" y="-1500"/>
         </scene>
         <!--Day Picker View Controller-->
         <scene sceneID="Yzo-lp-HVQ">
@@ -4405,7 +4420,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mLc-9q-2wE" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2459" y="-1192"/>
+            <point key="canvasLocation" x="2752" y="-1501"/>
         </scene>
         <!--Category Edit View Controller-->
         <scene sceneID="x3n-4H-7hd">
