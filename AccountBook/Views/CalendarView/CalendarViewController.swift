@@ -102,7 +102,18 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func searchButtonTapped(_ sender: UIButton) {
+        let vm = viewModel.handleSearchButton()
+        
+        guard let vc = storyboard?.instantiateViewController(identifier: "SearchViewController", creator: { coder in
+            SearchViewController(coder: coder, viewModel: vm)
+        }) else {
+            print("CalendarViewControlelr: Search VC 생성 오류")
+            return
+        }
+        
+        navigationController?.pushViewController(vc, animated: true)
     }
+    
     @IBAction func addButtonTapped(_ sender: UIButton) {
         if !isExpanded {
             toggleAddButton(true)

@@ -136,6 +136,11 @@ class CalendarViewModel {
         return vm
     }
     
+    func handleSearchButton() -> SearchViewModel {
+        let vm = SearchViewModel()
+        return vm
+    }
+    
     func handleDidSelectRowAt(viewModel: TransactionDetailViewModel, completion: @escaping () -> ()) {
         viewModel.onDidUpdateOldDateTransaction = { [weak self] date in
             guard let self = self, let id = self.itemIDsByDate[date] else {
