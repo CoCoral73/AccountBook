@@ -1992,9 +1992,36 @@
                     <view key="view" contentMode="scaleToFill" id="QyZ-0l-S8K">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DHy-6C-whl">
+                                <rect key="frame" x="0.0" y="59" width="393" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="8s7-jP-ZRd"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="검색" id="CTX-7O-7E2">
+                                        <barButtonItem key="leftBarButtonItem" image="chevron.left" catalog="system" id="ysc-ti-VX8">
+                                            <connections>
+                                                <action selector="backButtonTapped:" destination="d6C-4o-Of8" id="Jp0-Yx-9QF"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                                <navigationBarAppearance key="standardAppearance"/>
+                            </navigationBar>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="8s2-xE-3ED"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="DHy-6C-whl" firstAttribute="leading" secondItem="QyZ-0l-S8K" secondAttribute="leading" id="7KT-X4-KhC"/>
+                            <constraint firstItem="8s2-xE-3ED" firstAttribute="trailing" secondItem="DHy-6C-whl" secondAttribute="trailing" id="8xC-Pc-1xu"/>
+                            <constraint firstItem="DHy-6C-whl" firstAttribute="top" secondItem="8s2-xE-3ED" secondAttribute="top" id="vKF-ho-7IL"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="backButton" destination="ysc-ti-VX8" id="zoK-f4-vd4"/>
+                        <outlet property="navItem" destination="CTX-7O-7E2" id="Wbu-b8-urB"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="afH-WV-p6h" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
