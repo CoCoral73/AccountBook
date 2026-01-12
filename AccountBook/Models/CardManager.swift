@@ -11,9 +11,10 @@ class CardManager {
     private init() { }
     
     private var calendar = Calendar.current
+    private var lastCheckKey = "LastCheckDate"
     
     func checkAndCompleteCycle() {
-        let lastCheck = UserDefaults.standard.object(forKey: "LastCheckDate") as? Date ?? calendar.date(year: 2020, month: 1)!
+        let lastCheck = UserDefaults.standard.object(forKey: lastCheckKey) as? Date ?? calendar.date(year: 2020, month: 1)!
         let today = calendar.startOfDay(for: Date())
         
         if calendar.isDate(lastCheck, inSameDayAs: today) {
@@ -39,7 +40,7 @@ class CardManager {
             }
         }
         
-        UserDefaults.standard.set(today, forKey: "LastCheckDate")
+        UserDefaults.standard.set(today, forKey: lastCheckKey)
     }
     
     func calculateCurrentMonthAmountForDebitCard(for card: DebitCardItem, now: Date = Date()) -> Int64 {
