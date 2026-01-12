@@ -1985,10 +1985,10 @@
             </objects>
             <point key="canvasLocation" x="-231" y="-27"/>
         </scene>
-        <!--View Controller-->
+        <!--Search View Controller-->
         <scene sceneID="U1j-kE-TR0">
             <objects>
-                <viewController id="d6C-4o-Of8" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchViewController" hidesBottomBarWhenPushed="YES" id="d6C-4o-Of8" customClass="SearchViewController" customModule="AccountBook" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="QyZ-0l-S8K">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
