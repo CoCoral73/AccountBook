@@ -15,7 +15,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var searchImageButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
     @IBOutlet weak var periodButton: UIButton!
-    @IBOutlet weak var periodLabel: UILabel!
+    @IBOutlet weak var periodSelectButton: UIButton!
     @IBOutlet weak var categoryButton: UIButton!
     @IBOutlet weak var assetButton: UIButton!
     @IBOutlet weak var minAmountButton: UIButton!
@@ -70,6 +70,9 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func periodButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func periodSelectButtonTapped(_ sender: UIButton) {
     }
     
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
