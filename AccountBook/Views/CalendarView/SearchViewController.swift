@@ -14,6 +14,13 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var searchBar: UIView!
     @IBOutlet weak var searchImageButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
+    @IBOutlet weak var periodButton: UIButton!
+    @IBOutlet weak var periodLabel: UILabel!
+    @IBOutlet weak var categoryButton: UIButton!
+    @IBOutlet weak var assetButton: UIButton!
+    @IBOutlet weak var minAmountButton: UIButton!
+    @IBOutlet weak var maxAmountButton: UIButton!
+    @IBOutlet weak var sortButton: UIButton!
     
     var viewModel: SearchViewModel
     
@@ -61,6 +68,24 @@ class SearchViewController: UIViewController, ThemeApplicable {
     
     @IBAction func searchImageButtonTapped(_ sender: UIButton) {
         searchTextField.becomeFirstResponder()
+    }
+    
+    @IBAction func periodButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func categoryButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func assetButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func minAmountButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func maxAmountButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func sortButtonTapped(_ sender: UIButton) {
     }
     
     override func viewWillAppear(_ animated: Bool) {
