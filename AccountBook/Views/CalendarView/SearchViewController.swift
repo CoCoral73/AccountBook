@@ -36,7 +36,6 @@ class SearchViewController: UIViewController, ThemeApplicable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        startObservingTheme()
         configureNavigationBar()
         configureTextField()
     }
@@ -93,7 +92,4 @@ class SearchViewController: UIViewController, ThemeApplicable {
         applyInitialTheme()
     }
     
-    deinit {
-        stopObservingTheme()
-    }
 }
