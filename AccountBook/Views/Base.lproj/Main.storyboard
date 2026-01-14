@@ -2093,43 +2093,45 @@
                                                             <constraint firstItem="pYu-8O-aI3" firstAttribute="centerX" secondItem="gu5-Y1-uVc" secondAttribute="centerX" id="wxP-7T-G5s"/>
                                                         </constraints>
                                                     </view>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLY-bQ-S8R">
-                                                        <rect key="frame" x="94" y="0.0" width="85" height="50"/>
-                                                        <constraints>
-                                                            <constraint firstAttribute="width" constant="85" id="IAQ-xS-Yjj"/>
-                                                        </constraints>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal" title="전체">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="periodButtonTapped:" destination="d6C-4o-Of8" eventType="touchUpInside" id="9FD-Pe-D4L"/>
-                                                        </connections>
-                                                    </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5G-bN-CY1">
-                                                        <rect key="frame" x="179" y="0.0" width="214" height="50"/>
-                                                        <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
-                                                        <state key="normal">
-                                                            <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                        </state>
-                                                        <connections>
-                                                            <action selector="periodSelectButtonTapped:" destination="d6C-4o-Of8" eventType="touchUpInside" id="Kqn-3G-hB7"/>
-                                                        </connections>
-                                                    </button>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oaY-87-tzX">
+                                                        <rect key="frame" x="94" y="0.0" width="299" height="50"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hLY-bQ-S8R">
+                                                                <rect key="frame" x="0.0" y="0.0" width="85" height="50"/>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal" title="전체">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="periodButtonTapped:" destination="d6C-4o-Of8" eventType="touchUpInside" id="9FD-Pe-D4L"/>
+                                                                </connections>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5G-bN-CY1">
+                                                                <rect key="frame" x="85" y="0.0" width="214" height="50"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="width" constant="214" id="SFm-2X-KKI"/>
+                                                                </constraints>
+                                                                <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                                                                <state key="normal">
+                                                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                </state>
+                                                                <connections>
+                                                                    <action selector="periodSelectButtonTapped:" destination="d6C-4o-Of8" eventType="touchUpInside" id="Kqn-3G-hB7"/>
+                                                                </connections>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstItem="gu5-Y1-uVc" firstAttribute="top" secondItem="WUX-0D-GNQ" secondAttribute="top" id="3oG-Li-qug"/>
                                                     <constraint firstAttribute="height" constant="50" id="5cV-as-Ww0"/>
                                                     <constraint firstItem="gu5-Y1-uVc" firstAttribute="leading" secondItem="WUX-0D-GNQ" secondAttribute="leading" id="DBy-Sq-BFK"/>
-                                                    <constraint firstAttribute="bottom" secondItem="hLY-bQ-S8R" secondAttribute="bottom" id="Pl6-ng-vla"/>
-                                                    <constraint firstItem="g5G-bN-CY1" firstAttribute="top" secondItem="WUX-0D-GNQ" secondAttribute="top" id="WNZ-vd-euv"/>
-                                                    <constraint firstAttribute="trailing" secondItem="g5G-bN-CY1" secondAttribute="trailing" id="Y3l-8M-eon"/>
-                                                    <constraint firstItem="hLY-bQ-S8R" firstAttribute="leading" secondItem="gu5-Y1-uVc" secondAttribute="trailing" id="Zu3-Z4-0ih"/>
+                                                    <constraint firstItem="oaY-87-tzX" firstAttribute="leading" secondItem="gu5-Y1-uVc" secondAttribute="trailing" id="KKs-u6-H6t"/>
                                                     <constraint firstAttribute="bottom" secondItem="gu5-Y1-uVc" secondAttribute="bottom" id="a3f-h0-JzG"/>
-                                                    <constraint firstAttribute="bottom" secondItem="g5G-bN-CY1" secondAttribute="bottom" id="bqz-jB-deB"/>
-                                                    <constraint firstItem="hLY-bQ-S8R" firstAttribute="top" secondItem="WUX-0D-GNQ" secondAttribute="top" id="grf-WC-ChR"/>
-                                                    <constraint firstItem="g5G-bN-CY1" firstAttribute="leading" secondItem="hLY-bQ-S8R" secondAttribute="trailing" id="tYD-HQ-ncT"/>
+                                                    <constraint firstAttribute="trailing" secondItem="oaY-87-tzX" secondAttribute="trailing" id="e4e-mH-4XY"/>
+                                                    <constraint firstItem="oaY-87-tzX" firstAttribute="top" secondItem="WUX-0D-GNQ" secondAttribute="top" id="hC6-Hp-ego"/>
+                                                    <constraint firstAttribute="bottom" secondItem="oaY-87-tzX" secondAttribute="bottom" id="vNk-w3-vwd"/>
                                                 </constraints>
                                             </view>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l2E-K0-nYN">
