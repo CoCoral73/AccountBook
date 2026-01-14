@@ -17,15 +17,15 @@ class PeriodSelectionViewModel {
         return fmt
     }()
     
-    private var periodType: StatisticPeriod
+    private var periodType: PeriodType
     private var startDate: Date
     private var endDate: Date
     private(set) var selectedDateButtonTag: Int = 0
     
     var onDidChangeDate: (() -> ())?
-    var onDidApplyPeriod: ((StatisticPeriod, Date, Date) -> ())?
+    var onDidApplyPeriod: ((PeriodType, Date, Date) -> ())?
     
-    init(_ periodType: StatisticPeriod, _ startDate: Date, _ endDate: Date) {
+    init(_ periodType: PeriodType, _ startDate: Date, _ endDate: Date) {
         self.periodType = periodType
         
         switch periodType {
@@ -74,7 +74,7 @@ class PeriodSelectionViewModel {
     }
     
     func setPeriodType(_ value: Int) {
-        periodType = StatisticPeriod(rawValue: value)!
+        periodType = PeriodType(rawValue: value)!
         
         let (year, month) = (calendar.component(.year, from: startDate), calendar.component(.month, from: startDate))
         updatePeriodDates(year: year, month: month)

@@ -6,7 +6,7 @@
 //
 import Foundation
 
-enum StatisticPeriod: Int {
+enum PeriodType: Int {
     case monthly, yearly, custom
 }
 
@@ -23,7 +23,7 @@ struct AssetRow {
 
 class ChartViewModel {
     
-    private var periodType: StatisticPeriod = .monthly
+    private var periodType: PeriodType = .monthly
     private var startDate: Date, endDate: Date
     private var type: TransactionType = .expense
     
@@ -109,7 +109,7 @@ class ChartViewModel {
         onPresentPeriodSelectionVC?(vm)
     }
     
-    func setPeriod(_ periodType: StatisticPeriod, _ date: Date, _ endDate: Date = Date()) {
+    func setPeriod(_ periodType: PeriodType, _ date: Date, _ endDate: Date = Date()) {
         self.startDate = date
         self.endDate = endDate
         self.periodType = periodType
