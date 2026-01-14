@@ -36,6 +36,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        bindViewModel()
         configureNavigationBar()
         configureTextField()
     }
@@ -45,6 +46,15 @@ class SearchViewController: UIViewController, ThemeApplicable {
         searchBar.borderColor = theme.accentColor
         searchBar.backgroundColor = theme.baseColor
         searchImageButton.tintColor = theme.accentColor
+    }
+    
+    func bindViewModel() {
+        viewModel.onDidSetPeriod = { [weak self] in
+            guard let self = self else { return }
+            periodButton.setTitle(viewModel.periodTypeDisplay, for: .normal)
+            periodSelectButton.isHidden = viewModel.isPeriodSelectButtonHidden
+            periodSelectButton.setTitle(viewModel.periodDisplay, for: .normal)
+        }
     }
     
     func configureNavigationBar() {
@@ -70,9 +80,40 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func periodButtonTapped(_ sender: UIButton) {
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let action1 = UIAlertAction(title: "전체", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            viewModel.handlePeriodButton(isEntire: true)
+        }
+        let action2 = UIAlertAction(title: "지정", style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            viewModel.handlePeriodButton(isEntire: false)
+        }
+        
+        alert.addAction(action1)
+        alert.addAction(action2)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        
+        present(alert, animated: true)
     }
     
     @IBAction func periodSelectButtonTapped(_ sender: UIButton) {
+        let vm = viewModel.handlePeriodSelectButton()
+        guard let vc = storyboard?.instantiateViewController(identifier: "PeriodSelectionViewController", creator: { coder in
+            PeriodSelectionViewController(coder: coder, viewModel: vm)
+        }) else {
+            print("SearchViewController: PeriodSelection VC 생성 오류")
+            return
+        }
+        
+        if let sheet = vc.sheetPresentationController {
+            sheet.detents = [.custom { _ in
+                return vc.preferredContentSize.height
+            }]
+            sheet.prefersGrabberVisible = true
+        }
+
+        self.present(vc, animated: true, completion: nil)
     }
     
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
