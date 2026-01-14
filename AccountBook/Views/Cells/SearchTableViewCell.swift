@@ -17,4 +17,20 @@ class SearchTableViewCell: UITableViewCell {
     @IBOutlet weak var amountLabel: UILabel!
     @IBOutlet weak var assetLabel: UILabel!
     
+    var viewModel: SearchCellViewModel! {
+        didSet {
+            configure()
+        }
+    }
+    
+    func configure() {
+        dateLabel.text = viewModel.dateDisplay
+        categoryImageView.image = viewModel.categoryImageName.toImage()
+        categoryNameLabel.text = viewModel.categoryName
+        nameLabel.text = viewModel.name
+        memoLabel.text = viewModel.memo
+        amountLabel.text = viewModel.amountDisplay
+        assetLabel.text = viewModel.assetDisplay
+    }
+    
 }
