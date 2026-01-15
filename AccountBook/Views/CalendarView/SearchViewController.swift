@@ -22,6 +22,14 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var maxAmountButton: UIButton!
     @IBOutlet weak var sortButton: UIButton!
     
+    private var amountButtons: [UIButton] = []
+    
+    private let engine = CalculatorEngine()
+    private let keypad = NumericKeypadView.loadFromNib()
+    private var bottomConstraint: NSLayoutConstraint!
+    
+    private var currentAmountButtonTag: Int = 0
+    
     var viewModel: SearchViewModel
     
     required init?(coder: NSCoder, viewModel: SearchViewModel) {
@@ -39,6 +47,8 @@ class SearchViewController: UIViewController, ThemeApplicable {
         bindViewModel()
         configureNavigationBar()
         configureTextField()
+        configureKeypadLayout()
+        amountButtons = [minAmountButton, maxAmountButton]
     }
 
     func applyTheme(_ theme: any AppTheme) {
@@ -122,10 +132,10 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @IBAction func assetButtonTapped(_ sender: UIButton) {
     }
     
-    @IBAction func minAmountButtonTapped(_ sender: UIButton) {
-    }
-    
-    @IBAction func maxAmountButtonTapped(_ sender: UIButton) {
+    @IBAction func amountButtonTapped(_ sender: UIButton) {
+        currentAmountButtonTag = sender.tag
+        engine.setBuffer(viewModel.currentAmount(tag: sender.tag))
+        showNumericKeypad()
     }
     
     @IBAction func sortButtonTapped(_ sender: UIButton) {
@@ -134,6 +144,48 @@ class SearchViewController: UIViewController, ThemeApplicable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         applyInitialTheme()
+    }
+    
+}
+extension SearchViewController: NumericKeypadDelegate {
+    func configureKeypadLayout() {
+        keypad.delegate = self
+        
+        view.addSubview(keypad)
+        keypad.translatesAutoresizingMaskIntoConstraints = false
+
+        NSLayoutConstraint.activate([
+            keypad.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            keypad.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            keypad.heightAnchor.constraint(equalToConstant: 400)
+        ])
+        
+        bottomConstraint = keypad.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 400)
+        bottomConstraint.isActive = true
+    }
+    
+    func showNumericKeypad() {
+        bottomConstraint.constant = 0
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func keypadDidInput(_ input: NumericKeypadInput) {
+        let value = engine.input(input)
+        viewModel.handleNumericKeypad(value, tag: currentAmountButtonTag)
+        
+        let button = amountButtons[currentAmountButtonTag]
+        
+        button.setTitle(viewModel.currentAmountDisplay(tag: currentAmountButtonTag), for: .normal)
+        button.setTitleColor(value == 0 ? .placeholderText : .black, for: .normal)
+    }
+    
+    func keypadDidHide() {
+        bottomConstraint.constant = 400
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
     }
     
 }
