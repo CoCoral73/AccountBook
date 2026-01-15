@@ -106,6 +106,19 @@ final class CoreDataManager {
         return (try? context.fetch(request)) ?? []
     }
     
+    // MARK: - 전체 거래 내역 조회
+    func fetchTransactions() -> [Transaction] {
+        let request: NSFetchRequest<Transaction> = Transaction.fetchRequest()
+        request.sortDescriptors = [NSSortDescriptor(key: "date", ascending: true)]
+        
+        do {
+            return try context.fetch(request)
+        } catch {
+            print("Core Data fetch error: \(error)")
+            return []
+        }
+    }
+    
     // MARK: - 특정 날짜 거래 내역 조회
     func fetchTransactions(forDay date: Date) -> [Transaction] {
         let startOfDay = calendar.startOfDay(for: date)
