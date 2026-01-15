@@ -79,8 +79,8 @@ class SearchViewController: UIViewController, ThemeApplicable {
         searchTextField.addTarget(self, action: #selector(didChangedTextField), for: .editingChanged)
     }
     
-    @objc func didChangedTextField() {
-        
+    @objc func didChangedTextField(_ textField: UITextField) {
+        viewModel.setKeyword(with: textField.text)
     }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
