@@ -11,6 +11,8 @@ class SearchViewModel {
     var allTxs: [Transaction]
     var filteredTxs: [Transaction]
     
+    var keyword: String?
+    
     var isEntire: Bool = true
     var periodType: PeriodType?
     var startDate: Date = DefaultSetting.firstDate
@@ -65,6 +67,10 @@ class SearchViewModel {
     func didSelectRowAt(_ index: Int) -> TransactionDetailViewModel {
         let tx = filteredTxs[index]
         return TransactionDetailViewModel(transaction: tx)
+    }
+    
+    func setKeyword(with keyword: String?) {
+        self.keyword = keyword
     }
     
     func handlePeriodButton(isEntire: Bool) {
