@@ -21,6 +21,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var minAmountButton: UIButton!
     @IBOutlet weak var maxAmountButton: UIButton!
     @IBOutlet weak var sortButton: UIButton!
+    @IBOutlet weak var tableView: IntrinsicTableView!
     
     private var amountButtons: [UIButton] = []
     
@@ -49,6 +50,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
         configureTextField()
         configureKeypadLayout()
         amountButtons = [minAmountButton, maxAmountButton]
+        configureTableView()
     }
 
     func applyTheme(_ theme: any AppTheme) {
@@ -147,6 +149,44 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
 }
+
+extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
+    func configureTableView() {
+        tableView.dataSource = self
+        tableView.delegate = self
+        
+        tableView.rowHeight = 50
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return viewModel.numberOfRowsInSection
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.searchCell, for: indexPath) as! SearchTableViewCell
+        
+        cell.viewModel = viewModel.cellForRowAt(indexPath.row)
+        
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vm = viewModel.didSelectRowAt(indexPath.row)
+        showTransactionDetailView(vm)
+    }
+    
+    func showTransactionDetailView(_ vm: TransactionDetailViewModel) {
+        guard let vc = storyboard?.instantiateViewController(identifier: "TransactionDetailViewController", creator: { coder in
+            TransactionDetailViewController(coder: coder, viewModel: vm)
+        }) else {
+            print("SearchViewController: Transaction Detail VC 생성 오류")
+            return
+        }
+        
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
 extension SearchViewController: NumericKeypadDelegate {
     func configureKeypadLayout() {
         keypad.delegate = self
