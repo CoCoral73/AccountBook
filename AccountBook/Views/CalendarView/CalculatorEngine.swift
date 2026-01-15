@@ -13,6 +13,11 @@ final class CalculatorEngine {
     private var buffer: Decimal = 0
     private var didJustEvaluate = false
 
+    func setBuffer(_ value: Decimal) {
+        buffer = value
+        currentValue = 0
+    }
+    
     func input(_ input: NumericKeypadInput) -> Decimal {
         switch input {
         case .number(let n):
