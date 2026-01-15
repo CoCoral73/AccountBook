@@ -8,6 +8,9 @@
 import Foundation
 
 class SearchViewModel {
+    var allTxs: [Transaction]
+    var filteredTxs: [Transaction]
+    
     var isEntire: Bool = true
     var periodType: PeriodType?
     var startDate: Date = DefaultSetting.firstDate
@@ -15,6 +18,11 @@ class SearchViewModel {
     
     var minAmount: Decimal = 0
     var maxAmount: Decimal = Decimal(Int64.max)
+    
+    init() {
+        allTxs = CoreDataManager.shared.fetchTransactions()
+        filteredTxs = allTxs
+    }
     
     var onDidSetPeriod: (() -> Void)?
     
@@ -28,6 +36,9 @@ class SearchViewModel {
         let fmt = DateFormatter()
         fmt.dateFormat = "yyyy.MM.dd"
         return "\(fmt.string(from: startDate)) ~ \(fmt.string(from: endDate.yesterday))"
+    }
+    var numberOfRowsInSection: Int {
+        return filteredTxs.count
     }
     
     func currentAmount(tag: Int) -> Decimal {
@@ -44,6 +55,16 @@ class SearchViewModel {
         let value = tag == 0 ? minAmount : maxAmount
         let formatted = NSDecimalNumber(decimal: value).int64Value.formattedWithComma + "원"
         return formatted
+    }
+    
+    func cellForRowAt(_ index: Int) -> SearchCellViewModel {
+        let tx = filteredTxs[index]
+        return SearchCellViewModel(transaction: tx)
+    }
+    
+    func didSelectRowAt(_ index: Int) -> TransactionDetailViewModel {
+        let tx = filteredTxs[index]
+        return TransactionDetailViewModel(transaction: tx)
     }
     
     func handlePeriodButton(isEntire: Bool) {
