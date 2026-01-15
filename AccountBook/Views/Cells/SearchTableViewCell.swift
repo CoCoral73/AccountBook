@@ -28,7 +28,7 @@ class SearchTableViewCell: UITableViewCell {
         categoryImageView.image = viewModel.categoryImageName.toImage()
         categoryNameLabel.text = viewModel.categoryName
         nameLabel.text = viewModel.name
-        memoLabel.text = viewModel.memo
+        memoLabel.text = viewModel.memo + " "
         amountLabel.text = viewModel.amountDisplay
         assetLabel.text = viewModel.assetDisplay
     }
