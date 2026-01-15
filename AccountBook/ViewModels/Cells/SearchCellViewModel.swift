@@ -39,8 +39,8 @@ class SearchCellViewModel {
         case .income, .expense:
             return transaction.asset!.name
         case .transfer:
-            let fromAccount = transaction.fromAccount!
-            let toAccount = transaction.toAccount!
+            let fromAccount = transaction.fromAccount!.name
+            let toAccount = transaction.toAccount!.name
             return "\(fromAccount) → \(toAccount)"
         }
     }
