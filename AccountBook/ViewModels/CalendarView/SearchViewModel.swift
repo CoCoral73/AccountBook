@@ -13,6 +13,9 @@ class SearchViewModel {
     var startDate: Date = DefaultSetting.firstDate
     var endDate: Date = DefaultSetting.lastDate
     
+    var minAmount: Decimal = 0
+    var maxAmount: Decimal = Decimal(Int64.max)
+    
     var onDidSetPeriod: (() -> Void)?
     
     var isPeriodSelectButtonHidden: Bool {
@@ -25,6 +28,22 @@ class SearchViewModel {
         let fmt = DateFormatter()
         fmt.dateFormat = "yyyy.MM.dd"
         return "\(fmt.string(from: startDate)) ~ \(fmt.string(from: endDate.yesterday))"
+    }
+    
+    func currentAmount(tag: Int) -> Decimal {
+        if tag == 0 { return minAmount }
+        else {
+            return maxAmount == Decimal(Int64.max) ? 0 : maxAmount
+        }
+    }
+    
+    func currentAmountDisplay(tag: Int) -> String {
+        if tag == 0 && minAmount == 0 { return "최소" }
+        else if tag == 1 && maxAmount == Decimal(Int64.max) { return "최대" }
+        
+        let value = tag == 0 ? minAmount : maxAmount
+        let formatted = NSDecimalNumber(decimal: value).int64Value.formattedWithComma + "원"
+        return formatted
     }
     
     func handlePeriodButton(isEntire: Bool) {
@@ -53,5 +72,13 @@ class SearchViewModel {
             self.onDidSetPeriod?()
         }
         return vm
+    }
+    
+    func handleNumericKeypad(_ value: Decimal, tag: Int) {
+        if tag == 0 {
+            minAmount = value
+        } else {
+            maxAmount = value == 0 ? Decimal(Int64.max) : value
+        }
     }
 }
