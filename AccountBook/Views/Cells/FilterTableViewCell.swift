@@ -7,7 +7,7 @@
 
 import UIKit
 
-class FilterTableViewCell: UITableViewCell {
+class FilterTableViewCell: UITableViewCell, ThemeApplicable {
     
     @IBOutlet weak var iconView: UIImageView!
     @IBOutlet weak var nameLabel: UILabel!
@@ -24,6 +24,12 @@ class FilterTableViewCell: UITableViewCell {
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapCheckView))
         checkView.addGestureRecognizer(tap)
+        
+        applyTheme(ThemeManager.shared.currentTheme)
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        checkView.tintColor = theme.accentColor
     }
     
     func configure() {
