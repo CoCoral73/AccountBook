@@ -104,10 +104,20 @@ class SearchViewController: UIViewController, ThemeApplicable {
     func configureTapGesture() {
         let tap = UITapGestureRecognizer(target: self, action: #selector(didTapOverlayView))
         overlayView.addGestureRecognizer(tap)
+        
+        let tapView = UITapGestureRecognizer(target: self, action: #selector(didTapView))
+        tapView.delegate = self
+        tapView.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapView)
     }
     
     @objc func didTapOverlayView() {
         hidePopUp()
+    }
+    
+    @objc func didTapView() {
+        keypadDidHide()
+        searchTextField.resignFirstResponder()
     }
     
     @objc func didChangedTextField(_ textField: UITextField) {
@@ -218,6 +228,12 @@ extension SearchViewController: UIScrollViewDelegate, UIGestureRecognizerDelegat
         keypadDidHide()
     }
     
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+        if touch.view?.isDescendant(of: keypad) == true {
+            return false
+        }
+        return true
+    }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         keypadDidHide()
