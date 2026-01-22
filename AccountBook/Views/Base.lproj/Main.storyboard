@@ -2327,6 +2327,7 @@
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="400" placeholder="YES" id="2l9-lg-6Rj"/>
                                                 </constraints>
+                                                <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="SearchCell" rowHeight="50" id="WBd-eO-KVL" customClass="SearchTableViewCell" customModule="AccountBook" customModuleProvider="target">
                                                         <rect key="frame" x="0.0" y="50" width="393" height="50"/>
