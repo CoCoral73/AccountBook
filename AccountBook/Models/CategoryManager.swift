@@ -22,6 +22,17 @@ class CategoryManager {
         expenseCategories = categories.filter { $0.type == .expense }
         transferCategories = categories.filter { $0.type == .transfer }
     }
+    
+    func getCategory(with indexPath: IndexPath) -> Category {
+        switch indexPath.section {
+        case 0:
+            return incomeCategories[indexPath.row]
+        case 1:
+            return expenseCategories[indexPath.row]
+        default:
+            return transferCategories[indexPath.row]
+        }
+    }
 
     func addCategory(icon: String, name: String, type: TransactionType) {
         let category = Category(context: CoreDataManager.shared.context)
