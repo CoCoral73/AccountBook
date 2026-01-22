@@ -11,7 +11,7 @@ class CategoryManager {
     static let shared = CategoryManager()
     private init() {}
     
-    private var categories: [Category] = []
+    private(set) var categories: [Category] = []
     private(set) var incomeCategories: [Category] = []
     private(set) var expenseCategories: [Category] = []
     private(set) var transferCategories: [Category] = []
