@@ -23,6 +23,13 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var sortButton: UIButton!
     @IBOutlet weak var tableView: IntrinsicTableView!
     
+    @IBOutlet weak var overlayView: UIView!
+    @IBOutlet weak var popUpView: UIView!
+    @IBOutlet weak var popUpViewTitle: UILabel!
+    @IBOutlet weak var filterTableView: UITableView!
+    @IBOutlet weak var topConstraint: NSLayoutConstraint!
+    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
+    
     private var amountButtons: [UIButton] = []
     
     private let engine = CalculatorEngine()
@@ -132,6 +139,12 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func assetButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func cancelButtonTapped(_ sender: UIButton) {
+    }
+    
+    @IBAction func applyButtonTapped(_ sender: UIButton) {
     }
     
     @IBAction func amountButtonTapped(_ sender: UIButton) {
