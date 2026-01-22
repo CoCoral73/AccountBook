@@ -141,6 +141,28 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @IBAction func assetButtonTapped(_ sender: UIButton) {
     }
     
+    func showPopUp() {
+        overlayView.isHidden = false
+        popUpView.isHidden = false
+        self.topConstraint.constant = 50
+        self.bottomConstraint.constant = 50
+        
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    func hidePopUp() {
+        overlayView.isHidden = true
+        self.topConstraint.constant = 1000
+        self.bottomConstraint.constant = -900
+        UIView.animate(withDuration: 0.3) {
+            self.view.layoutIfNeeded()
+        } completion: { _ in
+            self.popUpView.isHidden = true
+        }
+    }
+    
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
     }
     
