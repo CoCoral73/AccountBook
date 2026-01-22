@@ -34,7 +34,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     
     private let engine = CalculatorEngine()
     private let keypad = NumericKeypadView.loadFromNib()
-    private var bottomConstraint: NSLayoutConstraint!
+    private var keypadBottomConstraint: NSLayoutConstraint!
     
     private var currentAmountButtonTag: Int = 0
     
@@ -213,12 +213,12 @@ extension SearchViewController: NumericKeypadDelegate {
             keypad.heightAnchor.constraint(equalToConstant: 400)
         ])
         
-        bottomConstraint = keypad.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 400)
-        bottomConstraint.isActive = true
+        keypadBottomConstraint = keypad.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 400)
+        keypadBottomConstraint.isActive = true
     }
     
     func showNumericKeypad() {
-        bottomConstraint.constant = 0
+        keypadBottomConstraint.constant = 0
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
@@ -235,7 +235,7 @@ extension SearchViewController: NumericKeypadDelegate {
     }
     
     func keypadDidHide() {
-        bottomConstraint.constant = 400
+        keypadBottomConstraint.constant = 400
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
