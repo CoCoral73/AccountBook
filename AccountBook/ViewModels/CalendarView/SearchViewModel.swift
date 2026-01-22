@@ -18,6 +18,10 @@ class SearchViewModel {
     var startDate: Date = DefaultSetting.firstDate
     var endDate: Date = DefaultSetting.lastDate
     
+    var isCategorySelected: Bool = true
+    var categoryFilter = Set<Category>(CategoryManager.shared.categories)
+    var assetFilter = Set<AssetItem>(CoreDataManager.shared.fetchAssetItems())
+    
     var minAmount: Decimal = 0
     var maxAmount: Decimal = Decimal(Int64.max)
     
@@ -27,6 +31,7 @@ class SearchViewModel {
     }
     
     var onDidSetPeriod: (() -> Void)?
+    var onRequestPopUp: (() -> Void)?
     
     var isPeriodSelectButtonHidden: Bool {
         return isEntire
@@ -39,6 +44,13 @@ class SearchViewModel {
         fmt.dateFormat = "yyyy.MM.dd"
         return "\(fmt.string(from: startDate)) ~ \(fmt.string(from: endDate.yesterday))"
     }
+    var popUpViewTitle: String {
+        return isCategorySelected ? "카테고리" : "자산"
+    }
+    var numberOfSections: Int {
+        return isCategorySelected ? 3 : 4
+    }
+    
     var numberOfRowsInSection: Int {
         return filteredTxs.count
     }
@@ -59,14 +71,58 @@ class SearchViewModel {
         return formatted
     }
     
+    func numberOfRowsInSection(section: Int) -> Int {
+        if isCategorySelected {
+            switch section {
+            case 0:
+                return CategoryManager.shared.incomeCategories.count
+            case 1:
+                return CategoryManager.shared.expenseCategories.count
+            default:
+                return CategoryManager.shared.transferCategories.count
+            }
+        } else {
+            switch section {
+            case 0:
+                return 1
+            case 1:
+                return AssetItemManager.shared.bankAccount.count
+            case 2:
+                return AssetItemManager.shared.debitCard.count
+            default:
+                return AssetItemManager.shared.creditCard.count
+            }
+        }
+    }
+    
     func cellForRowAt(_ index: Int) -> SearchCellViewModel {
         let tx = filteredTxs[index]
         return SearchCellViewModel(transaction: tx)
     }
     
+    func cellForRowAt(_ indexPath: IndexPath) -> FilterCellViewModel {
+        if isCategorySelected {
+            let category = CategoryManager.shared.getCategory(with: indexPath)
+            let isCheck = categoryFilter.contains(category)
+            return FilterCellViewModel(type: .category(category), isCheck: isCheck)
+        } else {
+            let asset = AssetItemManager.shared.getAssetItem(with: indexPath)
+            let isCheck = assetFilter.contains(asset)
+            return FilterCellViewModel(type: .asset(asset), isCheck: isCheck)
+        }
+    }
+    
     func didSelectRowAt(_ index: Int) -> TransactionDetailViewModel {
         let tx = filteredTxs[index]
         return TransactionDetailViewModel(transaction: tx)
+    }
+    
+    func titleForHeaderInSection(_ section: Int) -> String {
+        if isCategorySelected {
+            return TransactionType(rawValue: Int16(section))!.name
+        } else {
+            return AssetType(rawValue: Int16(section))!.displayName
+        }
     }
     
     func setKeyword(with keyword: String?) {
@@ -99,6 +155,16 @@ class SearchViewModel {
             self.onDidSetPeriod?()
         }
         return vm
+    }
+    
+    func handleCategoryButton() {
+        isCategorySelected = true
+        onRequestPopUp?()
+    }
+    
+    func handleAssetButtonTapped() {
+        isCategorySelected = false
+        onRequestPopUp?()
     }
     
     func handleNumericKeypad(_ value: Decimal, tag: Int) {
