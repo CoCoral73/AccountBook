@@ -183,9 +183,11 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        hidePopUp()
     }
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
+        hidePopUp()
     }
     
     @IBAction func amountButtonTapped(_ sender: UIButton) {
