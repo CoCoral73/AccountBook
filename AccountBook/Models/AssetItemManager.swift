@@ -65,6 +65,19 @@ class AssetItemManager {
         }
     }
     
+    func getAssetItem(with indexPath: IndexPath) -> AssetItem {
+        switch indexPath.section {
+        case 0:
+            return cash[0]
+        case 1:
+            return bankAccount[indexPath.row]
+        case 2:
+            return debitCard[indexPath.row]
+        default:
+            return creditCard[indexPath.row]
+        }
+    }
+    
     func getAssetItems(with type: AssetType) -> [AssetItem] {
         switch type {
         case .cash: return cash
