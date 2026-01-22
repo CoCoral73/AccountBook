@@ -11,6 +11,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var searchBar: UIView!
     @IBOutlet weak var searchImageButton: UIButton!
     @IBOutlet weak var searchTextField: UITextField!
@@ -54,6 +55,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
 
         bindViewModel()
         configureNavigationBar()
+        configureScrollView()
         configureTextField()
         configureTapGesture()
         configureKeypadLayout()
@@ -88,6 +90,10 @@ class SearchViewController: UIViewController, ThemeApplicable {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         navItem.standardAppearance = appearance
+    }
+    
+    func configureScrollView() {
+        scrollView.delegate = self
     }
     
     func configureTextField() {
@@ -203,6 +209,14 @@ class SearchViewController: UIViewController, ThemeApplicable {
         super.viewWillAppear(animated)
         applyInitialTheme()
     }
+}
+
+extension SearchViewController: UIScrollViewDelegate, UIGestureRecognizerDelegate, UITextFieldDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
+        keypadDidHide()
+    }
+    
     
 }
 

@@ -2621,6 +2621,7 @@
                         <outlet property="periodSelectButton" destination="g5G-bN-CY1" id="dz7-qB-gqM"/>
                         <outlet property="popUpView" destination="GTX-Y7-hUL" id="JQf-ka-jmp"/>
                         <outlet property="popUpViewTitle" destination="8Rr-JU-06R" id="Zqo-6O-otZ"/>
+                        <outlet property="scrollView" destination="I7B-cW-2Sy" id="8nX-4h-lB2"/>
                         <outlet property="searchBar" destination="cIV-xW-Zx1" id="VIf-k8-TXr"/>
                         <outlet property="searchImageButton" destination="3Nq-qS-ukJ" id="WNW-ju-QcS"/>
                         <outlet property="searchTextField" destination="WnJ-FN-s0B" id="l3G-Sk-CWg"/>
