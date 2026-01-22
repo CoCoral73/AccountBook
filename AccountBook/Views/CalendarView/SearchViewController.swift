@@ -97,6 +97,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     func configureTextField() {
+        searchTextField.delegate = self
         searchTextField.addTarget(self, action: #selector(didChangedTextField), for: .editingChanged)
     }
     
@@ -218,6 +219,13 @@ extension SearchViewController: UIScrollViewDelegate, UIGestureRecognizerDelegat
     }
     
     
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        keypadDidHide()
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+    }
 }
 
 extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
