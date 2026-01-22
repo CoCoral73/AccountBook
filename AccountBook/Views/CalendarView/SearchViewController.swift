@@ -55,6 +55,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
         bindViewModel()
         configureNavigationBar()
         configureTextField()
+        configureTapGesture()
         configureKeypadLayout()
         amountButtons = [minAmountButton, maxAmountButton]
         configureTableView()
@@ -91,6 +92,15 @@ class SearchViewController: UIViewController, ThemeApplicable {
     
     func configureTextField() {
         searchTextField.addTarget(self, action: #selector(didChangedTextField), for: .editingChanged)
+    }
+    
+    func configureTapGesture() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(didTapOverlayView))
+        overlayView.addGestureRecognizer(tap)
+    }
+    
+    @objc func didTapOverlayView() {
+        hidePopUp()
     }
     
     @objc func didChangedTextField(_ textField: UITextField) {
