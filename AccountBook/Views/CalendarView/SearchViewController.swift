@@ -210,25 +210,91 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     func configureTableView() {
         tableView.dataSource = self
         tableView.delegate = self
-        
         tableView.rowHeight = 50
+        tableView.sectionHeaderTopPadding = 0
+        
+        filterTableView.dataSource = self
+        filterTableView.delegate = self
+        filterTableView.rowHeight = 50
+        filterTableView.sectionHeaderTopPadding = 10
+    }
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        if tableView == self.tableView {
+            return 1
+        } else {
+            return viewModel.numberOfSections
+        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.numberOfRowsInSection
+        if tableView == self.tableView {
+            return viewModel.numberOfRowsInSection
+        } else {
+            return viewModel.numberOfRowsInSection(section: section)
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: Cell.searchCell, for: indexPath) as! SearchTableViewCell
-        
-        cell.viewModel = viewModel.cellForRowAt(indexPath.row)
-        
-        return cell
+        if tableView == self.tableView {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cell.searchCell, for: indexPath) as! SearchTableViewCell
+            
+            cell.viewModel = viewModel.cellForRowAt(indexPath.row)
+            
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: Cell.filterCell, for: indexPath) as! FilterTableViewCell
+            
+            cell.viewModel = viewModel.cellForRowAt(indexPath)
+    
+            return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vm = viewModel.didSelectRowAt(indexPath.row)
         showTransactionDetailView(vm)
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if tableView == self.tableView { return nil }
+        
+        let view = UIView()
+        view.backgroundColor = .systemBackground
+        
+        let title = UILabel()
+        title.text = viewModel.titleForHeaderInSection(section)
+        title.font = .systemFont(ofSize: 14, weight: .bold)
+        title.textColor = .darkGray
+        title.textAlignment = .left
+        
+        let separator = UIView()
+        separator.backgroundColor = .separator
+        
+        view.addSubview(title)
+        view.addSubview(separator)
+        
+        title.translatesAutoresizingMaskIntoConstraints = false
+        separator.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate( [
+            title.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            title.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            separator.heightAnchor.constraint(equalToConstant: 0.5),
+            separator.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+            separator.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            separator.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+
+        return view
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if tableView == filterTableView {
+            return 30
+        }
+        return 0
     }
     
     func showTransactionDetailView(_ vm: TransactionDetailViewModel) {
