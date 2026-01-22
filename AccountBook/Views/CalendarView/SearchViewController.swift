@@ -74,6 +74,13 @@ class SearchViewController: UIViewController, ThemeApplicable {
             periodSelectButton.isHidden = viewModel.isPeriodSelectButtonHidden
             periodSelectButton.setTitle(viewModel.periodDisplay, for: .normal)
         }
+        
+        viewModel.onRequestPopUp = { [weak self] in
+            guard let self = self else { return }
+            popUpViewTitle.text = viewModel.popUpViewTitle
+            filterTableView.reloadData()
+            showPopUp()
+        }
     }
     
     func configureNavigationBar() {
@@ -136,9 +143,11 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func categoryButtonTapped(_ sender: UIButton) {
+        viewModel.handleCategoryButton()
     }
     
     @IBAction func assetButtonTapped(_ sender: UIButton) {
+        viewModel.handleAssetButtonTapped()
     }
     
     func showPopUp() {
