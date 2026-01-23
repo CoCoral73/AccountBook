@@ -21,7 +21,7 @@ class SearchViewModel {
     var isCategorySelected: Bool = true
     var categoryFilter = Set<Category>(CategoryManager.shared.categories)
     var categoryViewModels: [[FilterCellViewModel]] = []
-    var assetFilter = Set<AssetItem>(CoreDataManager.shared.fetchAssetItems())
+    var assetFilter = Set<AssetItem>(AssetItemManager.shared.assetItems)
     var assetViewModels: [[FilterCellViewModel]] = []
     
     var minAmount: Decimal = 0
