@@ -130,6 +130,7 @@ class SearchViewModel {
     
     func setKeyword(with keyword: String?) {
         self.keyword = keyword
+        filterTransaction()
     }
     
     func handlePeriodButton(isEntire: Bool) {
@@ -146,6 +147,7 @@ class SearchViewModel {
             endDate = now.startOfNextMonth
         }
         onDidSetPeriod?()
+        filterTransaction()
     }
     
     func handlePeriodSelectButton() -> PeriodSelectionViewModel {
@@ -156,6 +158,7 @@ class SearchViewModel {
             self.startDate = startDate
             self.endDate = endDate
             self.onDidSetPeriod?()
+            filterTransaction()
         }
         return vm
     }
@@ -176,6 +179,7 @@ class SearchViewModel {
         } else {
             maxAmount = value == 0 ? Decimal(Int64.max) : value
         }
+        filterTransaction()
     }
     
     func handleSortButton(_ tag: Int) {
