@@ -34,11 +34,22 @@ enum SettingOption {
     }
 }
 
-class SettingTableViewController: UITableViewController {
+class SettingTableViewController: UITableViewController, ThemeApplicable {
+    
+    var isInitial: Bool = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        startObservingTheme()
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        tableView.backgroundColor = theme.baseColor
+    }
+    
+    deinit {
+        stopObservingTheme()
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -119,6 +130,10 @@ class SettingTableViewController: UITableViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if isInitial {
+            applyInitialTheme()
+            isInitial = false
+        }
         navigationController?.navigationBar.isHidden = true
     }
 }
