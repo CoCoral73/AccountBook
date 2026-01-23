@@ -180,6 +180,41 @@ class SearchViewModel {
     
     func handleSortButton(_ tag: Int) {
         sortCriteria = tag
+    private func filterTransaction() {
+        filteredTxs = allTxs.filter { tx in
+            if let keyword = self.keyword, !keyword.isEmpty {
+                guard tx.name.contains(keyword) || tx.memo.contains(keyword) else {
+                    return false
+                }
+            }
+            
+            if !isEntire {
+                guard startDate <= tx.date && tx.date < endDate else {
+                    return false
+                }
+            }
+            
+            guard categoryFilter.contains(tx.category) else {
+                return false
+            }
+            
+            if let asset = tx.asset, !assetFilter.contains(asset) {
+                return false
+            }
+            if let from = tx.fromAccount, let to = tx.toAccount, !assetFilter.contains(from) && !assetFilter.contains(to) {
+                return false
+            }
+            
+            let min = NSDecimalNumber(decimal: minAmount).int64Value
+            let max = NSDecimalNumber(decimal: maxAmount).int64Value
+            guard min <= tx.amount && tx.amount <= max else {
+                return false
+            }
+            
+            return true
+        }
+        
+        sortFilteredTransaction()
     }
     
     private func sortFilteredTransaction() {
