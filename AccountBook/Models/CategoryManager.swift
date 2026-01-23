@@ -25,6 +25,10 @@ class CategoryManager {
         expenseCategories = categories.filter { $0.type == .expense }
         transferCategories = categories.filter { $0.type == .transfer }
     }
+    
+    func checkDuplicate(name: String) -> Bool {
+        return categories.contains { $0.name == name }
+    }
 
     func addCategory(icon: String, name: String, type: TransactionType) {
         let category = Category(context: CoreDataManager.shared.context)
