@@ -25,6 +25,8 @@ class SearchViewModel {
     var minAmount: Decimal = 0
     var maxAmount: Decimal = Decimal(Int64.max)
     
+    var sortCriteria: Int = 0
+    
     init() {
         allTxs = CoreDataManager.shared.fetchTransactions()
         filteredTxs = allTxs
@@ -172,6 +174,23 @@ class SearchViewModel {
             minAmount = value
         } else {
             maxAmount = value == 0 ? Decimal(Int64.max) : value
+        }
+    }
+    
+    func handleSortButton(_ tag: Int) {
+        sortCriteria = tag
+    }
+    
+    private func sortFilteredTransaction() {
+        switch sortCriteria {
+        case 0:
+            filteredTxs.sort { $0.date > $1.date }
+        case 1:
+            filteredTxs.sort { $0.date < $1.date }
+        case 2:
+            filteredTxs.sort { $0.amount < $1.amount }
+        default:
+            filteredTxs.sort { $0.amount > $1.amount }
         }
     }
 }
