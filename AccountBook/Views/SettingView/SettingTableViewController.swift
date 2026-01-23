@@ -42,6 +42,7 @@ class SettingTableViewController: UITableViewController, ThemeApplicable {
         super.viewDidLoad()
         
         startObservingTheme()
+        tableView.sectionHeaderTopPadding = 0
     }
     
     func applyTheme(_ theme: any AppTheme) {
@@ -52,6 +53,10 @@ class SettingTableViewController: UITableViewController, ThemeApplicable {
         stopObservingTheme()
     }
 
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return section == 0 ? 0 : 10
+    }
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let option = SettingOption(indexPath: indexPath)
         
