@@ -68,6 +68,8 @@ class SearchViewController: UIViewController, ThemeApplicable {
         searchBar.borderColor = theme.accentColor
         searchBar.backgroundColor = theme.baseColor
         searchImageButton.tintColor = theme.accentColor
+        minAmountButton.setTitleColor(theme.accentColor, for: .selected)
+        maxAmountButton.setTitleColor(theme.accentColor, for: .selected)
     }
     
     func bindViewModel() {
@@ -208,7 +210,10 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func amountButtonTapped(_ sender: UIButton) {
+        let anotherTag = sender.tag == 0 ? 1 : 0
         currentAmountButtonTag = sender.tag
+        amountButtons[sender.tag].isSelected = true
+        amountButtons[anotherTag].isSelected = false
         engine.setBuffer(viewModel.currentAmount(tag: sender.tag))
         showNumericKeypad()
     }
@@ -385,6 +390,10 @@ extension SearchViewController: NumericKeypadDelegate {
         keypadBottomConstraint.constant = 400
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
+        }
+        
+        amountButtons.forEach {
+            $0.isSelected = false
         }
     }
     
