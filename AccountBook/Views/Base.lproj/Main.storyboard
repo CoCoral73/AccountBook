@@ -2283,7 +2283,6 @@
                                                 </subviews>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
-                                                    <constraint firstItem="hIK-fg-MQb" firstAttribute="centerY" secondItem="yDc-ED-YRN" secondAttribute="centerY" id="By6-7e-pFj"/>
                                                     <constraint firstAttribute="bottom" secondItem="hIK-fg-MQb" secondAttribute="bottom" id="Jhw-rC-uTL"/>
                                                     <constraint firstAttribute="bottom" secondItem="mzq-2a-Ywi" secondAttribute="bottom" id="Py9-Wn-NdJ"/>
                                                     <constraint firstItem="mzq-2a-Ywi" firstAttribute="top" secondItem="yDc-ED-YRN" secondAttribute="top" id="VMw-gf-DkJ"/>
