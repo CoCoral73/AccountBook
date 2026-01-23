@@ -44,6 +44,7 @@ class SearchViewModel {
     
     var onDidSetPeriod: (() -> Void)?
     var onRequestPopUp: (() -> Void)?
+    var onDidPopUpApply: ((_ isCategory: Bool, _ title: String) -> Void)?
     var onRequestReloadData: (() -> Void)?
     
     var isPeriodSelectButtonHidden: Bool {
@@ -231,6 +232,14 @@ class SearchViewModel {
         }
         
         filterTransaction()
+        
+        if isCategorySelected {
+            let title = CategoryManager.shared.categories.count == categoryFilter.count ? "전체" : "선택"
+            onDidPopUpApply?(true, title)
+        } else {
+            let title = AssetItemManager.shared.assetItems.count == assetFilter.count ? "전체" : "선택"
+            onDidPopUpApply?(false, title)
+        }
     }
     
     func handleNumericKeypad(_ value: Decimal, tag: Int) {
