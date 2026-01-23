@@ -219,11 +219,35 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func sortButtonTapped(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(withIdentifier: "SortMenuViewController") as! SortMenuViewController
+        vc.onDidTapButton = { [weak self] tag, title in
+            guard let self = self else { return }
+            self.viewModel.handleSortButton(tag)
+            self.sortButton.setTitle(title, for: .normal)
+        }
+        
+        vc.modalPresentationStyle = .popover
+        vc.preferredContentSize = CGSize(width: 110, height: 130)
+        
+        if let popover = vc.popoverPresentationController {
+            popover.sourceView = sortButton
+            popover.sourceRect = sortButton.bounds
+            popover.permittedArrowDirections = .up
+            popover.delegate = self
+        }
+        
+        present(vc, animated: true)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         applyInitialTheme()
+    }
+}
+
+extension SearchViewController: UIPopoverPresentationControllerDelegate {
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
 }
 
