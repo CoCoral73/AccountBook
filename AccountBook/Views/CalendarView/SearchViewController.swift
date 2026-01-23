@@ -76,6 +76,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
         viewModel.onDidSetPeriod = { [weak self] in
             guard let self = self else { return }
             periodButton.setTitle(viewModel.periodTypeDisplay, for: .normal)
+            periodButton.setTitleColor(viewModel.periodTypeDisplay == "전체" ? .placeholderText : ThemeManager.shared.currentTheme.accentColor, for: .normal)
             periodSelectButton.isHidden = viewModel.isPeriodSelectButtonHidden
             periodSelectButton.setTitle(viewModel.periodDisplay, for: .normal)
         }
