@@ -207,6 +207,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIButton) {
+        viewModel.handlePopUpCancel()
         hidePopUp()
     }
     

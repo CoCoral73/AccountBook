@@ -179,6 +179,28 @@ class SearchViewModel {
         onRequestPopUp?()
     }
     
+    func handlePopUpCancel() {
+        if isCategorySelected {
+            categoryViewModels.forEach { [weak self] vms in
+                guard let self = self else { return }
+                vms.forEach { vm in
+                    if case let FilterType.category(category) = vm.type {
+                        vm.isCheck = self.categoryFilter.contains(category)
+                    }
+                }
+            }
+        } else {
+            assetViewModels.forEach { [weak self] vms in
+                guard let self = self else { return }
+                vms.forEach { vm in
+                    if case let FilterType.asset(asset) = vm.type {
+                        vm.isCheck = self.assetFilter.contains(asset)
+                    }
+                }
+            }
+        }
+    }
+    
     func handlePopUpApply() {
         if isCategorySelected {
             categoryViewModels.forEach { [weak self] vms in
