@@ -36,6 +36,7 @@ class AssetItemManager {
     static let shared = AssetItemManager()
     private init() { }
     
+    private(set) var assetItems: [AssetItem] = []
     private(set) var cash: [CashItem] = []
     private(set) var bankAccount: [BankAccountItem] = []
     private(set) var debitCard: [DebitCardItem] = []
@@ -50,7 +51,7 @@ class AssetItemManager {
         debitCard.removeAll()
         creditCard.removeAll()
         
-        let assetItems = CoreDataManager.shared.fetchAssetItems()
+        assetItems = CoreDataManager.shared.fetchAssetItems()
         
         assetItems.forEach { item in
             switch item {
