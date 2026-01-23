@@ -15,23 +15,15 @@ class CategoryManager {
     private(set) var incomeCategories: [Category] = []
     private(set) var expenseCategories: [Category] = []
     private(set) var transferCategories: [Category] = []
+    var allCategories: [[Category]] {
+        return [incomeCategories, expenseCategories, transferCategories]
+    }
 
     func loadCategories() {
         categories = CoreDataManager.shared.fetchCategories()
         incomeCategories = categories.filter { $0.type == .income }
         expenseCategories = categories.filter { $0.type == .expense }
         transferCategories = categories.filter { $0.type == .transfer }
-    }
-    
-    func getCategory(with indexPath: IndexPath) -> Category {
-        switch indexPath.section {
-        case 0:
-            return incomeCategories[indexPath.row]
-        case 1:
-            return expenseCategories[indexPath.row]
-        default:
-            return transferCategories[indexPath.row]
-        }
     }
 
     func addCategory(icon: String, name: String, type: TransactionType) {
