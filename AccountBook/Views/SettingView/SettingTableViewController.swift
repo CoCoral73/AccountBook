@@ -135,10 +135,16 @@ class SettingTableViewController: UITableViewController, ThemeApplicable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationController?.navigationBar.isHidden = false
+        
         if isInitial {
             applyInitialTheme()
             isInitial = false
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         navigationController?.navigationBar.isHidden = true
     }
 }
