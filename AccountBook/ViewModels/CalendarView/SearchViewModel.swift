@@ -30,6 +30,7 @@ class SearchViewModel {
     init() {
         allTxs = CoreDataManager.shared.fetchTransactions()
         filteredTxs = allTxs
+        filteredTxs.sort { $0.date > $1.date }
     }
     
     var onDidSetPeriod: (() -> Void)?
