@@ -40,6 +40,9 @@ class AssetItemManager {
     private(set) var bankAccount: [BankAccountItem] = []
     private(set) var debitCard: [DebitCardItem] = []
     private(set) var creditCard: [CreditCardItem] = []
+    var allAssetItems: [[AssetItem]] {
+        return [cash, bankAccount, debitCard, creditCard]
+    }
     
     func loadAssetItems() {
         cash.removeAll()
@@ -62,19 +65,6 @@ class AssetItemManager {
             default:
                 break
             }
-        }
-    }
-    
-    func getAssetItem(with indexPath: IndexPath) -> AssetItem {
-        switch indexPath.section {
-        case 0:
-            return cash[0]
-        case 1:
-            return bankAccount[indexPath.row]
-        case 2:
-            return debitCard[indexPath.row]
-        default:
-            return creditCard[indexPath.row]
         }
     }
     
