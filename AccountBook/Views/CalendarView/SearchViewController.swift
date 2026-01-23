@@ -87,6 +87,17 @@ class SearchViewController: UIViewController, ThemeApplicable {
             showPopUp()
         }
         
+        viewModel.onDidPopUpApply = { [weak self] isCategory, title in
+            guard let self = self else { return }
+            if isCategory {
+                categoryButton.setTitle(title, for: .normal)
+                categoryButton.setTitleColor(title == "전체" ? .placeholderText : .black, for: .normal)
+            } else {
+                assetButton.setTitle(title, for: .normal)
+                assetButton.setTitleColor(title == "전체" ? .placeholderText : .black, for: .normal)
+            }
+        }
+        
         viewModel.onRequestReloadData = { [weak self] in
             guard let self = self else { return }
             self.tableView.reloadData()
