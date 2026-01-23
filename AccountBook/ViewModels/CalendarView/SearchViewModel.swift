@@ -35,6 +35,7 @@ class SearchViewModel {
     
     var onDidSetPeriod: (() -> Void)?
     var onRequestPopUp: (() -> Void)?
+    var onRequestReloadData: (() -> Void)?
     
     var isPeriodSelectButtonHidden: Bool {
         return isEntire
@@ -235,5 +236,7 @@ class SearchViewModel {
         default:
             filteredTxs.sort { $0.amount > $1.amount }
         }
+        
+        onRequestReloadData?()
     }
 }
