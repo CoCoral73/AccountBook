@@ -10,7 +10,7 @@ import UIKit
 enum SettingOption {
     case incomeCategory, expenseCategory, transferCategory
     case theme, lockApp
-    case help, contact, rating
+    case rating, help, contact
     
     init(indexPath: IndexPath) {
         switch (indexPath.section, indexPath.row) {
@@ -25,11 +25,11 @@ enum SettingOption {
         case (1, 1):
             self = .lockApp
         case (2, 0):
-            self = .help
-        case (2, 1):
-            self = .contact
-        default: //(2, 2)
             self = .rating
+        case (2, 1):
+            self = .help
+        default: //(2, 2)
+            self = .contact
         }
     }
 }
