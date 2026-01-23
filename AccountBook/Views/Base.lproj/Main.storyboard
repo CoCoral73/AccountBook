@@ -2295,8 +2295,8 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0Ub-y7-wso">
                                                 <rect key="frame" x="0.0" y="255" width="393" height="30"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhc-Hg-IhP">
-                                                        <rect key="frame" x="283" y="0.0" width="110" height="30"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" semanticContentAttribute="forceRightToLeft" contentHorizontalAlignment="leading" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Nhc-Hg-IhP">
+                                                        <rect key="frame" x="273" y="0.0" width="110" height="30"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="110" id="8hW-4L-w9p"/>
                                                         </constraints>
@@ -2317,7 +2317,7 @@
                                                     <constraint firstItem="Nhc-Hg-IhP" firstAttribute="top" secondItem="0Ub-y7-wso" secondAttribute="top" id="3oO-QL-sSl"/>
                                                     <constraint firstAttribute="bottom" secondItem="Nhc-Hg-IhP" secondAttribute="bottom" id="Jfi-9N-f61"/>
                                                     <constraint firstAttribute="height" constant="30" id="Qf4-vO-cbd"/>
-                                                    <constraint firstAttribute="trailing" secondItem="Nhc-Hg-IhP" secondAttribute="trailing" id="hTl-cE-K0b"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Nhc-Hg-IhP" secondAttribute="trailing" constant="10" id="hTl-cE-K0b"/>
                                                 </constraints>
                                             </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BqN-sn-yFx" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
