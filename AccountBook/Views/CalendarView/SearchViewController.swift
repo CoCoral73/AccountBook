@@ -211,6 +211,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func applyButtonTapped(_ sender: UIButton) {
+        viewModel.handlePopUpApply()
         hidePopUp()
     }
     

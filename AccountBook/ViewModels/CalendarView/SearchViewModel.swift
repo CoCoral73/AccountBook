@@ -179,6 +179,38 @@ class SearchViewModel {
         onRequestPopUp?()
     }
     
+    func handlePopUpApply() {
+        if isCategorySelected {
+            categoryViewModels.forEach { [weak self] vms in
+                guard let self = self else { return }
+                vms.forEach { vm in
+                    if case let FilterType.category(category) = vm.type {
+                        if vm.isCheck {
+                            self.categoryFilter.insert(category)
+                        } else {
+                            self.categoryFilter.remove(category)
+                        }
+                    }
+                }
+            }
+        } else {
+            assetViewModels.forEach { [weak self] vms in
+                guard let self = self else { return }
+                vms.forEach { vm in
+                    if case let FilterType.asset(asset) = vm.type {
+                        if vm.isCheck {
+                            self.assetFilter.insert(asset)
+                        } else {
+                            self.assetFilter.remove(asset)
+                        }
+                    }
+                }
+            }
+        }
+        
+        filterTransaction()
+    }
+    
     func handleNumericKeypad(_ value: Decimal, tag: Int) {
         if tag == 0 {
             minAmount = value
