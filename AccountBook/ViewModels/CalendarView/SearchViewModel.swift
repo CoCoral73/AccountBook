@@ -20,7 +20,9 @@ class SearchViewModel {
     
     var isCategorySelected: Bool = true
     var categoryFilter = Set<Category>(CategoryManager.shared.categories)
+    var categoryViewModels: [[FilterCellViewModel]] = []
     var assetFilter = Set<AssetItem>(CoreDataManager.shared.fetchAssetItems())
+    var assetViewModels: [[FilterCellViewModel]] = []
     
     var minAmount: Decimal = 0
     var maxAmount: Decimal = Decimal(Int64.max)
@@ -31,6 +33,13 @@ class SearchViewModel {
         allTxs = CoreDataManager.shared.fetchTransactions()
         filteredTxs = allTxs
         filteredTxs.sort { $0.date > $1.date }
+        
+        categoryViewModels = CategoryManager.shared.allCategories.map { array in
+            return array.map { FilterCellViewModel(type: .category($0), isCheck: true) }
+        }
+        assetViewModels = AssetItemManager.shared.allAssetItems.map { array in
+            return array.map { FilterCellViewModel(type: .asset($0), isCheck: true) }
+        }
     }
     
     var onDidSetPeriod: (() -> Void)?
@@ -106,13 +115,9 @@ class SearchViewModel {
     
     func cellForRowAt(_ indexPath: IndexPath) -> FilterCellViewModel {
         if isCategorySelected {
-            let category = CategoryManager.shared.getCategory(with: indexPath)
-            let isCheck = categoryFilter.contains(category)
-            return FilterCellViewModel(type: .category(category), isCheck: isCheck)
+            return categoryViewModels[indexPath.section][indexPath.row]
         } else {
-            let asset = AssetItemManager.shared.getAssetItem(with: indexPath)
-            let isCheck = assetFilter.contains(asset)
-            return FilterCellViewModel(type: .asset(asset), isCheck: isCheck)
+            return assetViewModels[indexPath.section][indexPath.row]
         }
     }
     
