@@ -22,6 +22,7 @@ enum CategoryEditMode: Equatable {
 enum CategoryInputError {
     case emptyIcon
     case emptyName
+    case duplicatedName
     
     var message: String {
         switch self {
@@ -29,6 +30,8 @@ enum CategoryInputError {
             "아이콘을 입력해주세요"
         case .emptyName:
             "이름을 입력해주세요"
+        case .duplicatedName:
+            "이미 존재하는 카테고리 이름입니다."
         }
     }
 }
@@ -70,6 +73,7 @@ class CategoryEditViewModel {
     func validateInput(icon: String?, name: String?) -> CategoryInputError? {
         guard let icon = icon, !icon.isEmpty else { return .emptyIcon }
         guard let name = name, !name.isEmpty else { return .emptyName }
+        guard !CategoryManager.shared.checkDuplicate(name: name) else { return .duplicatedName }
         return nil
     }
     
