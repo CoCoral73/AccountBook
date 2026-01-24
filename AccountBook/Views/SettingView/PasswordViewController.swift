@@ -7,7 +7,7 @@
 
 import UIKit
 
-class PasswordViewController: UIViewController {
+class PasswordViewController: UIViewController, ThemeApplicable {
     
     @IBOutlet weak var closeButton: UIButton!
     @IBOutlet weak var messageLabel: UILabel!
@@ -38,6 +38,14 @@ class PasswordViewController: UIViewController {
         
         bindViewModel()
         configureUI()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        view.backgroundColor = theme.baseColor
+        closeButton.tintColor = theme.accentColor
+        biometricIDButton.tintColor = theme.accentColor
     }
     
     func bindViewModel() {
