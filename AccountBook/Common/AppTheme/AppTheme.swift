@@ -40,6 +40,7 @@ protocol AppTheme {
     var accentColor: UIColor { get }
     var incomeColor: UIColor { get }
     var expenseColor: UIColor { get }
+    var transferColor: UIColor { get }
 
     var primaryTextColor: UIColor { get }
     var secondaryTextColor: UIColor { get }
@@ -55,6 +56,7 @@ protocol AppTheme {
 extension AppTheme {
     var incomeColor: UIColor { UIColor(red: 0.68, green: 0.92, blue: 0.77, alpha: 1.00) }
     var expenseColor: UIColor { UIColor(red: 1.00, green: 0.64, blue: 0.64, alpha: 1.00) }
+    var transferColor: UIColor { UIColor(red: 0.64, green: 0.84, blue: 1.00, alpha: 1.00) }
     
     var primaryTextColor: UIColor { .label }
     var secondaryTextColor: UIColor { .secondaryLabel }
