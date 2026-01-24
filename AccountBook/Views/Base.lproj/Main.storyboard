@@ -2723,6 +2723,7 @@
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="1g5-KI-1Kt"/>
                                 </constraints>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <items>
                                     <navigationItem title="상세 보기" id="lkw-Gc-tJE">
                                         <barButtonItem key="leftBarButtonItem" title="Item" image="chevron.left" catalog="system" id="DSs-aQ-lAe">
