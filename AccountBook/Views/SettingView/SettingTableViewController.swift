@@ -35,13 +35,12 @@ enum SettingOption {
 }
 
 class SettingTableViewController: UITableViewController, ThemeApplicable {
-    
-    var isInitial: Bool = true
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
         startObservingTheme()
+        applyTheme(ThemeManager.shared.currentTheme)
+        
         tableView.sectionHeaderTopPadding = 0
     }
     
@@ -132,11 +131,6 @@ class SettingTableViewController: UITableViewController, ThemeApplicable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = false
-        
-        if isInitial {
-            applyInitialTheme()
-            isInitial = false
-        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
