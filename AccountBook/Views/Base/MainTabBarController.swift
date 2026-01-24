@@ -16,11 +16,22 @@ class MainTabBarController: UITabBarController, ThemeApplicable {
         super.viewDidLoad()
 
         startObservingTheme()
+        configureTabBar()
         injectViewModel()
     }
     
     func applyTheme(_ theme: any AppTheme) {
-        tabBar.backgroundColor = theme.baseColor
+        tabBar.standardAppearance.backgroundColor = theme.baseColor
+        tabBar.scrollEdgeAppearance?.backgroundColor = theme.baseColor
+    }
+    
+    private func configureTabBar() {
+        let appearance = UITabBarAppearance()
+        appearance.configureWithDefaultBackground()
+        appearance.stackedLayoutAppearance.selected.iconColor = .darkGray
+        appearance.stackedLayoutAppearance.selected.titleTextAttributes = [.foregroundColor: UIColor.darkGray]
+        tabBar.standardAppearance = appearance
+        tabBar.scrollEdgeAppearance = appearance
     }
     
     private func injectViewModel() {
