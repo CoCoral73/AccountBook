@@ -10,6 +10,7 @@ import UIKit
 class CalendarViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var monthButton: UIButton!
+    @IBOutlet weak var searchButton: UIButton!
     
     @IBOutlet weak var boxView: UIView!
     
@@ -45,6 +46,7 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     }
     
     func applyTheme(_ theme: any AppTheme) {
+        searchButton.tintColor = theme.accentColor
         boxView.backgroundColor = theme.baseColor
         addButton.backgroundColor = theme.accentColor
     }

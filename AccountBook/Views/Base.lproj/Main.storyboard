@@ -510,6 +510,7 @@
                         <outlet property="incomeButton" destination="W7H-n6-bSx" id="Q0X-Jh-OoY"/>
                         <outlet property="monthButton" destination="MVE-23-Ecb" id="VEy-8h-YxE"/>
                         <outlet property="overlayView" destination="eLY-fU-Yyz" id="RBe-Ko-FG2"/>
+                        <outlet property="searchButton" destination="c95-uF-Ie8" id="lB6-7w-fsC"/>
                         <outlet property="totalExpenseLabel" destination="jHk-0l-usI" id="LBg-Xv-Bvv"/>
                         <outlet property="totalIncomeLabel" destination="V1G-uf-ysx" id="7ac-HU-obF"/>
                         <outlet property="totalLabel" destination="u1k-vY-5YH" id="725-ha-aFD"/>
