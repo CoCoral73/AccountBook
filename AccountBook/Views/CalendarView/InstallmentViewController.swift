@@ -10,6 +10,7 @@ import UIKit
 class InstallmentViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var saveButton: AutoUpdateColorButton!
@@ -35,6 +36,7 @@ class InstallmentViewController: UIViewController, ThemeApplicable {
     }
     
     func applyTheme(_ theme: any AppTheme) {
+        backButton.tintColor = theme.accentColor
         boxView.backgroundColor = theme.baseColor
         saveButton.applyBaseColor(theme.accentColor)
     }

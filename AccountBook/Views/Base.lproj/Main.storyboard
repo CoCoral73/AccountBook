@@ -3387,6 +3387,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="455-Pm-zLc" id="EXF-eE-Fg8"/>
                         <outlet property="boxView" destination="chM-jT-N00" id="aCO-Y3-hvc"/>
                         <outlet property="navItem" destination="l9s-rX-Ku1" id="Upv-a9-GOX"/>
                         <outlet property="saveButton" destination="P1I-Ub-xG2" id="dbk-1m-lSq"/>
