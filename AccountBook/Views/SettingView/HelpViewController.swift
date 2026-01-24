@@ -8,9 +8,10 @@
 import UIKit
 import WebKit
 
-class HelpViewController: UIViewController {
+class HelpViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var webView: WKWebView!
     
     override func viewDidLoad() {
@@ -18,8 +19,14 @@ class HelpViewController: UIViewController {
 
         configureNavigationBar()
         configureURL()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
 
+    func applyTheme(_ theme: any AppTheme) {
+        backButton.tintColor = theme.accentColor
+    }
+    
     private func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()

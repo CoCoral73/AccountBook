@@ -4776,6 +4776,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="i6e-dc-y95" id="Rei-8t-GMQ"/>
                         <outlet property="navItem" destination="Udr-dR-HMM" id="Vmf-C3-RwM"/>
                         <outlet property="webView" destination="jir-de-RLh" id="0sG-nn-6pk"/>
                     </connections>
