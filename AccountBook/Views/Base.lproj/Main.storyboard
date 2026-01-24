@@ -515,6 +515,7 @@
                         <outlet property="totalIncomeLabel" destination="V1G-uf-ysx" id="7ac-HU-obF"/>
                         <outlet property="totalLabel" destination="u1k-vY-5YH" id="725-ha-aFD"/>
                         <outlet property="totalStateLabel" destination="FNL-KW-JwN" id="KG7-zJ-T5f"/>
+                        <outlet property="transferButton" destination="1nM-Fq-cQg" id="9om-Vx-8N0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

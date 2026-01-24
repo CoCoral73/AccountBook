@@ -27,6 +27,7 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var addContainerView: UIView!
     @IBOutlet weak var incomeButton: UIButton!
     @IBOutlet weak var expenseButton: UIButton!
+    @IBOutlet weak var transferButton: UIButton!
     
     var viewModel: CalendarViewModel!
     
@@ -51,6 +52,9 @@ class CalendarViewController: UIViewController, ThemeApplicable {
         searchButton.tintColor = theme.accentColor
         boxView.backgroundColor = theme.baseColor
         addButton.backgroundColor = theme.accentColor
+        incomeButton.backgroundColor = theme.incomeColor
+        expenseButton.backgroundColor = theme.expenseColor
+        transferButton.backgroundColor = theme.transferColor
     }
     
     private func bindViewModel() {
