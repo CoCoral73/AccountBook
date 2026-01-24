@@ -1202,7 +1202,9 @@
                             <constraint firstItem="nVE-YV-FAs" firstAttribute="leading" secondItem="8hR-gB-LQf" secondAttribute="leading" id="bhd-hu-9Ck"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="통계" id="mqR-go-BIU"/>
+                    <tabBarItem key="tabBarItem" title="통계" id="mqR-go-BIU">
+                        <imageReference key="image" image="chart.bar.fill" catalog="system" symbolScale="large"/>
+                    </tabBarItem>
                     <size key="freeformSize" width="393" height="1351"/>
                     <connections>
                         <outlet property="assetTitleLabel" destination="6un-Tq-IBg" id="mpw-eS-tza"/>
@@ -5270,11 +5272,11 @@
             </objects>
             <point key="canvasLocation" x="-2140" y="-27"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--달력-->
         <scene sceneID="Hg1-J9-hhS">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="2yz-Vf-2Oc" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="" id="Ajm-R6-x0g">
+                    <tabBarItem key="tabBarItem" title="달력" id="Ajm-R6-x0g">
                         <imageReference key="image" image="calendar" catalog="system" symbolScale="large"/>
                     </tabBarItem>
                     <toolbarItems/>
@@ -5295,7 +5297,7 @@
         <scene sceneID="Y4x-6a-2W8">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jig-8d-Mff" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="자산 관리" id="Cg2-EC-pBQ"/>
+                    <tabBarItem key="tabBarItem" title="자산 관리" image="wallet.bifold.fill" catalog="system" id="Cg2-EC-pBQ"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="dNw-Ek-Q8w">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -5314,7 +5316,7 @@
         <scene sceneID="FJK-8j-x1H">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="o7M-5S-cdE" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="설정" id="10r-JJ-sZU"/>
+                    <tabBarItem key="tabBarItem" title="설정" image="gearshape.fill" catalog="system" id="10r-JJ-sZU"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="sNc-Zr-aSd">
                         <rect key="frame" x="0.0" y="59" width="393" height="44"/>
@@ -5333,6 +5335,7 @@
     <resources>
         <image name="arrow.up.arrow.down" catalog="system" width="128" height="97"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
+        <image name="chart.bar.fill" catalog="system" width="128" height="90"/>
         <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
@@ -5341,6 +5344,7 @@
         <image name="equal" catalog="system" width="128" height="73"/>
         <image name="expenseIcon" width="200" height="200"/>
         <image name="faceid" catalog="system" width="128" height="115"/>
+        <image name="gearshape.fill" catalog="system" width="128" height="123"/>
         <image name="helperIcon" width="200" height="200"/>
         <image name="incomeIcon" width="200" height="200"/>
         <image name="info.circle" catalog="system" width="128" height="123"/>
@@ -5351,6 +5355,7 @@
         <image name="square" catalog="system" width="128" height="114"/>
         <image name="themeIcon" width="200" height="200"/>
         <image name="transferIcon" width="200" height="200"/>
+        <image name="wallet.bifold.fill" catalog="system" width="128" height="104"/>
         <image name="xmark" catalog="system" width="128" height="113"/>
         <namedColor name="AccentColor">
             <color red="0.0" green="0.46000000000000002" blue="0.89000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
