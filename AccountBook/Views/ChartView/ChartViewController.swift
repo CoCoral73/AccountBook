@@ -41,7 +41,7 @@ class ChartViewController: UIViewController, ThemeApplicable {
     }
     
     func applyTheme(_ theme: any AppTheme) {
-        modeButton.backgroundColor = theme.accentColor
+        
     }
     
     func bindViewModel() {
@@ -83,6 +83,7 @@ class ChartViewController: UIViewController, ThemeApplicable {
     func configureUI() {
         periodButton.setTitle(viewModel.periodDisplay, for: .normal)
         modeButton.setTitle(viewModel.modeTitle, for: .normal)
+        modeButton.backgroundColor = viewModel.isIncome ? ThemeManager.shared.currentTheme.incomeColor : ThemeManager.shared.currentTheme.expenseColor
         totalTitleLabel.text = viewModel.totalTitle
         totalAmountLabel.text = viewModel.totalAmountDisplay
         categoryTitleLabel.text = viewModel.categoryTitle
@@ -216,6 +217,7 @@ class ChartViewController: UIViewController, ThemeApplicable {
     
     @IBAction func modeButtonTapped(_ sender: UIButton) {
         viewModel.handleModeButton()
+        modeButton.backgroundColor = viewModel.isIncome ? ThemeManager.shared.currentTheme.incomeColor : ThemeManager.shared.currentTheme.expenseColor
     }
     
     override func viewWillAppear(_ animated: Bool) {

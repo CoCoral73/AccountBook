@@ -58,6 +58,7 @@ class ChartViewModel {
         return fmt.string(from: startDate)
     }
     var modeTitle: String { type.name }
+    var isIncome: Bool { type == .income }
     var totalTitle: String { "총 \(type.name)" }
     var totalAmount: Int64 = 0
     var totalAmountDisplay: String = ""
