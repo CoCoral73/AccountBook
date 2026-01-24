@@ -39,6 +39,8 @@ class PeriodSelectionViewController: UIViewController, ThemeApplicable {
         configureUI()
         configurePickerView()
         configureSegControl()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
     
     func applyTheme(_ theme: any AppTheme) {
@@ -112,11 +114,6 @@ class PeriodSelectionViewController: UIViewController, ThemeApplicable {
     @IBAction func applyButtonTapped(_ sender: UIButton) {
         viewModel.handleApplyButton()
         dismiss(animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        applyInitialTheme()
     }
     
     override func viewDidLayoutSubviews() {

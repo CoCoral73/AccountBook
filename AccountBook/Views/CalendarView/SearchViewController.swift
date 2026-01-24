@@ -61,6 +61,8 @@ class SearchViewController: UIViewController, ThemeApplicable {
         configureKeypadLayout()
         amountButtons = [minAmountButton, maxAmountButton]
         configureTableView()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
 
     func applyTheme(_ theme: any AppTheme) {
@@ -256,11 +258,6 @@ class SearchViewController: UIViewController, ThemeApplicable {
         }
         
         present(vc, animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        applyInitialTheme()
     }
 }
 

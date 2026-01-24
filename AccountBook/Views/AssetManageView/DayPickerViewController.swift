@@ -24,7 +24,8 @@ class DayPickerViewController: UIViewController, ThemeApplicable {
         titleLabel.title = titleTag == 0 ? "출금일" : "시작일"
         collectionView.delegate = self
         collectionView.dataSource = self
-    
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
     
     func applyTheme(_ theme: any AppTheme) {
@@ -33,11 +34,6 @@ class DayPickerViewController: UIViewController, ThemeApplicable {
     
     @IBAction func closeButtonTapped(_ sender: UIBarButtonItem) {
         dismiss(animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        applyInitialTheme()
     }
     
     override func viewDidLayoutSubviews() {

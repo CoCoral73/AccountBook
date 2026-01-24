@@ -58,6 +58,8 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
         configureKeypadLayout()
         configureTableView()
         configureTapGesture()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
     
     func applyTheme(_ theme: any AppTheme) {
@@ -205,7 +207,6 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-        applyInitialTheme()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

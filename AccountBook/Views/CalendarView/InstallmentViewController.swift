@@ -33,6 +33,8 @@ class InstallmentViewController: UIViewController, ThemeApplicable {
         configureNavigationBar()
         configureTextField()
         saveButton.isEnabled = false
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
     
     func applyTheme(_ theme: any AppTheme) {
@@ -69,11 +71,6 @@ class InstallmentViewController: UIViewController, ThemeApplicable {
         viewModel.handleSaveButton(with: textField.text)
         UIImpactFeedbackGenerator(style: .light).impactOccurred()
         navigationController?.popViewController(animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        applyInitialTheme()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

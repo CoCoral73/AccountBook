@@ -38,6 +38,8 @@ class ChartViewController: UIViewController, ThemeApplicable {
         configurePieChartView()
         configureTableView()
         configureBarChartView()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
     
     func applyTheme(_ theme: any AppTheme) {
@@ -223,7 +225,6 @@ class ChartViewController: UIViewController, ThemeApplicable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        applyInitialTheme()
         reloadData()
     }
     

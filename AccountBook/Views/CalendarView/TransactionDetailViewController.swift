@@ -61,6 +61,8 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         configureKeypadLayout()
         configureTextField()
         configureKeyboardAccessory()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
     
     //ThemeApplicable
@@ -396,7 +398,6 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        applyInitialTheme()
         
         scrollView.contentInset.bottom = 0
         scrollView.verticalScrollIndicatorInsets.bottom = 0

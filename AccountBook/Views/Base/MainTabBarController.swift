@@ -18,6 +18,8 @@ class MainTabBarController: UITabBarController, ThemeApplicable {
         startObservingTheme()
         configureTabBar()
         injectViewModel()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
     
     func applyTheme(_ theme: any AppTheme) {
@@ -48,11 +50,6 @@ class MainTabBarController: UITabBarController, ThemeApplicable {
             let assetManageVC = navVC.topViewController as? AssetManageViewController {
             assetManageVC.viewModel = assetManageViewModel
         }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        applyInitialTheme()
     }
     
     deinit {

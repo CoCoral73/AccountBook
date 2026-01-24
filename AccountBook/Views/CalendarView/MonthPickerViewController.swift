@@ -31,6 +31,8 @@ class MonthPickerViewController: UIViewController, ThemeApplicable {
 
         stopObservingTheme()
         initPickerView()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
 
     func applyTheme(_ theme: any AppTheme) {
@@ -51,11 +53,6 @@ class MonthPickerViewController: UIViewController, ThemeApplicable {
     @IBAction func selectButtonTapped(_ sender: UIBarButtonItem) {
         viewModel.handleSelectButton(year: pickerView.selectedRow(inComponent: 0), month: pickerView.selectedRow(inComponent: 1))
         dismiss(animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        applyInitialTheme()
     }
     
     deinit {

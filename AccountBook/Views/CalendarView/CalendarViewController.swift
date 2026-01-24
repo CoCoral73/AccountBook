@@ -43,6 +43,8 @@ class CalendarViewController: UIViewController, ThemeApplicable {
         configureTableView()
         addGesture()
         configureAddButtonInitialState()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
     
     func applyTheme(_ theme: any AppTheme) {
@@ -193,7 +195,6 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.navigationBar.isHidden = true
-        applyInitialTheme()
     }
     
     deinit {

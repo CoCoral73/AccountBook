@@ -27,6 +27,8 @@ class DatePickerViewController: UIViewController, ThemeApplicable {
         
         startObservingTheme()
         datePicker.date = viewModel.currentDate
+        
+        applyTheme(ThemeManager.shared.currentTheme)
     }
     
     func applyTheme(_ theme: any AppTheme) {
@@ -36,11 +38,6 @@ class DatePickerViewController: UIViewController, ThemeApplicable {
     @IBAction func datePickerChanged(_ sender: UIDatePicker) {
         viewModel.onDatePickerChanged?(sender.date)
         dismiss(animated: true)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        applyInitialTheme()
     }
     
     override func viewDidLayoutSubviews() {

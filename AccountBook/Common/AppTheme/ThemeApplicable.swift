@@ -28,11 +28,6 @@ extension ThemeApplicable where Self: UIViewController {
             name: .themeDidChange,
             object: nil)
     }
-
-    /// 처음 화면 등장 시 테마 초기 적용
-    func applyInitialTheme() {
-        applyTheme(ThemeManager.shared.currentTheme)
-    }
 }
 
 extension ThemeApplicable where Self: UILabel {
