@@ -1517,6 +1517,7 @@
                     </navigationItem>
                     <size key="freeformSize" width="393" height="949"/>
                     <connections>
+                        <outlet property="addButton" destination="tEk-gc-3nB" id="NFk-te-J4U"/>
                         <outlet property="assetTotalAmountLabel" destination="Xpw-He-dsd" id="bCT-gP-gch"/>
                         <outlet property="infoView" destination="qfN-Hh-v9c" id="rYT-tm-AsW"/>
                         <outlet property="tableView" destination="Cap-Xd-beh" id="FaR-e9-f9j"/>

@@ -7,8 +7,9 @@
 
 import UIKit
 
-class AssetManageViewController: UIViewController {
+class AssetManageViewController: UIViewController, ThemeApplicable {
 
+    @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var infoView: UIView!
     @IBOutlet weak var assetTotalAmountLabel: UILabel!
     @IBOutlet weak var tableView: IntrinsicTableView!
@@ -19,8 +20,15 @@ class AssetManageViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startObservingTheme()
         bindViewModel()
         configureTableView()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        addButton.tintColor = theme.accentColor
     }
     
     func bindViewModel() {
@@ -97,5 +105,9 @@ class AssetManageViewController: UIViewController {
         infoView.layer.shadowOpacity = 0.2
         infoView.layer.shadowOffset = CGSize(width: 1, height: 1)
         infoView.layer.shadowRadius = 2
+    }
+    
+    deinit {
+        stopObservingTheme()
     }
 }
