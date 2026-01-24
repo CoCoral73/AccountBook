@@ -55,6 +55,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         startObservingTheme()
         configurePopGesture()
         bindViewModel()
+        configureNavigationBar()
         configureUI()
         configureTapGesture()
         configureKeypadLayout()
@@ -65,10 +66,6 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     //ThemeApplicable
     func applyTheme(_ theme: any AppTheme) {
         view.backgroundColor = theme.baseColor
-        
-        let appearance = UINavigationBarAppearance()
-        appearance.configureWithTransparentBackground()
-        navigationBar.standardAppearance = appearance
     }
     
     private func bindViewModel() {
@@ -222,6 +219,13 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
                 self.showInstallmentView(vm)
             }
         }
+    }
+    
+    private func configureNavigationBar() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        navigationBar.standardAppearance = appearance
+        navigationBar.scrollEdgeAppearance = appearance
     }
     
     private func configureUI() {
