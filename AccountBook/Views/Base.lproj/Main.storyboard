@@ -4438,6 +4438,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addButton" destination="Oep-ah-1gV" id="9xa-T8-Plp"/>
+                        <outlet property="backButton" destination="zFa-Zg-U4X" id="wek-bo-6Yv"/>
                         <outlet property="navItem" destination="XKp-hY-xxg" id="YpF-FO-ivx"/>
                         <outlet property="tableView" destination="5k1-gJ-89N" id="4Da-60-lhl"/>
                     </connections>

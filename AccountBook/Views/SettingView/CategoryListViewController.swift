@@ -7,9 +7,11 @@
 
 import UIKit
 
-class CategoryListViewController: UIViewController {
+class CategoryListViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var addButton: UIBarButtonItem!
     @IBOutlet weak var tableView: UITableView!
     
     var viewModel: CategoryListViewModel
@@ -28,6 +30,13 @@ class CategoryListViewController: UIViewController {
 
         configureNavigationBar()
         configureTableView()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        backButton.tintColor = theme.accentColor
+        addButton.tintColor = theme.accentColor
     }
     
     func configureNavigationBar() {
