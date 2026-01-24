@@ -4716,6 +4716,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="ClR-gw-c5l" id="6xe-GS-SQJ"/>
                         <outlet property="biometricIDSwitch" destination="qGO-Vn-Hf5" id="gXh-fh-mwZ"/>
                         <outlet property="biometricIDView" destination="YcM-yo-B8y" id="LmS-O6-MLR"/>
                         <outlet property="biometricTypeNameLabel" destination="gjC-OJ-oob" id="Z4x-9a-Ogb"/>

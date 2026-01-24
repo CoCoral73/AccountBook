@@ -7,9 +7,10 @@
 
 import UIKit
 
-class LockAppViewController: UIViewController {
+class LockAppViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var lockSwitch: UISwitch!
     @IBOutlet weak var detailViewForLockState: UIStackView!
     @IBOutlet weak var modifyPWView: UIView!
@@ -26,6 +27,14 @@ class LockAppViewController: UIViewController {
         bindViewModel()
         configureUI()
         configureModifyPW()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        backButton.tintColor = theme.accentColor
+        lockSwitch.onTintColor = theme.accentColor
+        biometricIDSwitch.onTintColor = theme.accentColor
     }
     
     func configureNavigationBar() {
