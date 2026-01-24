@@ -7,9 +7,11 @@
 
 import UIKit
 
-class AssetItemDetailViewController: UIViewController {
+class AssetItemDetailViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var navItem: UINavigationItem!
+    @IBOutlet weak var backButton: UIBarButtonItem!
+    @IBOutlet weak var editButton: UIBarButtonItem!
     @IBOutlet weak var balanceView: UIView!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var cardView: UIView!
@@ -38,6 +40,13 @@ class AssetItemDetailViewController: UIViewController {
         configureUI()
         configureTableView()
         bindViewModel()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        backButton.tintColor = theme.accentColor
+        editButton.tintColor = theme.accentColor
     }
     
     private func configureNavigationBar() {
