@@ -3388,7 +3388,7 @@
                     </view>
                     <connections>
                         <outlet property="boxView" destination="chM-jT-N00" id="aCO-Y3-hvc"/>
-                        <outlet property="navigationBar" destination="l9s-rX-Ku1" id="Upv-a9-GOX"/>
+                        <outlet property="navItem" destination="l9s-rX-Ku1" id="Upv-a9-GOX"/>
                         <outlet property="saveButton" destination="P1I-Ub-xG2" id="dbk-1m-lSq"/>
                         <outlet property="textField" destination="jU3-b1-hmN" id="tyW-vu-0ti"/>
                     </connections>

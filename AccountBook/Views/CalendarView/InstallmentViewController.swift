@@ -9,7 +9,7 @@ import UIKit
 
 class InstallmentViewController: UIViewController, ThemeApplicable {
 
-    @IBOutlet weak var navigationBar: UINavigationItem!
+    @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var boxView: UIView!
     @IBOutlet weak var textField: UITextField!
     @IBOutlet weak var saveButton: AutoUpdateColorButton!
@@ -42,7 +42,7 @@ class InstallmentViewController: UIViewController, ThemeApplicable {
     func configureNavigationBar() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        navigationBar.standardAppearance = appearance
+        navItem.standardAppearance = appearance
     }
     
     func configureTextField() {
