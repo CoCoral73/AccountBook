@@ -4541,6 +4541,7 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="backButton" destination="KIQ-jV-rgi" id="S40-ey-l1Z"/>
                         <outlet property="navItem" destination="roc-C9-zMO" id="DHU-Wx-6fT"/>
                         <outlet property="tableView" destination="Dll-iS-TqX" id="dXC-7v-HKR"/>
                     </connections>

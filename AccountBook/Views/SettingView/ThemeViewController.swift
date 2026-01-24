@@ -7,7 +7,7 @@
 
 import UIKit
 
-class ThemeViewController: UIViewController {
+class ThemeViewController: UIViewController, ThemeApplicable {
 
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var backButton: UIBarButtonItem!
@@ -19,8 +19,15 @@ class ThemeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        startObservingTheme()
         configureNavigationBar()
         configureTableView()
+        
+        applyTheme(ThemeManager.shared.currentTheme)
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        backButton.tintColor = theme.accentColor
     }
     
     func configureNavigationBar() {
@@ -46,6 +53,10 @@ class ThemeViewController: UIViewController {
         let indexPath = IndexPath(row: viewModel.selectedRow, section: 0)
         tableView.selectRow(at: indexPath, animated: false, scrollPosition: .none)
         flag = true
+    }
+    
+    deinit {
+        stopObservingTheme()
     }
 }
 
