@@ -8,7 +8,7 @@
 import UIKit
 import DGCharts
 
-class ChartViewController: UIViewController, ThemeApplicable {
+class ChartViewController: UIViewController {
 
     @IBOutlet weak var periodButton: UIButton!
     @IBOutlet weak var modeButton: UIButton!
@@ -32,18 +32,11 @@ class ChartViewController: UIViewController, ThemeApplicable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        startObservingTheme()
         bindViewModel()
         configureUI()
         configurePieChartView()
         configureTableView()
         configureBarChartView()
-        
-        applyTheme(ThemeManager.shared.currentTheme)
-    }
-    
-    func applyTheme(_ theme: any AppTheme) {
-        
     }
     
     func bindViewModel() {
@@ -187,7 +180,7 @@ class ChartViewController: UIViewController, ThemeApplicable {
         let data = viewModel.loadTotalsFor6Months()
         let entries = data.enumerated().map { BarChartDataEntry(x: Double($0.offset), y: Double($0.element.1)) }
         let dataSet = BarChartDataSet(entries: entries)
-        dataSet.colors = [UIColor.systemPink]
+        dataSet.colors = [ThemeManager.shared.currentTheme.accentColor]
         
         let chartData = BarChartData(dataSet: dataSet)
         return (chartData, data.map { $0.0 })
@@ -226,10 +219,6 @@ class ChartViewController: UIViewController, ThemeApplicable {
         super.viewWillAppear(animated)
         
         reloadData()
-    }
-    
-    deinit {
-        stopObservingTheme()
     }
     
 }
