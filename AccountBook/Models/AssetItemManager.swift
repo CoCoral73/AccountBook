@@ -88,27 +88,30 @@ class AssetItemManager {
         return newItem
     }
     
-    func addBankAccount(name: String, balance: Int64) {
+    func addBankAccount(name: String, colorIndex: Int, balance: Int64) {
         let newItem: BankAccountItem = createItem(BankAccountItem.self) { item in
             item.name = name
+            item.colorIndexValue = Int16(colorIndex)
             item.balance = balance
             item.typeValue = 1
         }
         bankAccount.append(newItem)
     }
     
-    func addDebitCard(name: String, account: BankAccountItem?) {
+    func addDebitCard(name: String, colorIndex: Int, account: BankAccountItem?) {
         let newItem: DebitCardItem = createItem(DebitCardItem.self) { item in
             item.name = name
+            item.colorIndexValue = Int16(colorIndex)
             item.linkedAccount = account
             item.typeValue = 2
         }
         debitCard.append(newItem)
     }
     
-    func addCreditCard(name: String, account: BankAccountItem?, withdrawalDate: Int16, startDate: Int16) {
+    func addCreditCard(name: String, colorIndex: Int, account: BankAccountItem?, withdrawalDate: Int16, startDate: Int16) {
         let newItem: CreditCardItem = createItem(CreditCardItem.self) { item in
             item.name = name
+            item.colorIndexValue = Int16(colorIndex)
             item.linkedAccount = account
             item.withdrawalDay = withdrawalDate
             item.startDay = startDate

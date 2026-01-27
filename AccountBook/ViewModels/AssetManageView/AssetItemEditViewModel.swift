@@ -121,11 +121,11 @@ class AssetItemEditViewModel {
     func addAssetItem() {
         switch type {
         case .bankAccount:
-            AssetItemManager.shared.addBankAccount(name: name, balance: balance)
+            AssetItemManager.shared.addBankAccount(name: name, colorIndex: colorIndex, balance: balance)
         case .debitCard:
-            AssetItemManager.shared.addDebitCard(name: name, account: linkedAccount)
+            AssetItemManager.shared.addDebitCard(name: name, colorIndex: colorIndex, account: linkedAccount)
         case .creditCard:
-            AssetItemManager.shared.addCreditCard(name: name, account: linkedAccount, withdrawalDate: withdrawalDay, startDate: startDay)
+            AssetItemManager.shared.addCreditCard(name: name, colorIndex: colorIndex, account: linkedAccount, withdrawalDate: withdrawalDay, startDate: startDay)
         default:
             break
         }
