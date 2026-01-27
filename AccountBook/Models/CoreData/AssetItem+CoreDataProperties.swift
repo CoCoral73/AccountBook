@@ -19,12 +19,17 @@ extension AssetItem {
     @NSManaged public var id: UUID
     @NSManaged public var name: String
     @NSManaged public var typeValue: Int16
+    @NSManaged public var colorIndexValue: Int16
     @NSManaged public var transactions: NSSet?
 
     var type: AssetType {
         get {
             AssetType(rawValue: typeValue)!
         }
+    }
+    
+    var colorIndex: Int {
+        get { Int(colorIndexValue) }
     }
 }
 

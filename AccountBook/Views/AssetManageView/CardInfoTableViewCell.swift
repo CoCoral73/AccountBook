@@ -23,6 +23,7 @@ class CardInfoTableViewCell: UITableViewCell {
     }
     
     func configure() {
+        backView.backgroundColor = ThemeManager.shared.currentTheme.assetColors[viewModel.colorIndex]
         nameLabel.text = viewModel.assetName
         currentCycleAmountLabel.text = viewModel.currentCycleAmountDisplay
         estimatedPaymentAmountView.isHidden = viewModel.isEstimatedPaymentAmountViewHidden

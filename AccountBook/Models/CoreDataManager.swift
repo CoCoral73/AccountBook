@@ -210,6 +210,7 @@ final class CoreDataManager {
                 let cashAsset = CashItem(context: context)
                 cashAsset.id = UUID()
                 cashAsset.name = "현금"
+                cashAsset.colorIndexValue = 0
                 cashAsset.transactions = nil
                 cashAsset.typeValue = 0
                 

@@ -51,6 +51,7 @@ protocol AppTheme {
     var chartColors: [UIColor] { get }
     var sectionColors: [UIColor] { get }
     var calendarColors: [UIColor] { get }
+    var assetColors: [UIColor] { get }
 }
 
 extension AppTheme {
@@ -84,5 +85,16 @@ extension AppTheme {
     }
     var calendarColors: [UIColor] {
         [.systemGray, .systemRed, .label, .label, .label, .label, .label, .systemBlue ]
+    }
+    var assetColors: [UIColor] {
+        [
+            UIColor(red: 1.00, green: 0.84, blue: 0.83, alpha: 1.00),
+            UIColor(red: 1.00, green: 0.89, blue: 0.71, alpha: 1.00),
+            UIColor(red: 1.00, green: 0.95, blue: 0.69, alpha: 1.00),
+            UIColor(red: 0.84, green: 0.95, blue: 0.82, alpha: 1.00),
+            UIColor(red: 0.78, green: 0.87, blue: 0.96, alpha: 1.00),
+            UIColor(red: 0.89, green: 0.82, blue: 1.00, alpha: 1.00),
+            UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1.00)
+        ]
     }
 }

@@ -17,6 +17,7 @@ class AssetItemEditViewModel {
     var mode: AssetEditMode
     private var type: AssetType
     private var name: String = ""
+    private(set) var colorIndex: Int = 0
     private var balance: Int64 = 0
     private var linkedAccount: BankAccountItem?
     private var withdrawalDay: Int16 = 13
@@ -35,6 +36,7 @@ class AssetItemEditViewModel {
         self.type = asset.type
         
         self.name = asset.name
+        self.colorIndex = asset.colorIndex
         switch asset {
         case let cash as CashItem:
             self.balance = cash.balance
@@ -88,6 +90,9 @@ class AssetItemEditViewModel {
         let type = AssetType(rawValue: Int16(index) + 1)!
         self.type = type
     }
+    func setColorIndex(with index: Int) {
+        self.colorIndex = index
+    }
     func setLinkedAccount(with account: BankAccountItem?) {
         self.linkedAccount = account
     }
@@ -131,13 +136,13 @@ class AssetItemEditViewModel {
     func editAssetItem(with asset: AssetItem) {
         switch type {
         case .cash:
-            AssetItemManager.shared.updateAssetItem(with: asset, name: name, balance: balance)
+            AssetItemManager.shared.updateAssetItem(with: asset, name: name, colorIndex: colorIndex, balance: balance)
         case .bankAccount:
-            AssetItemManager.shared.updateAssetItem(with: asset, name: name, balance: balance)
+            AssetItemManager.shared.updateAssetItem(with: asset, name: name, colorIndex: colorIndex, balance: balance)
         case .debitCard:
-            AssetItemManager.shared.updateAssetItem(with: asset, name: name, account: linkedAccount)
+            AssetItemManager.shared.updateAssetItem(with: asset, name: name, colorIndex: colorIndex, account: linkedAccount)
         case .creditCard:
-            AssetItemManager.shared.updateAssetItem(with: asset, name: name, account: linkedAccount, withdrawalDate: withdrawalDay, startDate: startDay)
+            AssetItemManager.shared.updateAssetItem(with: asset, name: name, colorIndex: colorIndex, account: linkedAccount, withdrawalDate: withdrawalDay, startDate: startDay)
         }
     }
     

@@ -117,8 +117,9 @@ class AssetItemManager {
         creditCard.append(newItem)
     }
     
-    func updateAssetItem(with item: AssetItem, name: String, balance: Int64 = 0, account: BankAccountItem? = nil, withdrawalDate: Int16 = 1, startDate: Int16 = 1) {
+    func updateAssetItem(with item: AssetItem, name: String, colorIndex: Int, balance: Int64 = 0, account: BankAccountItem? = nil, withdrawalDate: Int16 = 1, startDate: Int16 = 1) {
         item.name = name
+        item.colorIndexValue = Int16(colorIndex)
         switch item {
         case let cash as CashItem:
             cash.balance = balance

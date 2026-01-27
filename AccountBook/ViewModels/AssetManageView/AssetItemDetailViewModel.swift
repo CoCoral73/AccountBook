@@ -29,6 +29,9 @@ class AssetItemDetailViewModel {
     var assetName: String {
         return asset.name
     }
+    var colorIndex: Int {
+        return asset.colorIndex
+    }
     var isBalanceViewHidden: Bool {
         let type = asset.type
         return !(type == .cash || type == .bankAccount)

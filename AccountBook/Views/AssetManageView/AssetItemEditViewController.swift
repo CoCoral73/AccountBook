@@ -7,12 +7,13 @@
 
 import UIKit
 
-class AssetItemEditViewController: UIViewController, ThemeApplicable {
+class AssetItemEditViewController: UIViewController, ThemeApplicable, UIPopoverPresentationControllerDelegate {
 
     @IBOutlet weak var navItem: UINavigationItem!
     @IBOutlet weak var segControl: UISegmentedControl!
     
     @IBOutlet weak var nameTextField: UITextField!
+    @IBOutlet weak var colorButton: UIButton!
     @IBOutlet weak var balanceLabel: UILabel!
     @IBOutlet weak var accountButton: AutoDismissKeyboardButton!
     @IBOutlet weak var withdrawalDayButton: AutoDismissKeyboardButton!
@@ -106,6 +107,7 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
         topConstraint.constant = viewModel.topConstraintConstant
         nameTextField.isEnabled = viewModel.isEnabledForNameTextField
         nameTextField.text = viewModel.nameTextFieldText
+        colorButton.backgroundColor = ThemeManager.shared.currentTheme.assetColors[viewModel.colorIndex]
         balanceLabel.text = viewModel.balanceLabelText
         accountStackViewForModifyMode.isHidden = viewModel.isHiddenForTableView
         accountButton.setTitle(viewModel.accountButtonTitleString, for: .normal)
@@ -134,6 +136,31 @@ class AssetItemEditViewController: UIViewController, ThemeApplicable {
     @objc func didTapBalanceLabel() {
         view.endEditing(true)
         showNumericKeypad()
+    }
+    
+    @IBAction func colorButtonTapped(_ sender: UIButton) {
+        let vc = storyboard?.instantiateViewController(identifier: "ColorPickerViewController") as! ColorPickerViewController
+        vc.modalPresentationStyle = .popover
+        vc.preferredContentSize = CGSize(width: 302, height: 44)
+        
+        if let popover = vc.popoverPresentationController {
+            popover.sourceView = colorButton
+            popover.sourceRect = colorButton.bounds
+            popover.permittedArrowDirections = .up
+            popover.delegate = self
+        }
+        
+        vc.onDidSelectColor = { [weak self] tag in
+            guard let self = self else { return }
+            self.viewModel.setColorIndex(with: tag)
+            self.colorButton.backgroundColor = ThemeManager.shared.currentTheme.assetColors[tag]
+        }
+        
+        present(vc, animated: true)
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return .none
     }
     
     @IBAction func dayButtonTapped(_ sender: UIButton) {
