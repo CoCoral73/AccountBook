@@ -15,7 +15,7 @@ class CategoryCellViewModel {
     }
     
     var imageName: String {
-        guard let category = category else { return "+" }
+        guard let category = category else { return "➕" }
         return category.iconName
     }
     var nameString: String {

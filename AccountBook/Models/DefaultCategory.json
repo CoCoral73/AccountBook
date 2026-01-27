@@ -7,13 +7,13 @@
   },
   {
     "name": "용돈",
-    "iconName": "💵",
+    "iconName": "🧧",
     "typeValue": 0,
     "orderIndex": 3
   },
   {
     "name": "이자",
-    "iconName": "🏦",
+    "iconName": "💸",
     "typeValue": 0,
     "orderIndex": 2
   },
@@ -25,7 +25,7 @@
   },
   {
     "name": "기타",
-    "iconName": "❓",
+    "iconName": "💬",
     "typeValue": 0,
     "orderIndex": 4
   },
@@ -38,109 +38,109 @@
   },
   {
     "name": "간식",
-    "iconName": "🍚",
+    "iconName": "🧁",
     "typeValue": 1,
     "orderIndex": 1
   },
   {
     "name": "교통",
-    "iconName": "🍚",
+    "iconName": "🚊",
     "typeValue": 1,
     "orderIndex": 2
   },
   {
     "name": "통신",
-    "iconName": "🍚",
+    "iconName": "📱",
     "typeValue": 1,
     "orderIndex": 3
   },
   {
     "name": "생필품",
-    "iconName": "🍚",
+    "iconName": "🧻",
     "typeValue": 1,
     "orderIndex": 4
   },
   {
     "name": "구독",
-    "iconName": "🍚",
+    "iconName": "👑",
     "typeValue": 1,
     "orderIndex": 5
   },
   {
     "name": "주거",
-    "iconName": "🍚",
+    "iconName": "🏠",
     "typeValue": 1,
     "orderIndex": 6
   },
   {
     "name": "공과금",
-    "iconName": "🍚",
+    "iconName": "💧",
     "typeValue": 1,
     "orderIndex": 7
   },
   {
     "name": "대출이자",
-    "iconName": "🍚",
+    "iconName": "🏦",
     "typeValue": 1,
     "orderIndex": 8
   },
   {
     "name": "건강",
-    "iconName": "🍚",
+    "iconName": "🏥",
     "typeValue": 1,
     "orderIndex": 9
   },
   {
     "name": "쇼핑",
-    "iconName": "🍚",
+    "iconName": "🛍️",
     "typeValue": 1,
     "orderIndex": 10
   },
   {
     "name": "미용",
-    "iconName": "🍚",
+    "iconName": "💇‍♀️",
     "typeValue": 1,
     "orderIndex": 11
   },
   {
     "name": "데이트",
-    "iconName": "🍚",
+    "iconName": "❤️",
     "typeValue": 1,
     "orderIndex": 12
   },
   {
     "name": "취미",
-    "iconName": "🍚",
+    "iconName": "🏂",
     "typeValue": 1,
     "orderIndex": 13
   },
   {
     "name": "교육",
-    "iconName": "🍚",
+    "iconName": "📚",
     "typeValue": 1,
     "orderIndex": 14
   },
   {
     "name": "경조사",
-    "iconName": "🍚",
+    "iconName": "🎊",
     "typeValue": 1,
     "orderIndex": 15
   },
   {
     "name": "회비",
-    "iconName": "🍚",
+    "iconName": "🤝",
     "typeValue": 1,
     "orderIndex": 16
   },
   {
     "name": "복권",
-    "iconName": "🍚",
+    "iconName": "🎱",
     "typeValue": 1,
     "orderIndex": 17
   },
   {
     "name": "기타",
-    "iconName": "🍚",
+    "iconName": "💬",
     "typeValue": 1,
     "orderIndex": 18
   },
