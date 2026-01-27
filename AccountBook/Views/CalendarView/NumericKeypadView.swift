@@ -27,9 +27,36 @@ enum Operator: Int {
     case equal
 }
 
-class NumericKeypadView: UIView {
+class NumericKeypadView: UIView, ThemeApplicable {
+    
+    @IBOutlet weak var addButton: UIButton!
+    @IBOutlet weak var subtractButton: UIButton!
+    @IBOutlet weak var multiplyButton: UIButton!
+    @IBOutlet weak var divideButton: UIButton!
+    @IBOutlet weak var equalButton: UIButton!
+    @IBOutlet weak var acButton: UIButton!
+    @IBOutlet weak var hideButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    
+    var buttons: [UIButton] = []
+    
     static func loadFromNib() -> NumericKeypadView {
         return UINib(nibName: "NumericKeypadView", bundle: nil).instantiate(withOwner: nil).first as! NumericKeypadView
+    }
+    
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        
+        buttons = [addButton, subtractButton, multiplyButton, divideButton, equalButton, acButton, hideButton, deleteButton]
+        applyTheme(ThemeManager.shared.currentTheme)
+    }
+    
+    func applyTheme(_ theme: any AppTheme) {
+        self.backgroundColor = theme.baseColor
+        buttons.forEach {
+            $0.tintColor = theme.accentColor
+        }
+        acButton.setTitleColor(theme.accentColor, for: .normal)
     }
 
     weak var delegate: NumericKeypadDelegate?
