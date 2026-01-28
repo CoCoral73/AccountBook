@@ -19,7 +19,7 @@ class AssetSelectionViewModel {
         case .income:
             return [.cash, .bankAccount]
         case .expense:
-            return AssetType.allCases
+            return [.cash, .bankAccount, .debitCard, .creditCard]
         case .transfer:
             return [.bankAccount]
         }
