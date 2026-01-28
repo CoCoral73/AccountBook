@@ -22,11 +22,11 @@ class HistoryCellViewModel {
     var name: String {
         if transaction.type != .transfer { return transaction.name }
         
-        let suffix: String
-        if transaction.fromAccount! == asset as! BankAccountItem {
-            suffix = "(→ \(transaction.toAccount!.name))"
-        } else {
-            suffix = "(\(transaction.fromAccount!.name) →)"
+        var suffix: String = ""
+        if transaction.fromAccount == asset as? BankAccountItem {
+            suffix = "(→ \(transaction.toAccount?.name ?? "알 수 없음"))"
+        } else if transaction.toAccount == asset as? BankAccountItem {
+            suffix = "(\(transaction.fromAccount?.name ?? "알 수 없음") →)"
         }
         return [transaction.name, suffix].filter { !$0.isEmpty }.joined(separator: " ")
     }
