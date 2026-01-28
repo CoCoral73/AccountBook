@@ -137,6 +137,14 @@ class AssetItemManager {
     }
     
     func deleteAssetItem(with item: AssetItem) {
+        if let txs = item.transactions as? Set<Transaction> {
+            txs.forEach {
+                if $0.type != .transfer {
+                    $0.asset = deletedItem[0]
+                }
+            }
+        }
+        
         switch item {
         case _ as CashItem:
             return
