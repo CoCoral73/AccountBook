@@ -12,6 +12,7 @@ enum AssetType: Int16, CaseIterable {
     case bankAccount = 1
     case debitCard = 2
     case creditCard = 3
+    case deleted = 4
 
     var displayName: String {
         switch self {
@@ -19,15 +20,7 @@ enum AssetType: Int16, CaseIterable {
         case .bankAccount: return "계좌"
         case .debitCard: return "체크카드"
         case .creditCard: return "신용카드"
-        }
-    }
-
-    var iconName: String {
-        switch self {
-        case .cash: return "💵"
-        case .bankAccount: return "🏦"
-        case .debitCard: return "💳"
-        case .creditCard: return "💳"
+        case .deleted: return "삭제된 자산"
         }
     }
 }
@@ -41,6 +34,7 @@ class AssetItemManager {
     private(set) var bankAccount: [BankAccountItem] = []
     private(set) var debitCard: [DebitCardItem] = []
     private(set) var creditCard: [CreditCardItem] = []
+    private(set) var deletedItem: [DeletedItem] = []
     var allAssetItems: [[AssetItem]] {
         return [cash, bankAccount, debitCard, creditCard]
     }
@@ -63,6 +57,8 @@ class AssetItemManager {
                 debitCard.append(d)
             case let cr as CreditCardItem:
                 creditCard.append(cr)
+            case let deleted as DeletedItem:
+                deletedItem.append(deleted)
             default:
                 break
             }
@@ -75,6 +71,7 @@ class AssetItemManager {
         case .bankAccount: return bankAccount
         case .debitCard: return debitCard
         case .creditCard: return creditCard
+        default: return []
         }
     }
     
@@ -141,7 +138,7 @@ class AssetItemManager {
     
     func deleteAssetItem(with item: AssetItem) {
         switch item {
-        case let c as CashItem:
+        case _ as CashItem:
             return
         case let b as BankAccountItem:
             if let index = bankAccount.firstIndex(of: b) {
