@@ -90,7 +90,7 @@ class TransactionManager {
         let isCompleted = input.asset!.type != AssetType.creditCard
         transaction.isCompleted = isCompleted
         
-        adjustBalance(amount: amount, asset: input.asset!, isCompleted: isCompleted)
+        adjustBalance(amount: amount, asset: input.asset, isCompleted: isCompleted)
         
         if shouldSave {
             CoreDataManager.shared.saveContext()
@@ -112,8 +112,8 @@ class TransactionManager {
         transaction.fromAccount = input.fromAccount
         transaction.toAccount = input.toAccount
         
-        adjustBalance(amount: -input.amount, asset: transaction.fromAccount!, isCompleted: true)
-        adjustBalance(amount: input.amount, asset: transaction.toAccount!, isCompleted: true)
+        adjustBalance(amount: -input.amount, asset: transaction.fromAccount, isCompleted: true)
+        adjustBalance(amount: input.amount, asset: transaction.toAccount, isCompleted: true)
         
         CoreDataManager.shared.saveContext()
     }
@@ -144,7 +144,7 @@ class TransactionManager {
         transaction.memo = copy.memo
         
         if transaction.asset != copy.asset {
-            let oldAsset = transaction.asset!
+            let oldAsset = transaction.asset
             let amount = transaction.amount * (transaction.type == .income ? 1 : -1)
             let oldIsCompleted = transaction.isCompleted
             
@@ -152,7 +152,7 @@ class TransactionManager {
             adjustBalance(amount: -amount, asset: oldAsset, isCompleted: oldIsCompleted)
             
             //업데이트
-            adjustBalance(amount: amount, asset: copy.asset!, isCompleted: copy.isCompleted!)
+            adjustBalance(amount: amount, asset: copy.asset, isCompleted: copy.isCompleted!)
             
             transaction.asset = copy.asset
             transaction.isCompleted = copy.isCompleted!
@@ -163,7 +163,7 @@ class TransactionManager {
         
         transaction.amount = copy.amount
         
-        adjustBalance(amount: newAmount - oldAmount, asset: transaction.asset!, isCompleted: transaction.isCompleted)
+        adjustBalance(amount: newAmount - oldAmount, asset: transaction.asset, isCompleted: transaction.isCompleted)
         
         CoreDataManager.shared.saveContext()
     }
@@ -179,7 +179,7 @@ class TransactionManager {
         transaction.memo = copy.memo
         
         if transaction.fromAccount != copy.fromAccount {
-            let oldAccount = transaction.fromAccount!, newAccount = copy.fromAccount!
+            let oldAccount = transaction.fromAccount, newAccount = copy.fromAccount
             let amount = transaction.amount
             
             adjustBalance(amount: amount, asset: oldAccount, isCompleted: true)
@@ -189,7 +189,7 @@ class TransactionManager {
         }
         
         if transaction.toAccount != copy.toAccount {
-            let oldAccount = transaction.toAccount!, newAccount = copy.toAccount!
+            let oldAccount = transaction.toAccount, newAccount = copy.toAccount
             let amount = transaction.amount
             
             adjustBalance(amount: -amount, asset: oldAccount, isCompleted: true)
@@ -199,8 +199,8 @@ class TransactionManager {
         }
         
         let delta = copy.amount - transaction.amount
-        adjustBalance(amount: -delta, asset: transaction.fromAccount!, isCompleted: true)
-        adjustBalance(amount: delta, asset: transaction.toAccount!, isCompleted: true)
+        adjustBalance(amount: -delta, asset: transaction.fromAccount, isCompleted: true)
+        adjustBalance(amount: delta, asset: transaction.toAccount, isCompleted: true)
         
         transaction.amount = copy.amount
         
@@ -219,7 +219,7 @@ class TransactionManager {
     private func deleteRecord(_ transaction: Transaction) {
         // 할부 거래 중 일부를 삭제하려고 하면 → 전체 할부 삭제
         for tx in transaction.installment?.transactions.array as? [Transaction] ?? [transaction] {
-            let (amount, asset) = (tx.amount * (tx.type == .income ? 1 : -1), tx.asset!)
+            let (amount, asset) = (tx.amount * (tx.type == .income ? 1 : -1), tx.asset)
             adjustBalance(amount: -amount, asset: asset, isCompleted: tx.isCompleted)
             CoreDataManager.shared.context.delete(tx)
         }
@@ -227,7 +227,7 @@ class TransactionManager {
     }
     
     private func deleteTransfer(_ transaction: Transaction) {
-        let fromAccount = transaction.fromAccount!, toAccount = transaction.toAccount!
+        let fromAccount = transaction.fromAccount, toAccount = transaction.toAccount
         let amount = transaction.amount
         
         adjustBalance(amount: amount, asset: fromAccount, isCompleted: true)
@@ -242,7 +242,7 @@ class TransactionManager {
         guard transaction.asset is CreditCardItem else { return }
         
         transaction.isCompleted = true
-        adjustBalance(amount: -transaction.amount, asset: transaction.asset!, isCompleted: true)
+        adjustBalance(amount: -transaction.amount, asset: transaction.asset, isCompleted: true)
         
         if shouldSave {
             CoreDataManager.shared.saveContext()
@@ -253,7 +253,7 @@ class TransactionManager {
         guard transaction.isCompleted else { return }
         guard transaction.asset is CreditCardItem else { return }
         
-        adjustBalance(amount: transaction.amount, asset: transaction.asset!, isCompleted: true)
+        adjustBalance(amount: transaction.amount, asset: transaction.asset, isCompleted: true)
         transaction.isCompleted = false
         
         if shouldSave {
@@ -261,8 +261,8 @@ class TransactionManager {
         }
     }
     
-    func adjustBalance(amount: Int64, asset: AssetItem, isCompleted: Bool) {
-        guard isCompleted else { return }
+    func adjustBalance(amount: Int64, asset: AssetItem?, isCompleted: Bool) {
+        guard let asset = asset, isCompleted else { return }
         switch asset {
         case let cash as CashItem:
             cash.balance += amount
