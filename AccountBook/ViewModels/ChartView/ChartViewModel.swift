@@ -161,7 +161,12 @@ class ChartViewModel {
             let filtered = totalByAsset.filter { $0.key.type == type }
             let sorted = filtered.sorted(by: { $0.value > $1.value }) // 자산끼리는 금액순 유지
 
-            let rows = type == .cash ? [] : sorted.map { AssetRow(asset: $0.key, amount: $0.value) }
+            let rows: [AssetRow]
+            if type == .cash || type == .deleted {
+                rows = []
+            } else {
+                rows = sorted.map { AssetRow(asset: $0.key, amount: $0.value) }
+            }
             sections.append(AssetSection(assetType: type, totalAmount: totalAmount, rows: rows))
         }
         
