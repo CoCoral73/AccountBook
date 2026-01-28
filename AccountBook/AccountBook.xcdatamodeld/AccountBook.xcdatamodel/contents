@@ -33,6 +33,7 @@
     <entity name="DebitCardItem" representedClassName="DebitCardItem" parentEntity="AssetItem" syncable="YES">
         <relationship name="linkedAccount" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BankAccountItem" inverseName="linkedDebitCards" inverseEntity="BankAccountItem"/>
     </entity>
+    <entity name="DeletedItem" representedClassName="DeletedItem" parentEntity="AssetItem" syncable="YES"/>
     <entity name="Installment" representedClassName="Installment" syncable="YES">
         <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
         <attribute name="numberOfMonths" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
