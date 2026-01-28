@@ -4680,19 +4680,9 @@
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="P6w-b3-yqZ">
                                                             <rect key="frame" x="159.66666666666666" y="0.0" width="64" height="64"/>
-                                                            <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RyA-4z-eEN">
-                                                                    <rect key="frame" x="0.0" y="4" width="64" height="57"/>
-                                                                    <imageReference key="image" image="checkmark" catalog="system" symbolScale="small"/>
-                                                                </imageView>
-                                                            </subviews>
                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <constraints>
-                                                                <constraint firstItem="RyA-4z-eEN" firstAttribute="leading" secondItem="P6w-b3-yqZ" secondAttribute="leading" id="HCd-rR-I3p"/>
-                                                                <constraint firstItem="RyA-4z-eEN" firstAttribute="top" secondItem="P6w-b3-yqZ" secondAttribute="top" id="MJ8-1d-ZNm"/>
                                                                 <constraint firstAttribute="width" secondItem="P6w-b3-yqZ" secondAttribute="height" multiplier="1:1" id="UUg-pC-wEX"/>
-                                                                <constraint firstAttribute="bottom" secondItem="RyA-4z-eEN" secondAttribute="bottom" id="thH-3P-XIP"/>
-                                                                <constraint firstAttribute="trailing" secondItem="RyA-4z-eEN" secondAttribute="trailing" id="vyw-8H-fYy"/>
                                                             </constraints>
                                                         </view>
                                                     </subviews>
@@ -4712,7 +4702,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <outlet property="checkView" destination="RyA-4z-eEN" id="aqr-6H-OcQ"/>
+                                            <outlet property="checkView" destination="P6w-b3-yqZ" id="Thc-Oj-7Pe"/>
                                             <outlet property="colorView" destination="lv0-1g-yli" id="WTF-nc-seF"/>
                                         </connections>
                                     </tableViewCell>
@@ -5539,7 +5529,6 @@
         <image name="arrow.up.arrow.down" catalog="system" width="128" height="97"/>
         <image name="calendar" catalog="system" width="128" height="107"/>
         <image name="chart.bar.fill" catalog="system" width="128" height="90"/>
-        <image name="checkmark" catalog="system" width="128" height="114"/>
         <image name="chevron.down" catalog="system" width="128" height="70"/>
         <image name="chevron.left" catalog="system" width="97" height="128"/>
         <image name="contactIcon" width="200" height="200"/>

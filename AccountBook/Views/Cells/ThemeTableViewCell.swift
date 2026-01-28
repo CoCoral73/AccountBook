@@ -9,7 +9,7 @@ import UIKit
 
 class ThemeTableViewCell: UITableViewCell {
     @IBOutlet weak var colorView: UIView!
-    @IBOutlet weak var checkView: UIImageView!
+    @IBOutlet weak var checkView: UIView!
     
     var model: AppTheme! {
         didSet {
@@ -24,6 +24,6 @@ class ThemeTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
-        checkView.isHidden = !selected
+        checkView.backgroundColor = selected ? model.accentColor : UIColor.systemBackground
     }
 }
