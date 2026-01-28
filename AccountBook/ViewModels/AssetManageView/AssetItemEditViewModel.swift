@@ -25,6 +25,8 @@ class AssetItemEditViewModel {
     
     //거래 추가 안에서 자산 추가했을 때
     var onDidAddAssetItem: (() -> Void)?
+    //편집모드에서 삭제했을 때
+    var onDidRemoveAsset: (() -> Void)?
 
     init(type: AssetType = .bankAccount) {
         self.type = type
@@ -70,7 +72,7 @@ class AssetItemEditViewModel {
     var isHiddenForTableView: Bool { !(mode != .add && type == .bankAccount && numberOfRowsInSection > 0) }
     var isHiddenForCard: Bool { type == .cash || type == .bankAccount }
     var isHiddenForCredit: Bool { type != .creditCard }
-    var isHiddenForRemoveButton: Bool { mode == .add }
+    var isHiddenForRemoveButton: Bool { mode == .add || type == .cash }
     var nameTextFieldText: String { name }
     var balanceLabelText: String { balance.formattedWithComma + "원" }
     var numberOfRowsInSection: Int { cellForRowAt.count }
@@ -151,6 +153,7 @@ class AssetItemEditViewModel {
             print("삭제할 자산 없음")
             return 
         }
+        onDidRemoveAsset?()
         AssetItemManager.shared.deleteAssetItem(with: asset)
     }
 }

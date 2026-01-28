@@ -76,6 +76,11 @@ class AssetItemDetailViewController: UIViewController, ThemeApplicable {
     }
     
     private func showAssetItemEditView(_ vm: AssetItemEditViewModel) {
+        vm.onDidRemoveAsset = { [weak self] in
+            guard let self = self else { return }
+            self.navigationController?.popViewController(animated: true)
+        }
+        
         guard let vc = storyboard?.instantiateViewController(identifier: "AssetItemEditViewController", creator: { coder in
             AssetItemEditViewController(coder: coder, viewModel: vm)
         }) else {

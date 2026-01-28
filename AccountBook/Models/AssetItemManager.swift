@@ -141,6 +141,8 @@ class AssetItemManager {
     
     func deleteAssetItem(with item: AssetItem) {
         switch item {
+        case let c as CashItem:
+            return
         case let b as BankAccountItem:
             if let index = bankAccount.firstIndex(of: b) {
                 bankAccount.remove(at: index)
