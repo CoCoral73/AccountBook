@@ -50,7 +50,7 @@ final class CoreDataManager {
 
     func seedDataIfNeeded() {
         seedDefaultCategoriesIfNeeded()
-        seedCashAssetItemIfNeeded()
+        seedDefaultAssetItemIfNeeded()
     }
     
     // MARK: - Load and Insert Default Categories from JSON
@@ -200,7 +200,7 @@ final class CoreDataManager {
         }
     }
     
-    func seedCashAssetItemIfNeeded() {
+    func seedDefaultAssetItemIfNeeded() {
         let request: NSFetchRequest<CashItem> = CashItem.fetchRequest()
         request.fetchLimit = 1
         
@@ -214,11 +214,16 @@ final class CoreDataManager {
                 cashAsset.transactions = nil
                 cashAsset.typeValue = 0
                 
+                let deleted = DeletedItem(context: context)
+                deleted.id = UUID()
+                deleted.name = "삭제된 자산"
+                deleted.typeValue = 4
+                
                 saveContext()
-                print("기본 현금 자산 로드 완료!")
+                print("기본 자산 로드 완료!")
                 
             } else {
-                print("이미 기본 현금 자산이 존재합니다.")
+                print("이미 기본 자산이 존재합니다.")
             }
         } catch {
             print("자산 개수 확인 중 에러 발생: \(error)")
