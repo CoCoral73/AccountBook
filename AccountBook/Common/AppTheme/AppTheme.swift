@@ -77,7 +77,7 @@ extension AppTheme {
         ]
     }
     var sectionColors: [UIColor] {
-        [chartColors[0], chartColors[2], chartColors[3], chartColors[4]]
+        [chartColors[0], chartColors[2], chartColors[3], chartColors[4], chartColors[9]]
     }
     var calendarColors: [UIColor] {
         [.systemGray, .systemRed, .label, .label, .label, .label, .label, .systemBlue ]
