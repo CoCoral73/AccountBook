@@ -145,6 +145,8 @@ class AssetItemEditViewModel {
             AssetItemManager.shared.updateAssetItem(with: asset, name: name, colorIndex: colorIndex, account: linkedAccount)
         case .creditCard:
             AssetItemManager.shared.updateAssetItem(with: asset, name: name, colorIndex: colorIndex, account: linkedAccount, withdrawalDate: withdrawalDay, startDate: startDay)
+        default:
+            break
         }
     }
     
