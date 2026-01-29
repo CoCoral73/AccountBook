@@ -216,7 +216,7 @@ final class CoreDataManager {
                 
                 let deleted = DeletedItem(context: context)
                 deleted.id = UUID()
-                deleted.name = "삭제된 자산"
+                deleted.name = "(알 수 없음)"
                 deleted.typeValue = 4
                 
                 saveContext()
