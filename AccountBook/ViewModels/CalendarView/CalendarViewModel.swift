@@ -22,7 +22,8 @@ class CalendarViewModel {
     }
     
     var onDidSetCurrentMonth: (() -> Void)?
-    var onDidUpdateDayItem: ((UUID) -> Void)?
+    var onRequestUpdateDayItems: (() -> Void)?
+    var onRequestSelectDayItem: ((IndexPath) -> Void)?
     
     private(set) var itemIDsByDate: [Date: UUID] = [:]
     private(set) var dayItemsByUUID: [UUID: DayItem] = [:]
@@ -33,10 +34,10 @@ class CalendarViewModel {
     private(set) var selectedDate: Date
     private(set) var selectedDay: Int
     
-    init(currentMonth: Date = Date()) {
-        self.currentMonth = currentMonth
-        selectedDate = calendar.startOfDay(for: currentMonth)
-        selectedDay = calendar.component(.day, from: currentMonth)
+    init(now: Date = Date()) {
+        self.currentMonth = now
+        selectedDate = calendar.startOfDay(for: now)
+        selectedDay = calendar.component(.day, from: now)
         
         loadTransactions()
         generateDayItems()
@@ -44,7 +45,7 @@ class CalendarViewModel {
     
     var monthButtonString: String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy년 M월"
+        dateFormatter.dateFormat = "yyyy년 M월 "
         return dateFormatter.string(from: currentMonth)
     }
     
@@ -78,6 +79,18 @@ class CalendarViewModel {
         return sortedUUIDs
     }
     
+    func txDidUpdate(_ date: Date) {
+        if isCurrentMonth(with: date) {
+            loadTransactions()
+            updateDayItems()
+            setSelectedDate(with: date)
+            onRequestUpdateDayItems?()
+        } else {
+            setSelectedDate(with: date)
+            currentMonth = date
+        }
+    }
+    
     func cellForRowAt(_ index: Int) -> Transaction {
         guard let datas = transactions[selectedDay] else {
             fatalError("Calendar View Model: transactions 조회 실패")
@@ -90,39 +103,34 @@ class CalendarViewModel {
         currentMonth = next
     }
     
-    func setCurrentMonth(_ date: Date) {
-        currentMonth = date
-    }
-    
     func isCurrentMonth(with date: Date) -> Bool {
         return calendar.isDate(date, equalTo: currentMonth, toGranularity: .month)
     }
     
-    func setSelectedDate(with id: UUID) -> UUID? {
-        guard let item = dayItemsByUUID[id] else { return nil }
-        selectedDate = calendar.startOfDay(for: item.date)
+    //뷰모델에서
+    func setSelectedDate(with date: Date) {
+        selectedDate = date
         selectedDay = calendar.component(.day, from: selectedDate)
-        
-        if !isCurrentMonth(with: selectedDate) {    //달이 바뀔 때만 didSet 트리거
-            currentMonth = selectedDate
-        }
-        
-        return itemIDsByDate[selectedDate]
     }
     
-    func updateDayItem(for id: UUID, date: Date) {
-        let day = calendar.component(.day, from: date)
-        guard var item = dayItemsByUUID[id], let transaction = transactions[day] else { return }
+    //뷰컨트롤러에서
+    func setSelectedDate(at indexPath: IndexPath, id: UUID) {
+        guard let item = dayItemsByUUID[id] else { return }
         
-        var income: Int64 = 0, expense: Int64 = 0
-        transaction.forEach { tx in
-            income += tx.type == .income ? tx.amount : 0
-            expense += tx.type == .expense ? tx.amount : 0
+        setSelectedDate(with: item.date)
+        
+        if isCurrentMonth(with: item.date) {
+            onRequestSelectDayItem?(indexPath)
+        } else {
+            currentMonth = selectedDate
         }
-        
-        item.income = income
-        item.expense = expense
-        dayItemsByUUID[id]! = item
+    }
+    
+    func shouldSelectDate() -> UUID? {
+        if isCurrentMonth(with: selectedDate) {
+            return itemIDsByDate[selectedDate]!
+        }
+        return nil
     }
     
     func handleMonthButton() -> MonthPickerViewModel {
@@ -130,49 +138,54 @@ class CalendarViewModel {
         vm.onDidSelect = { [weak self] date in
             guard let self = self else { return }
             
-            setCurrentMonth(date)
+            currentMonth = date
             onDidSetCurrentMonth?()
         }
         return vm
     }
     
     func handleSearchButton() -> SearchViewModel {
-        let vm = SearchViewModel()
-        return vm
-    }
-    
-    func handleDidSelectRowAt(viewModel: TransactionDetailViewModel, completion: @escaping () -> ()) {
-        viewModel.onDidUpdateOldDateTransaction = { [weak self] date in
-            guard let self = self, let id = self.itemIDsByDate[date] else {
-                print("transaction.date로 UUID 찾기 실패(nil)")
-                return
-            }
-            
-            loadTransactions(with: date)
-            updateDayItem(for: id, date: date)
-            onDidUpdateDayItem?(id)
-        }
-        
-        completion()
+        return SearchViewModel()
     }
     
     func handleAddTransactionButton(tag: Int) -> TransactionAddViewModel {
         return TransactionAddViewModel(date: selectedDate, type: TransactionType(rawValue: Int16(tag))!)
     }
     
+    private func updateDayItems() {
+        var date = currentMonth.startOfMonth
+        while date < currentMonth.startOfNextMonth {
+            let uuid = itemIDsByDate[date]!
+            var item = dayItemsByUUID[uuid]!
+            let day = calendar.component(.day, from: date)
+            
+            let income = transactions[day]?.reduce(0, { result, ta in
+                return result + (ta.type == .income ? ta.amount : 0)
+            }) ?? 0
+            let expense = transactions[day]?.reduce(0, { result, ta in
+                return result + (ta.type == .expense ? ta.amount : 0)
+            }) ?? 0
+            
+            item.income = income
+            item.expense = expense
+            dayItemsByUUID[uuid] = item
+            
+            date = calendar.date(byAdding: .day, value: 1, to: date)!
+        }
+    }
+    
     private func generateDayItems() {
-        let rawDays = days(for: currentMonth)   // [Int?]
+        let rawDays = days(for: currentMonth)   // [Int?] ex) [nil, nil, 1, 2, 3, ..., 31, nil]
         // 이번 달 1일 Date 계산
-        let comps = calendar.dateComponents([.year, .month], from: currentMonth)
-        let firstOfMonth = calendar.date(from: comps)!
+        let startOfMonth = currentMonth.startOfMonth
         
-        let firstIndex = rawDays.firstIndex(where: { $0 != nil })!
-        let lastIndex = rawDays.lastIndex(where: { $0 != nil })!
+        let firstIndex = rawDays.firstIndex(where: { $0 != nil })!    //이번 달 1일
+        let lastIndex = rawDays.lastIndex(where: { $0 != nil })!    //이번 달 말일
         
         var items: [DayItem] = []
         for i in 0..<rawDays.count {
             if let day = rawDays[i] {
-                let date = calendar.date(byAdding: .day, value: day-1, to: firstOfMonth)!
+                let date = calendar.date(byAdding: .day, value: day-1, to: startOfMonth)!
                 
                 let income = transactions[day]?.reduce(0, { result, ta in
                     return result + (ta.type == .income ? ta.amount : 0)
@@ -186,12 +199,12 @@ class CalendarViewModel {
                 let date: Date, diff: Int
                 if i < firstIndex { //이전 달
                     diff = i - firstIndex
-                    date = calendar.date(byAdding: .day, value: diff, to: firstOfMonth)!
+                    date = calendar.date(byAdding: .day, value: diff, to: startOfMonth)!
                 }
                 else {  //다음 달
                     diff = i - lastIndex - 1
-                    let firstOfNextMonth = calendar.date(byAdding: .month, value: 1, to: firstOfMonth)!
-                    date = calendar.date(byAdding: .day, value: diff, to: firstOfNextMonth)!
+                    let startOfNextMonth = startOfMonth.startOfNextMonth
+                    date = calendar.date(byAdding: .day, value: diff, to: startOfNextMonth)!
                 }
                 
                 items.append(DayItem(id: UUID(), date: date, income: 0, expense: 0))
@@ -209,14 +222,6 @@ class CalendarViewModel {
         transactions = Dictionary(grouping: allTx) { tx in
             Calendar.current.component(.day, from: tx.date)
         }
-        calculateTotals()
-    }
-    
-    func loadTransactions(with date: Date) {
-        let tx = CoreDataManager.shared.fetchTransactions(forDay: date)
-        
-        let day = calendar.component(.day, from: date)
-        transactions[day] = tx
         calculateTotals()
     }
     
@@ -242,31 +247,5 @@ class CalendarViewModel {
 
         dayCache[date] = arr
         return arr
-    }
-}
-
-extension TransactionUpdatable {
-    func bindCalendarUpdate(calendarVM: CalendarViewModel, fromVC: CalendarViewController) {
-        onDidUpdateTransaction = { [weak calendarVM, weak fromVC] date in
-            guard let calendarVM, let fromVC else { return }
-
-            let monthChanged = !calendarVM.isCurrentMonth(with: date)
-            if monthChanged {
-                calendarVM.setCurrentMonth(date)
-            }
-
-            guard let id = calendarVM.itemIDsByDate[date] else { return }
-            _ = calendarVM.setSelectedDate(with: id)
-
-            if !monthChanged {
-                calendarVM.loadTransactions(with: date)
-                calendarVM.updateDayItem(for: id, date: date)
-            }
-
-            DispatchQueue.main.async {
-                fromVC.reloadDayItem(id)
-                fromVC.detailTableView.reloadData()
-            }
-        }
     }
 }
