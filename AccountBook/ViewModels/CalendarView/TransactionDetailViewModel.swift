@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TransactionDetailViewModel: TransactionUpdatable {
+class TransactionDetailViewModel {
     
     private(set) var state: EditState = .saved {
         didSet {
@@ -37,10 +37,6 @@ class TransactionDetailViewModel: TransactionUpdatable {
     var onRequestIsCompletedAlert: ((AlertConfig) -> Void)?
     var onRequestPop: (() -> Void)?
     var onShowInstallmentView: ((InstallmentViewModel) -> Void)?
-    
-    //CalendarViewModel
-    var onDidUpdateOldDateTransaction: ((Date) -> Void)?
-    var onDidUpdateTransaction: ((Date) -> Void)?   //TransactionUpdatable
     
     init(transaction: Transaction) {
         self.transaction = transaction
@@ -263,7 +259,6 @@ class TransactionDetailViewModel: TransactionUpdatable {
             copy.amount = transaction.amount
             
             onDidSetInstallment?()
-            onDidUpdateTransaction?(transaction.date)
         }
         onShowInstallmentView?(vm)
     }
@@ -274,9 +269,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     
     func confirmDeleteInstallment() {
         let isFirst = transaction.installmentIndexValue == 1
-        let date = transaction.date
         InstallmentManager.shared.deleteInstallment(transaction)
-        onDidUpdateTransaction?(date)
         
         if isFirst {
             copy.installment = transaction.installment?.numberOfMonths
@@ -294,9 +287,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     func confirmDelete() {
-        let date = transaction.date
         TransactionManager.shared.deleteTransaction(transaction)
-        onDidUpdateTransaction?(date)
         onRequestPop?()
     }
     
@@ -315,18 +306,12 @@ class TransactionDetailViewModel: TransactionUpdatable {
     
     @discardableResult
     func confirmSave() -> Bool {
-        let oldDate = transaction.date, newDate = copy.date
-        
         let result = TransactionManager.shared.updateTransaction(transaction, with: copy)
         if !result {
             onRequestInvalidDataFeedback?("동일한 계좌로는 이체할 수 없습니다.")
             return false
         }
         
-        if transaction.date != copy.date, Calendar.current.isDate(oldDate, equalTo: copy.date, toGranularity: .month) {
-            onDidUpdateOldDateTransaction?(oldDate)
-        }
-        onDidUpdateTransaction?(newDate)
         state = .saved
         
         return true
