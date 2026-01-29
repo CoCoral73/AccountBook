@@ -360,17 +360,11 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func installmentButtonTapped(_ sender: UIButton) {
-        checkSaveState()
         viewModel.handleInstallmentButton()
     }
     
     @IBAction func isCompletedButtonTapped(_ sender: UIButton) {
-        checkSaveState()
         viewModel.handleIsCompletedButton()
-    }
-    
-    func checkSaveState() {
-        viewModel.checkSaveState(name: nameTextField.text, memo: memoTextView.text)
     }
     
     func showInstallmentView(_ vm: InstallmentViewModel) {
@@ -388,7 +382,6 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     @IBAction func backButtonTapped(_ sender: UIBarButtonItem) {
-        checkSaveState()
         viewModel.handleBackButton()
     }
     
@@ -414,7 +407,8 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     deinit {
-        stopObservingTheme()
+        NotificationCenter.default.removeObserver(self)
+        
     }
 }
 
@@ -424,7 +418,6 @@ extension TransactionDetailViewController: UIGestureRecognizerDelegate {
     }
     
     func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
-        checkSaveState()
         if gestureRecognizer != navigationController?.interactivePopGestureRecognizer { return true }
         
         if viewModel.state == .modified {
@@ -485,7 +478,7 @@ extension TransactionDetailViewController: NumericKeypadDelegate {
         viewModel.handleNumericKeypad(value)
         
         let formatted = NSDecimalNumber(decimal: value).int64Value.formattedWithComma
-        amountLabel.text = "\(formatted)"
+        amountLabel.text = "\(formatted)원"
     }
     
     func keypadDidHide() {
@@ -508,7 +501,13 @@ extension TransactionDetailViewController: UITextFieldDelegate, UITextViewDelega
         nameTextField.delegate = self
         memoTextView.delegate = self
         
+        nameTextField.addTarget(self, action: #selector(nameChanged), for: .editingChanged)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    }
+    
+    @objc func nameChanged(_ textField: UITextField) {
+        viewModel.handleNameChanged(textField.text)
     }
     
     @objc func keyboardWillShow(_ noti: Notification) {
@@ -532,8 +531,13 @@ extension TransactionDetailViewController: UITextFieldDelegate, UITextViewDelega
         keypadDidHide()
     }
     
+    func textViewDidChange(_ textView: UITextView) {
+        viewModel.handleMemoChanged(textView.text)
+    }
+    
     func textViewDidBeginEditing(_ textView: UITextView) {
         currentEditingView = textView
+        keypadDidHide()
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {

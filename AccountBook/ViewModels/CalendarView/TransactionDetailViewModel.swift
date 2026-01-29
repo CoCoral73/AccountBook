@@ -139,6 +139,11 @@ class TransactionDetailViewModel: TransactionUpdatable {
         return vm
     }
     
+    func handleNameChanged(_ name: String?) {
+        copy.name = name ?? ""
+        state = .modified
+    }
+    
     func handleNumericKeypad(_ value: Decimal) {
         let amount = NSDecimalNumber(decimal: value).int64Value
         copy.amount = amount
@@ -237,13 +242,9 @@ class TransactionDetailViewModel: TransactionUpdatable {
         onDidSetIsCompleted?()
     }
     
-    func checkSaveState(name: String?, memo: String?) {
-        copy.name = name ?? ""
-        copy.memo = memo ?? ""
-        
-        if copy.name != transaction.name || copy.memo != transaction.memo {
-            state = .modified
-        }
+    func handleMemoChanged(_ memo: String!) {
+        copy.memo = memo
+        state = .modified
     }
     
     func requestInstallmentViewPresentation() {
