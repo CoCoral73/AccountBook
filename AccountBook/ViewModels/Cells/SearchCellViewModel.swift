@@ -37,10 +37,10 @@ class SearchCellViewModel {
     var assetDisplay: String {
         switch transaction.type {
         case .income, .expense:
-            return transaction.asset!.name
+            return transaction.asset?.name ?? "(알 수 없음)"
         case .transfer:
-            let fromAccount = transaction.fromAccount!.name
-            let toAccount = transaction.toAccount!.name
+            let fromAccount = transaction.fromAccount?.name ?? "(알 수 없음)"
+            let toAccount = transaction.toAccount?.name ?? "(알 수 없음)"
             return "\(fromAccount) → \(toAccount)"
         }
     }

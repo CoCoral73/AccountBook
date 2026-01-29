@@ -43,7 +43,6 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     var imageName: String {
-        //이모지로만 돼있음. 추후 변경 필요
         return copy.category.iconName
     }
     var dateDisplay: String {
@@ -73,48 +72,56 @@ class TransactionDetailViewModel: TransactionUpdatable {
         return prefix + self.amountDisplay
     }
     var amountDisplay: String {
-        return copy.amount.formattedWithComma
+        return copy.amount.formattedWithComma + "원"
     }
     var isAssetViewHidden: Bool {
         return copy.type == .transfer
     }
     var assetName: String {
         if copy.type != .transfer {
-            return copy.asset!.name
+            return copy.asset?.name ?? "(알 수 없음)"
         } else {
-            return "\(copy.fromAccount!.name) > \(copy.toAccount!.name)"
+            return "\(copy.fromAccount?.name ?? "(알 수 없음)") > \(copy.toAccount?.name ?? "(알 수 없음)")"
         }
     }
-    var assetType: AssetType? {
-        guard copy.type != .transfer else { return nil }
-        return copy.asset!.type
-    }
     var assetTypeDisplay: String {
-        guard let assetType = assetType else { return "**계좌 이체**" }
-        return copy.type == .income ? "**입금**" : "**\(assetType.displayName) 결제**"
+        if copy.type == .transfer { return "**계좌 이체**"}
+        else if copy.type == .income { return "**입금**" }
+        else {
+            let name = copy.asset?.type.displayName ?? ""
+            return "**\(name) 결제**"
+        }
     }
     var isAccountViewHidden: Bool {
         return copy.type != .transfer
     }
     var fromAccountName: String {
         guard copy.type == .transfer else { return "" }
-        return copy.fromAccount!.name
+        return copy.fromAccount?.name ?? "(알 수 없음)"
     }
     var toAccountName: String {
         guard copy.type == .transfer else { return "" }
-        return copy.toAccount!.name
+        return copy.toAccount?.name ?? "(알 수 없음)"
     }
     var shouldEdit: Bool {
         return copy.installment == nil
     }
-    var isInstallmentViewHidden: Bool { assetType != .creditCard }
+    var isInstallmentViewHidden: Bool {
+        if copy.type == .income || copy.type == .transfer { return true }
+        if let asset = copy.asset, asset.type == .creditCard {
+            return false
+        }
+        return true
+    }
     var installmentDisplay: String {
         guard let period = transaction.installment?.numberOfMonths, let index = transaction.installmentIndexValue else { return "일시불" }
         return "\(period) 개월 (\(index) / \(period))"
     }
-    var isIsCompletedViewHidden: Bool { assetType != .creditCard }
+    var isIsCompletedViewHidden: Bool {
+        return self.isInstallmentViewHidden
+    }
     var isCompletedDisplay: String {
-        guard let isCompleted = copy.isCompleted else { return "알수없음" }
+        guard let isCompleted = copy.isCompleted else { return "(알 수 없음)" }
         return isCompleted ? "완료" : "미완료"
     }
     var memo: String? {
