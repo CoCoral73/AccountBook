@@ -166,7 +166,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
             let success = UIAlertAction(title: "저장", style: .default) { _ in
-                self.viewModel.confirmSave(name: self.nameTextField.text, memo: self.memoTextView.text)
+                self.viewModel.confirmSave()
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
             alert.addAction(success)
@@ -179,7 +179,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
             let success = UIAlertAction(title: "저장", style: .default) { _ in
-                self.viewModel.confirmSave(name: self.nameTextField.text, memo: self.memoTextView.text)
+                self.viewModel.confirmSave()
                 self.viewModel.handleInstallmentFlow()
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -193,7 +193,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
             guard let self = self else { return }
             let alert = UIAlertController(title: config.title, message: config.message, preferredStyle: .actionSheet)
             let success = UIAlertAction(title: "저장", style: .default) { _ in
-                self.viewModel.confirmSave(name: self.nameTextField.text, memo: self.memoTextView.text)
+                self.viewModel.confirmSave()
                 self.viewModel.requestIsCompletedAlert()
             }
             let cancel = UIAlertAction(title: "취소", style: .cancel)
@@ -446,7 +446,7 @@ extension TransactionDetailViewController: UIGestureRecognizerDelegate {
         })
         alert.addAction(UIAlertAction(title: "저장", style: .default) { [weak self] _ in
             guard let self = self else { return }
-            let result = viewModel.confirmSave(name: nameTextField.text, memo: memoTextView.text)
+            let result = viewModel.confirmSave()
             if result {
                 navigationController?.popViewController(animated: true)
             }

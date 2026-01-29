@@ -314,10 +314,7 @@ class TransactionDetailViewModel: TransactionUpdatable {
     }
     
     @discardableResult
-    func confirmSave(name: String?, memo: String?) -> Bool {
-        copy.name = name ?? ""
-        copy.memo = memo ?? ""
-        
+    func confirmSave() -> Bool {
         let oldDate = transaction.date, newDate = copy.date
         
         let result = TransactionManager.shared.updateTransaction(transaction, with: copy)
