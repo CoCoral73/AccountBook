@@ -2343,30 +2343,30 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="393" height="50"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000.00.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tu7-9a-kpZ">
-                                                                    <rect key="frame" x="8" y="16" width="80" height="18"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2026.02.28" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tu7-9a-kpZ">
+                                                                    <rect key="frame" x="8" y="16" width="85" height="18"/>
                                                                     <constraints>
-                                                                        <constraint firstAttribute="width" constant="80" id="MYW-Ib-5a0"/>
+                                                                        <constraint firstAttribute="width" constant="85" id="Lmc-fh-hRA"/>
                                                                     </constraints>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Bdp-Rm-JWI">
-                                                                    <rect key="frame" x="96" y="5" width="30" height="30"/>
+                                                                    <rect key="frame" x="101" y="5" width="30" height="30"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" constant="30" id="QYs-GC-7bm"/>
                                                                         <constraint firstAttribute="width" secondItem="Bdp-Rm-JWI" secondAttribute="height" multiplier="1:1" id="TuS-6G-HYh"/>
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카테고리" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JXf-OY-Bhk">
-                                                                    <rect key="frame" x="93.666666666666671" y="36" width="34.666666666666671" height="12"/>
+                                                                    <rect key="frame" x="98.666666666666671" y="36" width="34.666666666666671" height="12"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="2z2-fo-zSD">
-                                                                    <rect key="frame" x="135" y="6.6666666666666679" width="28" height="36.666666666666657"/>
+                                                                    <rect key="frame" x="140" y="6.6666666666666679" width="28" height="36.666666666666657"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="이름" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6XU-44-Fl9">
                                                                             <rect key="frame" x="0.0" y="0.0" width="28" height="19.333333333333332"/>
