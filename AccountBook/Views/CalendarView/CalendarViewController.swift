@@ -37,7 +37,7 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        startObservingTheme()
+        addObserver()
         bindViewModel()
         configureTotals()
         configureCollectionView()
@@ -57,15 +57,37 @@ class CalendarViewController: UIViewController, ThemeApplicable {
         transferButton.backgroundColor = theme.transferColor
     }
     
+    func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(txDidUpdate), name: .txDidUpdate, object: nil)
+        startObservingTheme()
+    }
+    
+    @objc func txDidUpdate(_ noti: Notification) {
+        let date = noti.userInfo?["date"] as! Date
+        viewModel.txDidUpdate(date)
+    }
+    
     private func bindViewModel() {
         viewModel.onDidSetCurrentMonth = { [weak self] in
             guard let self = self else { return }
-            self.applySnapshot()
+            DispatchQueue.main.async {
+                self.applySnapshot()
+            }
         }
         
-        viewModel.onDidUpdateDayItem = { [weak self] id in
+        viewModel.onRequestUpdateDayItems = { [weak self] in
             guard let self = self else { return }
-            reloadDayItem(id)
+            DispatchQueue.main.async {
+                self.updateDayItems()
+            }
+        }
+        
+        viewModel.onRequestSelectDayItem = { [weak self] indexPath in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.selectNewCell(for: indexPath)
+                self.detailTableView.reloadData()
+            }
         }
     }
     
@@ -125,13 +147,13 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     @IBAction func addButtonTapped(_ sender: UIButton) {
         if !isExpanded {
             toggleAddButton(true)
-            overlayView.isHidden = false
-            addContainerView.isHidden = false
             
-            overlayView.alpha = 0
+            overlayView.isHidden = false
             addContainerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
-            UIView.animate(withDuration: 0.3, delay: 0, usingSpringWithDamping: 0.8, initialSpringVelocity: 1) {
+            addContainerView.isHidden = false
+            UIView.animate(withDuration: 0.1, delay: 0, options: [.curveEaseOut]) {
                 self.overlayView.alpha = 0.3
+                self.addContainerView.alpha = 1
                 self.addContainerView.transform = .identity
             }
         } else {
@@ -151,9 +173,10 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     
     @IBAction private func overlayTapped(_ sender: UITapGestureRecognizer) {
         toggleAddButton(false)
-        UIView.animate(withDuration: 0.05, animations: {
+        UIView.animate(withDuration: 0.1, animations: {
             self.overlayView.alpha = 0
             self.addContainerView.transform = CGAffineTransform(scaleX: 0.8, y: 0.8)
+            self.addContainerView.alpha = 0
         }) { _ in
             self.overlayView.isHidden = true
             self.addContainerView.isHidden = true
@@ -163,7 +186,6 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     
     @IBAction func addTransactionButtonTapped(_ sender: UIButton) {
         let vm = viewModel.handleAddTransactionButton(tag: sender.tag)
-        vm.bindCalendarUpdate(calendarVM: viewModel, fromVC: self)
         
         guard let addVC = storyboard?.instantiateViewController(identifier: "TransactionAddViewController", creator: { coder in
             TransactionAddViewController(coder: coder, viewModel: vm) })
@@ -202,7 +224,7 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     }
     
     deinit {
-        stopObservingTheme()
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
@@ -228,16 +250,19 @@ extension CalendarViewController {
         })
     }
     
-    func reloadDayItem(_ id: UUID) {
+    func updateDayItems() {
         var snap = dataSource.snapshot()
-        snap.reconfigureItems([id])
+        snap.reconfigureItems(viewModel.snapshotItems)
         dataSource.apply(snap, animatingDifferences: false) { [weak self] in
-            //id에 해당하는 셀이 다시 생성되면서(reconfigureItems -> cellProvider)
-            //viewModel이 새로 할당됨 -> isSelected가 false로 초기화되므로 다음 코드 필요
-            //self?.calendarCollectionView.layoutIfNeeded()
-            self?.selectDateIfNeeded()
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.calendarCollectionView.layoutIfNeeded()
+                self.selectDateIfNeeded()
+            }
         }
+        
         configureTotals()
+        detailTableView.reloadData()
     }
     
     func applySnapshot() {
@@ -245,10 +270,10 @@ extension CalendarViewController {
         snap.appendSections([0])
         snap.appendItems(viewModel.snapshotItems, toSection: 0)
         dataSource.apply(snap, animatingDifferences: false) { [weak self] in
-            //self?.calendarCollectionView.layoutIfNeeded()
-            //컬렉션 뷰의 내부 레이아웃 미완료로 cellForItem에서 nil 반환 -> 다음 런루프로 미루기
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.selectDateIfNeeded()
+                self.calendarCollectionView.layoutIfNeeded()
+                self.selectDateIfNeeded()
             }
         }
         
@@ -257,50 +282,27 @@ extension CalendarViewController {
         detailTableView.reloadData()
     }
     
-    private func deselectOldCell() {
-        //기존에 선택된 모든 셀들 deselect 처리
-        if let selectedIndexPaths = calendarCollectionView.indexPathsForSelectedItems {
-            for oldIndexPath in selectedIndexPaths {
-                calendarCollectionView.deselectItem(at: oldIndexPath, animated: false)
-                if let oldCell = calendarCollectionView.cellForItem(at: oldIndexPath) as? CalendarCollectionViewCell {
-                    oldCell.viewModel.isSelected = false
-                }
-            }
-        }
-    }
-    
     private func selectNewCell(for indexPath: IndexPath) {
         calendarCollectionView.selectItem(at: indexPath, animated: false, scrollPosition: [])
-        
         if let cell = calendarCollectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell {
             cell.viewModel.isSelected = true
         }
     }
     
     private func selectDateIfNeeded() {
-        
-        deselectOldCell()
-        
         //선택된 date가 현재 월에 포함된 날짜일 때만 선택 상태로 바꾸고 UI 업데이트
-        let date = viewModel.selectedDate
-        
-        if viewModel.isCurrentMonth(with: date) {
-            if let id = viewModel.itemIDsByDate[date], let indexPath = dataSource.indexPath(for: id) {
+        if let id = viewModel.shouldSelectDate() {
+            if let indexPath = dataSource.indexPath(for: id) {
                 selectNewCell(for: indexPath)
             }
         }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        deselectOldCell()
-        
-        guard let id = dataSource.itemIdentifier(for: indexPath), let newID = viewModel.setSelectedDate(with: id), let newIndexPath = dataSource.indexPath(for: newID) else { return }
-        
-        selectNewCell(for: newIndexPath)
-        
-        detailTableView.reloadData()
+        guard let uuid = dataSource.itemIdentifier(for: indexPath) else { return }
+        viewModel.setSelectedDate(at: indexPath, id: uuid)
     }
+    
     func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
         if let cell = collectionView.cellForItem(at: indexPath) as? CalendarCollectionViewCell {
             cell.viewModel.isSelected = false
@@ -311,7 +313,6 @@ extension CalendarViewController {
 
 //MARK: Collection View Layout
 extension CalendarViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 0    //위 아래 간격
     }
@@ -346,18 +347,13 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
             return
         }
         
-        vm.bindCalendarUpdate(calendarVM: viewModel, fromVC: self)
-        viewModel.handleDidSelectRowAt(viewModel: vm) { [weak self] in
-            guard let self = self else { return }
-            guard let detailVC = storyboard?.instantiateViewController(identifier: "TransactionDetailViewController", creator: { coder in
-                TransactionDetailViewController(coder: coder, viewModel: vm)
-            }) else {
-                fatalError("TransactionDetailViewController 생성 에러")
-            }
-            
-            navigationController?.pushViewController(detailVC, animated: true)
+        guard let detailVC = storyboard?.instantiateViewController(identifier: "TransactionDetailViewController", creator: { coder in
+            TransactionDetailViewController(coder: coder, viewModel: vm)
+        }) else {
+            fatalError("TransactionDetailViewController 생성 에러")
         }
         
+        navigationController?.pushViewController(detailVC, animated: true)
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -373,4 +369,8 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+}
+
+extension Notification.Name {
+    static let txDidUpdate = Notification.Name("TxDidUpdate")
 }
