@@ -74,6 +74,14 @@ class SearchViewController: UIViewController, ThemeApplicable {
         maxAmountButton.setTitleColor(theme.accentColor, for: .selected)
     }
     
+    func addObserver() {
+        NotificationCenter.default.addObserver(self, selector: #selector(txDidUpdate), name: .txDidUpdate, object: nil)
+    }
+    
+    @objc func txDidUpdate(_ noti: Notification) {
+        viewModel.requestReloadTransactions()
+    }
+    
     func bindViewModel() {
         viewModel.onDidSetPeriod = { [weak self] in
             guard let self = self else { return }
@@ -258,6 +266,10 @@ class SearchViewController: UIViewController, ThemeApplicable {
         }
         
         present(vc, animated: true)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
 }
 
