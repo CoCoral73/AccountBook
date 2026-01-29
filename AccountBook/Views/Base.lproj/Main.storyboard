@@ -2737,7 +2737,7 @@
                                                 <action selector="backButtonTapped:" destination="oU4-9V-oZi" id="fik-ek-xy4"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="저장" id="5Yh-EO-FCV">
+                                        <barButtonItem key="rightBarButtonItem" title="저장" hidden="YES" id="5Yh-EO-FCV">
                                             <connections>
                                                 <action selector="saveButtonTapped:" destination="oU4-9V-oZi" id="ghr-ne-fCf"/>
                                             </connections>
@@ -3269,6 +3269,7 @@
                         <outlet property="nameTextField" destination="Da1-Jo-gAY" id="fok-HX-zvm"/>
                         <outlet property="navigationBar" destination="mJ4-Vm-wgX" id="fUN-nl-vir"/>
                         <outlet property="paperView" destination="ZrH-Yn-V1x" id="Vr9-oO-thY"/>
+                        <outlet property="saveButton" destination="5Yh-EO-FCV" id="ggd-9v-EqO"/>
                         <outlet property="scrollView" destination="k7s-l0-oQt" id="2d3-yR-7yK"/>
                         <outlet property="toAccountButton" destination="wtb-PH-s7f" id="0k0-tY-S20"/>
                         <outlet property="toAccountView" destination="Ha5-EX-Wy3" id="9xl-RD-JRP"/>

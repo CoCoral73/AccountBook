@@ -9,11 +9,16 @@ import Foundation
 
 class TransactionDetailViewModel: TransactionUpdatable {
     
-    private(set) var state: EditState = .saved
+    private(set) var state: EditState = .saved {
+        didSet {
+            onDidChangeState?(state == .saved)
+        }
+    }
     private(set) var transaction: Transaction
     private var copy: TransactionModel
     
     //DetailTransactionViewControlelr
+    var onDidChangeState: ((Bool) -> Void)?
     var onDidSetTransactionDate: (() -> Void)?
     var onDidSetCategory: (() -> Void)?
     var onDidSetAssetItem: (() -> Void)?

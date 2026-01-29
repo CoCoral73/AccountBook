@@ -10,6 +10,7 @@ import UIKit
 class TransactionDetailViewController: UIViewController, ThemeApplicable {
     
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var backView: UIView!
     @IBOutlet weak var paperView: UIView!
@@ -71,6 +72,12 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     }
     
     private func bindViewModel() {
+        viewModel.onDidChangeState = { [weak self] isHidden in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.saveButton.isHidden = isHidden
+            }
+        }
         viewModel.onDidSetTransactionDate = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
