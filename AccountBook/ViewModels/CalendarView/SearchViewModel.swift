@@ -256,6 +256,11 @@ class SearchViewModel {
         sortFilteredTransaction()
     }
     
+    func requestReloadTransactions() {
+        allTxs = CoreDataManager.shared.fetchTransactions()
+        filterTransaction()
+    }
+    
     private func filterTransaction() {
         filteredTxs = allTxs.filter { tx in
             if let keyword = self.keyword, !keyword.isEmpty {
