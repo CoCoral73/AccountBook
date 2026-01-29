@@ -7,7 +7,7 @@
 
 import Foundation
 
-class TransactionAddViewModel: TransactionUpdatable {
+class TransactionAddViewModel {
     
     private var transactionDate: Date {
         didSet {
@@ -24,9 +24,6 @@ class TransactionAddViewModel: TransactionUpdatable {
     
     //Add View에서 currentDate가 바뀌면  바 버튼 아이템의 날짜 타이틀이 바뀌도록
     var onDidSetTransactionDate: (() -> Void)?
-    
-    //Add View에서 내역 추가 동작을 했을 때, Calendar View에서 해야할 일
-    var onDidUpdateTransaction: ((Date) -> Void)?
     
     //자산 선택 완료 -> TransactionAddTableVC
     var onDidSelectAsset: ((String) -> Void)?   //수입, 지출
@@ -67,13 +64,11 @@ class TransactionAddViewModel: TransactionUpdatable {
     func addTransaction(amount: Int64, asset: AssetItem, name: String, category: Category) {
         let input = TransactionModel(amount: amount, date: transactionDate, type: type, name: name, memo: "", category: category, asset: asset)
         TransactionManager.shared.addTransaction(with: input, shouldSave: true)
-        onDidUpdateTransaction?(transactionDate)
     }
     
     func addTransfer(amount: Int64, fromAccount: BankAccountItem, toAccount: BankAccountItem, name: String, category: Category) {
         let input = TransactionModel(amount: amount, date: transactionDate, type: type, name: name, memo: "", category: category, fromAccount: fromAccount, toAccount: toAccount)
         TransactionManager.shared.addTransfer(with: input)
-        onDidUpdateTransaction?(transactionDate)
     }
     
     func handleDateButton() {
