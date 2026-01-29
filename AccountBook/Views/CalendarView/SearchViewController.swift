@@ -268,6 +268,13 @@ class SearchViewController: UIViewController, ThemeApplicable {
         present(vc, animated: true)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        navigationController?.interactivePopGestureRecognizer?.delegate = nil
+        navigationController?.interactivePopGestureRecognizer?.isEnabled = true
+    }
+    
     deinit {
         NotificationCenter.default.removeObserver(self)
     }
