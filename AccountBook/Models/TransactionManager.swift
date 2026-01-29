@@ -94,6 +94,7 @@ class TransactionManager {
         
         if shouldSave {
             CoreDataManager.shared.saveContext()
+            NotificationCenter.default.post(name: .txDidUpdate, object: nil, userInfo: ["date": input.date])
         }
         
         return transaction
@@ -116,6 +117,7 @@ class TransactionManager {
         adjustBalance(amount: input.amount, asset: transaction.toAccount, isCompleted: true)
         
         CoreDataManager.shared.saveContext()
+        NotificationCenter.default.post(name: .txDidUpdate, object: nil, userInfo: ["date": input.date])
     }
     
     //할부 거래 생성용
@@ -166,6 +168,7 @@ class TransactionManager {
         adjustBalance(amount: newAmount - oldAmount, asset: transaction.asset, isCompleted: transaction.isCompleted)
         
         CoreDataManager.shared.saveContext()
+        NotificationCenter.default.post(name: .txDidUpdate, object: nil, userInfo: ["date": copy.date])
     }
     
     private func updateTransfer(_ transaction: Transaction, with copy: TransactionModel) -> Bool {
@@ -205,15 +208,18 @@ class TransactionManager {
         transaction.amount = copy.amount
         
         CoreDataManager.shared.saveContext()
+        NotificationCenter.default.post(name: .txDidUpdate, object: nil, userInfo: ["date": copy.date])
         return true
     }
 
     func deleteTransaction(_ transaction: Transaction) {
+        let date = transaction.date
         if transaction.type != .transfer {
             deleteRecord(transaction)
         } else {
             deleteTransfer(transaction)
         }
+        NotificationCenter.default.post(name: .txDidUpdate, object: nil, userInfo: ["date": date])
     }
     
     private func deleteRecord(_ transaction: Transaction) {

@@ -25,6 +25,7 @@ class InstallmentManager {
         }
         
         CoreDataManager.shared.saveContext()
+        NotificationCenter.default.post(name: .txDidUpdate, object: nil, userInfo: ["date": transaction.date])
     }
     
     func calculateMonthlyAmount(total: Int64, period: Int16) -> [Int64] {
@@ -40,6 +41,7 @@ class InstallmentManager {
             return
         }
         
+        let date = transaction.date
         let txs = installment.transactions.array as? [Transaction] ?? []
         txs[0].amount = installment.totalAmount
         txs[0].installment = nil
@@ -51,5 +53,6 @@ class InstallmentManager {
         
         CoreDataManager.shared.context.delete(installment)
         CoreDataManager.shared.saveContext()
+        NotificationCenter.default.post(name: .txDidUpdate, object: nil, userInfo: ["date": date])
     }
 }
