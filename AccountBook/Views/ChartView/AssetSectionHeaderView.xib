@@ -23,19 +23,19 @@
                         <constraint firstAttribute="height" constant="37" id="Ysp-G6-N3l"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="현금" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D2-qk-U65">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="현금" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4D2-qk-U65">
                     <rect key="frame" x="36" y="11.666666666666664" width="32" height="22"/>
                     <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="500,000원" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G37-5J-nz3">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="250" text="500,000원" textAlignment="right" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G37-5J-nz3">
                     <rect key="frame" x="284" y="11.666666666666664" width="89" height="22"/>
                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(1%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjA-dA-p1u">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1000" text="(1%)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjA-dA-p1u">
                     <rect key="frame" x="71" y="13.666666666666664" width="32" height="18"/>
                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                     <color key="textColor" systemColor="secondaryLabelColor"/>
@@ -49,7 +49,7 @@
                 <constraint firstItem="bjA-dA-p1u" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="7xS-OB-LeP"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="G37-5J-nz3" secondAttribute="trailing" constant="20" id="BZ1-gP-iSp"/>
                 <constraint firstItem="4D2-qk-U65" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="DRx-P5-t0P"/>
-                <constraint firstItem="G37-5J-nz3" firstAttribute="leading" relation="lessThanOrEqual" secondItem="bjA-dA-p1u" secondAttribute="trailing" constant="181" id="cRp-vl-ZPt"/>
+                <constraint firstItem="G37-5J-nz3" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="bjA-dA-p1u" secondAttribute="trailing" constant="10" id="YyT-tV-fqG"/>
                 <constraint firstItem="4D2-qk-U65" firstAttribute="leading" secondItem="Pz2-rC-KNy" secondAttribute="trailing" constant="12" id="hE2-QF-ZPY"/>
                 <constraint firstItem="G37-5J-nz3" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="pYx-IX-rEm"/>
                 <constraint firstItem="bjA-dA-p1u" firstAttribute="leading" secondItem="4D2-qk-U65" secondAttribute="trailing" constant="3" id="uFe-T4-RDb"/>
@@ -66,7 +66,7 @@
     </objects>
     <resources>
         <systemColor name="secondaryLabelColor">
-            <color red="0.23529411759999999" green="0.23529411759999999" blue="0.26274509800000001" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
