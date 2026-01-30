@@ -26,6 +26,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         self.window = window
         window.makeKeyAndVisible()
+        
+        showLockIfNeeded()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
@@ -48,33 +50,28 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func sceneWillEnterForeground(_ scene: UIScene) {
         // Called as the scene transitions from the background to the foreground.
         // Use this method to undo the changes made on entering the background.
-        guard let windowScene = scene as? UIWindowScene else { return }
-        guard let window = windowScene.windows.first else { return }
-
-        LockAppManager.shared.checkAvailableStateOfBiometricID()
-        if let topVC = window.topMostViewController() {
-            showLockIfNeeded(on: topVC)
-        }
+        showLockIfNeeded()
     }
     
-    private func showLockIfNeeded(on root: UIViewController) {
-        let manager = LockAppManager.shared
+    private func showLockIfNeeded() {
+        guard LockAppManager.shared.isLocked else { return }
          
-        guard manager.isLocked else { return }
-
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let passwordVC = storyboard.instantiateViewController(
-            identifier: "PasswordViewController",
-            creator: { coder in
-                PasswordViewController(coder: coder, viewModel: PasswordViewModel(mode: .validate))
-            }
-        )
-
-        passwordVC.modalPresentationStyle = .fullScreen
+        LockAppManager.shared.checkAvailableStateOfBiometricID()
         
-        // 이미 띄워져 있는지 방지
-        if root.presentedViewController == nil {
-            root.present(passwordVC, animated: false)
+        guard let topVC = window?.topMostViewController() else { return }
+        let isAlreadyShowing = topVC is PasswordViewController
+        
+        if !isAlreadyShowing {
+            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            let passwordVC = storyboard.instantiateViewController(
+                identifier: "PasswordViewController",
+                creator: { coder in
+                    PasswordViewController(coder: coder, viewModel: PasswordViewModel(mode: .validate))
+                }
+            )
+            
+            passwordVC.modalPresentationStyle = .fullScreen
+            topVC.present(passwordVC, animated: false)
         }
     }
 
