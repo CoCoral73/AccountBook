@@ -80,7 +80,7 @@ class SearchViewModel {
         return isCategorySelected ? "카테고리" : "자산"
     }
     var numberOfSections: Int {
-        return isCategorySelected ? 3 : 4
+        return isCategorySelected ? 3 : 5
     }
     
     var numberOfRowsInSection: Int {
@@ -121,8 +121,10 @@ class SearchViewModel {
                 return AssetItemManager.shared.bankAccount.count
             case 2:
                 return AssetItemManager.shared.debitCard.count
-            default:
+            case 3:
                 return AssetItemManager.shared.creditCard.count
+            default:
+                return 1
             }
         }
     }

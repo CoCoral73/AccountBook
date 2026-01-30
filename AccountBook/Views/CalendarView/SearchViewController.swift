@@ -55,6 +55,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        addObserver()
         bindViewModel()
         configureNavigationBar()
         configureScrollView()

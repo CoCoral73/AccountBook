@@ -36,7 +36,7 @@ class AssetItemManager {
     private(set) var creditCard: [CreditCardItem] = []
     private(set) var deletedItem: [DeletedItem] = []
     var allAssetItems: [[AssetItem]] {
-        return [cash, bankAccount, debitCard, creditCard]
+        return [cash, bankAccount, debitCard, creditCard, deletedItem]
     }
     
     func loadAssetItems() {
