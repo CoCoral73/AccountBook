@@ -127,9 +127,10 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
         
         viewModel.onRequestInvalidDataFeedback = { [weak self] msg in
             guard let self = self else { return }
-            HapticFeedback.notify(.error)
-            ToastManager.shared.show(message: msg, in: view)
-            return
+            DispatchQueue.main.async {
+                HapticFeedback.notify(.error)
+                ToastManager.shared.show(message: msg, in: self.view)
+            }
         }
         viewModel.onRequestDeleteInstallmentAlert = { [weak self] config in
             guard let self = self else { return }

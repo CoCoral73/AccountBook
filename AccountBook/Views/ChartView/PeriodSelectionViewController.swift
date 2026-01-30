@@ -55,8 +55,10 @@ class PeriodSelectionViewController: UIViewController, ThemeApplicable {
     func bindViewModel() {
         viewModel.onDidChangeDate = { [weak self] in
             guard let self = self else { return }
-            startDateButton.setTitle(viewModel.startDateButtonString, for: .normal)
-            endDateButton.setTitle(viewModel.endDateButtonString, for: .normal)
+            DispatchQueue.main.async {
+                self.startDateButton.setTitle(self.viewModel.startDateButtonString, for: .normal)
+                self.endDateButton.setTitle(self.viewModel.endDateButtonString, for: .normal)
+            }
         }
     }
     

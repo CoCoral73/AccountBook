@@ -42,23 +42,28 @@ class ChartViewController: UIViewController {
     func bindViewModel() {
         viewModel.onDidSetPeriod = { [weak self] in
             guard let self = self else { return }
-            periodButton.setTitle(viewModel.periodDisplay, for: .normal)
-            barChartStackView.isHidden = viewModel.isBarChartHidden
-            barChartView.isHidden = viewModel.isBarChartHidden
-            reloadData()
+            DispatchQueue.main.async {
+                self.periodButton.setTitle(self.viewModel.periodDisplay, for: .normal)
+                self.barChartStackView.isHidden = self.viewModel.isBarChartHidden
+                self.barChartView.isHidden = self.viewModel.isBarChartHidden
+                self.reloadData()
+            }
         }
         
         viewModel.onDidSetIsIncome = { [weak self] in
             guard let self = self else { return }
-            modeButton.setTitle(viewModel.modeTitle, for: .normal)
-            totalTitleLabel.text = viewModel.totalTitle
-            categoryTitleLabel.text = viewModel.categoryTitle
-            assetTitleLabel.text = viewModel.assetTitle
-            reloadData(shouldReloadTxs: false)
+            DispatchQueue.main.async {
+                self.modeButton.setTitle(self.viewModel.modeTitle, for: .normal)
+                self.totalTitleLabel.text = self.viewModel.totalTitle
+                self.categoryTitleLabel.text = self.viewModel.categoryTitle
+                self.assetTitleLabel.text = self.viewModel.assetTitle
+                self.reloadData(shouldReloadTxs: false)
+            }
         }
         
         viewModel.onPresentPeriodSelectionVC = { [weak self] vm in
-            guard let periodVC = self?.storyboard?.instantiateViewController(identifier: "PeriodSelectionViewController", creator: { coder in
+            guard let self = self else { return }
+            guard let periodVC = self.storyboard?.instantiateViewController(identifier: "PeriodSelectionViewController", creator: { coder in
                 PeriodSelectionViewController(coder: coder, viewModel: vm)
             }) else {
                 fatalError("PeriodSelectionViewController 생성 에러")
@@ -71,7 +76,9 @@ class ChartViewController: UIViewController {
                 sheet.prefersGrabberVisible = true
             }
 
-            self?.present(periodVC, animated: true, completion: nil)
+            DispatchQueue.main.async {
+                self.present(periodVC, animated: true, completion: nil)
+            }
         }
     }
     

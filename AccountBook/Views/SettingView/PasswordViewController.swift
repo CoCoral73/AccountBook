@@ -81,7 +81,9 @@ class PasswordViewController: UIViewController, ThemeApplicable {
         
         viewModel.onRequestDismiss = { [weak self] in
             guard let self = self else { return }
-            close()
+            DispatchQueue.main.async {
+                self.close()
+            }
         }
     }
     

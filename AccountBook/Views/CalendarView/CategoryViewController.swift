@@ -35,16 +35,22 @@ class CategoryViewController: UIViewController, UICollectionViewDataSource, UICo
     func bindViewModel() {
         viewModel.onRequestShowCategoryEditView = { [weak self] vm in
             guard let self = self else { return }
-            showCategoryEditView(vm)
+            DispatchQueue.main.async {
+                self.showCategoryEditView(vm)
+            }
         }
         viewModel.onRequestDismiss = { [weak self] in
             guard let self = self else { return }
-            dismiss(animated: true)
+            DispatchQueue.main.async {
+                self.dismiss(animated: true)
+            }
         }
         
         viewModel.onDidAddCategory = { [weak self] in
             guard let self = self else { return }
-            collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     

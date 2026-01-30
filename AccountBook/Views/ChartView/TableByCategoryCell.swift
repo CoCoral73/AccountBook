@@ -32,7 +32,6 @@ class TableByCategoryCell: UITableViewCell {
     
     func updateBarWidth(ratio: CGFloat) {
         
-
         let newConstraint = NSLayoutConstraint(
             item: widthRatioConstraint.firstItem as Any,
             attribute: widthRatioConstraint.firstAttribute,
