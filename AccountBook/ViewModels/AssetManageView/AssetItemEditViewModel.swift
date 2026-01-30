@@ -25,6 +25,8 @@ class AssetItemEditViewModel {
     
     //거래 추가 안에서 자산 추가했을 때
     var onDidAddAssetItem: (() -> Void)?
+    //자산 상세 -> 편집에서 수정했을 때
+    var onDidUpdateAssetItem: (() -> Void)?
     //편집모드에서 삭제했을 때
     var onDidRemoveAsset: (() -> Void)?
 
@@ -117,6 +119,7 @@ class AssetItemEditViewModel {
             addAssetItem()
         case .edit(let asset):
             editAssetItem(with: asset)
+            onDidUpdateAssetItem?()
         }
     }
     

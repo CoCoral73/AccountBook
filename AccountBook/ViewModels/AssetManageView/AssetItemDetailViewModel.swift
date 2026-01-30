@@ -13,6 +13,7 @@ class AssetItemDetailViewModel {
     private var txs: [Transaction]
     
     var onShowAssetItemEditView: ((AssetItemEditViewModel) -> Void)?
+    var onRequestReloadData: (() -> Void)?
     
     init(asset: AssetItem) {
         self.asset = asset
@@ -100,6 +101,10 @@ class AssetItemDetailViewModel {
     
     func handleEditButton() {
         let vm = AssetItemEditViewModel(asset: asset)
+        vm.onDidUpdateAssetItem = { [weak self] in
+            guard let self = self else { return }
+            self.onRequestReloadData?()
+        }
         onShowAssetItemEditView?(vm)
     }
 }

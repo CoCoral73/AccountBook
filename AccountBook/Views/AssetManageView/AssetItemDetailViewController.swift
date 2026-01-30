@@ -67,8 +67,16 @@ class AssetItemDetailViewController: UIViewController, ThemeApplicable {
     
     private func bindViewModel() {
         viewModel.onShowAssetItemEditView = { [weak self] vm in
+            guard let self = self else { return }
             DispatchQueue.main.async {
-                self?.showAssetItemEditView(vm)
+                self.showAssetItemEditView(vm)
+            }
+        }
+        
+        viewModel.onRequestReloadData = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.configureUI()
             }
         }
     }
