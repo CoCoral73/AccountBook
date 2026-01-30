@@ -19,6 +19,8 @@ class FilterCellViewModel {
         self.isCheck = isCheck
     }
     
+    var onDidTapCheckBox: (() -> Void)?
+    
     var isIconViewHidden: Bool {
         switch type {
         case .category:

@@ -28,6 +28,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var popUpView: UIView!
     @IBOutlet weak var popUpViewTitle: UILabel!
     @IBOutlet weak var filterTableView: UITableView!
+    @IBOutlet weak var selectAllButton: UIImageView!
     @IBOutlet weak var topConstraint: NSLayoutConstraint!
     @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
     
@@ -70,6 +71,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
         searchBar.borderColor = theme.accentColor
         searchBar.backgroundColor = theme.baseColor
         searchImageButton.tintColor = theme.accentColor
+        selectAllButton.tintColor = theme.accentColor
         minAmountButton.setTitleColor(theme.accentColor, for: .selected)
         maxAmountButton.setTitleColor(theme.accentColor, for: .selected)
     }
@@ -85,33 +87,56 @@ class SearchViewController: UIViewController, ThemeApplicable {
     func bindViewModel() {
         viewModel.onDidSetPeriod = { [weak self] in
             guard let self = self else { return }
-            periodButton.setTitle(viewModel.periodTypeDisplay, for: .normal)
-            periodButton.setTitleColor(viewModel.periodTypeDisplay == "전체" ? .placeholderText : ThemeManager.shared.currentTheme.accentColor, for: .normal)
-            periodSelectButton.isHidden = viewModel.isPeriodSelectButtonHidden
-            periodSelectButton.setTitle(viewModel.periodDisplay, for: .normal)
+            DispatchQueue.main.async {
+                self.periodButton.setTitle(self.viewModel.periodTypeDisplay, for: .normal)
+                self.periodButton.setTitleColor(self.viewModel.periodTypeDisplay == "전체" ? .placeholderText : ThemeManager.shared.currentTheme.accentColor, for: .normal)
+                self.periodSelectButton.isHidden = self.viewModel.isPeriodSelectButtonHidden
+                self.periodSelectButton.setTitle(self.viewModel.periodDisplay, for: .normal)
+            }
         }
         
-        viewModel.onRequestPopUp = { [weak self] in
+        viewModel.onRequestPopUp = { [weak self] imageName in
             guard let self = self else { return }
-            popUpViewTitle.text = viewModel.popUpViewTitle
-            filterTableView.reloadData()
-            showPopUp()
+            DispatchQueue.main.async {
+                self.popUpViewTitle.text = self.viewModel.popUpViewTitle
+                self.selectAllButton.image = UIImage(systemName: imageName)
+                self.filterTableView.reloadData()
+                self.showPopUp()
+            }
         }
         
         viewModel.onDidPopUpApply = { [weak self] isCategory, title in
             guard let self = self else { return }
-            if isCategory {
-                categoryButton.setTitle(title, for: .normal)
-                categoryButton.setTitleColor(title == "전체" ? .placeholderText : .black, for: .normal)
-            } else {
-                assetButton.setTitle(title, for: .normal)
-                assetButton.setTitleColor(title == "전체" ? .placeholderText : .black, for: .normal)
+            DispatchQueue.main.async {
+                if isCategory {
+                    self.categoryButton.setTitle(title, for: .normal)
+                    self.categoryButton.setTitleColor(title == "전체" ? .placeholderText : .black, for: .normal)
+                } else {
+                    self.assetButton.setTitle(title, for: .normal)
+                    self.assetButton.setTitleColor(title == "전체" ? .placeholderText : .black, for: .normal)
+                }
+            }
+        }
+        
+        viewModel.onRequestChangeSelectAll = { [weak self] imageName in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.selectAllButton.image = UIImage(systemName: imageName)
+            }
+        }
+        
+        viewModel.onRequestFilterReloadData = { [weak self] in
+            guard let self = self else { return }
+            DispatchQueue.main.async {
+                self.filterTableView.reloadData()
             }
         }
         
         viewModel.onRequestReloadData = { [weak self] in
             guard let self = self else { return }
-            self.tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     
@@ -138,6 +163,9 @@ class SearchViewController: UIViewController, ThemeApplicable {
         tapView.delegate = self
         tapView.cancelsTouchesInView = false
         view.addGestureRecognizer(tapView)
+        
+        let selectAll = UITapGestureRecognizer(target: self, action: #selector(didTapSelectAll))
+        selectAllButton.addGestureRecognizer(selectAll)
     }
     
     @objc func didTapOverlayView() {
@@ -147,6 +175,10 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @objc func didTapView() {
         keypadDidHide()
         searchTextField.resignFirstResponder()
+    }
+    
+    @objc func didTapSelectAll() {
+        viewModel.handleSelectAllButton()
     }
     
     @objc func didChangedTextField(_ textField: UITextField) {
@@ -354,6 +386,8 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if tableView == filterTableView { return }
+        
         let vm = viewModel.didSelectRowAt(indexPath.row)
         showTransactionDetailView(vm)
     }

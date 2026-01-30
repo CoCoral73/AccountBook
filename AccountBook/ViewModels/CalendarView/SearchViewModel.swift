@@ -19,9 +19,11 @@ class SearchViewModel {
     var endDate: Date = DefaultSetting.lastDate
     
     var isCategorySelected: Bool = true
-    var categoryFilter = Set<Category>(CategoryManager.shared.categories)
+    var isSelectAllForCategory: Bool = true
+    var categoryFilter = Set<Category>(CategoryManager.shared.allCategories.flatMap { $0 })
     var categoryViewModels: [[FilterCellViewModel]] = []
-    var assetFilter = Set<AssetItem>(AssetItemManager.shared.assetItems)
+    var isSelectAllForAsset: Bool = true
+    var assetFilter = Set<AssetItem>(AssetItemManager.shared.allAssetItems.flatMap { $0 })
     var assetViewModels: [[FilterCellViewModel]] = []
     
     var minAmount: Decimal = 0
@@ -35,16 +37,32 @@ class SearchViewModel {
         filteredTxs.sort { $0.date > $1.date }
         
         categoryViewModels = CategoryManager.shared.allCategories.map { array in
-            return array.map { FilterCellViewModel(type: .category($0), isCheck: true) }
+            return array.map {
+                let vm = FilterCellViewModel(type: .category($0), isCheck: true)
+                vm.onDidTapCheckBox = { [weak self] in
+                    guard let self = self else { return }
+                    self.handlePopUpFiltering()
+                }
+                return vm
+            }
         }
         assetViewModels = AssetItemManager.shared.allAssetItems.map { array in
-            return array.map { FilterCellViewModel(type: .asset($0), isCheck: true) }
+            return array.map {
+                let vm = FilterCellViewModel(type: .asset($0), isCheck: true)
+                vm.onDidTapCheckBox = { [weak self] in
+                    guard let self = self else { return }
+                    self.handlePopUpFiltering()
+                }
+                return vm
+            }
         }
     }
     
     var onDidSetPeriod: (() -> Void)?
-    var onRequestPopUp: (() -> Void)?
+    var onRequestPopUp: ((String) -> Void)?
     var onDidPopUpApply: ((_ isCategory: Bool, _ title: String) -> Void)?
+    var onRequestChangeSelectAll: ((String) -> Void)?
+    var onRequestFilterReloadData: (() -> Void)?
     var onRequestReloadData: (() -> Void)?
     
     var isPeriodSelectButtonHidden: Bool {
@@ -172,12 +190,42 @@ class SearchViewModel {
     
     func handleCategoryButton() {
         isCategorySelected = true
-        onRequestPopUp?()
+        isSelectAllForCategory = categoryFilter.count == categoryViewModels.flatMap { $0 }.count
+        onRequestPopUp?(isSelectAllForCategory ? "checkmark.square.fill" : "square")
     }
     
     func handleAssetButtonTapped() {
         isCategorySelected = false
-        onRequestPopUp?()
+        isSelectAllForAsset = assetFilter.count == assetViewModels.flatMap { $0 }.count
+        onRequestPopUp?(isSelectAllForAsset ? "checkmark.square.fill" : "square")
+    }
+    
+    func handleSelectAllButton() {
+        if isCategorySelected {
+            isSelectAllForCategory.toggle()
+            categoryViewModels.flatMap { $0 }.forEach {
+                $0.isCheck = isSelectAllForCategory
+            }
+            onRequestChangeSelectAll?(isSelectAllForCategory ? "checkmark.square.fill" : "square")
+        } else {
+            isSelectAllForAsset.toggle()
+            assetViewModels.flatMap { $0 }.forEach {
+                $0.isCheck = isSelectAllForAsset
+            }
+            onRequestChangeSelectAll?(isSelectAllForAsset ? "checkmark.square.fill" : "square")
+        }
+        
+        onRequestFilterReloadData?()
+    }
+    
+    func handlePopUpFiltering() {
+        let isSelectAll: Bool
+        if isCategorySelected {
+            isSelectAll = categoryViewModels.flatMap { $0 }.filter { $0.isCheck }.count == categoryViewModels.flatMap { $0 }.count
+        } else {
+            isSelectAll = assetViewModels.flatMap { $0 }.filter { $0.isCheck }.count == assetViewModels.flatMap { $0 }.count
+        }
+        onRequestChangeSelectAll?(isSelectAll ? "checkmark.square.fill" : "square")
     }
     
     func handlePopUpCancel() {
@@ -234,10 +282,10 @@ class SearchViewModel {
         filterTransaction()
         
         if isCategorySelected {
-            let title = CategoryManager.shared.categories.count == categoryFilter.count ? "전체" : "선택"
+            let title = categoryFilter.count == categoryViewModels.flatMap { $0 }.count ? "전체" : "선택"
             onDidPopUpApply?(true, title)
         } else {
-            let title = AssetItemManager.shared.assetItems.count == assetFilter.count ? "전체" : "선택"
+            let title = assetFilter.count == assetViewModels.flatMap { $0 }.count ? "전체" : "선택"
             onDidPopUpApply?(false, title)
         }
     }

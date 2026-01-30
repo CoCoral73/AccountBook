@@ -42,5 +42,6 @@ class FilterTableViewCell: UITableViewCell, ThemeApplicable {
     @objc func didTapCheckView() {
         viewModel.isCheck.toggle()
         checkView.image = UIImage(systemName: viewModel.checkImageName)
+        viewModel.onDidTapCheckBox?()
     }
 }
