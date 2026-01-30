@@ -10,6 +10,7 @@ import UIKit
 class TransactionDetailViewController: UIViewController, ThemeApplicable {
     
     @IBOutlet weak var navigationBar: UINavigationBar!
+    @IBOutlet weak var backButton: UIBarButtonItem!
     @IBOutlet weak var saveButton: UIBarButtonItem!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var backView: UIView!
@@ -69,6 +70,7 @@ class TransactionDetailViewController: UIViewController, ThemeApplicable {
     //ThemeApplicable
     func applyTheme(_ theme: any AppTheme) {
         view.backgroundColor = theme.baseColor
+        backButton.tintColor = theme.accentColor
     }
     
     private func bindViewModel() {

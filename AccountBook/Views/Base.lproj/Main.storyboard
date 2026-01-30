@@ -1552,6 +1552,7 @@
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="편집" id="OwJ-8Q-6oq">
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <connections>
                                                 <action selector="editButtonTapped:" destination="2Hy-8X-TJV" id="hG9-nB-EjD"/>
                                             </connections>
@@ -1818,7 +1819,6 @@
                         <outlet property="balanceView" destination="aNo-2k-XEN" id="5Xs-da-EHP"/>
                         <outlet property="cardView" destination="Spw-od-Rw6" id="Z6a-cn-8BO"/>
                         <outlet property="currentCycleAmountLabel" destination="VD6-SG-b9Z" id="NHt-JH-3FM"/>
-                        <outlet property="editButton" destination="OwJ-8Q-6oq" id="lzR-JH-nCd"/>
                         <outlet property="estimatedPaymentAmountLabel" destination="rjX-yd-eLa" id="8iq-k7-edp"/>
                         <outlet property="estimatedPaymentAmountView" destination="Mtk-Td-1Pd" id="Kjj-9x-N8J"/>
                         <outlet property="linkedAccountLabel" destination="dFv-63-3RE" id="UMi-m0-tpA"/>
@@ -3258,6 +3258,7 @@
                         <outlet property="assetItemButton" destination="kz7-3j-9QQ" id="ERk-8Z-sTn"/>
                         <outlet property="assetTypeLabel" destination="Yqr-si-hI6" id="Jdp-He-tpG"/>
                         <outlet property="assetView" destination="aMQ-sg-car" id="77h-DG-li5"/>
+                        <outlet property="backButton" destination="DSs-aQ-lAe" id="688-hh-g6M"/>
                         <outlet property="backView" destination="dVb-Pm-lLl" id="dge-Zb-Iob"/>
                         <outlet property="categoryButton" destination="9So-KP-ogq" id="grb-fe-27n"/>
                         <outlet property="dateButton" destination="qcq-2D-RLI" id="1nB-Cz-fhM"/>
@@ -5232,7 +5233,7 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem title="취소" id="dyl-s6-IdD">
-                                        <color key="tintColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="cancelButtonTapped:" destination="bux-WE-lBz" id="bgY-Jl-pB1"/>
                                         </connections>
@@ -5246,7 +5247,7 @@
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="bdT-wq-yVB"/>
                                     <barButtonItem title="선택" id="C1P-OR-8qB">
-                                        <color key="tintColor" red="1" green="0.59396674679999995" blue="0.62780083789999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <connections>
                                             <action selector="selectButtonTapped:" destination="bux-WE-lBz" id="QSz-CZ-Ep8"/>
                                         </connections>
@@ -5285,7 +5286,6 @@
                     <connections>
                         <outlet property="cancelButton" destination="dyl-s6-IdD" id="xDX-Ck-Pku"/>
                         <outlet property="pickerView" destination="r2t-Wn-bQD" id="yfP-g5-3cz"/>
-                        <outlet property="selectButton" destination="C1P-OR-8qB" id="YKB-QI-eTz"/>
                         <outlet property="todayButton" destination="ryw-5w-ek3" id="pwy-hz-qrX"/>
                     </connections>
                 </viewController>

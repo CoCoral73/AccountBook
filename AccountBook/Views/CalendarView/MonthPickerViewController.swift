@@ -37,7 +37,6 @@ class MonthPickerViewController: UIViewController, ThemeApplicable {
 
     func applyTheme(_ theme: any AppTheme) {
         todayButton.tintColor = theme.accentColor
-        selectButton.tintColor = theme.accentColor
     }
     
     @IBAction func cancelButtonTapped(_ sender: UIBarButtonItem) {
