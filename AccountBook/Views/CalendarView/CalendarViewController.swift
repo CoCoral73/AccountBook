@@ -59,12 +59,17 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     
     func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(txDidUpdate), name: .txDidUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(dataDidUpdate), name: .dataDidUpdate, object: nil)
         startObservingTheme()
     }
     
     @objc func txDidUpdate(_ noti: Notification) {
         let date = noti.userInfo?["date"] as! Date
         viewModel.txDidUpdate(date)
+    }
+    
+    @objc func dataDidUpdate(_ noti: Notification) {
+        detailTableView.reloadData()
     }
     
     private func bindViewModel() {
@@ -373,4 +378,5 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension Notification.Name {
     static let txDidUpdate = Notification.Name("TxDidUpdate")
+    static let dataDidUpdate = Notification.Name("dataDidUpdate")
 }

@@ -133,7 +133,9 @@ class AssetItemManager {
             credit.withdrawalDay = withdrawalDate
         default: break
         }
+        
         CoreDataManager.shared.saveContext()
+        NotificationCenter.default.post(name: .dataDidUpdate, object: nil)
     }
     
     func deleteAssetItem(with item: AssetItem) {
@@ -162,7 +164,9 @@ class AssetItemManager {
             }
         default: break
         }
+        
         CoreDataManager.shared.context.delete(item)
         CoreDataManager.shared.saveContext()
+        NotificationCenter.default.post(name: .dataDidUpdate, object: nil)
     }
 }

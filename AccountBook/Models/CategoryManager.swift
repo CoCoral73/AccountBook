@@ -57,6 +57,7 @@ class CategoryManager {
         category.name = name
         
         CoreDataManager.shared.saveContext()
+        NotificationCenter.default.post(name: .dataDidUpdate, object: nil)
     }
 
     func deleteCategory(_ category: Category) {
@@ -89,6 +90,7 @@ class CategoryManager {
         
         CoreDataManager.shared.context.delete(category)
         CoreDataManager.shared.saveContext()
+        NotificationCenter.default.post(name: .dataDidUpdate, object: nil)
     }
     
     func reorderCategory(type: TransactionType, source: Int, destination: Int) {
