@@ -2024,7 +2024,7 @@
                                 <rect key="frame" x="0.0" y="103" width="393" height="749"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="hCx-ir-Tog">
-                                        <rect key="frame" x="0.0" y="0.0" width="393" height="685"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="393" height="735"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LUZ-cZ-Uep">
                                                 <rect key="frame" x="0.0" y="0.0" width="393" height="55"/>
@@ -2331,8 +2331,25 @@
                                                     <constraint firstAttribute="trailing" secondItem="Nhc-Hg-IhP" secondAttribute="trailing" constant="10" id="hTl-cE-K0b"/>
                                                 </constraints>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="PPd-7S-CJB">
+                                                <rect key="frame" x="0.0" y="285" width="393" height="50"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="검색 결과가 없습니다." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g9n-nm-hv3">
+                                                        <rect key="frame" x="123.66666666666667" y="14.999999999999998" width="145.66666666666663" height="20.333333333333329"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                        <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                </subviews>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <constraints>
+                                                    <constraint firstItem="g9n-nm-hv3" firstAttribute="centerY" secondItem="PPd-7S-CJB" secondAttribute="centerY" id="iyE-km-ply"/>
+                                                    <constraint firstItem="g9n-nm-hv3" firstAttribute="centerX" secondItem="PPd-7S-CJB" secondAttribute="centerX" id="sRR-lp-jN8"/>
+                                                    <constraint firstAttribute="height" constant="50" id="v37-m1-vxW"/>
+                                                </constraints>
+                                            </view>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="BqN-sn-yFx" customClass="IntrinsicTableView" customModule="AccountBook" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="285" width="393" height="400"/>
+                                                <rect key="frame" x="0.0" y="335" width="393" height="400"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="400" placeholder="YES" id="2l9-lg-6Rj"/>
@@ -2486,11 +2503,13 @@
                                                 </label>
                                                 <imageView clipsSubviews="YES" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="square" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="wCS-a3-pI0">
                                                     <rect key="frame" x="297" y="6.6666666666666643" width="40" height="37"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="wCS-a3-pI0" secondAttribute="height" multiplier="1:1" id="1Ge-er-O2U"/>
+                                                    </constraints>
                                                 </imageView>
                                             </subviews>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
-                                                <constraint firstItem="wCS-a3-pI0" firstAttribute="width" secondItem="wCS-a3-pI0" secondAttribute="height" multiplier="1:1" id="1Ge-er-O2U"/>
                                                 <constraint firstAttribute="bottom" secondItem="wCS-a3-pI0" secondAttribute="bottom" constant="5" id="A1i-pe-PES"/>
                                                 <constraint firstItem="SKe-D6-Ajp" firstAttribute="centerY" secondItem="RfI-mh-wHa" secondAttribute="centerY" id="GBC-US-jVe"/>
                                                 <constraint firstItem="wCS-a3-pI0" firstAttribute="top" secondItem="RfI-mh-wHa" secondAttribute="top" constant="5" id="Lj7-OU-Pur"/>
@@ -2650,6 +2669,7 @@
                         <outlet property="maxAmountButton" destination="r8u-Qx-8z7" id="keP-us-zo9"/>
                         <outlet property="minAmountButton" destination="aEs-ec-Mgv" id="Ewi-Sj-h3q"/>
                         <outlet property="navItem" destination="CTX-7O-7E2" id="Wbu-b8-urB"/>
+                        <outlet property="noResultsView" destination="PPd-7S-CJB" id="ldf-l6-uG2"/>
                         <outlet property="overlayView" destination="ObJ-a7-lhz" id="mvX-EK-G3n"/>
                         <outlet property="periodButton" destination="hLY-bQ-S8R" id="2WU-1A-Spn"/>
                         <outlet property="periodSelectButton" destination="g5G-bN-CY1" id="dz7-qB-gqM"/>

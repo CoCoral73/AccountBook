@@ -8,8 +8,8 @@
 import Foundation
 
 class SearchViewModel {
-    var allTxs: [Transaction]
-    var filteredTxs: [Transaction]
+    private var allTxs: [Transaction]
+    private var filteredTxs: [Transaction]
     
     var keyword: String?
     
@@ -63,7 +63,7 @@ class SearchViewModel {
     var onDidPopUpApply: ((_ isCategory: Bool, _ title: String) -> Void)?
     var onRequestChangeSelectAll: ((String) -> Void)?
     var onRequestFilterReloadData: (() -> Void)?
-    var onRequestReloadData: (() -> Void)?
+    var onRequestReloadData: ((Bool) -> Void)?
     
     var isPeriodSelectButtonHidden: Bool {
         return isEntire
@@ -358,6 +358,6 @@ class SearchViewModel {
             filteredTxs.sort { $0.amount > $1.amount }
         }
         
-        onRequestReloadData?()
+        onRequestReloadData?(filteredTxs.isEmpty)
     }
 }

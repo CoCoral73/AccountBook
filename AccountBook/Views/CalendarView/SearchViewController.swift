@@ -22,6 +22,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
     @IBOutlet weak var minAmountButton: UIButton!
     @IBOutlet weak var maxAmountButton: UIButton!
     @IBOutlet weak var sortButton: UIButton!
+    @IBOutlet weak var noResultsView: UIView!
     @IBOutlet weak var tableView: IntrinsicTableView!
     
     @IBOutlet weak var overlayView: UIView!
@@ -132,10 +133,10 @@ class SearchViewController: UIViewController, ThemeApplicable {
             }
         }
         
-        viewModel.onRequestReloadData = { [weak self] in
+        viewModel.onRequestReloadData = { [weak self] isEmpty in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.tableView.reloadData()
+                self.reloadResults(isEmpty)
             }
         }
     }
@@ -347,10 +348,18 @@ extension SearchViewController: UITableViewDataSource, UITableViewDelegate {
         tableView.rowHeight = 50
         tableView.sectionHeaderTopPadding = 0
         
+        noResultsView.isHidden = viewModel.numberOfRowsInSection > 0
+        
+        filterTableView.dataSource = self
         filterTableView.dataSource = self
         filterTableView.delegate = self
         filterTableView.rowHeight = 50
         filterTableView.sectionHeaderTopPadding = 10
+    }
+    
+    func reloadResults(_ isEmpty: Bool) {
+        noResultsView.isHidden = !isEmpty
+        tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
