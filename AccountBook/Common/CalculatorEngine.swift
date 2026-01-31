@@ -69,7 +69,7 @@ final class CalculatorEngine {
         
         var rounded = Decimal()
         NSDecimalRound(&rounded, &currentValue, 0, .down)
-        currentValue = rounded
+        currentValue = currentValue == .nan ? 0 : rounded
         
         buffer = 0
     }
