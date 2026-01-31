@@ -2790,7 +2790,7 @@
                                                 <action selector="backButtonTapped:" destination="oU4-9V-oZi" id="fik-ek-xy4"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="저장" hidden="YES" id="5Yh-EO-FCV">
+                                        <barButtonItem key="rightBarButtonItem" title="저장" style="done" hidden="YES" id="5Yh-EO-FCV">
                                             <connections>
                                                 <action selector="saveButtonTapped:" destination="oU4-9V-oZi" id="ghr-ne-fCf"/>
                                             </connections>
