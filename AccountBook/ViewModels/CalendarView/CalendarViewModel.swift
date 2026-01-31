@@ -7,10 +7,6 @@
 
 import Foundation
 
-protocol TransactionUpdatable: AnyObject {
-    var onDidUpdateTransaction: ((Date) -> Void)? { get set }
-}
-
 class CalendarViewModel {
     
     private var currentMonth: Date {
