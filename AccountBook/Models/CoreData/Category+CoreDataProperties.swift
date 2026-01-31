@@ -22,6 +22,7 @@ extension Category {
     @NSManaged public var name: String
     @NSManaged public var orderIndex: Int16
     @NSManaged public var transactions: NSSet?
+    @NSManaged public var isRemoved: Bool
     
     var type: TransactionType {
         get { TransactionType(rawValue: typeValue) ?? .expense }

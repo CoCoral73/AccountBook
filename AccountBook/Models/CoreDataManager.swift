@@ -102,6 +102,7 @@ final class CoreDataManager {
     // MARK: - 전체 카테고리 로드
     func fetchCategories() -> [Category] {
         let request: NSFetchRequest<Category> = Category.fetchRequest()
+        request.predicate = NSPredicate(format: "isRemoved == NO")
         request.sortDescriptors = [NSSortDescriptor(key: "orderIndex", ascending: true)]
         return (try? context.fetch(request)) ?? []
     }

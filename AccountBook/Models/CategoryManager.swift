@@ -5,6 +5,7 @@
 //  Created by 김정원 on 8/2/25.
 //
 
+import CoreData
 import Foundation
 
 class CategoryManager {
@@ -26,8 +27,15 @@ class CategoryManager {
         transferCategories = categories.filter { $0.type == .transfer }
     }
     
-    func checkDuplicate(name: String) -> Bool {
-        return categories.contains { $0.name == name }
+    func checkDuplicate(type: TransactionType, name: String) -> Bool {
+        switch type {
+        case .income:
+            return incomeCategories.contains { $0.name == name }
+        case .expense:
+            return expenseCategories.contains { $0.name == name }
+        case .transfer:
+            return transferCategories.contains { $0.name == name }
+        }
     }
 
     func addCategory(icon: String, name: String, type: TransactionType) {
@@ -49,6 +57,7 @@ class CategoryManager {
             transferCategories.append(category)
         }
         
+        categories.append(category)
         CoreDataManager.shared.saveContext()
     }
     
@@ -60,7 +69,7 @@ class CategoryManager {
         NotificationCenter.default.post(name: .dataDidUpdate, object: nil)
     }
 
-    func deleteCategory(_ category: Category) {
+    func removeCategory(_ category: Category) {
         switch category.type {
         case .income:
             if let index = incomeCategories.firstIndex(of: category) {
@@ -88,7 +97,14 @@ class CategoryManager {
             }
         }
         
-        CoreDataManager.shared.context.delete(category)
+        categories.removeAll(where: { $0 == category })
+        
+        if category.transactions?.count ?? 0 > 0 {
+            category.isRemoved = true
+        } else {
+            CoreDataManager.shared.context.delete(category)
+        }
+        
         CoreDataManager.shared.saveContext()
         NotificationCenter.default.post(name: .dataDidUpdate, object: nil)
     }
@@ -119,5 +135,29 @@ class CategoryManager {
         }
 
         CoreDataManager.shared.saveContext()
+    }
+    
+    func deleteCategoryIfNeeded() {
+        CoreDataManager.shared.persistentContainer.performBackgroundTask { context in
+            let request: NSFetchRequest<Category> = Category.fetchRequest()
+            request.predicate = NSPredicate(format: "isRemoved == YES")
+            
+            do {
+                let removed = try context.fetch(request)
+                
+                for category in removed {
+                    if (category.transactions?.count ?? 0) == 0 {
+                        context.delete(category)
+                    }
+                }
+                
+                if context.hasChanges {
+                    try context.save()
+                    print("백그라운드, 카테고리 정리 완료")
+                }
+            } catch {
+                print("백그라운드, 카테고리 정리중 오류 발생: \(error)")
+            }
+        }
     }
 }

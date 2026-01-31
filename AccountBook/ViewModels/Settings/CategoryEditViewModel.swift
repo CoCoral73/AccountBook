@@ -73,7 +73,7 @@ class CategoryEditViewModel {
     func validateInput(icon: String?, name: String?) -> CategoryInputError? {
         guard let icon = icon, !icon.isEmpty else { return .emptyIcon }
         guard let name = name, !name.isEmpty else { return .emptyName }
-        guard !CategoryManager.shared.checkDuplicate(name: name) else { return .duplicatedName }
+        guard !CategoryManager.shared.checkDuplicate(type: type, name: name) else { return .duplicatedName }
         return nil
     }
     
@@ -93,7 +93,7 @@ class CategoryEditViewModel {
         case .add:
             return
         case .edit(let category):
-            CategoryManager.shared.deleteCategory(category)
+            CategoryManager.shared.removeCategory(category)
             onDidEditCategory?()
         }
     }

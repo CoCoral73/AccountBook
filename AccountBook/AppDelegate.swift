@@ -21,6 +21,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         LockAppManager.shared.clearKeychainDataIfFirstLaunch()
         CardManager.shared.checkAndCompleteCycle()
+        
+        CategoryManager.shared.deleteCategoryIfNeeded()
+        
         return true
     }
 
