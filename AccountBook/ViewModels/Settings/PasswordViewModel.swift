@@ -19,7 +19,7 @@ enum PasswordStep: Int {
 }
 
 class PasswordViewModel {
-    private var mode: PasswordMode
+    private(set) var mode: PasswordMode
     private var length: Int = 4
     
     var onUpdateDigit: ((Int, String) -> Void)?
@@ -52,7 +52,7 @@ class PasswordViewModel {
     }
     
     var isEnabledForBiometricID: Bool {
-        return LockAppManager.shared.useBiometricID
+        return LockAppManager.shared.useBiometricID && mode == .validate
     }
     
     var alphaForBiometricID: CGFloat {
@@ -77,7 +77,7 @@ class PasswordViewModel {
     }
     
     func requestValidateBiometricID() {
-        guard LockAppManager.shared.useBiometricID else { return }
+        guard mode == .validate && LockAppManager.shared.useBiometricID else { return }
         LockAppManager.shared.authenticateWithBiometrics(reason: "잠금 해제") { [weak self] success in
             guard let self = self else { return }
             if success {
