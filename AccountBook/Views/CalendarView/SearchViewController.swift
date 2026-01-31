@@ -102,6 +102,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
             DispatchQueue.main.async {
                 self.popUpViewTitle.text = self.viewModel.popUpViewTitle
                 self.selectAllButton.image = UIImage(systemName: imageName)
+                self.filterTableView.setContentOffset(.zero, animated: true)
                 self.filterTableView.reloadData()
                 self.showPopUp()
             }
