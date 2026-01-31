@@ -28,6 +28,7 @@ class AssetSelectionViewController: UIViewController, UITableViewDelegate, UITab
         super.viewDidLoad()
 
         configureTableView()
+        configureInitialSettingIfNeeded()
         preferredContentSize.height = 360
     }
 
@@ -43,25 +44,20 @@ class AssetSelectionViewController: UIViewController, UITableViewDelegate, UITab
         itemTableView.contentInsetAdjustmentBehavior = .never
     }
     
+    private func configureInitialSettingIfNeeded() {
+        guard viewModel.type == .transfer else { return }
+        
+        typeTableView.selectRow(at: IndexPath(row: 0, section: 0), animated: false, scrollPosition: .none)
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if tableView == typeTableView {
-            guard let cell = tableView.cellForRow(at: indexPath) as? AssetTypeTableViewCell else { return }
-            
-            if let model = cell.model {
-                selectedType = model
-                itemTableView.reloadData()
-            }
+            viewModel.setSelectedType(indexPath.row)
+            itemTableView.reloadData()
         } else {
-            guard let cell = tableView.cellForRow(at: indexPath) as? AssetItemTableViewCell else { return }
-            
-            if let model = cell.model {
-                viewModel.didSelectRowAt(with: model)
-                dismiss(animated: true)
-            } else {    //자산 추가 뷰로 이동
-                let vm = AssetItemEditViewModel(type: selectedType!)
+            if let vm = viewModel.didSelectRowAt(indexPath.row) {
                 vm.onDidAddAssetItem = { [weak self] in
                     guard let self = self else { return }
-                    
                     self.itemTableView.reloadData()
                 }
                 
@@ -72,6 +68,8 @@ class AssetSelectionViewController: UIViewController, UITableViewDelegate, UITab
                 
                 addAssetVC.modalPresentationStyle = .fullScreen
                 present(addAssetVC, animated: true)
+            } else {
+                dismiss(animated: true)
             }
         }
     }
@@ -80,8 +78,7 @@ class AssetSelectionViewController: UIViewController, UITableViewDelegate, UITab
         if tableView == typeTableView {
             return viewModel.assetTypes.count
         } else {
-            guard let type = selectedType else { return 0 }
-            return AssetItemManager.shared.getAssetItems(with: type).count + (type != .cash ? 1 : 0)
+            return viewModel.numberOfRowsInSection
         }
     }
     
@@ -95,10 +92,10 @@ class AssetSelectionViewController: UIViewController, UITableViewDelegate, UITab
         } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: Cell.assetItemCell, for: indexPath) as! AssetItemTableViewCell
             
-            if selectedType != .cash && indexPath.row == tableView.numberOfRows(inSection: 0) - 1 { //자산 추가 셀
+            if viewModel.selectedType != .cash && indexPath.row == viewModel.numberOfRowsInSection - 1 { //자산 추가 셀
                 cell.model = nil
             } else {
-                let item = AssetItemManager.shared.getAssetItems(with: selectedType!)[indexPath.row]
+                let item = viewModel.assetItems[indexPath.row]
                 cell.model = item
             }
             
