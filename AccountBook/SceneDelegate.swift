@@ -59,7 +59,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         LockAppManager.shared.checkAvailableStateOfBiometricID()
         
         guard let topVC = window?.topMostViewController() else { return }
-        var isAlreadyShowing = (topVC as? PasswordViewController)?.viewModel.mode == .validate
+        let isAlreadyShowing = (topVC as? PasswordViewController)?.viewModel.mode == .validate
         
         if !isAlreadyShowing {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
