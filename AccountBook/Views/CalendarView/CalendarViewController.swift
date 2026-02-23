@@ -359,7 +359,7 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
         }
         
         navigationController?.pushViewController(detailVC, animated: true)
-        tableView.deselectRow(at: indexPath, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -120,5 +120,6 @@ extension CategoryListViewController: UITableViewDataSource, UITableViewDelegate
         
         vc.presentationStyle = .push
         navigationController?.pushViewController(vc, animated: true)
+        tableView.deselectRow(at: indexPath, animated: false)
     }
 }
