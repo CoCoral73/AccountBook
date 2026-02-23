@@ -244,4 +244,65 @@ final class CoreDataManager {
         return (try? context.fetch(request)) ?? []
     }
 
+    // MARK: - 거래내역 초기화 (Transaction, Installment 삭제)
+    func resetAllTransactions() {
+        let entityNames = ["Transaction", "Installment"]
+        var deletedIDs: [NSManagedObjectID] = []
+
+        do {
+            for entityName in entityNames {
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                deleteRequest.resultType = .resultTypeObjectIDs
+
+                let result = try context.execute(deleteRequest) as? NSBatchDeleteResult
+                if let ids = result?.result as? [NSManagedObjectID] {
+                    deletedIDs.append(contentsOf: ids)
+                }
+            }
+
+            NSManagedObjectContext.mergeChanges(
+                fromRemoteContextSave: [NSDeletedObjectsKey: deletedIDs],
+                into: [context]
+            )
+        } catch {
+            print("거래내역 초기화 실패: \(error)")
+        }
+    }
+
+    // MARK: - 전체 초기화 (CoreData + Keychain + UserDefaults)
+    func resetAllData() {
+        let entityNames = ["Transaction", "Installment", "Category", "AssetItem"]
+        var deletedIDs: [NSManagedObjectID] = []
+
+        do {
+            for entityName in entityNames {
+                let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
+                let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
+                deleteRequest.resultType = .resultTypeObjectIDs
+
+                let result = try context.execute(deleteRequest) as? NSBatchDeleteResult
+                if let ids = result?.result as? [NSManagedObjectID] {
+                    deletedIDs.append(contentsOf: ids)
+                }
+            }
+
+            NSManagedObjectContext.mergeChanges(
+                fromRemoteContextSave: [NSDeletedObjectsKey: deletedIDs],
+                into: [context]
+            )
+        } catch {
+            print("CoreData 초기화 실패: \(error)")
+        }
+
+        if let bundleID = Bundle.main.bundleIdentifier {
+            UserDefaults.standard.removePersistentDomain(forName: bundleID)
+        }
+        
+        LockAppManager.shared.clearKeychainDataIfFirstLaunch()
+        
+        ThemeManager.shared.reset()
+        seedDataIfNeeded()
+    }
+
 }
