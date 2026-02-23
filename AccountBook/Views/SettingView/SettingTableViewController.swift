@@ -9,7 +9,7 @@ import UIKit
 
 enum SettingOption {
     case incomeCategory, expenseCategory, transferCategory
-    case theme, lockApp
+    case theme, lockApp, reset
     case rating, help, contact
     
     init(indexPath: IndexPath) {
@@ -24,6 +24,8 @@ enum SettingOption {
             self = .theme
         case (1, 1):
             self = .lockApp
+        case (1, 2):
+            self = .reset
         case (2, 0):
             self = .rating
         case (2, 1):
@@ -66,6 +68,8 @@ class SettingTableViewController: UITableViewController, ThemeApplicable {
             showThemeView()
         case .lockApp:
             showLockAppView()
+        case .reset:
+            showResetAlert()
         case .help:
             showHelpView()
         case .contact:
@@ -105,6 +109,22 @@ class SettingTableViewController: UITableViewController, ThemeApplicable {
         }
         
         navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func showResetAlert() {
+        let alert = UIAlertController(title: "데이터 초기화", message: nil, preferredStyle: .actionSheet)
+        let action1 = UIAlertAction(title: "거래 내역 초기화", style: .destructive) { _ in
+            CoreDataManager.shared.resetAllTransactions()
+        }
+        let action2 = UIAlertAction(title: "전체 설정 초기화", style: .destructive) { _ in
+            CoreDataManager.shared.resetAllData()
+        }
+        
+        alert.addAction(action1)
+        alert.addAction(action2)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
+        
+        present(alert, animated: true)
     }
     
     func showHelpView() {
