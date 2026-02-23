@@ -114,10 +114,6 @@ class CategoryEditViewController: UIViewController {
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        iconTextField.becomeFirstResponder()
-    }
 }
 
 extension CategoryEditViewController: UITextFieldDelegate {
