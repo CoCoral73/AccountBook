@@ -51,6 +51,9 @@ final class CoreDataManager {
     func seedDataIfNeeded() {
         seedDefaultCategoriesIfNeeded()
         seedDefaultAssetItemIfNeeded()
+        
+        CategoryManager.shared.loadCategories()
+        AssetItemManager.shared.loadAssetItems()
     }
     
     // MARK: - Load and Insert Default Categories from JSON

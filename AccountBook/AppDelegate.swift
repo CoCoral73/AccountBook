@@ -16,9 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         CoreDataManager.shared.seedDataIfNeeded()
         
-        CategoryManager.shared.loadCategories()
-        AssetItemManager.shared.loadAssetItems()
-        
         LockAppManager.shared.clearKeychainDataIfFirstLaunch()
         CardManager.shared.checkAndCompleteCycle()
         
