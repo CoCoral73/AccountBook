@@ -54,8 +54,12 @@ final class ThemeManager {
         currentKind = kind
     }
 
-    // MARK: - 저장/로드 (UserDefaults)
+    // 테마 초기화 (기본값으로 복원)
+    func reset() {
+        currentKind = .pink
+    }
 
+    // MARK: - 저장/로드 (UserDefaults)
     private func save(kind: AppThemeKind) {
         UserDefaults.standard.set(kind.rawValue, forKey: "AppThemeKind")
     }
