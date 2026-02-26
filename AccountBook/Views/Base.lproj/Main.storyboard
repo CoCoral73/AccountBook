@@ -358,11 +358,10 @@
                                 </prototypes>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nZE-h1-eQs" customClass="GADBannerView">
-                                <rect key="frame" x="36.666666666666657" y="719" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="719" width="393" height="50"/>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" placeholder="YES" id="9ej-UO-kaJ"/>
-                                    <constraint firstAttribute="width" constant="320" placeholder="YES" id="heQ-0z-uO4"/>
                                 </constraints>
                             </view>
                             <view hidden="YES" alpha="0.0" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eLY-fU-Yyz">
@@ -480,7 +479,6 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="dU9-6d-kDc" secondAttribute="trailing" id="1Q6-Jw-sji"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="eLY-fU-Yyz" secondAttribute="trailing" id="9gD-Xu-SGd"/>
                             <constraint firstItem="K3Q-sI-xUx" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="B6I-NU-czW"/>
-                            <constraint firstItem="nZE-h1-eQs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Bga-ta-Joy"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="SPv-hE-Kgg" secondAttribute="trailing" id="CJm-N7-PsG"/>
                             <constraint firstItem="eLY-fU-Yyz" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="F5O-gw-sEi"/>
                             <constraint firstItem="eLY-fU-Yyz" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="GaP-Ra-w93"/>
@@ -499,12 +497,14 @@
                             <constraint firstItem="DEs-YH-E4L" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="XlA-Jr-w5w"/>
                             <constraint firstItem="26h-FC-cIP" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ZBz-HP-emA"/>
                             <constraint firstItem="kq9-iQ-Zmf" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="a8o-j3-cXm"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="nZE-h1-eQs" secondAttribute="trailing" id="ePW-t2-7TA"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="kq9-iQ-Zmf" secondAttribute="trailing" id="gBG-xX-bzg"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DEs-YH-E4L" secondAttribute="trailing" constant="16" id="gPp-Pn-c5x"/>
                             <constraint firstItem="k3h-HX-058" firstAttribute="top" secondItem="kq9-iQ-Zmf" secondAttribute="bottom" id="hl3-au-tiG"/>
                             <constraint firstItem="SPv-hE-Kgg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="hmu-nF-Jl7"/>
                             <constraint firstItem="kq9-iQ-Zmf" firstAttribute="top" secondItem="dU9-6d-kDc" secondAttribute="bottom" id="j0s-uJ-owh"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="nZE-h1-eQs" secondAttribute="bottom" id="jBC-jx-x1Q"/>
+                            <constraint firstItem="nZE-h1-eQs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="jIe-1H-8bi"/>
                             <constraint firstItem="K3Q-sI-xUx" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="tdJ-nz-hep"/>
                             <constraint firstItem="26h-FC-cIP" firstAttribute="bottom" secondItem="XVN-SM-19z" secondAttribute="bottom" constant="15" id="uMm-B8-Lxw"/>
                             <constraint firstItem="SPv-hE-Kgg" firstAttribute="top" secondItem="DEs-YH-E4L" secondAttribute="bottom" constant="10" id="vt8-EC-Ii9"/>
