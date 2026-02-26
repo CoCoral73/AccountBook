@@ -97,6 +97,7 @@
 				90E579532E15002700323D5A /* Frameworks */,
 				90E579542E15002700323D5A /* Resources */,
 				316741AA59DC6EAF5F16B0E8 /* [CP] Embed Pods Frameworks */,
+				7D7E20A36FF897510A8927C8 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -106,8 +107,6 @@
 				90E579582E15002700323D5A /* AccountBook */,
 			);
 			name = AccountBook;
-			packageProductDependencies = (
-			);
 			productName = AccountBook;
 			productReference = 90E579562E15002700323D5A /* AccountBook.app */;
 			productType = "com.apple.product-type.application";
@@ -136,8 +135,6 @@
 			);
 			mainGroup = 90E5794D2E15002700323D5A;
 			minimizedProjectReferenceProxies = 1;
-			packageReferences = (
-			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 90E579572E15002700323D5A /* Products */;
 			projectDirPath = "";
@@ -174,6 +171,23 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AccountBook/Pods-AccountBook-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		7D7E20A36FF897510A8927C8 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AccountBook/Pods-AccountBook-resources-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-AccountBook/Pods-AccountBook-resources-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-AccountBook/Pods-AccountBook-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E8ACDE3DB87FA496529670D5 /* [CP] Check Pods Manifest.lock */ = {

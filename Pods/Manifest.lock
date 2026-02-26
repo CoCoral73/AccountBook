@@ -2,17 +2,25 @@ PODS:
   - DGCharts (5.1.0):
     - DGCharts/Core (= 5.1.0)
   - DGCharts/Core (5.1.0)
+  - Google-Mobile-Ads-SDK (13.0.0):
+    - GoogleUserMessagingPlatform (>= 1.1)
+  - GoogleUserMessagingPlatform (3.1.0)
 
 DEPENDENCIES:
   - DGCharts
+  - Google-Mobile-Ads-SDK
 
 SPEC REPOS:
   trunk:
     - DGCharts
+    - Google-Mobile-Ads-SDK
+    - GoogleUserMessagingPlatform
 
 SPEC CHECKSUMS:
   DGCharts: 1c6daf585b6cfc78807af44ea690d357c410627f
+  Google-Mobile-Ads-SDK: 96498d53355e438e2d932277e5e8e41a824fe4d4
+  GoogleUserMessagingPlatform: befe603da6501006420c206222acd449bba45a9c
 
-PODFILE CHECKSUM: a44bbf6ba2980b3bbddfc7066424da1aa45256d5
+PODFILE CHECKSUM: 7c9e289a81d8aac8ecdb08d66c0223feb1a5c2bc
 
 COCOAPODS: 1.16.2
