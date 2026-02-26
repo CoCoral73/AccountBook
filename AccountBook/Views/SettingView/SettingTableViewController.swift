@@ -132,17 +132,32 @@ class SettingTableViewController: UITableViewController, ThemeApplicable, Banner
     
     func showResetAlert() {
         let alert = UIAlertController(title: "데이터 초기화", message: nil, preferredStyle: .actionSheet)
-        let action1 = UIAlertAction(title: "거래 내역 초기화", style: .destructive) { _ in
-            CoreDataManager.shared.resetAllTransactions()
+        let action1 = UIAlertAction(title: "거래 내역 삭제", style: .destructive) { _ in
+            self.showConfirmAlert(message: "거래 내역을 삭제하시겠습니까?") {
+                CoreDataManager.shared.resetAllTransactions()
+            }
         }
-        let action2 = UIAlertAction(title: "전체 설정 초기화", style: .destructive) { _ in
-            CoreDataManager.shared.resetAllData()
+        let action2 = UIAlertAction(title: "전체 설정 삭제", style: .destructive) { _ in
+            self.showConfirmAlert(message: "전체 설정을 삭제하시겠습니까?") {
+                CoreDataManager.shared.resetAllData()
+            }
         }
         
         alert.addAction(action1)
         alert.addAction(action2)
         alert.addAction(UIAlertAction(title: "취소", style: .cancel))
         
+        present(alert, animated: true)
+    }
+    
+    func showConfirmAlert(message: String, handler: @escaping () -> Void) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let confirm = UIAlertAction(title: "삭제", style: .destructive) { _ in
+            handler()
+        }
+        
+        alert.addAction(confirm)
+        alert.addAction(UIAlertAction(title: "취소", style: .cancel))
         present(alert, animated: true)
     }
     
