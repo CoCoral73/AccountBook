@@ -469,10 +469,10 @@ extension TransactionDetailViewController: NumericKeypadDelegate {
         NSLayoutConstraint.activate([
             keypad.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             keypad.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            keypad.heightAnchor.constraint(equalToConstant: 400)
+            keypad.heightAnchor.constraint(equalToConstant: view.frame.height * 0.47)
         ])
         
-        bottomConstraint = keypad.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 400)
+        bottomConstraint = keypad.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.frame.height * 0.47)
         bottomConstraint.isActive = true
     }
     
@@ -492,7 +492,7 @@ extension TransactionDetailViewController: NumericKeypadDelegate {
     }
     
     func keypadDidHide() {
-        bottomConstraint.constant = 400
+        bottomConstraint.constant = view.frame.height * 0.47
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }

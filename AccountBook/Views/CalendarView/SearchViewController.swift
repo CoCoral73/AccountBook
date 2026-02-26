@@ -466,10 +466,10 @@ extension SearchViewController: NumericKeypadDelegate {
         NSLayoutConstraint.activate([
             keypad.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             keypad.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            keypad.heightAnchor.constraint(equalToConstant: 400)
+            keypad.heightAnchor.constraint(equalToConstant: view.frame.height * 0.47)
         ])
         
-        keypadBottomConstraint = keypad.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 400)
+        keypadBottomConstraint = keypad.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: view.frame.height * 0.47)
         keypadBottomConstraint.isActive = true
     }
     
@@ -491,7 +491,7 @@ extension SearchViewController: NumericKeypadDelegate {
     }
     
     func keypadDidHide() {
-        keypadBottomConstraint.constant = 400
+        keypadBottomConstraint.constant = view.frame.height * 0.47
         UIView.animate(withDuration: 0.25) {
             self.view.layoutIfNeeded()
         }
