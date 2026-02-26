@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 enum SettingOption {
     case incomeCategory, expenseCategory, transferCategory
@@ -37,13 +38,23 @@ enum SettingOption {
 }
 
 class SettingTableViewController: UITableViewController, ThemeApplicable {
+    @IBOutlet weak var bannerView: BannerView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadBannerAd()
         startObservingTheme()
         applyTheme(ThemeManager.shared.currentTheme)
         
         tableView.sectionHeaderTopPadding = 0
+    }
+    
+    func loadBannerAd() {
+        bannerView.adSize = AdSizeLargeBanner
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(Request())
     }
     
     func applyTheme(_ theme: any AppTheme) {

@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import GoogleMobileAds
 
 class CalendarViewController: UIViewController, ThemeApplicable {
 
@@ -21,6 +22,7 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     
     @IBOutlet weak var calendarCollectionView: IntrinsicCollectionView!
     @IBOutlet weak var detailTableView: UITableView!
+    @IBOutlet weak var bannerView: BannerView!
     
     @IBOutlet weak var addButton: UIButton!
     @IBOutlet weak var overlayView: UIView!
@@ -37,6 +39,7 @@ class CalendarViewController: UIViewController, ThemeApplicable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        loadBannerAd()
         addObserver()
         bindViewModel()
         configureTotals()
@@ -46,6 +49,13 @@ class CalendarViewController: UIViewController, ThemeApplicable {
         configureAddButtonInitialState()
         
         applyTheme(ThemeManager.shared.currentTheme)
+    }
+    
+    func loadBannerAd() {
+        bannerView.adSize = AdSizeBanner
+        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.rootViewController = self
+        bannerView.load(Request())
     }
     
     func applyTheme(_ theme: any AppTheme) {
