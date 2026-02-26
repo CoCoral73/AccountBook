@@ -71,7 +71,7 @@ class ChartViewController: UIViewController {
 
             if let sheet = periodVC.sheetPresentationController {
                 sheet.detents = [.custom { _ in
-                    return periodVC.preferredContentSize.height
+                    return periodVC.preferredContentSize.height + 20
                 }]
                 sheet.prefersGrabberVisible = true
             }

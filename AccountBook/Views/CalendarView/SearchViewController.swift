@@ -225,7 +225,7 @@ class SearchViewController: UIViewController, ThemeApplicable {
         
         if let sheet = vc.sheetPresentationController {
             sheet.detents = [.custom { _ in
-                return vc.preferredContentSize.height
+                return vc.preferredContentSize.height + 20
             }]
             sheet.prefersGrabberVisible = true
         }
