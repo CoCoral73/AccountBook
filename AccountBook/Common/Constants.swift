@@ -22,3 +22,8 @@ struct Cell {
     static let categoryListCell = "CategoryListCell"
     static let themeCell = "ThemeCell"
 }
+
+struct ADUnitID {
+    static let calendar = "ca-app-pub-7450647597196052/2451639874"
+    static let setting = "ca-app-pub-7450647597196052/4815991483"
+}
