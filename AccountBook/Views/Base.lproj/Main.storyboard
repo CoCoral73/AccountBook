@@ -264,7 +264,7 @@
                                 </cells>
                             </collectionView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="k3h-HX-058" userLabel="구분선">
-                                <rect key="frame" x="0.0" y="536" width="393" height="0.66666666666666663"/>
+                                <rect key="frame" x="0.0" y="536.66666666666663" width="393" height="0.33333333333337123"/>
                                 <color key="backgroundColor" systemColor="systemGrayColor"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="0.5" id="VYg-1Y-rkb"/>
@@ -5259,7 +5259,7 @@
                                 </constraints>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="31" translatesAutoresizingMaskIntoConstraints="NO" id="hTd-XY-HiX">
-                                <rect key="frame" x="95.000000000000014" y="302" width="203.33333333333337" height="36"/>
+                                <rect key="frame" x="95.000000000000014" y="328.33333333333331" width="203.33333333333337" height="36"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="—" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DGP-Vl-amA">
                                         <rect key="frame" x="0.0" y="0.0" width="25.333333333333332" height="36"/>
@@ -5288,24 +5288,38 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="새로운 암호를 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gUe-Dr-Ang">
-                                <rect key="frame" x="96" y="240.33333333333334" width="201" height="21.666666666666657"/>
+                                <rect key="frame" x="96" y="266.66666666666669" width="201" height="21.666666666666686"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RwE-Xq-RvM">
+                                <rect key="frame" x="0.0" y="364.33333333333331" width="393" height="163.66666666666669"/>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c1U-W5-Bgv">
+                                <rect key="frame" x="0.0" y="102.99999999999999" width="393" height="163.66666666666663"/>
+                            </view>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="Oex-7m-FHE"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="RwE-Xq-RvM" firstAttribute="top" secondItem="hTd-XY-HiX" secondAttribute="bottom" id="0xW-V9-ZT5"/>
+                            <constraint firstItem="a8f-1h-HA3" firstAttribute="top" secondItem="RwE-Xq-RvM" secondAttribute="bottom" id="1vH-4I-oDZ"/>
                             <constraint firstItem="hTd-XY-HiX" firstAttribute="centerX" secondItem="Jsk-VP-mY3" secondAttribute="centerX" id="9ta-3W-84Y"/>
+                            <constraint firstItem="Oex-7m-FHE" firstAttribute="trailing" secondItem="RwE-Xq-RvM" secondAttribute="trailing" id="Bpf-7U-MlN"/>
                             <constraint firstItem="Oex-7m-FHE" firstAttribute="bottom" secondItem="a8f-1h-HA3" secondAttribute="bottom" constant="10" id="GuJ-Ob-oXx"/>
                             <constraint firstItem="Oex-7m-FHE" firstAttribute="trailing" secondItem="WBz-IR-5Gj" secondAttribute="trailing" constant="16" id="JVJ-Ev-Ak6"/>
+                            <constraint firstItem="gUe-Dr-Ang" firstAttribute="top" secondItem="c1U-W5-Bgv" secondAttribute="bottom" id="MVj-cU-AeJ"/>
+                            <constraint firstItem="RwE-Xq-RvM" firstAttribute="leading" secondItem="Oex-7m-FHE" secondAttribute="leading" id="Nk4-ZB-ibI"/>
+                            <constraint firstItem="RwE-Xq-RvM" firstAttribute="height" secondItem="c1U-W5-Bgv" secondAttribute="height" id="Rwn-Uv-RU3"/>
                             <constraint firstItem="hTd-XY-HiX" firstAttribute="top" secondItem="gUe-Dr-Ang" secondAttribute="bottom" constant="40" id="Sor-8x-IQy"/>
                             <constraint firstItem="gUe-Dr-Ang" firstAttribute="centerX" secondItem="Jsk-VP-mY3" secondAttribute="centerX" id="V92-7S-F4G"/>
                             <constraint firstItem="Oex-7m-FHE" firstAttribute="trailing" secondItem="a8f-1h-HA3" secondAttribute="trailing" constant="16" id="c1P-25-E0U"/>
                             <constraint firstItem="WBz-IR-5Gj" firstAttribute="top" secondItem="Oex-7m-FHE" secondAttribute="top" id="gHJ-I0-EGG"/>
+                            <constraint firstItem="c1U-W5-Bgv" firstAttribute="leading" secondItem="Oex-7m-FHE" secondAttribute="leading" id="hDr-KN-J3N"/>
+                            <constraint firstItem="c1U-W5-Bgv" firstAttribute="top" secondItem="WBz-IR-5Gj" secondAttribute="bottom" id="iNk-bC-9O4"/>
                             <constraint firstItem="a8f-1h-HA3" firstAttribute="leading" secondItem="Oex-7m-FHE" secondAttribute="leading" constant="16" id="kSQ-ep-THb"/>
-                            <constraint firstItem="a8f-1h-HA3" firstAttribute="top" secondItem="hTd-XY-HiX" secondAttribute="bottom" constant="190" id="z44-5d-aGe"/>
+                            <constraint firstItem="Oex-7m-FHE" firstAttribute="trailing" secondItem="c1U-W5-Bgv" secondAttribute="trailing" id="r7F-Ai-itM"/>
                         </constraints>
                     </view>
                     <connections>
@@ -5321,7 +5335,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2Lz-JG-Fib" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1518" y="3077"/>
+            <point key="canvasLocation" x="1515.2671755725189" y="3076.7605633802818"/>
         </scene>
         <!--Month Picker View Controller-->
         <scene sceneID="xl8-jQ-hNU">
