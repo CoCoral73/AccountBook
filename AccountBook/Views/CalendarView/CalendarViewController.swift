@@ -78,6 +78,7 @@ class CalendarViewController: UIViewController, ThemeApplicable, BannerViewDeleg
     func addObserver() {
         NotificationCenter.default.addObserver(self, selector: #selector(txDidUpdate), name: .txDidUpdate, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(dataDidUpdate), name: .dataDidUpdate, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(didReset), name: .didReset, object: nil)
         startObservingTheme()
     }
     
@@ -88,6 +89,10 @@ class CalendarViewController: UIViewController, ThemeApplicable, BannerViewDeleg
     
     @objc func dataDidUpdate(_ noti: Notification) {
         detailTableView.reloadData()
+    }
+    
+    @objc func didReset(_ noti: Notification) {
+        viewModel.didReset()
     }
     
     private func bindViewModel() {
@@ -397,4 +402,5 @@ extension CalendarViewController: UITableViewDelegate, UITableViewDataSource {
 extension Notification.Name {
     static let txDidUpdate = Notification.Name("TxDidUpdate")
     static let dataDidUpdate = Notification.Name("dataDidUpdate")
+    static let didReset = Notification.Name("DidReset")
 }

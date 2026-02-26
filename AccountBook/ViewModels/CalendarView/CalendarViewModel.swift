@@ -87,6 +87,12 @@ class CalendarViewModel {
         }
     }
     
+    func didReset() {
+        loadTransactions()
+        generateDayItems()
+        onDidSetCurrentMonth?()
+    }
+    
     func cellForRowAt(_ index: Int) -> Transaction {
         guard let datas = transactions[selectedDay] else {
             fatalError("Calendar View Model: transactions 조회 실패")

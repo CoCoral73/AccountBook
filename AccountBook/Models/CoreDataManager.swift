@@ -268,6 +268,8 @@ final class CoreDataManager {
         } catch {
             print("거래내역 초기화 실패: \(error)")
         }
+        
+        NotificationCenter.default.post(name: .didReset, object: nil)
     }
 
     // MARK: - 전체 초기화 (CoreData + Keychain + UserDefaults)
@@ -303,6 +305,7 @@ final class CoreDataManager {
         
         ThemeManager.shared.reset()
         seedDataIfNeeded()
+        NotificationCenter.default.post(name: .didReset, object: nil)
     }
 
 }
