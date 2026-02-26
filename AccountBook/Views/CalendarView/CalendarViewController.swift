@@ -8,7 +8,7 @@
 import UIKit
 import GoogleMobileAds
 
-class CalendarViewController: UIViewController, ThemeApplicable {
+class CalendarViewController: UIViewController, ThemeApplicable, BannerViewDelegate {
 
     @IBOutlet weak var monthButton: UIButton!
     @IBOutlet weak var searchButton: UIButton!
@@ -55,7 +55,15 @@ class CalendarViewController: UIViewController, ThemeApplicable {
         bannerView.adSize = AdSizeBanner
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
+        bannerView.delegate = self
         bannerView.load(Request())
+    }
+    
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 1) {
+            bannerView.alpha = 1
+        }
     }
     
     func applyTheme(_ theme: any AppTheme) {

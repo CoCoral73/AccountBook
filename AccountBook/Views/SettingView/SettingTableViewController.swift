@@ -37,7 +37,7 @@ enum SettingOption {
     }
 }
 
-class SettingTableViewController: UITableViewController, ThemeApplicable {
+class SettingTableViewController: UITableViewController, ThemeApplicable, BannerViewDelegate {
     @IBOutlet weak var bannerView: BannerView!
     
     override func viewDidLoad() {
@@ -54,7 +54,15 @@ class SettingTableViewController: UITableViewController, ThemeApplicable {
         bannerView.adSize = AdSizeLargeBanner
         bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
         bannerView.rootViewController = self
+        bannerView.delegate = self
         bannerView.load(Request())
+    }
+    
+    func bannerViewDidReceiveAd(_ bannerView: BannerView) {
+        bannerView.alpha = 0
+        UIView.animate(withDuration: 1) {
+            bannerView.alpha = 1
+        }
     }
     
     func applyTheme(_ theme: any AppTheme) {
