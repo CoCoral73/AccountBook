@@ -36,6 +36,20 @@ class AutoDismissKeyboardButton: UIButton {
     
 }
 
+class HairlineView: UIView {
+    override var intrinsicContentSize: CGSize {
+        let pixel = 1.0 / UIScreen.main.scale
+        return CGSize(width: UIView.noIntrinsicMetric, height: pixel)
+    }
+}
+
+class VerticalHairlineView: UIView {
+    override var intrinsicContentSize: CGSize {
+        let pixel = 1.0 / UIScreen.main.scale
+        return CGSize(width: pixel, height: UIView.noIntrinsicMetric)
+    }
+}
+
 class IntrinsicCollectionView: UICollectionView {
     override var contentSize: CGSize {
         didSet {
