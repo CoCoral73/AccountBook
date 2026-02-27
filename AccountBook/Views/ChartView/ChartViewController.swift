@@ -104,6 +104,7 @@ class ChartViewController: UIViewController {
         pieChartView.rotationEnabled = false
         pieChartView.setExtraOffsets(left: 0, top: 20, right: 0, bottom: 0)
         pieChartView.minOffset = 10
+        pieChartView.sliceTextDrawingThreshold = 10.8  // 3% 이하(360°×0.03) 슬라이스는 레이블·연결선 숨김
     }
     
     func configureTableView() {
