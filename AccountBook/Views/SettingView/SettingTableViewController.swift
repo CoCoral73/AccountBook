@@ -175,11 +175,11 @@ class SettingTableViewController: UITableViewController, ThemeApplicable, Banner
     }
     
     func showRatingView() {
-//        let appID = "1234567890" // 너의 앱 ID
-//        let urlString = "https://apps.apple.com/app/id\(appID)?action=write-review"
-//        if let url = URL(string: urlString) {
-//            UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//        }
+        let appID = "6759727652"
+        let urlString = "https://apps.apple.com/app/id\(appID)?action=write-review"
+        if let url = URL(string: urlString) {
+            UIApplication.shared.open(url)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
