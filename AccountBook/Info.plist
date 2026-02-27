@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>맞춤형 광고를 제공하기 위해 추적 권한이 필요합니다.</string>
 	<key>NSFaceIDUsageDescription</key>
 	<string>잠금 설정을 위해 Face ID를 사용합니다.</string>
 	<key>CFBundleDisplayName</key>

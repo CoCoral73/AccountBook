@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import AppTrackingTransparency
+import GoogleMobileAds
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -38,8 +40,20 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
 
     func sceneDidBecomeActive(_ scene: UIScene) {
-        // Called when the scene has moved from an inactive state to an active state.
-        // Use this method to restart any tasks that were paused (or not yet started) when the scene was inactive.
+        requestTrackingAuthorizationIfNeeded()
+    }
+
+    private var didRequestTracking = false
+
+    private func requestTrackingAuthorizationIfNeeded() {
+        guard !didRequestTracking else { return }
+        didRequestTracking = true
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            ATTrackingManager.requestTrackingAuthorization { _ in
+                MobileAds.shared.start(completionHandler: nil)
+            }
+        }
     }
 
     func sceneWillResignActive(_ scene: UIScene) {
