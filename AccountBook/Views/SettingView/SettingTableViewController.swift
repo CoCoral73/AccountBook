@@ -52,7 +52,7 @@ class SettingTableViewController: UITableViewController, ThemeApplicable, Banner
     
     func loadBannerAd() {
         bannerView.adSize = AdSizeLargeBanner
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = ADUnitID.setting
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.load(Request())

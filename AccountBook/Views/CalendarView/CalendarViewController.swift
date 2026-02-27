@@ -53,7 +53,7 @@ class CalendarViewController: UIViewController, ThemeApplicable, BannerViewDeleg
     
     func loadBannerAd() {
         bannerView.adSize = AdSizeBanner
-        bannerView.adUnitID = "ca-app-pub-3940256099942544/2934735716"
+        bannerView.adUnitID = ADUnitID.calendar
         bannerView.rootViewController = self
         bannerView.delegate = self
         bannerView.load(Request())

@@ -24,6 +24,11 @@ struct Cell {
 }
 
 struct ADUnitID {
+    #if DEBUG
+    static let calendar = "ca-app-pub-3940256099942544/2934735716"
+    static let setting = "ca-app-pub-3940256099942544/2934735716"
+    #else
     static let calendar = "ca-app-pub-7450647597196052/2451639874"
     static let setting = "ca-app-pub-7450647597196052/4815991483"
+    #endif
 }
