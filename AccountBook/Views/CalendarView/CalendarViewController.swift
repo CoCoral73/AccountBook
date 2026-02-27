@@ -351,7 +351,7 @@ extension CalendarViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
 
-        let width = calendarCollectionView.frame.width / 7
+        let width = floor(calendarCollectionView.frame.width / 7)
         let size = CGSize(width: width, height: width)
         return size
     }
