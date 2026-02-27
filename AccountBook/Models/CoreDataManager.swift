@@ -35,6 +35,7 @@ final class CoreDataManager {
                 fatalError("Core Data error: \(error)")
             }
         }
+        context.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 
     // MARK: - 저장
@@ -265,11 +266,36 @@ final class CoreDataManager {
                 fromRemoteContextSave: [NSDeletedObjectsKey: deletedIDs],
                 into: [context]
             )
+            context.refreshAllObjects()
+
+            resetAllBalances()
         } catch {
             print("거래내역 초기화 실패: \(error)")
         }
-        
+
         NotificationCenter.default.post(name: .didReset, object: nil)
+    }
+
+    // MARK: - 자산 잔액 초기화
+    private func resetAllBalances() {
+        let cashRequest: NSFetchRequest<CashItem> = CashItem.fetchRequest()
+        let bankRequest: NSFetchRequest<BankAccountItem> = BankAccountItem.fetchRequest()
+
+        do {
+            let cashItems = try context.fetch(cashRequest)
+            for item in cashItems {
+                item.balance = 0
+            }
+
+            let bankItems = try context.fetch(bankRequest)
+            for item in bankItems {
+                item.balance = 0
+            }
+
+            saveContext()
+        } catch {
+            print("자산 잔액 초기화 실패: \(error)")
+        }
     }
 
     // MARK: - 전체 초기화 (CoreData + Keychain + UserDefaults)
