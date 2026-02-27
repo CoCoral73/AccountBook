@@ -37,6 +37,18 @@ class AutoDismissKeyboardButton: UIButton {
 }
 
 class HairlineView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setContentHuggingPriority(.required, for: .vertical)
+        setContentCompressionResistancePriority(.required, for: .vertical)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setContentHuggingPriority(.required, for: .vertical)
+        setContentCompressionResistancePriority(.required, for: .vertical)
+    }
+
     override var intrinsicContentSize: CGSize {
         let pixel = 1.0 / UIScreen.main.scale
         return CGSize(width: UIView.noIntrinsicMetric, height: pixel)
@@ -44,6 +56,18 @@ class HairlineView: UIView {
 }
 
 class VerticalHairlineView: UIView {
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setContentHuggingPriority(.required, for: .horizontal)
+        setContentCompressionResistancePriority(.required, for: .horizontal)
+    }
+
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        setContentHuggingPriority(.required, for: .horizontal)
+        setContentCompressionResistancePriority(.required, for: .horizontal)
+    }
+
     override var intrinsicContentSize: CGSize {
         let pixel = 1.0 / UIScreen.main.scale
         return CGSize(width: pixel, height: UIView.noIntrinsicMetric)
